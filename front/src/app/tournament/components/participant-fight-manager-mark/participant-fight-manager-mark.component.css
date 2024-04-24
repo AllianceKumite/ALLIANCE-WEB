@@ -1,0 +1,19 @@
+input {
+    text-align: right;
+}
+
+.calculated {
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 3px 10px;
+    overflow: hidden;
+}
+
+.calculated.left {
+    margin-right: 2%;
+    margin-left: -2%;
+}
+
+.judge {
+    text-align: end;
+}

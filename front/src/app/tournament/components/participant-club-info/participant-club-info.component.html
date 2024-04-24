@@ -1,0 +1,11 @@
+<div class="participant-club truncated-content">
+    <!-- <ng-container *ngIf="!withCoach">
+      <span>{{ club }}{{withCoach}}</span>
+    </ng-container>
+
+    <ng-container *ngIf="withCoach">
+        <span>{{ club }} [{{ coach }}]</span>
+    </ng-container> -->
+    <span *ngIf="coach && coach.length > 0">{{ club }} [{{ coach }}]</span>
+    <span *ngIf="coach && coach.length == 0">{{ club }}</span>
+</div>

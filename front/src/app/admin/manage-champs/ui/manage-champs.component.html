@@ -1,0 +1,39 @@
+<div style="margin-top: 5em;">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="d-flex">
+                <input type="text" class="form-control mt-4 input-round" placeholder="Name" [(ngModel)]="champName">
+                <button class="btn btn-primary mt-4 create-btn" (click)="onCreateChamp()">Create</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4 justify-content-center">
+        <div class="col-8">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Type</th>
+                        <th scope="col" class="align-text-center">Del</th>
+                        <th scope="col" class="align-text-center">Manage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let champ of champs$ | async">
+                        <th (click)="goToChamp($event)" class="cursor-pointer align-text-left">{{champ.name}}</th>
+                        <td class="align-text-left">{{champ.dateFrom}}</td>
+                        <td class="align-text-left">{{champ.dateTo}}</td>
+                        <td class="align-text-left">{{champ.city}}</td>
+                        <td class="align-text-left">{{champ.champType}}</td>
+                        <td class="align-text-center"><button class="btn btn-sm btn-outline-danger" (click)="onDeleteChamp(champ.name)"><i class="fa fa-trash" aria-hidden="true"></i> Del</button></td>
+                        <!-- <td class="align-text-center"><button class="btn btn-sm btn-outline-success" (click)="onManageChamp(champ.name)" *ngIf="isManageable(champ)">Manage</button></td> -->
+                        <td class="align-text-center"><button class="btn btn-sm btn-outline-success" (click)="onManageChamp(champ.name)">Manage</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

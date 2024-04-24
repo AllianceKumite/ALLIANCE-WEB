@@ -1,0 +1,47 @@
+h1 {
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+.tournaments_body {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  flex-wrap: wrap;
+  width: 101.5%;
+}
+.tournaments_body .tournament_block {
+  /* width: 32%; */
+  min-height: 250px;
+  max-height: auto;
+  margin-bottom: 50px;
+  padding-left: 0;
+}
+
+.blog {
+  margin-top: 0px;
+}
+
+.top_tournament {
+  margin-top: 125px;
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .tournaments_body {
+    width: 100%;
+  }
+  .tournament_block {
+    margin-left: 0;
+    margin-right: 0 !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  h1 {
+    text-align: center;
+  }
+}/*# sourceMappingURL=blog.component.css.map */

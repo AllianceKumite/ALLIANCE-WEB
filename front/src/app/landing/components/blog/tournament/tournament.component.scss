@@ -1,0 +1,136 @@
+
+.card{
+    position: relative;
+    height: 330px;
+    // background-color: #f6f2f2;
+    background-color: #FAFAD2;
+    border: 1px solid #cbcbcb;
+    cursor: pointer;
+}
+
+.card:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 9px, rgba(0, 0, 0, 0.3) 0px 5px 13px -3px, rgba(0, 0, 0, 0.1) 0px -1px 0px inset;
+}
+
+.card-img-bcg{
+    background-color: #fff;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    height: 180px;
+}
+
+.card-text{
+    font-size: 18px;
+    color: #242424;
+    font-weight: 400;
+
+}
+
+.card-img-top{
+    opacity: 0.9;
+    object-fit: cover;
+}
+
+.block_img {
+    height: 180px;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: contain;
+    opacity: 0.7;
+
+    img {
+        width: 100%;
+    }
+}
+
+h2{
+    font-size: 22px;
+    font-weight: 400;
+
+}
+
+h5{
+    font-size: 18px;
+    color: #242424;
+
+    // font-weight: 300;
+}
+
+.block {
+    width: 100%;
+    background-color: white;
+    // height: 500px;
+    max-height: auto;
+    // padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    // background-color: #7f5a83;
+    // background-color: #DCD9D4;
+    // background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), radial-gradient(at 50% 0%, rgba(255, 255, 255, 0.10) 0%, rgba(0, 0, 0, 0.50) 50%);
+    // background-blend-mode: soft-light, screen;
+    background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);
+    // background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+    background-image: linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+    //   background-color: gray;
+    cursor: pointer;
+    // overflow: hidden;
+}
+
+// .block {
+//   background-color: white;
+//   padding: 1em;
+//   margin: 1em;
+//   cursor: pointer;
+//   text-align: center;
+//   min-height: 360px;
+
+    // .block_content{
+    //     min-height: 130px;
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: space-between;
+    // }
+
+    // .block_img{
+    //     width: 100%;
+    //     height: 280px;
+    //     overflow: hidden;
+
+    //     display: flex;
+    //     align-items: center;
+
+    //     // background-color: gray;
+    //     // color: white;
+
+    //     img {
+    //       width: 100%;
+    //     }
+    // }
+
+    // .title{
+    //     h2{
+    //         font-size: 24px;
+    //         margin-top: 10px;
+    //     }
+    // }
+
+    // .info{
+    //     display: flex;
+    //     justify-content: space-between;
+    // }
+// }
+
+.block:hover {
+    // background-color: rgb(79, 148, 164)
+}
+
+@media (min-width: 1000px) {
+    .block_content{
+        min-height: 80px;
+    }
+  }

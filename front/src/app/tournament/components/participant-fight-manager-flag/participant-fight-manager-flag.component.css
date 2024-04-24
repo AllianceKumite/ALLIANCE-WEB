@@ -1,0 +1,51 @@
+/* .manage-participant .participants-details {
+  width: 80%;
+} */
+
+/* .manage-participant  .participant-won {
+  width: 20%;
+  align-self: center;
+} */
+
+.btn {
+  /* width: 100%;
+  height: 100%; */
+  width: 25px;
+  margin: 0;
+  /* padding: 0; */
+  /* padding-left: 2px;  */
+  /* padding-right: 0em; */
+  padding: 0;
+  margin-right: 4px;
+}
+
+.btn-confirm {
+  width: 150px;
+  margin: 0;
+  padding: 4px;
+
+  /* width: 100%;
+  height: 100%; */
+}
+
+.btn-secondary {
+  width: 25px;
+  /* width: 100%;
+  height: 100%; */
+
+  background-color: gray;
+  color: white
+}
+
+#manage-button-aka,
+#manage-button-shiro {
+  margin-left: 2em;
+  width: 150px;
+  /* height: 30px; */
+  padding: 4px;
+  margin: 0;
+
+  /* margin: 0; */
+  /* margin-left: 2em;
+  width: 150px; */
+}

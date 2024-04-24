@@ -1,0 +1,11 @@
+<span *ngIf="id > 0" class="{{up ? 'upercased' : ''}}">
+    {{ ('navbar.tatami' | translate ) }} {{ getName() }}
+</span>
+
+<span *ngIf="id == 0" class="{{up ? 'upercased' : ''}}">
+  {{ ('general.allTatamis' | translate ) }}
+</span>
+
+<span *ngIf="id == -1" class="{{up ? 'upercased' : ''}}">
+  {{ ('navbar.tatami' | translate ) }}
+</span>

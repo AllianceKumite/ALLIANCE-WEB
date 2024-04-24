@@ -1,0 +1,12 @@
+<ng-select
+    #languageSelector
+    bindLabel="name" bindValue="code" name="language"
+    [items]="languages"
+    [(ngModel)]="lng"
+    (change)="setLanguage(lng)"
+    [clearable]="false"
+    (mouseenter)="expand()"
+    (mouseleave) = "collapse()"
+    (focus)="blur()"
+></ng-select>
+<!-- (mouseleave)="collapse()" -->

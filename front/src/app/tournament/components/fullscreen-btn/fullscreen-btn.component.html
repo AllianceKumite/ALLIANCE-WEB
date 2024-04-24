@@ -1,0 +1,8 @@
+<button
+    *ngIf="!isFullScreen"
+    type="button"
+    class="fullscreenButton btn btn-sm btn-outline-secondary m-1"
+    style="{{type == 'popout' ? 'position: absolute; right: 0;' : ''}}"
+    (click)="goFullscreen()">
+        {{isFullScreen ? '&#x02605;' : '&#x02197;'}}
+</button>

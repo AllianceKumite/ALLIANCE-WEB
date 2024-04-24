@@ -1,0 +1,293 @@
+<div class="container">
+    <div class="d-flex flex-wrap justify-content-between mt-3 mb-3">
+        <h3 class="w-100">{{'tools.personalapp' | translate}}</h3>
+        <div class="d-flex align-items-center justify-content-between w-100 p-2"
+            style="border: 1px solid #bababa; background-color: #fff;">
+            <ng-select style="width: 15%;" [(ngModel)]="selectedCountry" [searchable]="false"
+                placeholder="{{ 'general.country' | translate }}" name="selectedCountry" dropdownPosition="bottom"
+                (change)="onCountrySelect($event)">
+                <ng-option *ngFor="let country of countries" [value]="country.id">
+                    <img src="{{logosDir}}/{{ country.countryFlag.trim() }}" class="menu-dropdown-img">
+                    {{ 'db.country.' + country.id | translate }}
+                </ng-option>
+            </ng-select>
+
+            <ng-select style="width: 15%;" [(ngModel)]="selectedRegion" [searchable]="false"
+                placeholder="{{ 'coach.region' | translate }}" name="selectedRegion" dropdownPosition="bottom"
+                (change)="onRegionSelect()">
+                <ng-option *ngFor="let item of regions" [value]="item.regionId">
+                    {{('db.region.' + item.regionId) | translate}}
+                </ng-option>
+            </ng-select>
+
+            <ng-select style="width: 15%;" [(ngModel)]="selectedClub" [searchable]="false"
+                placeholder="{{ 'coach.club' | translate }}" name="selectedClub" dropdownPosition="bottom"
+                (change)="onClubSelect($event)">
+                <!-- style="display: flex; align-items: center;" -->
+                <ng-option *ngFor="let club of champclubs" [value]="club.id">
+                    {{ club.name}}
+                </ng-option>
+            </ng-select>
+
+            <ng-select style="width: 15%;" [(ngModel)]="selectedCoach" bindLabel="name" bindValue="id"
+                [searchable]="false" placeholder="{{ 'coach.coach' | translate }}" name="selectedCoach"
+                dropdownPosition="bottom" (change)="onCoachSelect($event)">
+                <!-- style="display: flex; align-items: center;" -->
+                <ng-option *ngFor="let coach of coaches" [value]="coach.id">
+                    {{ coach.name}}
+                </ng-option>
+            </ng-select>
+            <div class="d-flex justify-content-between" style="width: 10%;">
+                <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center"
+                    style="height: 32px;" (click)="tabletoExcel('tableapp', 'personalapp')">Export</button>
+                <div class="img-box" title="Help with printing a document">
+                    <a target="_blank" href="{{ helppage }}">
+                        <img src="{{logosDir}}/Print.svg" alt="" style="width: 30px; height: 20px; cursor: help;"> 
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <label for="champ">{{"coach.champ" | translate}}</label>
+            <input type="text" class="form-control h-32" name="champ" id="champ" [(ngModel)]="champName">
+        </div>
+        <div class="col-2">
+            <label for="programm">{{"coach.programm" | translate}}</label>
+            <input type="text" class="form-control h-32" name="programm" id="programm" [(ngModel)]="programm">
+        </div>
+        <div class="col-2">
+            <label for="agecategory">{{"coach.agecategory" | translate}}</label>
+            <input type="text" class="form-control h-32" name="agecategory" id="agecategory" [(ngModel)]="agecategory">
+        </div>
+        <div class="col-3">
+            <label for="champInfo">{{"coach.champInfo" | translate}}</label>
+            <input type="text" class="form-control h-32" name="champInfo" id="champInfo" [(ngModel)]="champInfo">
+        </div>
+        <div class="col-2">
+            <label for="command">{{"coach.command" | translate}}</label>
+            <input type="text" class="form-control h-32" name="command" id="command" [(ngModel)]="command">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <label for="citychamp">{{"coach.citychamp" | translate}}</label>
+            <input type="text" class="form-control h-32" name="citychamp" id="citychamp" [(ngModel)]="citychamp">
+        </div>
+        <div class="col-2">
+            <label for="datechamp">{{"coach.datechamp" | translate}}</label>
+            <input type="date" class="form-control h-32" name="datechamp" id="datechamp" [(ngModel)]="datechamp">
+        </div>
+        <div class="col-3">
+            <label for="coachname">{{"coach.coachname" | translate}}</label>
+            <input type="text" class="form-control h-32" name="coachname" id="coachname" [(ngModel)]="coachname">
+        </div>
+        <div class="col-4">
+            <label for="addrcoach">{{"coach.addrcoach" | translate}}</label>
+            <input type="text" class="form-control h-32" name="addrcoach" id="addrcoach" [(ngModel)]="addrcoach">
+        </div>
+    </div>
+    <div class="data">
+        <table class="w-100" id="tableapp">
+            <thead>
+                <tr>
+                    <th style="text-align: center; width: 40px;"></th>
+                    <th style="text-align: center; width: 250px;"></th>
+                    <th style="text-align: center; width: 80px;"></th>
+                    <th style="text-align: center; width: 80px;"></th>
+                    <th style="text-align: center; width: 80px;"></th>
+                    <th style="text-align: center; width: 80px;"></th>
+                    <th style="text-align: center; width: 80px;"></th>
+                    <th style="text-align: center; width: 100px;"></th>
+                    <th style="text-align: center; width: 100px;"></th>
+                    <th style="text-align: center; width: 100px;"></th>
+                    <th style="text-align: center; width: 100px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="11" style="text-align: center;">{{'coach.row1' | translate}}</td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="text-align: center;">{{'coach.row2' | translate}} {{champName}}</td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="text-align: center;">{{'coach.row3' | translate}}
+                        {{programm}}{{agecategory}}</td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="text-align: center;">{{champInfo}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: start;">{{'coach.fromcommand' | translate}}</td>
+                    <td colspan="9" style="text-align: start;">{{command}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: start;"></td>
+                    <td colspan="9" style="text-align: center; font-size: 10px; border-top: 1px solid #242424;">
+                        {{'coach.teamcmdinfo' | translate}}</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="text-align: start;">{{'coach.venue' | translate}}: {{ citychamp }}</td>
+                    <td colspan="6" style="text-align: end;">{{'coach.dateofholding' | translate}}: {{ datechamp |
+                        date:'dd.MM.yyyy'}}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="11" style="text-align: start;">{{coachname}}</td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="text-align: start;">{{addrcoach}}</td>
+                </tr>
+                <tr>
+                    <td colspan="11" style="text-align: start;border-top: 1px solid #242424; font-size: 10px;">
+                        {{'coach.personalinfo' | translate}}</td>
+                </tr>
+                <tr class="p-2">
+                    <td class="p-2" style="text-align: center; border: 1px solid #242424;">#</td>
+                    <td class="p-2" style="text-align: center; border: 1px solid #242424;">{{'coach.fio' | translate}}
+                    </td>
+                    <td class="p-2" style="text-align: center; border: 1px solid #242424;">{{'coach.age' | translate}}
+                    </td>
+                    <td class="p-2" style="text-align: center; border: 1px solid #242424;">{{'coach.rang' | translate}}
+                    </td>
+                    <td class="p-2" style="text-align: center; border: 1px solid #242424;">{{'coach.prg' | translate}}
+                    </td>
+                    <td class="p-2" style="text-align: center; border: 1px solid #242424;">{{'coach.w-cat' | translate}}
+                    </td>
+                    <td class="p-2" style="text-align: center; border: 1px solid #242424;">{{'coach.zalik' | translate}}
+                    </td>
+                    <td class="p-2" style="text-align: center; border: 1px solid #242424;">{{'coach.club' |
+                        translate}}/{{'coach.citychamp' | translate}}</td>
+                    <td class="p-2" style="text-align: center; border: 1px solid #242424;">{{'coach.scool' | translate}}
+                    </td>
+                    <td class="p-2" style="text-align: center; border: 1px solid #242424;">{{'coach.coach' | translate}}
+                    </td>
+                    <td class="p-2" style="text-align: center; border: 1px solid #242424;">{{'coach.sign' | translate}}
+                    </td>
+                </tr>
+                <ng-container *ngFor="let item of customParticipants; let i = index">
+                    <tr>
+                        <td class="p-2" style="text-align: center; border: 1px solid #242424; font-size: 12px;">{{i +
+                            1}}</td>
+                        <td class="p-2" style="text-align: start;border: 1px solid #242424; font-size: 12px;">
+                            {{item.FIO}}</td>
+                        <td class="p-2" style="text-align: center;border: 1px solid #242424;">
+                            <div class="d-flex flex-wrap">
+                                <span class="w-100" style="font-size: 12px;"> {{ item.DateBR | date:'dd.MM.yyyy'}}
+                                </span>
+                                <span class="w-100" style="font-size: 12px;"> {{ age_count(item.DateBR) }} </span>
+                            </div>
+                        </td>
+                        <td class="p-2" style="text-align: center;border: 1px solid #242424; font-size: 12px;">{{
+                            item.DAN }}</td>
+                        <td class="p-2" style="text-align: center;border: 1px solid #242424; font-size: 12px;">
+                            {{(item.Kumite == 1 ? ('coach.kumite' | translate) : '')}} {{(item.Kata == 1 ? ('coach.kata'
+                            | translate) : '')}} {{(item.KataGroup == 1 ? ('coach.groupKata' | translate) : '')}}
+                        </td>
+                        <td class="p-2" style="text-align: center;border: 1px solid #242424; font-size: 12px;"> 
+                           {{ getWeightCategory(item)}}
+                        </td>
+                        <td class="p-2" style="text-align: center;border: 1px solid #242424;font-size: 12px;">
+                            {{'coach.zalik-value' | translate}}</td>
+                        <td class="p-2" style="text-align: center;border: 1px solid #242424;">
+                            <div class="d-flex flex-wrap">
+                                <span class="w-100" style="font-size: 12px;"> {{ item.ClubName }} </span>
+                                <span class="w-100" style="font-size: 12px;"> {{ item.ClubCity }} </span>
+                            </div>
+                        </td>
+                        <td class="p-2" style="text-align: center;border: 1px solid #242424;">--</td>
+                        <td class="p-2" style="text-align: center;border: 1px solid #242424;font-size: 12px;">{{
+                            item.coachName }}</td>
+                        <td class="p-2" style="text-align: center;border: 1px solid #242424;"></td>
+                    </tr>
+                </ng-container>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" style="text-align: start; height: 100px;">{{'coach.headregion' | translate}}
+                    </td>
+                    <td style="text-align: center; ">{{'coach.placeofseal' | translate}}</td>
+                    <td style="text-align: start; "></td>
+                    <td style="text-align: start; "></td>
+                    <td colspan="2" style="text-align: start;"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: start;"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center; font-size: 10px; font-style: italic; border-top: 1px solid #242424">
+                        {{'coach.signature' | translate}}</td>
+                    <td style="text-align: start;"></td>
+                    <td colspan="2"
+                        style="text-align: center; font-size: 10px; font-style: italic;border-top: 1px solid #242424">
+                        {{'coach.namesignature' | translate}}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" style="text-align: start; height: 50px;">{{'coach.headteam' | translate}}</td>
+                    <td style="text-align: center">{{'coach.placeofseal' | translate}}</td>
+                    <td style="text-align: start"></td>
+                    <td style="text-align: start"></td>
+                    <td colspan="2" style="text-align: start; padding-top: 20px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: start;"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center; font-size: 10px; font-style: italic;border-top: 1px solid #242424">
+                        {{'coach.signature' | translate}}</td>
+                    <td style="text-align: start;"></td>
+                    <td colspan="2"
+                        style="text-align: center; font-size: 10px; font-style: italic;border-top: 1px solid #242424">
+                        {{'coach.namesignature' | translate}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: start; height: 50px;">{{'coach.headcoach' | translate}}</td>
+                    <td style="text-align: center;">{{'coach.placeofseal' | translate}}</td>
+                    <td style="text-align: start;"></td>
+                    <td style="text-align: start;"></td>
+                    <td colspan="2" style="text-align: start;"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: start"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center; font-size: 10px; font-style: italic;border-top: 1px solid #242424">
+                        {{'coach.signature' | translate}}</td>
+                    <td style="text-align: start;"></td>
+                    <td colspan="2"
+                        style="text-align: center; font-size: 10px; font-style: italic;border-top: 1px solid #242424">
+                        {{'coach.namesignature' | translate}}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" style="text-align: start; padding-top: 20px;">{{'coach.allowed' | translate}}</td>
+                    <td colspan="4"
+                        style="text-align: center;  font-style: italic; padding-top: 20px; border-bottom: 1px solid #242424;">
+                        {{numToPr(customParticipants.length)}}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: start"></td>
+                    <td colspan="4" style="text-align: center; font-size: 10px; font-style: italic;">{{'coach.lfd' |
+                        translate}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: start;  height: 50px;">{{'coach.doctor' | translate}}</td>
+                    <td style="text-align: center; ">{{'coach.placeofseal' | translate}}</td>
+                    <td style="text-align: start; "></td>
+                    <td style="text-align: start; "></td>
+                    <td colspan="2" style="text-align: start; "></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: start;"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center; font-size: 10px; font-style: italic;border-top: 1px solid #242424">
+                        {{'coach.signature' | translate}}</td>
+                    <td style="text-align: start;"></td>
+                    <td colspan="2"
+                        style="text-align: center; font-size: 10px; font-style: italic;border-top: 1px solid #242424">
+                        {{'coach.namesignature' | translate}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

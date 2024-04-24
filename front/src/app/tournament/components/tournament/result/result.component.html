@@ -1,0 +1,28 @@
+<div *ngIf="drawFromSvg() && offset && resultSvg" class="pt-2 pb-2" style="overflow: auto;">
+    <object type="image/svg+xml" [data]="this.safeUrl" class="w-100">
+        <!-- <img src="{{resultSrc}}/{{resultSvg[offset]}}" width="1325px" alt="result"> -->
+    </object>
+</div>
+
+<ng-container *ngIf="indyvidualResults">
+    <div class="container m-0 d-flex justify-content-start">
+        <div class="p-1 m-0">
+            <h2>
+                {{'results.individualResults' | translate}}
+                <ng-container *ngIf="tatami"> &nbsp;|&nbsp; <tatami-title [id]="tatami" [tatamiType] = 'tatamuType'></tatami-title></ng-container>
+                <ng-container *ngIf="time"> &nbsp;|&nbsp; {{time}}:00</ng-container>
+            </h2>
+        </div>
+    </div>
+
+    <result-individual [data]="indyvidualResults" [champType]="0" [champName]="nameOfChampionship" style="width:100%"></result-individual>
+</ng-container>
+
+
+<ng-container *ngIf="groupedResults">
+    <div class="container mt-4" style="padding-left: 4em;">
+        <h2>{{'results.' + entityName + 'Results' | translate}}</h2>
+    </div>
+
+    <result-entity [entityName]="entityName" [data]="groupedResults" [champType]="0" style="width:100%"></result-entity>
+</ng-container>

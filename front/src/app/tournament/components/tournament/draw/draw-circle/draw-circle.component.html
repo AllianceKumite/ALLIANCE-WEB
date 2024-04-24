@@ -1,0 +1,206 @@
+<!-- TODO: cleanup and DRY  -->
+<div class="container-fluid" *ngIf="this.fights">
+
+    <!-- users table -->
+    <div class="row ">
+        <div *ngFor="let participantsBlock of participants; let k = index;">
+            <div *ngIf="blocks && (blocks.amount > 1)">
+                {{ 'draw.block' | translate }} {{k == 0 ? "A" : "B"}}
+            </div>
+
+            <div class="draw scrolled-x">
+                <div class="col grid-section scroll-width-{{participantsBlock ? participantsBlock.length : 0}}">
+                    <div class="pair">
+                        <div *ngFor="let participant of participantsBlock; let i = index;"
+                            class="row justify-content-center;">
+                            <div [ngClass]="{
+                              'col-2' : true,
+                              'pair': true,
+                              'participant' : true,
+                              'participant-aka' : true,
+                              'participant-shiro' : true,
+                              'participant-passed' : false && isWinnerAka(getFilalFight()),
+                              'participant-winner' : false
+                            }" style="{{i == 0 ? 'border-top: 1px solid #ccc;' : ''}}">
+                                <participant [info]="participant" [akaShiroType]="'shiro'"
+                                    [viewType]="'drawParticipant'" [showExtendedInfo]="showExtendedInfo"
+                                    [drawPlace]="blocks.amount == 1" style="width: 100%;"></participant>
+                            </div>
+                            <div class="col grid">
+                                <div *ngFor="let participantInTableVertical of participantsBlock; let j = index;"
+                                    [ngClass]="{
+                                      'circle-cell': true,
+                                      'circle-cell-disabled' : i == j
+                                    }"
+                                    style="{{i == 0 && j == 0 ? 'border-top-left-radius: 5px;' : ''}} {{i == participantsBlock.length-1 && j == 0 ? 'border-bottom-left-radius: 5px;' : ''}} ">
+                                    {{ i != j ? getPoints(participant, participantInTableVertical) : ''}}
+                                </div>
+                                <div class="circle-cell"
+                                    style="{{i == 0 ? 'border-top-right-radius: 5px;' : ''}} {{i == participantsBlock.length-1 ? 'border-bottom-right-radius: 5px;' : ''}} ">
+                                    <!-- {{ participant.CountWinner * 2 }} -->
+                                    {{ participant.totalPoints }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fights -->
+
+    <ng-container *ngFor="let level of this.levels; let k = index;">
+        <div class="row draw draw-circle" *ngIf="k < 100 ">
+            <div *ngFor="let fight of level; let j = index;" [ngClass]="{
+                    'scroll-width-no': participants.length == 1,
+                    'scroll-width-2': participants[fight.details.BlockNum - 1].length == 2 && participants.length > 1,
+                    'scroll-width-3': participants[fight.details.BlockNum - 1].length == 3 && participants.length > 1,
+                    'scroll-width-4': participants[fight.details.BlockNum - 1].length == 4 && participants.length > 1,
+                    'scroll-width-5': participants[fight.details.BlockNum - 1].length == 5 && participants.length > 1,
+                    'scroll-width-6': participants[fight.details.BlockNum - 1].length == 6 && participants.length > 1,
+                    'scroll-width-7': participants[fight.details.BlockNum - 1].length == 7 && participants.length > 1
+                }">
+                <div style="display: flex" [ngClass]="{
+                        'col-3' : true,
+                        'pair': true
+                      }">
+
+
+                    <div class="level" style="flex-shrink: 0; flex-grow: 1">
+                        <div>
+                            {{k + 1}}{{ ('level.lap.' + (+k + 1)) | translate }} {{ 'level.lap.word' | translate }}
+                        </div>
+                        <div [ngClass]="{
+                          'participant' : true,
+                          'participant-aka' : true,
+                          'participant-passed' : isWinnerAka(fight)
+                        }">
+                            <participant [info]="fight.red" [akaShiroType]="'aka'" [viewType]="'drawParticipant'"
+                                [showExtendedInfo]="showExtendedInfo" [passed]="isWinnerAka(fight)"
+                                style="width: 100%;"></participant>
+                        </div>
+
+                        <div [ngClass]="{
+                            'participant' : true,
+                            'participant-shiro' : true,
+                            'participant-passed' : isWinnerShiro(fight)
+                          }">
+                            <participant [info]="fight.white" [akaShiroType]="'shiro'" [viewType]="'drawParticipant'"
+                                [showExtendedInfo]="showExtendedInfo" [passed]="isWinnerShiro(fight)"
+                                style="width: 100%;"></participant>
+                        </div>
+                    </div>
+
+                    <div class="col-1 level level-0" style="flex-shrink: 1;">
+                        <div [ngClass]="{
+                                'pair-from-single-participant': false && isSingleParticipant(fight)
+                        }">
+                            <div class="num-fight-wrapper" style="margin-top: 27px">
+                                <div [ngClass]="{
+                                      'num-fight': true,
+                                      'duelIsPlace': duelIsPlace(fight),
+                                      'line-had-place': fightAlreadyHadPlace(fight)
+                                    }">{{fight?.details?.NumDuel}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- this.levels[0] - finals -->
+    <!-- TODO: refactor this -->
+
+    <div class="row draw" *ngIf="blocks && (blocks.amount > 1)">
+        <!-- Finals from olympic, TODO: DRY -->
+        <div class="col-3" style="display: flex; padding-top: 2em; padding-left: 0; padding-right: 0;">
+            <div class="level level-0 winners">
+                <!-- Final fight -->
+                <div class="pair">
+                    <div class="draw-label">
+                        {{ 'draw.fight1Place' | translate}}
+                    </div>
+
+                    <div [ngClass]="{
+                        'participant' : true,
+                        'participant-aka' : true,
+                        'participant-passed' : isWinnerAka(getFilalFight()),
+                        'participant-winner' : true
+                    }">
+                        <participant [info]="getFilalFight()?.red" [akaShiroType]="'aka'" [viewType]="'drawParticipant'"
+                            [showExtendedInfo]="showExtendedInfo" style="width: 100%;"></participant>
+                    </div>
+                    <div [ngClass]="{
+                        'participant' : true,
+                        'participant-shiro' : true,
+                        'participant-passed' : isWinnerShiro(getFilalFight())
+                      }">
+                        <participant [info]="getFilalFight()?.white" [akaShiroType]="'shiro'"
+                            [viewType]="'drawParticipant'" [showExtendedInfo]="showExtendedInfo" style="width: 100%;">
+                        </participant>
+                    </div>
+                </div>
+
+                <!-- Fight for 3 place, or two 3 places if no 3 place fight is present -->
+                <div class="pair" *ngIf="get3PlaceFight()">
+                    <div class="draw-label" *ngIf="get3PlaceFight() && get3PlaceFight().details.NumDuel != 0">
+                        {{ 'draw.fight3Place' | translate}}
+                    </div>
+
+                    <!-- <div class="draw-label" *ngIf="!get3PlaceFight() || get3PlaceFight().details.NumDuel == 0">
+                      {{ 'draw.thirdPlaces' | translate}}
+                  </div> -->
+
+                    <div [ngClass]="{
+                    'participant' : true,
+                    'participant-aka' : true,
+                    'participant-passed' : isWinnerAka(get3PlaceFight())
+                  }">
+
+                        <participant [info]="get3PlaceFight()?.red" [akaShiroType]="'aka'"
+                            [viewType]="'drawParticipant'" [showExtendedInfo]="showExtendedInfo" style="width: 100%;">
+                        </participant>
+                    </div>
+
+                    <div [ngClass]="{
+                      'participant' : true,
+                      'participant-shiro' : true,
+                      'participant-passed' : isWinnerShiro(get3PlaceFight())
+                    }">
+                        <participant [info]="get3PlaceFight()?.white" [akaShiroType]="'shiro'"
+                            [viewType]="'drawParticipant'" [showExtendedInfo]="showExtendedInfo" style="width: 100%;">
+                        </participant>
+                    </div>
+                </div>
+            </div>
+
+            <!-- num duel-->
+            <div class="col-1 level level-0 winners">
+                <ng-container *ngFor="let levels of blocks[0]; let j = index;">
+                    <ng-container *ngFor="let fight of levels; let k = index;">
+                        <div *ngIf="fight.details.BlockNum == 0 && fight.details.Level == 12" class="num-fight-wrapper"
+                            style="padding-top: 4.5em;padding-bottom: 3.5em;  margin-top: 27px">
+                            <div [ngClass]="{
+                              'num-fight': true,
+                              'line-had-place': fightAlreadyHadPlace(fight)
+                            }">{{fight?.details?.NumDuel}}</div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngFor="let levels of blocks[0]; let j = index;">
+                    <ng-container *ngFor="let fight of levels; let k = index;">
+                        <div *ngIf="fight.details.BlockNum == 0 && fight.details.Level == 8" class="num-fight-wrapper"
+                            style="padding-top: 4em;padding-bottom: 3.5em; margin-top: 27px">
+                            <div [ngClass]="{
+                                'num-fight': true,
+                                'line-had-place': fightAlreadyHadPlace(fight)
+                            }">{{fight?.details?.NumDuel}}</div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

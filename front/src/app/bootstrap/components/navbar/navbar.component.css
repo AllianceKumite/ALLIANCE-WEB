@@ -1,0 +1,51 @@
+.global-header {
+  /* height: 5em; */
+  height: 90px;
+}
+
+.navbar {
+    display: block;
+    width: 100%;
+    /* position: relative; */
+    /* background-color: #0d1829; */
+    /* background-color: black; */
+    background-color: #fff;
+    z-index: 30;
+    /* border: 1px solid #444; */
+}
+
+.logo img {
+    width: 10%;
+    padding: 0.5%;
+}
+
+.logo .title {
+    width: 100%;
+    font-weight: 800;
+}
+
+.global-header {
+  padding-left: 15px;
+}
+
+.title {
+    margin-right: 1em;
+}
+
+.title a {
+    color: rgb(68, 84, 106);
+    font-weight: 400;
+    font-size: 28px;
+    position: relative;
+}
+
+/* .title a::before {
+    position: absolute;
+    content: 'Alliance Kumite';
+    transform-origin: bottom;
+    transform: rotateX(180deg);
+    line-height: 1em;
+    background: linear-gradient(0deg, #efc20e 0, rgba(255, 255, 255, 0) 80%);
+    -webkit-background-clip: text;
+    color: rgba(0, 0, 0, 0);
+} */

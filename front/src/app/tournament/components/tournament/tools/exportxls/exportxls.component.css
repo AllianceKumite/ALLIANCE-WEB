@@ -1,0 +1,24 @@
+.itemdata{
+    text-align: start;
+    word-wrap: break-word;
+    background-color: #f9f9f9;
+    border-color: #f9f9f9;
+}
+
+ .col-header{
+    background-color: #fff;
+ }
+
+ .row-category{
+    background-color: rgba(86, 138, 202, 0.4);
+ }
+
+ .table-sm{
+    border: none;
+    outline: none;
+    border-color: #fff;
+ }
+
+ .table-result{
+    border-color: #f9f9f9;
+ }

@@ -1,0 +1,106 @@
+<ng-container>
+  <!-- <div class="top_tournament" *ngIf="topTournament"> -->
+  <div class="top_tournament d-flex flex-wrap flex-column justify-content-between align-items-center" *ngIf="topTournament">
+
+    <div *ngIf='tournament' class="row p-0 m-0 block" (click)='goToTournament(tournament.id)'>
+      <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center p-0 m-0" style="height: 400px">
+        <div class="block_img">
+          <img src="{{mediaDir}}/champ/background.jpg" alt=""
+            style="position: relative; width: 100%;height: 100%; opacity: 0.2; object-fit: cover;">
+          <img *ngIf="tournament.id" src="{{mediaDir}}/champ/{{tournament.id}}.jpg"
+            onerror="this.src = 'assets/media/champ/default_champ1.jpg'"
+            style="position: absolute; height:360px; object-fit:fill; opacity: 0.8;" />
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6 d-flex flex-wrap justify-content-start align-items-center p-0" style="height: 400px">
+        <h2 class="w-100 text-center">
+          {{ ('db.champs.' + tournament.id + ".name") | translate}}
+        </h2>
+        <div class="timer w-100">
+          <div *ngIf='diffDays > 0' class="timer_block">
+            <div class="d-flex">
+              <h2 class="p-0 m-0"> {{diffDays}}</h2>
+              <h3 style="margin-left: 10px;">
+                {{ ('landing.days.' + (
+                diffDays == 1 ? 'singular' :
+                diffDays > 1 && diffDays < 5 ? 'semiplural' : diffDays>= 5 ? "plural" : "false")) | translate
+                  }}
+              </h3>
+            </div>
+          </div>
+
+          <div *ngIf='diffHours > 0' class="timer_block">
+            <div class="d-flex">
+              <h2 class="p-0 m-0">{{ diffHours }}</h2>
+              <h3>
+                {{ ('landing.hours.' + (
+                diffHours == 1 ? 'singular' :
+                diffHours > 1 && diffHours < 5 ? 'semiplural' : diffHours>= 5 ? "plural" : "false")) | translate
+                  }}
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="p-2 d-flex flex-wrap justify-content-between w-100">
+          <h5 class="w-100 text-start"><i class="fa fa-map-marker" style="color: navy; width: 30px;"
+              aria-hidden="true"></i> {{ ('db.champs.' + tournament.id + ".city") | translate}}</h5>
+          <h5 class="w-100 text-start"><i class="fa fa-calendar" style="color: green; width: 30px;"
+              aria-hidden="true"></i> {{getFullDateSting(tournament.date,tournament.dateTo)}}</h5>
+          <h5 class="w-100 text-start"><i class="fa fa-calendar-check-o" style="color: red; width: 30px;"
+              aria-hidden="true"></i> {{'landing.endregistration' | translate}}: {{getDateSting(tournament.dateEndReg)}}
+          </h5>
+        </div>
+      </div>
+
+      <!-- <div class="block_content_backgr w-25 justify-content-center">
+      <div class="timer w-100 d-flex align-items-center justify-content-center">   
+        <div *ngIf='diffDays > 0' class="timer_block">
+          <h2>{{diffDays}}</h2>
+          <p>
+            {{ ('landing.days.' + (
+            diffDays == 1 ? 'singular' :
+            diffDays > 1 && diffDays < 5 ? 'semiplural' : diffDays>= 5 ? "plural" : "false")) | translate
+              }}
+          </p>
+        </div>
+    
+        <div *ngIf='diffHours > 0' class="timer_block">
+          <h2>{{ diffHours }}</h2>
+          <p>
+            {{ ('landing.hours.' + (
+            diffHours == 1 ? 'singular' :
+            diffHours > 1 && diffHours < 5 ? 'semiplural' : diffHours>= 5 ? "plural" : "false")) | translate
+              }}
+          </p>
+        </div>
+      </div>
+      <div class="info">
+        <span>{{getDateSting(tournament.dateEndReg)}}</span>
+      </div>
+
+    </div> -->
+
+      <!-- <div class="block_img w-50">
+        <img *ngIf="tournament.id" src="{{mediaDir}}/champ/{{tournament.id}}.jpg" />
+    </div> -->
+
+      <!-- <div class="block_content">
+        <div class="title text-center">
+            <h2>{{ ('db.champs.' + tournament.id + ".name") | translate}}</h2>
+        </div>
+        <div class="info">
+          <span class="w-100 text-center">{{ ('db.champs.' + tournament.id + ".city") | translate}}</span>
+          <span  class="w-100 text-center">{{getDateSting(tournament.date)}} - {{getDateSting(tournament.dateTo)}}</span>
+        </div>
+    </div> -->
+    </div>
+
+    <div class="top_tournament p-1 w-100">
+      <div class="p-0 w-100 d-flex justify-content-center" >
+        <video src="{{mediaDir}}/champ/top.mp4" width="100%" height="340px" controls
+          ></video>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,19 @@
+.size-variant-narrow.row
+.size-variant-narrow .col,
+.size-variant-vide.row
+.size-variant-wide .col {
+  margin: 0 !important;
+  padding: 0 !important
+}
+
+.size-variant-narrow.row {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.size-variant-wide.row.current-fight {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+

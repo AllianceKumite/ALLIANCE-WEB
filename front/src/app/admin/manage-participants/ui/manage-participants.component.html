@@ -1,0 +1,832 @@
+<!-- *ngIf=""coach" -->
+<!-- Modal -->
+<div class="row p-0 m-0">
+    <!-- info-user -->
+    <div class="col-12 col-sm-6 col-md-6 p-1 m-0">
+        <!-- info-user -->
+        <div class="box-info">
+            <div class="row d-flex p-1">
+                <!-- branch -->
+                <div *ngIf="!this.model.isSuperAdmin" class="col-6 col-sm-3 col-md-3">
+                    <span style="font-weight: 500;"> {{"coach.branch" | translate}}:
+                        <span style="font-weight: 400;"> {{model.branch || ''}}
+                        </span>
+                    </span>
+                </div>
+                <!-- club -->
+                <div *ngIf="!this.model.isSuperAdmin" class="col-6 col-sm-3 col-md-3">
+                    <span style="font-weight: 500;"> {{"coach.club" | translate}}:
+                        <span style="font-weight: 400"> {{model.club}}
+                        </span>
+                    </span>
+                </div>
+                <!-- coach -->
+                <div class="col-6 col-sm-3 col-md-3">
+                    <span style="font-weight: 500;"> {{'coach.coach' | translate }}:
+                        <span style="font-weight: 400; color: darkblue; text-decoration: underline; cursor: pointer;"
+                            [routerLink]="['/coach', model.coachId]"> {{model.coach}}
+                        </span>
+                    </span>
+                </div>
+                <!-- coach participant -->
+                <div class="col-6 col-sm-3 col-md-3">
+                    <span style="font-weight: 500;">{{"coach.allPart" | translate}}:
+                        <span style="font-weight: 400;"> {{athletesCount}}</span>
+                        <span *ngIf="model.title" style="font-weight: 400;"> / {{participantsCount}}</span>
+                    </span>
+                </div>
+                <div class="col-4">
+                    <button *ngIf="this.model.isSuperAdmin" class="btn btn-success w-100" style="padding: 4px;"
+                        (click)="onShowRole()">
+                        Role Coach
+                    </button>
+                    <ng-container *ngIf="!this.model.isSuperAdmin">
+                        <a target="_blank" href="{{ videofile }}">
+                            <img src="{{logosDir}}/video-camera.svg" alt="" style="width: 30px; height: 20px; cursor: help;"> 
+                        </a>                
+                    </ng-container>
+                </div>
+            </div>
+            <div class="row d-flex p-1">
+                <div class="d-flex flex-wrap align-items-center">
+                    <!-- gender select -->
+                    <div class="col-12 col-sm-6 col-md-6" style="font-size: 0.9em;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+                            <label style="display: flex; align-items: center; margin-right: 10px;">
+                                <input type="radio" id="choice1" style="margin-right: 5px;" name="participant-filter"
+                                    [(ngModel)]="model.filters.genderOption" [value]="'all'"
+                                    (ngModelChange)="chooseGender($event)">
+                                {{"coach.all" | translate}}
+                            </label>
+                            <label style="display: flex; align-items: center;">
+                                <input type="radio" id="choice2" name="participant-filter"
+                                    [(ngModel)]="model.filters.genderOption" style="margin-right: 5px;" [value]="'man'"
+                                    (ngModelChange)="chooseGender($event)"> {{"coach.man" |
+                                translate}}
+                            </label>
+                            <label style="display: flex; align-items: center;">
+                                <input type="radio" id="choice3" name="participant-filter" style="margin-right: 5px;"
+                                    [(ngModel)]="model.filters.genderOption" [value]="'women'"
+                                    (ngModelChange)="chooseGender($event)">
+                                {{"coach.woman" | translate}}
+                            </label>
+                        </div>
+                    </div>
+                    <!-- set?reset all kumite/kata - if !this.model.isSuperAdmin -->
+                    <ng-container *ngIf="!this.model.isSuperAdmin">
+                        <div class="col-4 col-sm-2 col-md-2" style="font-size: 0.9em; padding: 4px;">
+                            <button class="btn btn-warning w-100" title="{{'coach.resetAllKata' | translate}}"
+                                (click)="setAllKata(false)">
+                                Kata
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16" height="16"
+                                    fill="#fff" viewBox="0 0 122.88 122.87"
+                                    style="enable-background:new 0 0 122.88 122.87" xml:space="preserve">
+                                    <style type="text/css">
+                                    </style>
+                                    <g>
+                                        <path class="st0"
+                                            d="M33.04,38.05c19.9,19.19,34.44,39.39,49.12,64.97c7.72-8.39,9.65-11.22,3.66-23.28 c-8.88-17.88-33.44-43.55-47.9-48.9c-1.73-0.64-3.32-0.96-4.67-0.92c-0.79,0.03-1.86,0.8-2.58,1.81 C29.06,33.99,30.79,35.88,33.04,38.05L33.04,38.05z" />
+                                        <path class="st0"
+                                            d="M88.74,15.17c-20.9,28.84-42.87,56.96-70.18,82.96c9.9,8.8,13.67,8.41,23.79-0.31 C59.72,82.84,85.39,46.96,94.31,26.7c1.49-3.38,3.02-8.87-0.81-11.05C91.94,14.76,89.89,14.33,88.74,15.17L88.74,15.17z" />
+                                        <path class="st1"
+                                            d="M51.21,0.87l0.44-0.07L52,0.74l0.1-0.01l0.44-0.07l0.25-0.03l0.19-0.03l0.44-0.06l0.15-0.02l0.29-0.04 l0.44-0.05l0.05-0.01l0.39-0.04l0.39-0.04l0.04,0l0.44-0.04l0.3-0.03l0.14-0.01l0.44-0.04l0.2-0.02l0.24-0.02l0.43-0.03l0.11-0.01 l0.33-0.02l0.44-0.02l0.01,0l0.42-0.02l0.35-0.02l0.08,0l0.44-0.02l0.25-0.01l0.18-0.01l0.43-0.01l0.16,0l0.28,0l0.43,0l0.06,0 l0.37,0l0.4,0l0.03,0l0.43,0.01l0.3,0l0.13,0l0.43,0.01l0.21,0.01l0.22,0.01l0.43,0.02l0.12,0l0.31,0.02l0.43,0.02l0.02,0 l0.41,0.02l0.08,0.01l0.35,0.03l0.43,0.03l0.26,0.02l0.17,0.01l0.59,0.06l0.26,0.03l0.42,0.04l0.07,0.01l0.35,0.04l0.4,0.05l0.02,0 l0.42,0.05l0.3,0.04l0.11,0.02l0.42,0.06l0.21,0.03l0.21,0.03l0.42,0.07l0.12,0.02l0.3,0.05l0.42,0.07l0.03,0l0.39,0.07l0.35,0.06 l0.07,0.01l0.41,0.08l0.26,0.05l0.16,0.03l1.24,0.26l0.07,0.02l0.34,0.08l0.39,0.09l0.02,0l0.71,0.18l0.11,0.02 c0.68,0.17,1.35,0.35,2.02,0.55c-2.82,3.12-5.42,6.1-7.82,8.95c-1.6-0.29-3.22-0.51-4.85-0.65v0c-1.26-0.11-2.52-0.17-3.79-0.18 l-0.05,0c-0.62,0-1.24,0-1.86,0.02l-0.08,0l-0.28,0.01l-0.28,0.01l0,0l-0.28,0.01l-0.28,0.01l-0.09,0.01l-0.19,0.01l-0.45,0.03 l-0.11,0.01l-0.54,0.04l-0.02,0l-0.28,0.02l-0.28,0.02l-0.06,0.01l-0.5,0.05L56.2,10.8l-0.13,0.01l-0.5,0.05l-0.02,0l-0.05,0.01 l-0.28,0.03l-0.28,0.03l-0.04,0.01l-0.25,0.03l-0.28,0.04l-0.12,0.02l-0.16,0.02l-0.28,0.04l-0.21,0.03l-0.08,0.01l-0.28,0.05 l-0.28,0.05l-0.01,0l-0.64,0.11l-0.01,0l-0.63,0.12l-0.01,0l-0.63,0.13l-0.01,0l-0.63,0.14l-0.01,0l-0.62,0.14l-0.01,0l-0.62,0.15 l-0.01,0l-0.62,0.16l-0.01,0l-0.62,0.17l-0.01,0l-0.61,0.17l-0.01,0l-0.61,0.18l-0.01,0l-0.6,0.19l-0.01,0l-0.6,0.2l-0.01,0 l-0.59,0.2l-0.01,0l-0.59,0.21l-0.01,0l-0.59,0.22l-0.01,0l-0.58,0.22l-0.01,0l-1.17,0.47l-0.01,0 c-8.95,3.72-16.47,9.86-21.89,17.5C12.4,42.56,8.9,56.05,11.24,69.91c0.56,3.29,1.42,6.47,2.55,9.49 c-2.03,3.83-4.13,7.67-6.28,11.48l-0.15-0.27l-0.03-0.06l-0.68-1.31l-0.01-0.02l-0.01-0.01l-0.13-0.27l-0.2-0.41l-0.08-0.15 L6.08,88.1l-0.12-0.25l-0.02-0.04l-0.13-0.28l-0.13-0.28l-0.04-0.08l-0.22-0.49l-0.09-0.2l-0.04-0.08l-0.25-0.58l-0.02-0.04 l-0.47-1.13l-0.11-0.28l-0.01-0.02L4.2,83.77l-0.04-0.11l-0.27-0.71l-0.02-0.06l-0.22-0.6l-0.02-0.06l-0.08-0.24l-0.17-0.49 l-0.04-0.12l-0.1-0.3l-0.1-0.3l0-0.01l-0.1-0.29l-0.29-0.92l-0.08-0.26l-0.01-0.04l-0.09-0.31l-0.09-0.31l-0.03-0.08l-0.07-0.23 l-0.09-0.31L2.22,77.8L2.2,77.7l-0.08-0.31l-0.08-0.31l-0.01-0.03l-0.07-0.28l-0.08-0.31l-0.04-0.16l-0.04-0.15l-0.08-0.31 l-0.07-0.29l0-0.02l-0.07-0.31L1.5,74.87l-0.03-0.11l-0.05-0.21l-0.07-0.32l-0.05-0.24l-0.02-0.08l-0.07-0.32l-0.06-0.32 l-0.01-0.05L1.1,72.95l-0.06-0.32L1,72.44l-0.02-0.13l-0.06-0.32l-0.06-0.32c-2.82-16.72,1.4-33.02,10.51-45.82 C20.49,13.03,34.49,3.69,51.21,0.87L51.21,0.87L51.21,0.87z M57.11,112.17L57.11,112.17c1.88,0.16,3.79,0.22,5.71,0.16l0.08,0 l0.28-0.01l0.28-0.01h0l0.28-0.01l0.28-0.01l0.09-0.01l0.19-0.01l0.45-0.03l0.11-0.01l0.54-0.04l0.02,0l0.28-0.02l0.28-0.03 l0.06-0.01l0.5-0.05l0.15-0.02l0.13-0.01l0.5-0.05l0.02,0l0.05-0.01l0.28-0.03l0.28-0.03l0.04-0.01l0.25-0.03l0.28-0.04l0.12-0.02 l0.16-0.02l0.28-0.04l0.21-0.03l0.08-0.01l0.28-0.04l0.28-0.05l0.01,0l0.64-0.11h0.01l0.63-0.12l0.01,0l0.63-0.13l0.01,0l0.63-0.13 l0.01,0l0.62-0.14l0.01,0l0.62-0.15l0.01,0l0.62-0.16h0.01l0.62-0.17h0.01l0.61-0.17l0.01,0l0.61-0.18l0.01,0l0.6-0.19l0.01,0 l0.6-0.2l0.01,0l0.59-0.2l0.01,0l0.59-0.21l0.01,0l0.59-0.21l0.01,0l0.58-0.22l0.01,0l1.17-0.47h0.01 c8.94-3.72,16.47-9.86,21.89-17.5c7.55-10.62,11.05-24.11,8.71-37.97c-0.56-3.29-1.42-6.47-2.55-9.49 c2.03-3.83,4.13-7.67,6.28-11.48l0.15,0.27l0.03,0.06l0.68,1.31l0.01,0.02l0.01,0.01l0.13,0.27l0.2,0.41l0.08,0.15l0.14,0.28 l0.12,0.25l0.02,0.04l0.13,0.28l0.13,0.28l0.04,0.08l0.22,0.49l0.09,0.2l0.04,0.08l0.25,0.58l0.02,0.04l0.47,1.13l0.11,0.28 l0.01,0.02l0.23,0.59l0.04,0.11l0.27,0.71l0.02,0.07l0.22,0.6l0.02,0.06l0.08,0.24l0.17,0.49l0.04,0.12l0.1,0.3l0.1,0.3l0,0.01 l0.1,0.3l0.29,0.92l0.08,0.26l0.01,0.04l0.09,0.31l0.09,0.31l0.03,0.08l0.06,0.23l0.09,0.31l0.06,0.21l0.03,0.1l0.08,0.31 l0.08,0.31l0.01,0.03l0.07,0.28l0.08,0.31l0.04,0.16l0.04,0.15l0.08,0.31l0.07,0.29l0,0.02l0.07,0.31l0.07,0.32l0.03,0.11 l0.05,0.21l0.07,0.32l0.05,0.24l0.02,0.08l0.07,0.32l0.06,0.32l0.01,0.05l0.05,0.27l0.06,0.32l0.04,0.19l0.02,0.14l0.06,0.32 l0.05,0.32c2.82,16.72-1.4,33.01-10.51,45.82c-9.11,12.81-23.11,22.15-39.83,24.97l-0.44,0.07l-0.34,0.05l-0.1,0.02l-0.44,0.07 l-0.25,0.04l-0.19,0.03l-0.44,0.06l-0.15,0.02l-0.29,0.04l-0.44,0.05l-0.05,0.01l-0.39,0.04l-0.39,0.04l-0.04,0l-0.44,0.04 l-0.3,0.03l-0.14,0.01l-0.44,0.04l-0.2,0.02l-0.24,0.02l-0.43,0.03l-0.11,0.01l-0.33,0.02l-0.44,0.02l-0.01,0l-0.42,0.02 l-0.35,0.02l-0.08,0l-0.43,0.02l-0.25,0.01l-0.18,0.01l-0.43,0.01l-0.16,0l-0.28,0l-0.43,0h-0.06h-0.37l-0.4,0h-0.03l-0.43-0.01 l-0.3-0.01l-0.13,0l-0.43-0.01l-0.21-0.01l-0.22-0.01l-0.43-0.02l-0.12,0l-0.31-0.02l-0.43-0.02l-0.02,0l-0.41-0.03l-0.08,0 l-0.35-0.03l-0.43-0.03l-0.26-0.02l-0.17-0.01l-0.59-0.05l-0.26-0.03l-0.42-0.04l-0.07-0.01l-0.35-0.04l-0.4-0.05l-0.02,0 l-0.42-0.05l-0.3-0.04l-0.11-0.02l-0.42-0.06l-0.21-0.03l-0.21-0.03l-0.42-0.07l-0.12-0.02l-0.3-0.05l-0.42-0.07l-0.03,0 l-0.39-0.07l-0.35-0.06l-0.07-0.01l-0.41-0.08l-0.26-0.05l-0.16-0.03l-1.24-0.26l-0.07-0.02l-0.34-0.08l-0.39-0.09l-0.02,0 l-0.71-0.18l-0.1-0.03c-0.68-0.17-1.35-0.36-2.02-0.55c2.82-3.12,5.42-6.1,7.82-8.95C53.85,111.81,55.47,112.03,57.11,112.17 L57.11,112.17z" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="col-4 col-sm-2 col-md-2" style="font-size: 0.9em; padding: 4px;">
+                            <button class="btn btn-success w-100" (click)="setAllKumite(true)"
+                                title="{{'coach.setAllKumite' | translate}}">
+                                Kumite
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16" height="16"
+                                    fill="#fff" viewBox="0 0 117.72 117.72"
+                                    style="enable-background:new 0 0 117.72 117.72" xml:space="preserve">
+                                    <style type="text/css">
+                                    </style>
+                                    <g>
+                                        <path class="st0"
+                                            d="M58.86,0c9.13,0,17.77,2.08,25.49,5.79c-3.16,2.5-6.09,4.9-8.82,7.21c-5.2-1.89-10.81-2.92-16.66-2.92 c-13.47,0-25.67,5.46-34.49,14.29c-8.83,8.83-14.29,21.02-14.29,34.49c0,13.47,5.46,25.66,14.29,34.49 c8.83,8.83,21.02,14.29,34.49,14.29s25.67-5.46,34.49-14.29c8.83-8.83,14.29-21.02,14.29-34.49c0-3.2-0.31-6.34-0.9-9.37 c2.53-3.3,5.12-6.59,7.77-9.85c2.08,6.02,3.21,12.49,3.21,19.22c0,16.25-6.59,30.97-17.24,41.62 c-10.65,10.65-25.37,17.24-41.62,17.24c-16.25,0-30.97-6.59-41.62-17.24C6.59,89.83,0,75.11,0,58.86 c0-16.25,6.59-30.97,17.24-41.62S42.61,0,58.86,0L58.86,0z M31.44,49.19L45.8,49l1.07,0.28c2.9,1.67,5.63,3.58,8.18,5.74 c1.84,1.56,3.6,3.26,5.27,5.1c5.15-8.29,10.64-15.9,16.44-22.9c6.35-7.67,13.09-14.63,20.17-20.98l1.4-0.54H114l-3.16,3.51 C101.13,30,92.32,41.15,84.36,52.65C76.4,64.16,69.28,76.04,62.95,88.27l-1.97,3.8l-1.81-3.87c-3.34-7.17-7.34-13.75-12.11-19.63 c-4.77-5.88-10.32-11.1-16.79-15.54L31.44,49.19L31.44,49.19z" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="col-4 col-sm-2 col-md-2" style="font-size: 0.9em; padding: 4px;">
+                            <button class="btn btn-warning w-100" (click)="setAllKumite(false)"
+                                title="{{'coach.resetAllKumite' | translate}}">
+                                Kumite
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16" height="16"
+                                    fill="#fff" viewBox="0 0 122.88 122.87"
+                                    style="enable-background:new 0 0 122.88 122.87" xml:space="preserve">
+                                    <style type="text/css">
+                                    </style>
+                                    <g>
+                                        <path class="st0"
+                                            d="M33.04,38.05c19.9,19.19,34.44,39.39,49.12,64.97c7.72-8.39,9.65-11.22,3.66-23.28 c-8.88-17.88-33.44-43.55-47.9-48.9c-1.73-0.64-3.32-0.96-4.67-0.92c-0.79,0.03-1.86,0.8-2.58,1.81 C29.06,33.99,30.79,35.88,33.04,38.05L33.04,38.05z" />
+                                        <path class="st0"
+                                            d="M88.74,15.17c-20.9,28.84-42.87,56.96-70.18,82.96c9.9,8.8,13.67,8.41,23.79-0.31 C59.72,82.84,85.39,46.96,94.31,26.7c1.49-3.38,3.02-8.87-0.81-11.05C91.94,14.76,89.89,14.33,88.74,15.17L88.74,15.17z" />
+                                        <path class="st1"
+                                            d="M51.21,0.87l0.44-0.07L52,0.74l0.1-0.01l0.44-0.07l0.25-0.03l0.19-0.03l0.44-0.06l0.15-0.02l0.29-0.04 l0.44-0.05l0.05-0.01l0.39-0.04l0.39-0.04l0.04,0l0.44-0.04l0.3-0.03l0.14-0.01l0.44-0.04l0.2-0.02l0.24-0.02l0.43-0.03l0.11-0.01 l0.33-0.02l0.44-0.02l0.01,0l0.42-0.02l0.35-0.02l0.08,0l0.44-0.02l0.25-0.01l0.18-0.01l0.43-0.01l0.16,0l0.28,0l0.43,0l0.06,0 l0.37,0l0.4,0l0.03,0l0.43,0.01l0.3,0l0.13,0l0.43,0.01l0.21,0.01l0.22,0.01l0.43,0.02l0.12,0l0.31,0.02l0.43,0.02l0.02,0 l0.41,0.02l0.08,0.01l0.35,0.03l0.43,0.03l0.26,0.02l0.17,0.01l0.59,0.06l0.26,0.03l0.42,0.04l0.07,0.01l0.35,0.04l0.4,0.05l0.02,0 l0.42,0.05l0.3,0.04l0.11,0.02l0.42,0.06l0.21,0.03l0.21,0.03l0.42,0.07l0.12,0.02l0.3,0.05l0.42,0.07l0.03,0l0.39,0.07l0.35,0.06 l0.07,0.01l0.41,0.08l0.26,0.05l0.16,0.03l1.24,0.26l0.07,0.02l0.34,0.08l0.39,0.09l0.02,0l0.71,0.18l0.11,0.02 c0.68,0.17,1.35,0.35,2.02,0.55c-2.82,3.12-5.42,6.1-7.82,8.95c-1.6-0.29-3.22-0.51-4.85-0.65v0c-1.26-0.11-2.52-0.17-3.79-0.18 l-0.05,0c-0.62,0-1.24,0-1.86,0.02l-0.08,0l-0.28,0.01l-0.28,0.01l0,0l-0.28,0.01l-0.28,0.01l-0.09,0.01l-0.19,0.01l-0.45,0.03 l-0.11,0.01l-0.54,0.04l-0.02,0l-0.28,0.02l-0.28,0.02l-0.06,0.01l-0.5,0.05L56.2,10.8l-0.13,0.01l-0.5,0.05l-0.02,0l-0.05,0.01 l-0.28,0.03l-0.28,0.03l-0.04,0.01l-0.25,0.03l-0.28,0.04l-0.12,0.02l-0.16,0.02l-0.28,0.04l-0.21,0.03l-0.08,0.01l-0.28,0.05 l-0.28,0.05l-0.01,0l-0.64,0.11l-0.01,0l-0.63,0.12l-0.01,0l-0.63,0.13l-0.01,0l-0.63,0.14l-0.01,0l-0.62,0.14l-0.01,0l-0.62,0.15 l-0.01,0l-0.62,0.16l-0.01,0l-0.62,0.17l-0.01,0l-0.61,0.17l-0.01,0l-0.61,0.18l-0.01,0l-0.6,0.19l-0.01,0l-0.6,0.2l-0.01,0 l-0.59,0.2l-0.01,0l-0.59,0.21l-0.01,0l-0.59,0.22l-0.01,0l-0.58,0.22l-0.01,0l-1.17,0.47l-0.01,0 c-8.95,3.72-16.47,9.86-21.89,17.5C12.4,42.56,8.9,56.05,11.24,69.91c0.56,3.29,1.42,6.47,2.55,9.49 c-2.03,3.83-4.13,7.67-6.28,11.48l-0.15-0.27l-0.03-0.06l-0.68-1.31l-0.01-0.02l-0.01-0.01l-0.13-0.27l-0.2-0.41l-0.08-0.15 L6.08,88.1l-0.12-0.25l-0.02-0.04l-0.13-0.28l-0.13-0.28l-0.04-0.08l-0.22-0.49l-0.09-0.2l-0.04-0.08l-0.25-0.58l-0.02-0.04 l-0.47-1.13l-0.11-0.28l-0.01-0.02L4.2,83.77l-0.04-0.11l-0.27-0.71l-0.02-0.06l-0.22-0.6l-0.02-0.06l-0.08-0.24l-0.17-0.49 l-0.04-0.12l-0.1-0.3l-0.1-0.3l0-0.01l-0.1-0.29l-0.29-0.92l-0.08-0.26l-0.01-0.04l-0.09-0.31l-0.09-0.31l-0.03-0.08l-0.07-0.23 l-0.09-0.31L2.22,77.8L2.2,77.7l-0.08-0.31l-0.08-0.31l-0.01-0.03l-0.07-0.28l-0.08-0.31l-0.04-0.16l-0.04-0.15l-0.08-0.31 l-0.07-0.29l0-0.02l-0.07-0.31L1.5,74.87l-0.03-0.11l-0.05-0.21l-0.07-0.32l-0.05-0.24l-0.02-0.08l-0.07-0.32l-0.06-0.32 l-0.01-0.05L1.1,72.95l-0.06-0.32L1,72.44l-0.02-0.13l-0.06-0.32l-0.06-0.32c-2.82-16.72,1.4-33.02,10.51-45.82 C20.49,13.03,34.49,3.69,51.21,0.87L51.21,0.87L51.21,0.87z M57.11,112.17L57.11,112.17c1.88,0.16,3.79,0.22,5.71,0.16l0.08,0 l0.28-0.01l0.28-0.01h0l0.28-0.01l0.28-0.01l0.09-0.01l0.19-0.01l0.45-0.03l0.11-0.01l0.54-0.04l0.02,0l0.28-0.02l0.28-0.03 l0.06-0.01l0.5-0.05l0.15-0.02l0.13-0.01l0.5-0.05l0.02,0l0.05-0.01l0.28-0.03l0.28-0.03l0.04-0.01l0.25-0.03l0.28-0.04l0.12-0.02 l0.16-0.02l0.28-0.04l0.21-0.03l0.08-0.01l0.28-0.04l0.28-0.05l0.01,0l0.64-0.11h0.01l0.63-0.12l0.01,0l0.63-0.13l0.01,0l0.63-0.13 l0.01,0l0.62-0.14l0.01,0l0.62-0.15l0.01,0l0.62-0.16h0.01l0.62-0.17h0.01l0.61-0.17l0.01,0l0.61-0.18l0.01,0l0.6-0.19l0.01,0 l0.6-0.2l0.01,0l0.59-0.2l0.01,0l0.59-0.21l0.01,0l0.59-0.21l0.01,0l0.58-0.22l0.01,0l1.17-0.47h0.01 c8.94-3.72,16.47-9.86,21.89-17.5c7.55-10.62,11.05-24.11,8.71-37.97c-0.56-3.29-1.42-6.47-2.55-9.49 c2.03-3.83,4.13-7.67,6.28-11.48l0.15,0.27l0.03,0.06l0.68,1.31l0.01,0.02l0.01,0.01l0.13,0.27l0.2,0.41l0.08,0.15l0.14,0.28 l0.12,0.25l0.02,0.04l0.13,0.28l0.13,0.28l0.04,0.08l0.22,0.49l0.09,0.2l0.04,0.08l0.25,0.58l0.02,0.04l0.47,1.13l0.11,0.28 l0.01,0.02l0.23,0.59l0.04,0.11l0.27,0.71l0.02,0.07l0.22,0.6l0.02,0.06l0.08,0.24l0.17,0.49l0.04,0.12l0.1,0.3l0.1,0.3l0,0.01 l0.1,0.3l0.29,0.92l0.08,0.26l0.01,0.04l0.09,0.31l0.09,0.31l0.03,0.08l0.06,0.23l0.09,0.31l0.06,0.21l0.03,0.1l0.08,0.31 l0.08,0.31l0.01,0.03l0.07,0.28l0.08,0.31l0.04,0.16l0.04,0.15l0.08,0.31l0.07,0.29l0,0.02l0.07,0.31l0.07,0.32l0.03,0.11 l0.05,0.21l0.07,0.32l0.05,0.24l0.02,0.08l0.07,0.32l0.06,0.32l0.01,0.05l0.05,0.27l0.06,0.32l0.04,0.19l0.02,0.14l0.06,0.32 l0.05,0.32c2.82,16.72-1.4,33.01-10.51,45.82c-9.11,12.81-23.11,22.15-39.83,24.97l-0.44,0.07l-0.34,0.05l-0.1,0.02l-0.44,0.07 l-0.25,0.04l-0.19,0.03l-0.44,0.06l-0.15,0.02l-0.29,0.04l-0.44,0.05l-0.05,0.01l-0.39,0.04l-0.39,0.04l-0.04,0l-0.44,0.04 l-0.3,0.03l-0.14,0.01l-0.44,0.04l-0.2,0.02l-0.24,0.02l-0.43,0.03l-0.11,0.01l-0.33,0.02l-0.44,0.02l-0.01,0l-0.42,0.02 l-0.35,0.02l-0.08,0l-0.43,0.02l-0.25,0.01l-0.18,0.01l-0.43,0.01l-0.16,0l-0.28,0l-0.43,0h-0.06h-0.37l-0.4,0h-0.03l-0.43-0.01 l-0.3-0.01l-0.13,0l-0.43-0.01l-0.21-0.01l-0.22-0.01l-0.43-0.02l-0.12,0l-0.31-0.02l-0.43-0.02l-0.02,0l-0.41-0.03l-0.08,0 l-0.35-0.03l-0.43-0.03l-0.26-0.02l-0.17-0.01l-0.59-0.05l-0.26-0.03l-0.42-0.04l-0.07-0.01l-0.35-0.04l-0.4-0.05l-0.02,0 l-0.42-0.05l-0.3-0.04l-0.11-0.02l-0.42-0.06l-0.21-0.03l-0.21-0.03l-0.42-0.07l-0.12-0.02l-0.3-0.05l-0.42-0.07l-0.03,0 l-0.39-0.07l-0.35-0.06l-0.07-0.01l-0.41-0.08l-0.26-0.05l-0.16-0.03l-1.24-0.26l-0.07-0.02l-0.34-0.08l-0.39-0.09l-0.02,0 l-0.71-0.18l-0.1-0.03c-0.68-0.17-1.35-0.36-2.02-0.55c2.82-3.12,5.42-6.1,7.82-8.95C53.85,111.81,55.47,112.03,57.11,112.17 L57.11,112.17z" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="this.model.isSuperAdmin">
+                        <div class="col-6 col-sm-3 col-md-3" style="font-size: 0.9em; padding: 4px;">
+                            <label>{{"coach.coach" | translate}}:</label>
+                            <ng-select style="padding: 4px;" bindLabel="coachName" bindValue="coachId"
+                                placeholder="AllianceKumite" name="allCoaches" [items]="allCoaches"
+                                [(ngModel)]="model.coachId" (ngModelChange)="select()" class="form-control"
+                                style="height: 36px;">
+                            </ng-select>
+                        </div>
+                        <div class="col-6 col-sm-3 col-md-3" style="font-size: 0.9em; padding: 4px;">
+                            <label>{{"coach.club" | translate}}:</label>
+                            <ng-select bindLabel="clubName" bindValue="clubId" placeholder="" name="allClubs"
+                                [items]="allClubs" [(ngModel)]="model.clubId" (ngModelChange)="select()"
+                                class="form-control" style="height: 36px;">
+                            </ng-select>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <!-- data admin coach -->
+        <div *ngIf="isShowRole" class="col-12">
+            <div class="box-info">
+                <div class="row d-flex p-1">
+                    <app-manage-instructors [isSuperAdmin]="model?.isSuperAdmin" [champName]="model?.title"
+                        [coachId]="model?.coachId" *ngIf="model?.isBranch || model?.isSuperAdmin">
+                    </app-manage-instructors>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 p-1 m-0">
+        <div *ngIf="model.title && isCheckQuota" class="box-info d-flex align-items-center justify-content-center" style="color:crimson; font-size: 1.2em;">
+            <p>{{'coach.teamcompinfo'  | translate : { teamCompetitionCount: teamCompetitionCount} }}</p>
+        </div>        
+    </div>
+
+<div class="row p-0 m-0">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 p-1 m-0">
+        <div class="border-box">
+            <div class="header">
+                <h4 style="padding-left: 10px;">{{"coach.genList" | translate}}
+                    {{this.selectedAthletes.length > 0 ? " - " + this.selectedAthletes.length + " " + ("coach.selected"
+                    | translate)
+                    : ""}}
+                </h4>
+                <div style="height: 36px; padding: 4px; width: 30%; position: relative;">
+                    <input type="text" class="input form-control" [(ngModel)]="model.filters.findByName"
+                        (input)="findByName()">
+                    <label class="label" (click)="clearSearch()">×</label>
+                </div>
+            </div>
+
+            <div class="box-table mt-1" [ngClass]="{'te2': model.title, 'te1': !model.title}">
+                <div class="row row-header p-2 m-0">
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 text-center ath-checked"></div>
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 text-center ath-num">#</div>
+                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 text-start ath-fio">{{"coach.fio" | translate}}</div>
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 text-center ath-gender">{{"coach.gender" | translate}}
+                    </div>
+                    <div class="col-5 col-sm-5 col-md-1 col-lg-2 p-0 text-center ath-datebr">{{"coach.date" |
+                        translate}}
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-1 col-lg-1 text-end ath-weight">{{"coach.weight" | translate}}
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-1 col-lg-1 text-center ath-grade">{{"coach.rang" | translate}}
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-2 col-lg-2">
+                        <div class="d-flex justify-content-start w-100">
+                            <button class="btn btn-action btn-success" title="{{'coach.moveToPart' | translate}}"
+                                (click)="moveToParticipantList()" [disabled]="!eligibleToMoveToParticipants()"
+                                [hidden]="!model.title">
+                                <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"
+                                    text-rendering="geometricPrecision" image-rendering="optimizeQuality"
+                                    fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 441 512.02" width="16"
+                                    height="16" fill="#fff">
+                                    <path
+                                        d="M324.87 279.77c32.01 0 61.01 13.01 82.03 34.02 21.09 21 34.1 50.05 34.1 82.1 0 32.06-13.01 61.11-34.02 82.11l-1.32 1.22c-20.92 20.29-49.41 32.8-80.79 32.8-32.06 0-61.1-13.01-82.1-34.02-21.01-21-34.02-50.05-34.02-82.11s13.01-61.1 34.02-82.1c21-21.01 50.04-34.02 82.1-34.02zM243.11 38.08v54.18c.99 12.93 5.5 23.09 13.42 29.85 8.2 7.01 20.46 10.94 36.69 11.23l37.92-.04-88.03-95.22zm91.21 120.49-41.3-.04c-22.49-.35-40.21-6.4-52.9-17.24-13.23-11.31-20.68-27.35-22.19-47.23l-.11-1.74V25.29H62.87c-10.34 0-19.75 4.23-26.55 11.03-6.8 6.8-11.03 16.21-11.03 26.55v336.49c0 10.3 4.25 19.71 11.06 26.52 6.8 6.8 16.22 11.05 26.52 11.05h119.41c2.54 8.79 5.87 17.25 9.92 25.29H62.87c-17.28 0-33.02-7.08-44.41-18.46C7.08 432.37 0 416.64 0 399.36V62.87c0-17.26 7.08-32.98 18.45-44.36C29.89 7.08 45.61 0 62.87 0h173.88c4.11 0 7.76 1.96 10.07 5l109.39 118.34c2.24 2.43 3.34 5.49 3.34 8.55l.03 119.72c-8.18-1.97-16.62-3.25-25.26-3.79v-89.25zm-229.76 54.49c-6.98 0-12.64-5.66-12.64-12.64 0-6.99 5.66-12.65 12.64-12.65h150.49c6.98 0 12.65 5.66 12.65 12.65 0 6.98-5.67 12.64-12.65 12.64H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h142.52c3.71 0 7.05 1.6 9.37 4.15a149.03 149.03 0 0 0-30.54 21.14H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h86.2c-3.82 8.05-6.95 16.51-9.29 25.29h-76.91zm277.27 25.48v22.18c0 4.32-3.66 7.97-7.98 7.97h-29.9v29.91c0 4.33-3.65 7.97-7.98 7.97h-22.18c-4.33 0-7.98-3.59-7.98-7.97v-29.91H275.9c-4.32 0-7.97-3.59-7.97-7.97v-22.18c0-4.38 3.59-7.97 7.97-7.97h29.91v-29.91c0-4.39 3.59-7.97 7.98-7.97h22.18c4.39 0 7.98 3.64 7.98 7.97v29.91h29.9c4.39 0 7.98 3.7 7.98 7.97z" />
+                                </svg>
+                            </button>
+                            <button class="btn btn-action btn-warning" title="{{'coach.deletePart' | translate}}"
+                                (click)="deleteFromParticipantList()" [disabled]="eligibleToMoveToParticipants()"
+                                [hidden]="!model.title">
+                                <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"
+                                    text-rendering="geometricPrecision" image-rendering="optimizeQuality"
+                                    fill-rule="evenodd" clip-rule="evenodd" width="16" height="16" fill="#fff"
+                                    viewBox="0 0 441 512.02">
+                                    <path
+                                        d="M324.87 279.77c32.01 0 61.01 13.01 82.03 34.02 21.09 21 34.1 50.05 34.1 82.1 0 32.06-13.01 61.11-34.02 82.11l-1.32 1.22c-20.92 20.29-49.41 32.8-80.79 32.8-32.06 0-61.1-13.01-82.1-34.02-21.01-21-34.02-50.05-34.02-82.11s13.01-61.1 34.02-82.1c21-21.01 50.04-34.02 82.1-34.02zM243.11 38.08v54.18c.99 12.93 5.5 23.09 13.42 29.85 8.2 7.01 20.46 10.94 36.69 11.23l37.92-.04-88.03-95.22zm91.21 120.49-41.3-.04c-22.49-.35-40.21-6.4-52.9-17.24-13.23-11.31-20.68-27.35-22.19-47.23l-.11-1.74V25.29H62.87c-10.34 0-19.75 4.23-26.55 11.03-6.8 6.8-11.03 16.21-11.03 26.55v336.49c0 10.3 4.25 19.71 11.06 26.52 6.8 6.8 16.22 11.05 26.52 11.05h119.41c2.54 8.79 5.87 17.25 9.92 25.29H62.87c-17.28 0-33.02-7.08-44.41-18.46C7.08 432.37 0 416.64 0 399.36V62.87c0-17.26 7.08-32.98 18.45-44.36C29.89 7.08 45.61 0 62.87 0h173.88c4.11 0 7.76 1.96 10.07 5l109.39 118.34c2.24 2.43 3.34 5.49 3.34 8.55l.03 119.72c-8.18-1.97-16.62-3.25-25.26-3.79v-89.25zm-229.76 54.49c-6.98 0-12.64-5.66-12.64-12.64 0-6.99 5.66-12.65 12.64-12.65h150.49c6.98 0 12.65 5.66 12.65 12.65 0 6.98-5.67 12.64-12.65 12.64H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h142.52c3.71 0 7.05 1.6 9.37 4.15a149.03 149.03 0 0 0-30.54 21.14H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h86.2c-3.82 8.05-6.95 16.51-9.29 25.29h-76.91zm277.8 27.04v22.39c0 4.36-3.69 8.04-8.05 8.04h-98.87c-4.36 0-8.05-3.62-8.05-8.04V384.7c0-4.42 3.63-8.05 8.05-8.05h98.87c4.43 0 8.05 3.74 8.05 8.05z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="all-participants">
+                    <div *ngFor="let athlete of athletes| slice: (page - 1) * pageSize : page * pageSize; let idx = index;"
+                        class="row row-data p-2 m-0 d-flex align-items-center border-bottom border-secondary-subtle"
+                        id=`tr{{idx}}` [class.selected-participant-color]="isSelectedAthlete(athlete)"
+                        (click)="selectAndScrollParticipants($event, athlete)">
+                        <div class="col-1 col-sm-1 col-md-1 col-lg-1 text-center ath-checked">
+                            <input type="checkbox" [checked]="isSelectedAthlete(athlete)"
+                                (click)="selectAndScrollParticipants($event, athlete)" />
+                        </div>
+                        <div class="col-1 col-sm-1 col-md-1 col-lg-1 text-center ath-num">{{ idx + 1 + startItem}}</div>
+                        <div class="col-6 col-sm-4 col-md-4 col-lg-3 text-start ath-fio"
+                            [class.selected-participant-color]="isSelectedAthlete(athlete)">{{ athlete.FIO }}</div>
+                        <div class="col-1 col-sm-1 col-md-1 col-lg-1 text-center ath-gender">{{ athlete.gender }}</div>
+                        <div class="col-5 col-sm-5 col-md-1 col-lg-2 p-0 text-center ath-datebr">{{ athlete.dateBR |
+                            date:
+                            'dd.MM.yy' }}</div>
+                        <div class="col-4 col-sm-4 col-md-1 col-lg-1 text-end ath-weight">{{ athlete.Weight | number :
+                            '1.1-1' }}</div>
+                        <div class="col-4 col-sm-4 col-md-1 col-lg-1 text-center ath-grade">{{ athlete.DAN }}</div>
+                        <div class="col-4 col-sm-4 col-md-2 col-lg-2">
+                            <div *ngIf="isSelectedAthlete(athlete) && selectedAthletes.length == 1"
+                                class="d-flex justify-content-start">
+                                <button class="btn btn-action btn-success" title="{{'coach.moveToPart' | translate}}"
+                                    (click)="moveToParticipantList()" [disabled]="eligibleToMoveToParticipant(athlete)"
+                                    [hidden]="!model.title">
+                                    <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"
+                                        text-rendering="geometricPrecision" image-rendering="optimizeQuality"
+                                        fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 441 512.02" width="16"
+                                        height="16" fill="#fff">
+                                        <path
+                                            d="M324.87 279.77c32.01 0 61.01 13.01 82.03 34.02 21.09 21 34.1 50.05 34.1 82.1 0 32.06-13.01 61.11-34.02 82.11l-1.32 1.22c-20.92 20.29-49.41 32.8-80.79 32.8-32.06 0-61.1-13.01-82.1-34.02-21.01-21-34.02-50.05-34.02-82.11s13.01-61.1 34.02-82.1c21-21.01 50.04-34.02 82.1-34.02zM243.11 38.08v54.18c.99 12.93 5.5 23.09 13.42 29.85 8.2 7.01 20.46 10.94 36.69 11.23l37.92-.04-88.03-95.22zm91.21 120.49-41.3-.04c-22.49-.35-40.21-6.4-52.9-17.24-13.23-11.31-20.68-27.35-22.19-47.23l-.11-1.74V25.29H62.87c-10.34 0-19.75 4.23-26.55 11.03-6.8 6.8-11.03 16.21-11.03 26.55v336.49c0 10.3 4.25 19.71 11.06 26.52 6.8 6.8 16.22 11.05 26.52 11.05h119.41c2.54 8.79 5.87 17.25 9.92 25.29H62.87c-17.28 0-33.02-7.08-44.41-18.46C7.08 432.37 0 416.64 0 399.36V62.87c0-17.26 7.08-32.98 18.45-44.36C29.89 7.08 45.61 0 62.87 0h173.88c4.11 0 7.76 1.96 10.07 5l109.39 118.34c2.24 2.43 3.34 5.49 3.34 8.55l.03 119.72c-8.18-1.97-16.62-3.25-25.26-3.79v-89.25zm-229.76 54.49c-6.98 0-12.64-5.66-12.64-12.64 0-6.99 5.66-12.65 12.64-12.65h150.49c6.98 0 12.65 5.66 12.65 12.65 0 6.98-5.67 12.64-12.65 12.64H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h142.52c3.71 0 7.05 1.6 9.37 4.15a149.03 149.03 0 0 0-30.54 21.14H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h86.2c-3.82 8.05-6.95 16.51-9.29 25.29h-76.91zm277.27 25.48v22.18c0 4.32-3.66 7.97-7.98 7.97h-29.9v29.91c0 4.33-3.65 7.97-7.98 7.97h-22.18c-4.33 0-7.98-3.59-7.98-7.97v-29.91H275.9c-4.32 0-7.97-3.59-7.97-7.97v-22.18c0-4.38 3.59-7.97 7.97-7.97h29.91v-29.91c0-4.39 3.59-7.97 7.98-7.97h22.18c4.39 0 7.98 3.64 7.98 7.97v29.91h29.9c4.39 0 7.98 3.7 7.98 7.97z" />
+                                    </svg>
+                                </button>
+
+                                <button class="btn btn-action btn-warning" title="{{'coach.deletePart' | translate}}"
+                                    (click)="deleteFromParticipantList()"
+                                    [disabled]="!eligibleToMoveToParticipant(athlete)" [hidden]="!model.title">
+                                    <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"
+                                        text-rendering="geometricPrecision" image-rendering="optimizeQuality"
+                                        fill-rule="evenodd" clip-rule="evenodd" width="16" height="16" fill="#fff"
+                                        viewBox="0 0 441 512.02">
+                                        <path
+                                            d="M324.87 279.77c32.01 0 61.01 13.01 82.03 34.02 21.09 21 34.1 50.05 34.1 82.1 0 32.06-13.01 61.11-34.02 82.11l-1.32 1.22c-20.92 20.29-49.41 32.8-80.79 32.8-32.06 0-61.1-13.01-82.1-34.02-21.01-21-34.02-50.05-34.02-82.11s13.01-61.1 34.02-82.1c21-21.01 50.04-34.02 82.1-34.02zM243.11 38.08v54.18c.99 12.93 5.5 23.09 13.42 29.85 8.2 7.01 20.46 10.94 36.69 11.23l37.92-.04-88.03-95.22zm91.21 120.49-41.3-.04c-22.49-.35-40.21-6.4-52.9-17.24-13.23-11.31-20.68-27.35-22.19-47.23l-.11-1.74V25.29H62.87c-10.34 0-19.75 4.23-26.55 11.03-6.8 6.8-11.03 16.21-11.03 26.55v336.49c0 10.3 4.25 19.71 11.06 26.52 6.8 6.8 16.22 11.05 26.52 11.05h119.41c2.54 8.79 5.87 17.25 9.92 25.29H62.87c-17.28 0-33.02-7.08-44.41-18.46C7.08 432.37 0 416.64 0 399.36V62.87c0-17.26 7.08-32.98 18.45-44.36C29.89 7.08 45.61 0 62.87 0h173.88c4.11 0 7.76 1.96 10.07 5l109.39 118.34c2.24 2.43 3.34 5.49 3.34 8.55l.03 119.72c-8.18-1.97-16.62-3.25-25.26-3.79v-89.25zm-229.76 54.49c-6.98 0-12.64-5.66-12.64-12.64 0-6.99 5.66-12.65 12.64-12.65h150.49c6.98 0 12.65 5.66 12.65 12.65 0 6.98-5.67 12.64-12.65 12.64H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h142.52c3.71 0 7.05 1.6 9.37 4.15a149.03 149.03 0 0 0-30.54 21.14H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h86.2c-3.82 8.05-6.95 16.51-9.29 25.29h-76.91zm277.8 27.04v22.39c0 4.36-3.69 8.04-8.05 8.04h-98.87c-4.36 0-8.05-3.62-8.05-8.04V384.7c0-4.42 3.63-8.05 8.05-8.05h98.87c4.43 0 8.05 3.74 8.05 8.05z" />
+                                    </svg>
+                                </button>
+
+                                <button class="btn btn-action btn-danger" (click)="deleteAth()"
+                                    title="{{'coach.deleteCurrent' | translate}}" [disabled]="!activeAthlete.athId">
+                                    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="16"
+                                        height="16" fill="#fff" viewBox="0 0 105.7 122.88">
+                                        <path
+                                            d="M30.46,14.57V5.22A5.18,5.18,0,0,1,32,1.55v0A5.19,5.19,0,0,1,35.68,0H70a5.22,5.22,0,0,1,3.67,1.53l0,0a5.22,5.22,0,0,1,1.53,3.67v9.35h27.08a3.36,3.36,0,0,1,3.38,3.37V29.58A3.38,3.38,0,0,1,102.32,33H98.51l-8.3,87.22a3,3,0,0,1-2.95,2.69H18.43a3,3,0,0,1-3-2.95L7.19,33H3.37A3.38,3.38,0,0,1,0,29.58V17.94a3.36,3.36,0,0,1,3.37-3.37Zm36.27,0V8.51H39v6.06ZM49.48,49.25a3.4,3.4,0,0,1,6.8,0v51.81a3.4,3.4,0,1,1-6.8,0V49.25ZM69.59,49a3.4,3.4,0,1,1,6.78.42L73,101.27a3.4,3.4,0,0,1-6.78-.43L69.59,49Zm-40.26.42A3.39,3.39,0,1,1,36.1,49l3.41,51.8a3.39,3.39,0,1,1-6.77.43L29.33,49.46ZM92.51,33.38H13.19l7.94,83.55H84.56l8-83.55Z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <pagination id="pagination" [align]="true" [boundaryLinks]="true" [directionLinks]="true"
+            [totalItems]="athletes?.length" [itemsPerPage]="pageSize" [maxSize]="6" (pageChanged)="onPageChange($event)"
+            [(ngModel)]="page">
+        </pagination>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-1 m-0">
+        <div class="detail-box">
+            <div class="header" style="height: 36px">
+                <h4 style="padding-left: 10px;">{{"coach.detailsPart" | translate}}</h4>
+                <div
+                    style="padding: 6px; width: 200px; position: relative; display: flex; justify-content: space-between;">
+                    <button style="height: 28px; width: 100%" (click)="insertNewAth()" [disabled]="!eligibleToAddNew()"
+                        class="btn btn-success">
+                        {{"coach.addNew" | translate}}
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-1" [ngClass]="{'de2': model.title, 'de1': !model.title}">
+                <div class="row p-0 m-0">
+                    <!-- fio -->
+                    <div class="col-8 col-sm-8 col-md-8 p-1 m-0">
+                        <div *ngIf="submitted && activeAthleteValidationError && activeAthleteValidationError.FIO == 'exists' "
+                            class="invalid-feedback">
+                            {{ "coach.athleteExists" | translate: { athlete: activeAthlete.FIO, date:
+                            getDateSting(activeAthlete.dateBR)} }}
+                        </div>
+                        <label for="fio">{{"coach.fio" | translate}}</label>
+                        <input type="text" class="form-control h-32" name="FIO" id="fio" [(ngModel)]="activeAthlete.FIO"
+                            (input)="onSelectChange()"
+                            [ngClass]="{ 'is-invalid': submitted && activeAthleteValidationError && activeAthleteValidationError.FIO }"
+                            (ngModelChange)="cleanErrors()">
+                    </div>
+                    <!-- date -->
+                    <div class="col-4 col-sm-4 col-md-4 p-1 m-0">
+                        <label for="date-br">{{"coach.dateBR" | translate}}</label>
+                        <input id="date-br" type="date" class="form-control h-32" name="dateBR"
+                            [(ngModel)]="activeAthlete.dateBR" (input)="onSelectChange()"
+                            [ngClass]="{ 'is-invalid': submitted && activeAthleteValidationError && activeAthleteValidationError.dateBR }"
+                            (ngModelChange)="cleanErrors()">
+                    </div>
+                    <!-- weight -->
+                    <div class="col-4 col-sm-4 col-md-4 p-1 m-0">
+                        <label for="weight">{{"coach.weight" | translate}}</label>
+                        <input type="number" style="height: 40px;" class="form-control" step="0.1" id="weight"
+                            name="weight" [(ngModel)]="activeAthlete.Weight" (input)="onSelectChange()"
+                            [ngClass]="{ 'is-invalid': submitted && activeAthleteValidationError && activeAthleteValidationError.weight }">
+                    </div>
+                    <!-- gender -->
+                    <div class="col-4 col-sm-4 col-md-4 p-1 m-0">
+                        <label for="gender">{{"coach.gender" | translate}}</label>
+                        <ng-select bindLabel="name" bindValue="name" name="gender" id="gender" [items]="gender"
+                            [(ngModel)]="activeAthlete.gender" class="form-control" (change)="onSelectChange()"
+                            [ngClass]="{ 'is-invalid': submitted && activeAthleteValidationError && activeAthleteValidationError.gender }">
+                        </ng-select>
+                    </div>
+                    
+                    <!-- DAN -->
+                    <div class="col-4 col-sm-4 col-md-4 p-1 m-0">
+                        <label for="rang">{{"coach.rang" | translate}}</label>
+                        <ng-select bindLabel="name" bindValue="name" name="dan" [items]="dan"
+                            [(ngModel)]="activeAthlete.DAN" class="form-control" (change)="onSelectChange()"
+                            dropdownPosition = bottom
+                            [ngClass]="{ 'is-invalid': submitted && activeAthleteValidationError && activeAthleteValidationError.DAN }">
+                        </ng-select>
+                    </div>
+                    
+                    <!-- flags -->
+                    <div class="col-8 col-sm-8 col-md-8 p-1 m-0" style="display: flex; flex-direction: column;">
+                        <label class="p-1 d-flex align-items-center">
+                            <input type="checkbox" [checked]="activeAthlete.Kumite" (change)="onChangeKumite()"/>
+                            -{{"coach.kumite" |
+                            translate}}
+                        </label>
+
+                        <label class="p-1 d-flex align-items-center">
+                            <input type="checkbox" [checked]="activeAthlete.Kata" (change)="onChangeKata()" />
+                            -{{"coach.kata" | translate}}
+                        </label>
+
+                        <label class="p-1 d-flex align-items-center">
+                            <input type="checkbox" [checked]="activeAthlete.KataGroup" (change)="onChangeKataGroup()" />
+                            -{{"coach.groupKata" |
+                            translate}}
+                        </label>
+
+                        <label *ngIf="model.title && isCheckQuota" class="p-1 d-flex align-items-center">
+                            <input type="checkbox" [checked]="activeAthlete.teamcompetition" (change)="onChangecompetition()" />
+                            -{{"coach.teamcompetition" |
+                            translate}}
+                        </label>
+
+                        <label class="p-1 d-flex align-items-center">
+                            <input type="checkbox" [checked]="activeAthlete.Favorit1" (change)="onChangeFavorit1()" />
+                            -{{"coach.favorite1" |
+                            translate}}
+                        </label>
+
+                        <label class="p-1 d-flex align-items-center">
+                            <input type="checkbox" [checked]="activeAthlete.Favorit2" (change)="onChangeFavorit2()" />
+                            -{{"coach.favorite2" |
+                            translate}}
+                        </label>
+                    </div>
+
+                    <!-- photo -->
+                    <div class="col-4 col-sm-4 col-md-4 p-1 m-0">
+                        <div class="user-picure">
+                            <div *ngIf="!activeAthlete.photo_bytes && !activeAthlete.Photo"
+                                style="width: 80%; text-align: center;">
+                                <img src="/assets/media/logos/default-photo.svg" style="width: 100%; opacity: 0.6" />
+                            </div>
+                            <div *ngIf="activeAthlete.photo_bytes" style="width: 80%; text-align: center;">
+                                <img [src]="activeAthlete.photo_bytes" width="100%" />
+                            </div>
+                            <div *ngIf="!activeAthlete.photo_bytes && activeAthlete.Photo">
+                                <img src="{{activeAthlete.Photo}}" width="100%" />
+                            </div>
+                            <div class="btn-load-photo">
+                                <label class="btn btn-sm btn-custom" for="file"
+                                    style="width:100%; height: 26px;">Photo</label>
+                                <input id="file" type="file" accept='image/*' (change)="onPhotoChange($event)"
+                                    style="visibility:hidden">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12  p-1 m-0 mt-3">
+                        <label for="division">{{"coach.division" | translate}}</label>
+                        <ng-select bindLabel="name" bindValue="id" name="division" [items]="division"
+                            [(ngModel)]="activeAthlete.Division" class="form-control" (change)="onSelectChange()" (clear)="onClearDivision()">
+                        </ng-select>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="mt-2 row" *ngIf="model.isSuperAdmin">
+                            <div class="d-flex justify-content-between">
+                                <label for="" style="width: 100px;">{{"coach.club" | translate}}:</label>
+                                <label for="" style="width: 100%;">{{activeAthlete.clubName}}</label>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <label for="" style="width: 100px;">{{"coach.coach" | translate}}:</label>
+                                <label for="" style="width: 100%;">{{activeAthlete.coachName}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-1 m-0">
+        <div *ngIf="model.title" class="border-box">
+            <div class="header" style="height: 36px">
+                <h4 style="padding-left: 10px;">{{"coach.partTournament" | translate}}</h4>
+            </div>
+            <div class="box-table mt-1" [ngClass]="{'te2': model.title, 'te1': !model.title}">
+                <div class="row row-header p-2 m-0">
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 text-center ath-checked"></div>
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 text-center ath-num">#</div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 text-start ath-fio">{{"coach.fio" | translate}}</div>
+
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 text-center ath-checked">
+                        <button class="btn btn-action btn-warning p-0 m-0" (click)="clearParticipantList()"
+                            title="{{'coach.deletePart' | translate}}"
+                            [disabled]="!participants || participants.length == 0" [hidden]="!model.title">
+                            <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"
+                                text-rendering="geometricPrecision" image-rendering="optimizeQuality"
+                                fill-rule="evenodd" clip-rule="evenodd" width="16" height="16" fill="#fff"
+                                viewBox="0 0 441 512.02">
+                                <path
+                                    d="M324.87 279.77c32.01 0 61.01 13.01 82.03 34.02 21.09 21 34.1 50.05 34.1 82.1 0 32.06-13.01 61.11-34.02 82.11l-1.32 1.22c-20.92 20.29-49.41 32.8-80.79 32.8-32.06 0-61.1-13.01-82.1-34.02-21.01-21-34.02-50.05-34.02-82.11s13.01-61.1 34.02-82.1c21-21.01 50.04-34.02 82.1-34.02zM243.11 38.08v54.18c.99 12.93 5.5 23.09 13.42 29.85 8.2 7.01 20.46 10.94 36.69 11.23l37.92-.04-88.03-95.22zm91.21 120.49-41.3-.04c-22.49-.35-40.21-6.4-52.9-17.24-13.23-11.31-20.68-27.35-22.19-47.23l-.11-1.74V25.29H62.87c-10.34 0-19.75 4.23-26.55 11.03-6.8 6.8-11.03 16.21-11.03 26.55v336.49c0 10.3 4.25 19.71 11.06 26.52 6.8 6.8 16.22 11.05 26.52 11.05h119.41c2.54 8.79 5.87 17.25 9.92 25.29H62.87c-17.28 0-33.02-7.08-44.41-18.46C7.08 432.37 0 416.64 0 399.36V62.87c0-17.26 7.08-32.98 18.45-44.36C29.89 7.08 45.61 0 62.87 0h173.88c4.11 0 7.76 1.96 10.07 5l109.39 118.34c2.24 2.43 3.34 5.49 3.34 8.55l.03 119.72c-8.18-1.97-16.62-3.25-25.26-3.79v-89.25zm-229.76 54.49c-6.98 0-12.64-5.66-12.64-12.64 0-6.99 5.66-12.65 12.64-12.65h150.49c6.98 0 12.65 5.66 12.65 12.65 0 6.98-5.67 12.64-12.65 12.64H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h142.52c3.71 0 7.05 1.6 9.37 4.15a149.03 149.03 0 0 0-30.54 21.14H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h86.2c-3.82 8.05-6.95 16.51-9.29 25.29h-76.91zm277.8 27.04v22.39c0 4.36-3.69 8.04-8.05 8.04h-98.87c-4.36 0-8.05-3.62-8.05-8.04V384.7c0-4.42 3.63-8.05 8.05-8.05h98.87c4.43 0 8.05 3.74 8.05 8.05z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+
+                <!-- <div> -->
+                <div *ngFor="let participant of participants; let idx = index;"
+                    class="row row-data p-2 m-0 d-flex align-items-center border-bottom border-secondary-subtle"
+                    id=`tr{{idx}}` [class.selected-participant-color]="isSelectedParticipant(participant)"
+                    (click)="selectAndScrollAthletes($event, participant)">
+                    <div class="col-1 col-sm-1 col-md-1 text-center ath-checked">
+                        <input type="checkbox" [checked]="isSelectedParticipant(participant)"
+                            (click)="selectAndScrollAthletes($event, participant)" />
+                    </div>
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 text-center ath-num">{{ idx + 1 + startItem}}</div>
+                    <div class="col-9 col-sm-9 col-md-9 col-lg-9 text-start ath-fio"
+                        [class.selected-participant-color]="isSelectedParticipant(participant)">
+                        {{ participant.FIO }}
+                    </div>
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 text-center">
+                        <div *ngIf="isSelectedParticipant(participant) && selectedParticipants.length == 1"
+                            class="w-100 p-0 m-0">
+                            <button class="btn btn-action btn-warning p-0 m-0" (click)="deleteFromParticipantList()"
+                                title="{{'coach.deletePart' | translate}}" [disabled]="!activeAthlete.athId"
+                                [hidden]="!model.title">
+                                <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"
+                                    text-rendering="geometricPrecision" image-rendering="optimizeQuality"
+                                    fill-rule="evenodd" clip-rule="evenodd" width="16" height="16" fill="#fff"
+                                    viewBox="0 0 441 512.02">
+                                    <path
+                                        d="M324.87 279.77c32.01 0 61.01 13.01 82.03 34.02 21.09 21 34.1 50.05 34.1 82.1 0 32.06-13.01 61.11-34.02 82.11l-1.32 1.22c-20.92 20.29-49.41 32.8-80.79 32.8-32.06 0-61.1-13.01-82.1-34.02-21.01-21-34.02-50.05-34.02-82.11s13.01-61.1 34.02-82.1c21-21.01 50.04-34.02 82.1-34.02zM243.11 38.08v54.18c.99 12.93 5.5 23.09 13.42 29.85 8.2 7.01 20.46 10.94 36.69 11.23l37.92-.04-88.03-95.22zm91.21 120.49-41.3-.04c-22.49-.35-40.21-6.4-52.9-17.24-13.23-11.31-20.68-27.35-22.19-47.23l-.11-1.74V25.29H62.87c-10.34 0-19.75 4.23-26.55 11.03-6.8 6.8-11.03 16.21-11.03 26.55v336.49c0 10.3 4.25 19.71 11.06 26.52 6.8 6.8 16.22 11.05 26.52 11.05h119.41c2.54 8.79 5.87 17.25 9.92 25.29H62.87c-17.28 0-33.02-7.08-44.41-18.46C7.08 432.37 0 416.64 0 399.36V62.87c0-17.26 7.08-32.98 18.45-44.36C29.89 7.08 45.61 0 62.87 0h173.88c4.11 0 7.76 1.96 10.07 5l109.39 118.34c2.24 2.43 3.34 5.49 3.34 8.55l.03 119.72c-8.18-1.97-16.62-3.25-25.26-3.79v-89.25zm-229.76 54.49c-6.98 0-12.64-5.66-12.64-12.64 0-6.99 5.66-12.65 12.64-12.65h150.49c6.98 0 12.65 5.66 12.65 12.65 0 6.98-5.67 12.64-12.65 12.64H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h142.52c3.71 0 7.05 1.6 9.37 4.15a149.03 149.03 0 0 0-30.54 21.14H104.56zm0 72.3c-6.98 0-12.64-5.66-12.64-12.65 0-6.98 5.66-12.64 12.64-12.64h86.2c-3.82 8.05-6.95 16.51-9.29 25.29h-76.91zm277.8 27.04v22.39c0 4.36-3.69 8.04-8.05 8.04h-98.87c-4.36 0-8.05-3.62-8.05-8.04V384.7c0-4.42 3.63-8.05 8.05-8.05h98.87c4.43 0 8.05 3.74 8.05 8.05z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div  class="d-flex justify-content-between p-2" style="background-color: #fff"> -->
+<!-- <div>
+        <div *ngIf="!this.model.isSuperAdmin">{{"coach.club" | translate}}: {{model.club}}</div>
+        <div>{{ 'coach.coach' | translate }}: {{model.coach}}</div>
+        <div><a style="display: inline-block; width: 100%;" [routerLink]="['/coach', model.coachId]" class="btn btn-sm btn-custom mt-2" >&#x270E; {{"coach.updateCoach" | translate}}</a></div>
+        <div *ngIf="this.model.isSuperAdmin">
+            <a style="display: inline-block; width: 100%;"[routerLink]="['/administrator']" class="btn btn-sm btn-custom mt-2" >&#x2729; {{"coach.admin" | translate}}</a>
+        </div>
+        <div class="m-2"></div>
+        <div *ngIf="!this.model.isSuperAdmin">{{"coach.branch" | translate}}: {{model.branch || ''}}</div>
+        <div>{{"coach.allPart" | translate}}: {{athletesCount}}</div>
+        <div *ngIf="model.title">{{"coach.selectPart" | translate}}: {{participantsCount}}</div>
+    </div> -->
+
+<!-- <div>
+        <div style="width: 30em;" class="pb-3">
+            <label>{{"coach.search" | translate}}:</label>
+            <input type="text" class="form-control" name="findByName"
+                [(ngModel)]="model.filters.findByName" (ngModelChange)="findByName()"
+            />
+        </div>
+
+        <div *ngIf="model.isSuperAdmin" class="display: flex row">
+            <div class="col-6">
+                <label>{{"coach.coach" | translate}}:</label>
+                <ng-select
+                            bindLabel="coachName"
+                            bindValue="coachId"
+                            placeholder="AllianceKumite"
+                            name="allCoaches"
+                            [items]="allCoaches"
+                            [(ngModel)]="model.coachId"
+                            (ngModelChange)="select()"
+                            class="form-control"
+                ></ng-select>
+            </div>
+            <div class="col-6">
+                <label>{{"coach.club" | translate}}:</label>
+                <ng-select
+                            bindLabel="clubName"
+                            bindValue="clubId"
+                            placeholder=""
+                            name="allClubs"
+                            [items]="allClubs"
+                            [(ngModel)]="model.clubId"
+                            (ngModelChange)="select()"
+                            class="form-control"
+                ></ng-select>
+            </div>
+        </div>
+    </div> -->
+
+<!-- <div class="d-flex" style="flex-direction: column;"> -->
+<!-- <div class="pr-4" style="display: none">
+            <div><input type="radio" id="choice1" name="filters" [(ngModel)]="model.filters.participantOption" [value]="'full'" (ngModelChange)="chooseList($event)"> {{"coach.fullList" | translate}}</div>
+            <div><input type="radio" id="choice2" name="filters" [(ngModel)]="model.filters.participantOption" [value]="'onlyParticipants'" (ngModelChange)="chooseList($event)"> {{"coach.onlyPart" | translate}}</div>
+        </div> -->
+<!-- <div class="row_ participant-filter">
+              <label><input type="radio" id="choice3" name="participant-filter" [(ngModel)]="model.filters.genderOption" [value]="'all'" (ngModelChange)="chooseGender($event)"> {{"coach.all" | translate}}</label>
+              <label><input type="radio" id="choice3" name="participant-filter" [(ngModel)]="model.filters.genderOption" [value]="'man'" (ngModelChange)="chooseGender($event)"> {{"coach.man" | translate}}</label>
+              <label><input type="radio" id="choice3" name="participant-filter" [(ngModel)]="model.filters.genderOption" [value]="'women'" (ngModelChange)="chooseGender($event)"> {{"coach.woman" | translate}}</label>
+        </div> -->
+
+<!-- <button *ngIf="!model.isSuperAdmin && model.title" style="width: 100%" class="btn btn-sm btn-custom mt-2" (click)="setAllKumite(true)"> {{"coach.setAllKumite" | translate}}</button>
+        <button *ngIf="!model.isSuperAdmin && model.title" style="width: 100%" class="btn btn-sm btn-custom mt-1" (click)="setAllKumite(false)"> {{"coach.resetAllKumite" | translate}}</button> -->
+<!-- </div> -->
+<!-- <div class="w-33">
+        <app-manage-instructors
+            [isSuperAdmin]="model?.isSuperAdmin"
+            [champName]="model?.title"
+            [coachId]="model?.coachId"
+            *ngIf="model?.isBranch || model?.isSuperAdmin"
+        ></app-manage-instructors>
+    </div> -->
+<!-- </div> -->
+
+<!-- <div class="d-flex justify-content-between px-2 pt-0">
+    <div class="general-list" [ngClass]="{'w-33': model.title, 'w-100 mr-2': !model.title}">
+        <div class="header">
+            <h4>{{"coach.genList" | translate}}
+                {{this.selectedAthletes.length > 0 ? " - " + this.selectedAthletes.length + " "  + ("coach.selected" | translate) : ""}}
+            </h4>
+        </div>
+        <div
+            class="fixTableHead body mt-1"
+            [ngClass]="{'te2': model.title, 'te1': !model.title}"
+            [class.branch]="model.isBranch"
+        >
+            <table>
+                <thead>
+                    <tr>
+                        <th class="w-10">
+                            <input type="checkbox"
+                              (click)="selectAllAthletes($event)"
+                              [checked]="areAllAthletesSelected"
+                            />
+                        </th>
+                        <th class="w-10">{{"coach.num" | translate}}</th>
+                        <th class="w-50">{{"coach.fio" | translate}}</th>
+                        <th class="w-25">{{"coach.gender" | translate}}</th>
+                        <th class="w-25">{{"coach.date" | translate}}</th>
+                        <th class="w-25">{{"coach.weight" | translate}}</th>
+                        <th class="w-25">{{"coach.rang" | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody id="all-participants">
+                    <tr *ngFor="let athlete of athletes; let idx = index;"
+                        (click)="selectAndScrollParticipants($event, athlete)">
+                        <td class="table-row" [class.selected-participant-color]="isSelectedAthlete(athlete)">
+                            <input type="checkbox"
+                                [checked]="isSelectedAthlete(athlete)"
+                                (click)="selectAndScrollParticipants($event, athlete)"
+                            />
+                        </td>
+
+                        <td class="table-row"
+                            [class.selected-participant-color]="isSelectedAthlete(athlete)"
+                        >{{ idx + 1 }}</td>
+                        <td class="table-row" [class.selected-participant-color]="isSelectedAthlete(athlete)">{{ athlete.FIO }}</td>
+                        <td class="table-row" [class.selected-participant-color]="isSelectedAthlete(athlete)">{{ athlete.gender }}</td>
+                        <td class="table-row" [class.selected-participant-color]="isSelectedAthlete(athlete)">{{ athlete.dateBR | date: 'dd.MM.yyyy' }}</td>
+                        <td class="table-row" [class.selected-participant-color]="isSelectedAthlete(athlete)">{{ athlete.Weight }}</td>
+                        <td class="table-row" [class.selected-participant-color]="isSelectedAthlete(athlete)">{{ athlete.DAN }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="sportsman" [ngClass]="{'w-33': model.title, 'w-100 ml-2': !model.title}">
+        <div class="header">
+            <h4>{{"coach.detailsPart" | translate}}</h4>
+        </div>
+        <div class="user-details body mt-2 pl-2 pr-2">
+            <div class="pt-1">
+                <div>
+                    <div>{{"coach.fio" | translate}}</div>
+
+                    <div *ngIf="submitted && activeAthleteValidationError && activeAthleteValidationError.FIO == 'exists' " class="invalid-feedback">
+                        {{ "coach.athleteExists" | translate: { athlete: activeAthlete.FIO, date: getDateSting(activeAthlete.dateBR)} }}
+                    </div>
+
+                    <input type="text" class="form-control" name="FIO"
+                        [(ngModel)]="activeAthlete.FIO"
+                        [ngClass]="{ 'is-invalid': submitted && activeAthleteValidationError && activeAthleteValidationError.FIO }"
+                        (ngModelChange)="cleanErrors()"
+                    >
+                </div>
+
+                <div class="d-flex justify-content-between_ pt-2 row">
+                    <div class="col-custom">
+                        <div>{{"coach.dateBR" | translate}}</div>
+                        <input id="date-br" type="date" class="form-control" name="dateBR"
+                            [(ngModel)]="activeAthlete.dateBR"
+                            [ngClass]="{ 'is-invalid': submitted && activeAthleteValidationError && activeAthleteValidationError.dateBR }"
+                            (ngModelChange)="cleanErrors()"
+                        >
+                    </div>
+                    <div class="col-custom">
+                        <div>{{"coach.gender" | translate}}</div>
+                        <ng-select bindLabel="name" bindValue="name" name="gender"
+                            [items]="gender" [(ngModel)]="activeAthlete.gender" class="form-control p-0 m-0"
+                            [ngClass]="{ 'is-invalid': submitted && activeAthleteValidationError && activeAthleteValidationError.gender }"
+                        >
+                        </ng-select>
+                    </div>
+                    <div  class="col-custom">
+                        <div>{{"coach.weight" | translate}}</div>
+                        <input type="number" class="form-control" name="weight"
+                            [(ngModel)]="activeAthlete.Weight"
+                            [ngClass]="{ 'is-invalid': submitted && activeAthleteValidationError && activeAthleteValidationError.weight }"
+                        >
+                    </div>
+                    <div  class="col-custom">
+                        <div>{{"coach.rang" | translate}}</div>
+                        <ng-select bindLabel="name" bindValue="name" name="dan"
+                            [items]="dan" [(ngModel)]="activeAthlete.DAN" class="form-control p-0 m-0"
+                            [ngClass]="{ 'is-invalid': submitted && activeAthleteValidationError && activeAthleteValidationError.DAN }"
+                        >
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="mt-2 row" style="display: none;" *ngIf="model.isBranch || model.isSuperAdmin">
+                    <div>{{"coach.club" | translate}}: {{activeAthlete.clubName}}</div>
+                    <div>{{"coach.coach" | translate}}: {{activeAthlete.coachName}}</div>
+                </div>
+
+                <div class="pt-2 row" >
+                    <div class="col-custom">
+                        <label>
+                            <input type="checkbox" [checked]="activeAthlete.Kumite" (change)="onChangeKumite()"
+                            /> {{"coach.kumite" | translate}}
+                        </label>
+
+                        <label>
+                            <input type="checkbox" [checked]="activeAthlete.Kata" (change)="onChangeKata()"
+                            /> {{"coach.kata" | translate}}
+                        </label>
+
+                        <label>
+                            <input type="checkbox" [checked]="activeAthlete.KataGroup" (change)="onChangeKataGroup()"
+                            /> {{"coach.groupKata" | translate}}
+                        </label>
+
+                        <label *ngIf="this.model.isSuperAdmin" style="padding-top: 0.5em; border-top: 1px solid #eee; margin-top: 0.5em;">
+                            <div>{{"general.coach" | translate}}:</div>
+                            <div>{{activeAthlete.coachName}}</div>
+                        </label>
+                    </div>
+
+                    <div class="col-custom d-flex" style="width:45%">
+                        <div style="min-width: 50%; margin-right: 1%">
+                            <label>
+                                <input type="checkbox" [checked]="activeAthlete.Favorit1" (change)="onChangeFavorit1()"
+                                /> {{"coach.favorite1" | translate}}
+                            </label>
+
+                            <label>
+                                <input type="checkbox" [checked]="activeAthlete.Favorit2" (change)="onChangeFavorit2()"
+                                /> {{"coach.favorite2" | translate}}
+                            </label>
+
+                            <label style="display: none;">
+                                <input type="checkbox" [checked]="activeAthlete.Participant"
+                                    (change)="activeAthlete.Participant = !activeAthlete.Participant"
+                                /> {{"coach.partic" | translate}}
+                            </label>
+                        </div>
+
+
+                        <div class="col-custom user-picure">
+                            <div *ngIf="!activeAthlete.photo_bytes && !activeAthlete.Photo" style="width: 70%; text-align: center;">
+                                <img src="/assets/media/logos/default-photo.svg" style="width: 100%; opacity: 0.6"/>
+                                {{ 'coach.noPhoto' | translate }}
+                            </div>
+                            <img *ngIf="activeAthlete.photo_bytes" [src]="activeAthlete.photo_bytes" />
+                            <img *ngIf="!activeAthlete.photo_bytes && activeAthlete.Photo" src="{{activeAthlete.Photo}}" />
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-custom">
+                        <label class="btn btn-sm btn-custom" for="file" style="width:100%">{{"coach.photo" | translate}}</label>
+                        <input id="file" type="file" accept='image/*' (change)="onPhotoChange($event)" style="visibility:hidden">
+                    </div>
+                </div>
+
+                <div class="actions mt-3">
+                    <button (click)="insertNewAth()" class="btn btn-custom btn-sm"
+                        [disabled]="!eligibleToAddNew()"
+                    >
+                        {{"coach.addNew" | translate}}
+                    </button>
+                    <button  (click)="updateAth()"class="btn btn-custom btn-sm"
+                        [disabled]="!eligibleToBeUpdated()"
+                    >
+                        {{"coach.saveChange" | translate}}
+                    </button>
+                    <button (click)="deleteAth()" class="btn btn-custom btn-sm"
+                        [disabled]="!activeAthlete.athId"
+                    >
+                        {{"coach.deleteCurrent" | translate}}
+                    </button>
+                </div>
+
+                <div class="pt-1 actions" *ngIf="model.title">
+                    <button (click)="moveToParticipantList()" class="btn btn-custom btn-sm"
+                        [disabled]="!eligibleToMoveToParticipants()"
+                    >
+                        {{"coach.moveToPart" | translate}}
+                    </button>
+                    <button (click)="deleteFromParticipantList()" class="btn btn-custom btn-sm"
+                        [disabled]="!eligibleToDeleteFromParticipants()"
+                    >
+                        {{"coach.deletePart" | translate}}
+                    </button>
+                    <button (click)="clearParticipantList()" class="btn btn-custom btn-sm"
+                        [disabled]="!participants || participants.length == 0"
+                    >
+                        {{"coach.clearPart" | translate}}
+                    </button>
+                </div>
+              </div>
+        </div>
+    </div>
+    <div class="participant w-33" *ngIf="model.title">
+        <div class="header">
+            <h4>{{"coach.partTournament" | translate}}
+                {{this.selectedParticipants.length > 0 ? " - " + this.selectedParticipants  .length + " "  + ("coach.selected" | translate) : ""}}
+            </h4>
+        </div>
+        <div class="fixTableHead body mt-1 te2">
+            <table class="w-100">
+                <thead>
+                    <tr>
+                        <th class="w-10">
+                            <input type="checkbox"
+                              (click)="selectAllParticipants($event)"
+                              [checked]="areAllParticipantsSelected"
+                            />
+                        </th>
+                        <th class="w-10">{{"coach.num" | translate}}</th>
+                        <th class="w-100">{{"coach.fio" | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody id="selected-participants">
+                    <tr *ngFor="let participant of participants; let idx = index;" (click)="selectAndScrollAthletes($event, participant)">
+                        <td class="table-row" [class.selected-participant-color]="isSelectedParticipant(participant)">
+                            <input type="checkbox"
+                                [checked]="isSelectedParticipant(participant)"
+                                (click)="selectAndScrollAthletes($event, participant)"
+                            />
+                        </td>
+                        <td class="table-row" style="width: 10px;" [class.selected-participant-color]="isSelectedParticipant(participant)">{{ idx + 1 }}</td>
+                        <td class="table-row" [class.selected-participant-color]="isSelectedParticipant(participant)">{{ participant.FIO }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,37 @@
+<!-- <div class="header">
+    <h4>{{'coach.coachesListBranch' | translate}}</h4>
+</div> -->
+<div class="fixTableHead body mt-1 coach-list-table">
+    <table>
+        <thead>
+            <tr style="position: relative;z-index: 2;">
+                <th class="w-10 text-center">{{'coach.num' | translate}}</th>
+                <th class="w-50">{{"coach.fio" | translate}}</th>
+                <th class="w-50 text-center">{{"coach.blocked" | translate}}</th>
+                <th class="w-50 text-center" *ngIf="isSuperAdmin && isChamp">{{"coach.tmanager" | translate}}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let branch of branches$ | async; let idx = index;">
+                <td class="table-row text-center">{{ idx + 1 }}</td>
+                <td class="table-row">{{ branch.coachName }}</td>
+                <td class="table-row  text-center">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitches{{ idx + 1 }}"
+                            [checked]="branch.blocked" (change)="blockCoach(branch)" />
+                        <label class="custom-control-label" for="customSwitches{{ idx + 1 }}"></label>
+                    </div>
+                </td>
+                <td class="table-row text-center" *ngIf="isSuperAdmin && isChamp">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitchesTmanager{{ idx + 1 }}"
+                            [checked]="branch.isTmanager" (change)="changeTmanagerRole(branch)" />
+                        <label class="custom-control-label" for="customSwitchesTmanager{{ idx + 1 }}"></label>
+                    </div>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

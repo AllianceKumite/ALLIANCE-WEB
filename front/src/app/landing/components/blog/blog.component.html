@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="blog">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 p-1">
+            <ng-container *ngIf="tournaments && tournaments.future && tournaments.future?.next">
+                <div class="col-12">
+                    <div class="d-flex justify-content-start align-items-center p-2" style="height: 50px;">
+                        <div class="d-flex justify-content-start align-items-center" style="height: 100%;">
+                            <h4>{{'landing.nearestTournaments' | translate}}</h4>
+                        </div>
+                    </div>
+                    <app-top-tournament [tournament]="tournaments.future.next"></app-top-tournament>
+                </div>
+            </ng-container>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-1">
+            <div class="d-flex justify-content-start align-items-center p-2" style="height: 50px;">
+                <div class="d-flex justify-content-start align-items-center" style="height: 100%;">
+                    <h4>{{'landing.upcomingTournaments' | translate}}</h4>
+                </div>
+            </div>
+            <div *ngIf="tournaments?.future?.following && tournaments?.future?.following.length > 0" class="block-list" >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 p-2 d-flex flex-wrap" style="cursor: pointer; min-height: 100px;"
+                    (click)='goToTournament(tournament.id)'
+                    *ngFor='let tournament of tournaments?.future?.following; let i = index;' [ngClass]="{ 'row-data-gray': i % 2 === 0}">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center justify-content-start">
+                            <span class="card-title text-start p-1"
+                                style="color: rgb(15, 15, 135); font-weight: 500; font-size: 12px">{{ i + 1}}</span>
+                            <img class="flag-name" src="{{logosDir}}/{{ tournament.orgLogo }}"
+                                style="width: 30px; height: 30px; padding: 2px;">
+                            <span class="card-title text-start p-1"
+                                style="color: rgb(27, 27, 182); font-weight: 500; font-size: 14px">{{
+                                ('db.champs.' + tournament.id + ".name") | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center" style="width: 100%;">
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                            <span class="card-text ms-2" style="font-size: 11px"><i class="fa fa-calendar" style="color: green"
+                                    aria-hidden="true"></i> {{getFullDateSting(tournament.date,
+                                tournament.dateTo)}}</span>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-3">
+                            <span class="card-text"style="font-size: 11px"><i class="fa fa-map-marker" style="color: navy"
+                                    aria-hidden="true"></i> {{ ('db.champs.' + tournament.id + ".city") |
+                                translate}}</span>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-5">
+                            <span class="card-text"style="font-size: 11px"><i class="fa fa-calendar" style="color: red" aria-hidden="true"></i>
+                                {{'landing.endregistration' | translate}}:
+                                {{getDateSting(tournament.dateEndReg)}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-1">
+            <div class="d-flex justify-content-start align-items-center p-2" style="height: 50px;">
+                <div class="d-flex justify-content-start align-items-center" style="height: 100%;">
+                    <h4 class="p-1 m-0">{{'landing.previousTournaments' | translate}}</h4>
+                    <h4 class="p-1 m-0" style="display: flex; align-items: center; margin-left: 10px;">
+                    </h4>
+                    <ng-select
+                        name="selectedYear"
+                        [items]="years"
+                        class="box-select-item fw-medium text-primary-emphasis p-1 m-0"
+                        style="width: 100px; border: 1px solid rgb(202, 202, 202); border-radius: 4px;"
+                        [(ngModel)]="selectedYear"
+                        (change) = "onSelectYear()"
+                        [clearable]="false">
+                    </ng-select> 
+                </div>
+            </div>
+            <div *ngIf="tournaments?.future?.following && tournaments?.future?.following.length > 0" class="block-list" >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 p-2 d-flex flex-wrap" style="cursor: pointer; min-height: 100px;"
+                    (click)='goToTournament(tournament.id)'
+                    *ngFor='let tournament of customPreview; let i = index;' [ngClass]="{ 'row-data-gray': i % 2 === 0}">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center justify-content-start">
+                            <span class="card-title text-start p-1"
+                                style="color: rgb(15, 15, 135); font-weight: 500; font-size: 12px">{{ i + 1}}</span>
+                            <img class="flag-name" src="{{logosDir}}/{{ tournament.orgLogo }}"
+                                style="width: 30px; height: 30px; padding: 2px;">
+                            <span class="card-title text-start p-1"
+                                style="color: rgb(27, 27, 182); font-weight: 500; font-size: 14px">{{
+                                ('db.champs.' + tournament.id + ".name") | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="row" style="width: 100%">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-6">
+                            <span class="card-text ms-2" style="font-size: 11px"><i class="fa fa-calendar" style="color: green"
+                                    aria-hidden="true"></i> {{getFullDateSting(tournament.date,
+                                tournament.dateTo)}}</span>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                            <span class="card-text"style="font-size: 11px"><i class="fa fa-map-marker" style="color: navy"
+                                    aria-hidden="true"></i> {{ ('db.champs.' + tournament.id + ".city") |
+                                translate}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

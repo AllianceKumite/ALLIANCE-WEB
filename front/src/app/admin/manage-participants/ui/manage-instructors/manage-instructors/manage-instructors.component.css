@@ -1,0 +1,70 @@
+h4 {
+  font-size: 16px;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+td {
+  cursor: pointer;
+}
+
+.header {
+  border: 1px solid none;
+  background-color: rgb(68, 84, 106);
+  padding: 5px;
+  margin: 0;
+}
+
+.body table thead tr th {
+  border: 1px solid gray;
+  background-color: rgb(68, 84, 106);
+  padding: 4px;
+  color: #fff;
+  font-weight: 400;
+}
+
+.table-row {
+  border: 1px solid rgb(68, 84, 106);
+  background-color: #fff;
+  padding: 4px;
+  /* display: flex;
+  justify-content: flex-start; */
+}
+
+.coach-list-table {
+  height: 10.39em;
+}
+
+label {
+  margin: 0;
+  color: rgb(68, 84, 106)
+}
+
+.fixTableHead {
+  overflow-y: auto;
+  /* height: 110px; */
+}
+
+.fixTableHead thead th {
+  position: sticky;
+  top: 0;
+}
+
+.custom-control-input~.custom-control-label::before {
+  border-color: green;
+  background-color: green;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  border-color: red;
+  background-color: red;
+}
+
+.custom-switch .custom-control-label::after {
+  background-color: rgb(215, 238, 215);
+}
+
+.custom-switch .custom-control-input:checked~.custom-control-label::after {
+  background-color: rgb(245, 226, 226);
+}

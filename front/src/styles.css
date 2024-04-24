@@ -1,0 +1,656 @@
+@font-face {
+    font-family: digi;
+    src: url('/assets/fonts/digital-7 (mono).ttf');
+}
+
+@font-face {
+  font-family: digi-mono;
+  src: url('/assets/fonts/8895-fontps.ttf');
+}
+
+
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: url('/assets/fonts/Roboto-Regular.ttf');
+}
+
+
+@font-face {
+  font-family: 'dance_partner';
+  src: url('/assets/fonts/dance_partner_2.ttf');
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url('/assets/fonts/Montserrat-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: Arbatc;
+  src: url('/assets/fonts/Arbatc.otf');
+}
+
+@font-face {
+  font-family: 'Chemyretro';
+  src: url('/assets/fonts/ChemyretroV01.otf');
+}
+
+@font-face {
+  font-family: 'Spslcirclestwoc';
+  src: url('/assets/fonts/Spslcirclestwoc.otf');
+}
+
+@font-face {
+  font-family: 'Lugaextra';
+  src: url('/assets/fonts/LugaextralightadcItalic.otf');
+}
+
+@font-face {
+  font-family: 'Englishscriptc';
+  src: url('/assets/fonts/Englishscriptc.otf');
+} 
+
+@font-face {
+  font-family: 'Exo2Medium';
+  src: url('/assets/fonts/Exo2Mediumexpanded.otf');
+}
+
+@font-face {
+  font-family: 'new_zelek';
+  src: url('/assets/fonts/new_zelek.ttf');
+}
+
+@font-face {
+  font-family: 'lugashadow';
+  src: url('/assets/fonts/lugashadow_[allfont.ru].ttf');
+}
+
+@font-face {
+  font-family: 'TT Chocolates';
+  src: url('/assets/fonts/TT Chocolates Trial Regular.otf');
+}
+
+@font-face {
+  font-family: 'taurus-bold';
+  src: url('/assets/fonts/taurus-bold_[allfont.ru].ttf');
+}
+
+@font-face {
+  font-family: 'mon-amour';
+  src: url('/assets/fonts/mon-amour-two-medium_[allfont.ru].ttf');
+}
+
+@font-face {
+  font-family: 'europeext-normal';
+  src: url('/assets/fonts/europeext-normal_[allfont.ru].ttf');
+}
+
+@font-face {
+  font-family: 'helios-extra-black-bold';
+  src: url('/assets/fonts/36-font.otf');
+}
+
+@font-face {
+  font-family: 'helios-c-bold';
+  src: url('/assets/fonts/38-font.otf');
+}
+
+@font-face {
+  font-family: 'office-c-bold';
+  src: url('/assets/fonts/50-font.otf');
+}
+
+@font-face {
+  font-family: 'helga-c-bold';
+  src: url('/assets/fonts/65-font.otf');
+}
+
+@font-face {
+  font-family: 'europe-c-bold';
+  src: url('/assets/fonts/121-font.otf');
+}
+
+@font-face {
+  font-family: 'open-sans';
+  src: url('/assets/fonts/OpenSans-VariableFont_wdth_wght.ttf');
+}
+
+@font-face {
+  font-family: 'SF Pro';
+  src: url('/assets/fonts/SF-Pro-Display-Regular.otf');
+}
+
+
+/* <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+@font-face {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://mdn.github.io/web-fonts/LatoReg.ttf");
+}
+
+body {
+  /* font-family: -apple-system, BlinkMacSystemFont; */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;;
+  /* font-family: "open-sans", sans-serif; */
+  
+  background-image: url(/assets/img/bg-ai.png);
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100%;
+  min-height: 100vh;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+body.mat-typography {
+    font-family: 'SF Pro',-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    /* font-family: "SF Pro"; */
+    font-size: 1em;
+    font-weight: 100;
+    /* color: #444 */
+
+}
+/* Font Settings */
+[contenteditable="true"]:focus {
+    outline: none;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.w-33 {
+    width: 33% !important;
+}
+
+.w-95 {
+    width: 95% !important;
+}
+
+.bold {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.align-text-center {
+    text-align: center;
+}
+
+.align-text-left {
+    text-align: left;
+}
+
+.custom-border {
+    border: 4px solid transparent;
+    border-image: linear-gradient(to right,#1976D2, #03A9F4);
+    border-image-slice: 1;
+    padding: 2%;
+}
+
+.default-color {
+   color: black;
+}
+
+/* Header */
+/* .header {
+
+} */
+
+/* Ng-select */
+
+/*
+.ng-dropdown-panel.ng-select-bottom {
+    width: auto !important;
+}
+
+@media screen and (max-device-width: 990px) {
+    .ng-dropdown-panel.ng-select-bottom {
+        width: 100% !important;
+    }
+}
+
+.ng-select .ng-select-container {
+    border: none;
+}
+
+.ng-select.ng-select-searchable .ng-select-container .ng-value-container .ng-input {
+    opacity: 0;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+    color: #ffffff;
+}
+
+.ng-select.ng-select-opened .ng-select-container .ng-value-container .ng-placeholder {
+    color: #122239;
+}
+
+
+
+.ng-select .ng-select-container {
+  background-color: transparent;
+  color: #64707e;
+}
+
+.ng-option-label {
+  display: flex;
+  align-items: center;
+}
+
+.ng-select.ng-select-opened > .ng-select-container {
+  background: transparent;
+  border-color: #b3b3b3 #ccc #d9d9d9;
+}
+*/
+.ng-select .ng-select-container,
+.ng-select.ng-select-opened > .ng-select-container {
+    background-color: transparent;
+    border: none;
+}
+
+
+.ng-select .ng-dropdown-panel {
+  width: auto;
+  z-index: 2;
+}
+
+.ng-select .ng-dropdown-panel-items .ng-option {
+  text-align: left;
+}
+
+.ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+  border: 0;
+  box-shadow: none;
+}
+
+.ng-select.form-control {
+  padding-top: 0;
+}
+
+.test {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
+}
+
+.test1 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 99%;
+}
+
+.w-12 {
+    width: 12%;
+}
+
+.w-36px {
+    width: 36px;
+}
+
+.selected-participant-color {
+  background-color: lightgray !important;
+}
+
+@media screen and (max-device-width: 990px) {
+  .tournament-info .ng-select .ng-dropdown-panel {
+        left: -2em;
+        right: 0;
+  }
+}
+
+.color-variant-0 .fight-category {
+  background-color: #7798c0 !important;
+}
+
+.color-variant-1 .fight-category {
+  background-color: #8FBC8F !important;
+}
+
+.color-variant-1 .card-header,
+.color-variant-1 .online-tatami-current-fight .current-category {
+  background-color: #628C81 !important;
+}
+
+.color-variant-1 .online-tatami-current-fight .fight-card {
+  background-color: #8FBC8F !important;
+}
+
+.color-variant-2 .fight-category {
+  background-color: #A392C5 !important;
+}
+
+.color-variant-2 .card-header,
+.color-variant-2 .online-tatami-current-fight .current-category {
+  background-color: #735889 !important;
+}
+
+.color-variant-2 .online-tatami-current-fight .fight-card {
+  background-color: #826FB0 !important;
+}
+
+
+
+
+.size-variant-narrow .online-tatami-current-participant .aka-shiro-mark {
+  width: 0.3em !important;
+}
+
+.size-variant-narrow .online-tatami-current-participant .participant-fio {
+  font-size: 120% !important;
+}
+
+.size-variant-narrow .online-tatami-current-fight .fight-card .fight-number {
+  font-size: 100% !important;
+}
+
+.size-variant-narrow .participant-photo img {
+  width: 3em !important;
+}
+
+.size-variant-narrow .online-tatami-next-participant .participant-fio {
+  font-size: 140% !important;
+}
+
+.size-variant-narrow .online-tatami-next-participant.row {
+  height: 4em !important;
+}
+
+.size-variant-narrow .online-tatami-current-participant.aka {
+  border-bottom: 0 !important;
+}
+
+.size-variant-narrow .online-tatami-current-fight  {
+  font-size: 100% !important;
+}
+
+.size-variant-narrow .online-tatami-current-fight .current-category {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 0.2em;
+}
+
+.size-variant-narrow .online-tatami-next-fight .fight-category div:last-child {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.size-variant-narrow .online-tatami-next-fight .fight-category div:last-child .category-name {
+  flex-shrink: 0;
+}
+
+.size-variant-narrow .online-tatami-next-fight .fight-category div:last-child .category-level {
+  flex-shrink: 1;
+}
+
+.size-variant-narrow .online-tatami-next-fight .fight-category {
+  height: 2.3em !important;
+}
+
+.size-variant-narrow .online-tatami-current-participant .aka-shiro-mark {
+  height: 4em !important;
+}
+
+.size-variant-narrow .online-tatami-next-fight {
+  margin-bottom: 0.4em !important;
+}
+
+.fixed-nav {
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+}
+
+.color-1 { background-color: #7798c0; }
+.color-2 { background-color: #8FBC8F; }
+.color-3 { background-color: #c0bcc9; }
+.color-4 { background-color: #698FCA; }
+.color-5 { background-color: #769376; }
+.color-6 { background-color: #826FB0; }
+.color-7 { background-color: #637BA0; }
+.color-8 { background-color: #7D8E85; }
+.color-9 { background-color: #70688A; }
+.color-10 { background-color: #6488A0; }
+.color-11 { background-color: #628C81; }
+.color-12 { background-color: #735889; }
+
+/* .participant-passed .participant-club { */
+  /* color: #ddd !important; */
+/* } */
+
+/* .participant-passed::after {
+  content: 'winner';
+  content: ' \02713';
+  color: #7798c0;
+} */
+
+
+/* .draw-circle .participant-passed .participant-fio span::before {
+  content: "●";
+  color: #8FBC8F;
+} */
+
+.draw .participant-fio {
+  max-width: 15.5em;
+}
+
+@media (max-width: 667px) {
+  h1, h2 {
+    text-align: center;
+  }
+
+  div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child {
+    padding-left: 0;
+  }
+  /* .dataTables_filter#DataTables_Table_0_filter */
+
+  div.dataTables_wrapper div.dataTables_filter {
+    text-align: left !important;
+  }
+
+  .pagination {
+      display: block
+  }
+
+  .pagination li {
+    float: left;
+  }
+
+  .paginate_button.first,
+  .paginate_button.previous,
+  .paginate_button.next,
+  .paginate_button.last {
+      width: 50%
+  }
+}
+
+.ng-select .ng-arrow-wrapper {
+  width: 25px;
+  padding-right: 30px;
+  padding-left: 5px;
+}
+
+.scrolled-x {
+    overflow-x: auto;
+}
+
+.autocomplete-container .input-container input {
+  height: 32px !important;
+  line-height: 32px !important;
+  padding: 0 5px !important;
+  font-size: inherit !important;
+  color: #64707e !important;
+}
+
+.autocomplete-container {
+  box-shadow: none !important;
+  height: 32px !important;
+}
+
+
+.section6 .carousel-indicators button {
+    padding: 0 1em;
+    margin: 1em 0.1em;
+    opacity: 0.7;
+    height: 0.5em;
+}
+
+.section6 .visually-hidden {
+    display: none;
+}
+
+.modal-content {
+    margin-top: 15em;
+}
+
+.shiftRight {
+    right: -50%;
+}
+
+@media only screen and (max-width: 1150px) {
+  #managed-fights button, #manage-fight-in-detail button, #manage-fight-in-detail input[type="button"] {
+      padding: 0 0em
+  }
+
+  .btn-label-details {
+    display: none
+  }
+
+  .manage-fight-in-details-with-flags label {
+    font-size: 60%;
+  }
+}
+
+
+@media only screen and (max-width: 1200px) {
+    #managed-fights, #manage-fight-in-detail {
+      font-size: 85%;
+    }
+
+    #managed-fights button, #manage-fight-in-detail button, #manage-fight-in-detail input[type="button"] {
+        padding: 0 0.1em
+    }
+
+    .timer-ui svg {
+        width: 7em;
+    }
+
+    .timer-indicator {
+        font-size: 2em !important;
+        margin-top: 3.3em !important;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+  #manage-fight-in-detail input[type="button"] {
+      padding-left:  0.2em;
+      padding-right:  0.2em
+  }
+
+  #managed-fights .participant-number {
+    font-size: 100% !important;;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  #manage-fight-in-detail input[type="button"] {
+      padding-left: 0.3em;
+      padding-right:  0.3em
+  }
+
+  #manage-fight-in-detail .participant-manage-btns button {
+      padding: 0.1em 0.5em;
+      margin: 0.2em
+  }
+
+  #manage-button-shiro, #manage-button-aka, #manage-fight-in-detail input[value="V1"] {
+      margin-left: 1em !important
+  }
+}
+
+@media only screen and (max-width: 1660px) {
+    .btn-label, #visual-separator {
+        display: none;
+    }
+}
+
+
+.current-fight-tatami-title h4 {
+  font-size: 3em
+}
+/*
+.current-fight-tatami-title {
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(2,23,80,1) 0%, rgba(0,100,229,1) 100%, rgba(0,114,255,1) 100%);
+} */
+
+/* .active .ng-value {
+  color: white;
+} */
+
+/* html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+/* https://bootstrap-menu.com/detail-multilevel.html */
+/* ============ desktop view ============ */
+@media all and (min-width: 992px) {
+	.dropdown-menu li{ position: relative; 	}
+	.nav-item .submenu{
+		display: none;
+		position: absolute;
+		left:100%; top:-7px;
+	}
+	.nav-item .submenu-left{
+		right:100%; left:auto;
+	}
+	.dropdown-menu > li:hover{ background-color: #f1f1f1 }
+	.dropdown-menu > li:hover > .submenu{ display: block; }
+}
+/* ============ desktop view .end// ============ */
+
+/* ============ small devices ============ */
+@media (max-width: 991px) {
+  .dropdown-menu .dropdown-menu{
+      margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
+  }
+}
+/* ============ small devices .end// ============ */
+
+.participants-list .table > :not(caption) > * > * {
+  padding: 0.5em;
+  font-size: 1.05em;
+
+}
+
+.participants-list table.dataTable.table-striped > tbody > tr.odd {
+  box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.05);
+}
+
+.participants-list table.dataTable.table-striped > tbody > tr.odd > * {
+  box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0);
+  border: 0;
+}
+
+.participants-list table.dataTable.table-striped > tbody > tr > * {
+  border: 0;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

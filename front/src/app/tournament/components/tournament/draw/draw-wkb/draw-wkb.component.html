@@ -1,0 +1,136 @@
+<!-- TODO: cleanup refactor to be self descriptive and DRY  -->
+<div class="container-fluid scrolled-x" *ngIf="this.fights">
+    <div class="row draw">
+        <!-- Draw all levels except the last one (finals) -->
+        <ng-container *ngFor="let levelFights of this.levels; let i = index">
+            <ng-container *ngIf="i !== this.levels.length - 1">
+                <div class="col-3" style="display: flex;">
+                    <div class= "level level-0">
+                        <div class="draw-label" style="position: absolute; top: 0.5em;">
+                            {{i + 1}}{{ ('level.lap.' + (+i + 1)) | translate }} {{ 'level.lap.word' | translate }}
+                        </div>
+                        <ng-container *ngFor="let fight of levelFights; let j = index;">
+                                <!-- 'participant-passed' : isWinnerAka(fight) -->
+                            <div [ngClass]="{
+                                'participant' : true,
+                                'participant-aka' : true,
+                                'participant-shiro' : true
+                            }"
+                                style="{{j == 0 ? 'border-top: 1px solid #ccc;' : ''}}"
+                            >
+                                <!-- [passed]="isWinnerAka(fight)" -->
+                                <participant
+                                    [info]="fight.red"
+                                    [akaShiroType]="shiro"
+                                    [viewType]="'drawParticipant'"
+                                    [showExtendedInfo]="showExtendedInfo"
+                                    style="width: 100%;"
+                                ></participant>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <div [ngClass]="{
+                      'col-1 level level-0' : true
+                    }">
+                        <ng-container *ngFor="let fight of levelFights; let j = index;" >
+                              <div class="num-fight-wrapper" *ngIf="i !== this.levels.length - 1">
+                                  <!-- 'line-had-place': fightAlreadyHadPlace(fight) -->
+                                  <div [ngClass]="{
+                                    'num-fight': true
+                                  }">{{fight?.details?.NumDuel}}</div>
+                              </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+
+        <!-- Finals from olympic, TODO: DRY -->
+
+        <div class="col-3" style="display: flex;">
+            <div class="level level-0 winners">
+                <!-- Final fight -->
+                <div class="draw-label" style="position: absolute; top: 0.5em;">
+                    {{ 'draw.fight1Place' | translate}}
+                </div>
+
+                <div class="pair_">
+                    <div [ngClass]="{
+                      'participant' : true,
+                      'participant-aka' : true,
+                      'participant-passed' : isWinnerAka(getFilalFight()),
+                      'participant-winner' : true
+                    }">
+                        <participant
+                            [info]="getFilalFight()?.red"
+                            [akaShiroType]="'aka'"
+                            [viewType]="'drawParticipant'"
+                            [showExtendedInfo]="showExtendedInfo"
+                            style="width: 100%;"
+                        ></participant>
+                    </div>
+                    <div [ngClass]="{
+                        'participant' : true,
+                        'participant-shiro' : true,
+                        'participant-passed' : isWinnerShiro(getFilalFight())
+                      }">
+                          <participant
+                              [info]="getFilalFight()?.white"
+                              [akaShiroType]="'shiro'"
+                              [viewType]="'drawParticipant'"
+                              [showExtendedInfo]="showExtendedInfo"
+                              style="width: 100%;"
+                          ></participant>
+                    </div>
+                </div>
+
+                <!-- Third pplace fight -->
+                <div class="pair_" *ngIf="get3PlaceFight()">
+                    <div class="draw-label">
+                        {{ 'draw.fight3Place' | translate}}
+                    </div>
+
+                    <div [ngClass]="{
+                        'participant' : true,
+                        'participant-aka' : true,
+                        'participant-passed' : isWinnerAka(get3PlaceFight())
+                    }">
+                        <participant
+                            [info]="get3PlaceFight()?.red"
+                            [akaShiroType]="'aka'"
+                            [viewType]="'drawParticipant'"
+                            [showExtendedInfo]="showExtendedInfo"
+                            style="width: 100%;"
+                        ></participant>
+                    </div>
+
+                    <div [ngClass]="{
+                        'participant' : true,
+                        'participant-shiro' : true,
+                        'participant-passed' : isWinnerShiro(get3PlaceFight())
+                      }">
+                        <participant
+                            [info]="get3PlaceFight()?.white"
+                            [akaShiroType]="'shiro'"
+                            [viewType]="'drawParticipant'"
+                            [showExtendedInfo]="showExtendedInfo"
+                            style="width: 100%;"
+                        ></participant>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-1 level level-0 winners">
+                <ng-container *ngFor="let fight of levels[levels.length - 1]; let j = index;" >
+                      <div class="num-fight-wrapper">
+                          <div [ngClass]="{
+                            'num-fight': true,
+                            'line-had-place': fightAlreadyHadPlace(fight)
+                          }">{{fight?.details?.NumDuel}}</div>
+                      </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

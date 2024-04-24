@@ -1,0 +1,62 @@
+<h1>{{ 'navbar.online' | translate}} | <tatami-title [id]="tatamiId"></tatami-title>
+</h1>
+
+<div class="row justify-content-center align-items-start pt-2" style="min-height: 20em; position: relative;">
+    <!-- <div class="row justify-content-start align-items-start" style="position: absolute;">
+        <div style="width: 250px; height: 200px; z-index: 1000;">
+            <img src="/assets/img/landing/ak-qr.png" alt="" style="width: 100%; height: auto; object-fit: cover;">
+        </div>    
+    </div>   -->
+
+    <div class="col" >
+        <div  *ngIf="tatamiId !== 0 && tatamiId < 12">
+               <online-tatami [id]="tatamiId" [fights]='tatamis[0] ? tatamis[0].fights : null' [champType]="champType" 
+            [champName]="nameOfChampionship" [tatamiType] = "tatamiType"></online-tatami>
+        </div>
+
+        <ng-container *ngIf="tatamiId == 0">
+
+            <ng-container *ngIf="tatamis.length == 1">
+                <div class="row top-horizontally">
+                    <div class="col-5" *ngFor="let tatami of tatamis; let idx = index;">
+                        <online-tatami [id]="tatami.tatamiId" [fights]='tatami.fights' [champType]="champType" [size]="1"
+                            [colorVariant]="idx" [champName]="nameOfChampionship" [tatamiType] = "tatamiType"></online-tatami>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="tatamis.length == 2">
+                <div class="row top-horizontally">
+                    <div class="col-5" *ngFor="let tatami of tatamis; let idx = index;">
+                        <online-tatami [id]="tatami.tatamiId" [fights]='tatami.fights' [champType]="champType" [size]="1"
+                            [colorVariant]="idx" [champName]="nameOfChampionship" [tatamiType] = "tatamiType"></online-tatami>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="tatamis.length > 2">
+                <div class="row top-horizontally">
+                    <div class="col-4" *ngFor="let tatami of tatamis; let idx = index;">
+                        <online-tatami [id]="tatami.tatamiId" [fights]='tatami.fights' [champType]="champType" [size]="1"
+                            [colorVariant]="idx" [champName]="nameOfChampionship" [tatamiType] = "tatamiType"></online-tatami>
+                    </div>
+                </div>
+            </ng-container>
+
+        </ng-container>
+
+        <ng-container *ngIf="tatamiId >= 12">
+            <div class="row top-horizontally">
+                <div class="col-4" *ngFor="let tatami of tatamis; let idx = index;">
+                    <online-tatami [id]="tatami.tatamiId" [fights]='tatami.fights' [champType]="champType" [size]="1"
+                        [colorVariant]="idx" [champName]="nameOfChampionship" [tatamiType] = "tatamiType"></online-tatami>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<!-- <div style="position: absolute; width: 150px; height: 180px; top: 100; left: 0;">
+    <img src="/assets/img/landing/AllianceKumite.png" alt="" style="width: 100%; height: auto; object-fit: cover;">
+</div> -->
+

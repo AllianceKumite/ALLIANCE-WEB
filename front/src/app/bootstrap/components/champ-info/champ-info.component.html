@@ -1,0 +1,14 @@
+<div class="champ-info" *ngIf="champName">
+    <!-- <h5 class="name">{{getName()}}</h5> -->
+    <h5 class="name">{{ ('db.champs.' + champName + ".name") | translate}}, {{ ('db.champs.' + champName + ".city") | translate}}</h5>
+    <h5 class="date">
+      {{ (champFrom && champFrom != 'None')
+            ? ( champFrom | date: 'dd.MM.yyyy' )
+            : 'None'
+      }} - {{
+        (champTo && champTo != 'None')
+            ? ( champTo | date: 'dd.MM.yyyy' )
+            : 'None'
+      }}
+    </h5>
+</div>

@@ -1,0 +1,494 @@
+<form *ngIf="registerForm && !registeredSuccessfully" [formGroup]="registerForm" class="form-control auth-form-main" (ngSubmit)="doRegister()">
+    <h2 class="text-start">
+        <ng-container *ngIf="coachId">{{'registration.editProfile' | translate}}</ng-container>
+        <ng-container *ngIf="!coachId">{{'registration.singup' | translate}}</ng-container>
+    </h2>
+    <!-- name-email -->
+    <div class="row registration">
+        <!-- user name -->
+        <div class="col-sm-12 col-md-6">
+             <div class="d-flex m-0 p-0 justify-content-start align-items-center mt-2">
+                <label 
+                    class="fw-medium" 
+                    for="username">{{ 'registration.name' | translate }}
+                    <span class="text-danger">✲</span>
+                </label>
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">{{ 'error.required.username' | translate }}                       
+                    </div>
+                </div>
+            </div>
+            <input formControlName="username" class="form-control h-40 p-2" type="text" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+        </div>
+        <!-- user email -->
+        <div class="col-sm-12 col-md-6">
+            <div class="d-flex m-0 p-0 justify-content-start align-items-center  mt-2">
+                <label 
+                    class="fw-medium" 
+                    for="email">{{ 'registration.email' | translate }}
+                    <span class="text-danger">✲</span>
+                </label>
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">{{ 'error.required.email' | translate }}</div>
+                    <div *ngIf="f.email.errors.email">{{ 'error.emailInvalid' | translate }}</div>
+                    <div *ngIf="f.email.errors.taken">{{ 'error.emailTaken' | translate }}</div>
+                </div>
+            </div>
+            <input formControlName="email" class="form-control h-40 p-2" type="email" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        </div>
+    </div>
+    <!-- country-region-city -->
+    <div class="row registration">
+        <!-- country -->
+        <div class="col-sm-12 col-md-4">
+            <div class="d-flex m-0 p-0 justify-content-start align-items-center mt-2">
+                <label 
+                    class="fw-medium" 
+                    for="country">{{ 'general.country' | translate }}
+                    <span class="text-danger">✲</span>
+                </label>
+                <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                    <div *ngIf="f.country.errors.required">{{ 'error.required.country' | translate }}</div>
+                </div>
+            </div>
+            <ng-select *ngIf="countries"
+                #registrationCountrySelector
+                [(ngModel)]="selectedCountry"
+                (change)="onCountrySelect($event)"
+                [searchable]="true"
+                class="form-control h-40 p-0"
+                [ngClass]="{ 'is-invalid': submitted && f.country.errors }"
+                name="country"
+                formControlName="country"
+                dropdownPosition="bottom"
+                [ngSelected]="3">
+                <ng-option *ngFor="let country of countries" [value]="country.id" [ngSelected]="country.id == 3">
+                    {{ 'db.country.' + country.id | translate }}
+                </ng-option>
+            </ng-select>
+        </div>
+        <!-- region -->
+        <div class="col-sm-12 col-md-4">
+            <div class="d-flex m-0 p-0 justify-content-start align-items-center mt-2">
+                <label 
+                    class="fw-medium" 
+                    for="region">{{ 'general.region' | translate }}
+                </label>
+            </div>
+            <div class="ng-autocomplete w-100">
+                <ng-autocomplete
+                    [data]="regions"
+                    [(ngModel)]="selectedRegion"
+                    [searchKeyword]="'regionName' + lng"
+                    (selected)='onRegionSelect($event)'
+                    [itemTemplate]="itemTemplate1"
+                    formControlName="region"
+                    class="form-control h-40 p-1"
+                    [ngClass]="{ 'is-invalid': submitted && f.region.errors }"
+                ></ng-autocomplete>
+    
+                <ng-template #itemTemplate1 let-item>
+                    <a style="color: black" >{{('db.region.' + item.regionId) | translate}}</a>
+                </ng-template>
+            </div>
+        </div>
+        <!-- city -->
+        <div class="col-sm-12 col-md-4">
+            <div class="d-flex m-0 p-0 justify-content-start align-items-center mt-2">
+                <label 
+                    class="fw-medium" 
+                    for="city">{{ 'registration.city' | translate }}
+                    <span class="text-danger">✲</span>
+                </label>
+                <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                    <div *ngIf="f.city.errors.required">{{ 'error.required.city' | translate }}</div>
+                </div>
+            </div>
+            <div class="ng-autocomplete w-100">
+                <ng-autocomplete
+                  [(ngModel)]="selectedCity"
+                  [data]="cities"
+                  [searchKeyword]="'cityName'"
+                  [itemTemplate]="itemTemplate2"
+                  formControlName="city"
+                  class="form-control h-40 p-1"
+                  [ngClass]="{ 'is-invalid': submitted && f.city.errors }"
+                ></ng-autocomplete>
+  
+                <ng-template #itemTemplate2 let-item>
+                  <a style="color: black" [innerHTML]="item.cityName"></a>
+                </ng-template>
+              </div>
+          </div>
+    </div>
+    <!-- federation-branch-club -->
+    <div class="row registration">
+        <!-- federation -->
+        <div class="col-sm-12 col-md-4">
+            <div class="d-flex m-0 p-0 justify-content-start align-items-center mt-2">
+                <label 
+                    class="fw-medium" 
+                    for="organization">{{ 'general.organization' | translate }}
+                    <span class="text-danger">✲</span>
+                </label>
+                <div *ngIf="submitted && f.organization.errors" class="invalid-feedback">
+                    <div *ngIf="f.organization.errors.required">{{ 'error.required.organization' | translate }}</div>
+                </div>
+            </div>
+            <!-- <ng-select  
+                *ngIf="organizations"
+                [(ngModel)]="selectedOrganization"
+                [searchKeyword]="'orgName'"
+                placeholder=""
+                name="organization"
+                formControlName="organization"
+                class="form-control h-40 p-0"
+                [ngClass]="{ 'is-invalid': submitted && f.organization.errors }"
+                dropdownPosition="bottom"
+            >
+                <ng-option *ngFor="let organization of organizations" [value]="organization.orgId">
+                    {{ organization.orgName }}
+                </ng-option>
+            </ng-select> -->
+
+            <div class="ng-autocomplete w-100">
+                <ng-autocomplete
+                  [(ngModel)]="selectedOrganization"
+                  [data]="organizations"
+                  [searchKeyword]="'orgName'"
+                  [itemTemplate]="itemTemplate4"
+                  formControlName="organization"
+                  class="form-control h-40 p-1"
+                  [ngClass]="{ 'is-invalid': submitted && f.organization.errors }"
+                ></ng-autocomplete>
+      
+                <ng-template #itemTemplate4 let-item>
+                  <a style="color: black" [innerHTML]="item.orgName"></a>
+                </ng-template>
+            </div>
+        </div>
+        <!-- branch -->
+        <div class="col-sm-12 col-md-4">
+            <div class="d-flex m-0 p-0 justify-content-start align-items-center mt-2">
+                <label 
+                    class="fw-medium" 
+                    for="branch">{{ 'registration.branch' | translate }}
+                </label>
+            </div>
+            <ng-select  
+                *ngIf="branches"
+                [(ngModel)]="selectedBranch"
+                placeholder=""
+                name="branch"
+                formControlName="branch"
+                class="form-control p-0"
+                [ngClass]="{ 'is-invalid': submitted && f.branch.errors }"
+                dropdownPosition="bottom">
+
+                <ng-option *ngFor="let branch of branches" [value]="branch.branchId">
+                    {{ branch.branchName }}
+                </ng-option>
+
+            </ng-select>
+        </div>
+        <!-- club -->
+        <div class="col-sm-12 col-md-4">
+            <div class="d-flex m-0 p-0 justify-content-start align-items-center mt-2">
+                <label 
+                    class="fw-medium" 
+                    for="club">{{ 'general.club' | translate }}
+                    <span class="text-danger">✲</span>
+                </label>
+                <div *ngIf="submitted && f.club.errors" class="invalid-feedback">
+                    <div *ngIf="f.club.errors.required">{{ 'error.required.club' | translate }}</div>
+                </div>
+            </div>
+            <div class="ng-autocomplete w-100">
+                <ng-autocomplete
+                  [(ngModel)]="selectedClub"
+                  [data]="clubs"
+                  [searchKeyword]="'clubName'"
+                  [itemTemplate]="itemTemplate3"
+                  formControlName="club"
+                  class="form-control h-40 p-1"
+                  [ngClass]="{ 'is-invalid': submitted && f.club.errors }"
+                ></ng-autocomplete>
+  
+                <ng-template #itemTemplate3 let-item>
+                  <a style="color: black" [innerHTML]="item.clubName"></a>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <!-- password-button -->
+    <div class="row registration">
+
+        <!-- <ng-container *ngIf="coachId || changePassword || newUser"> -->
+        <ng-container *ngIf="changePassword || newUser">
+            <div class="col-6 col-md-4">
+                <div class="d-flex m-0 p-0 justify-content-start align-items-center mt-2">
+                    <label 
+                        class="fw-medium" 
+                        for="password">{{ 'registration.password' | translate }}
+                        <span class="text-danger">✲</span>
+                    </label>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">{{ 'error.required.password' | translate }}</div>
+                    </div>
+                </div>
+                <input type="password" class="form-control h-40 p-1" formControlName="password" autocomplete="new-password" id="new-password"
+                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />   
+            </div>
+
+            <div class="col-6 col-md-4">
+                <div class="d-flex m-0 p-0 justify-content-start align-items-center mt-2">
+                    <label 
+                        class="fw-medium" 
+                        for="confirmPassword">{{ 'registration.confirmPassword' | translate }}
+                        <span class="text-danger">✲</span>
+                    </label>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.confirmPassword.errors.required">{{ 'error.required.confirmPassword' | translate }}</div>
+                        <div *ngIf="f.confirmPassword.errors.doesntMatch">{{ 'error.passwordDoesntMatch' | translate }}</div>
+                    </div>
+                </div>
+                <input type="password" class="form-control h-40 p-1" formControlName="confirmPassword" autocomplete="new-password" id="new-confirm-password"
+                [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />   
+            </div>
+        </ng-container>
+        <!-- <ng-container *ngIf="coachId && !changePassword">
+            <div class="col-6 col-md-4">
+            </div>
+            <div class="col-6 col-md-4">
+            </div>       
+        </ng-container> -->
+
+        <div class="col-6 col-md-2">
+            <button *ngIf="coachId" type="button" 
+                class="btn btn-primary confirm-button w-100 h-40"
+                style="margin-top: 34px;"
+                (click)="onChangePassword()">
+                {{'registration.changepassword' | translate}}
+            </button>
+        </div>
+
+        <div class="col-6 col-md-2">
+            <button type="submit" 
+                class="btn btn-primary confirm-button w-100 h-40"
+                style="margin-top: 34px;">
+                <ng-container *ngIf="coachId">{{'registration.saveProfile' | translate}}</ng-container>
+                <ng-container *ngIf="!coachId">{{'registration.singup' | translate}}</ng-container>
+            </button>
+        </div>
+    </div>
+</form>
+
+<div class="form-control auth-form" *ngIf="registeredSuccessfully">
+    <h3 class="doneSuccessfully">
+        <ng-container *ngIf="coachId">{{ 'registration.savedSuccessfully' | translate : {email: f?.email?.value} }}</ng-container>
+        <ng-container *ngIf="!coachId">{{ 'registration.registeredSuccessfully' | translate : {email: f?.email?.value} }}</ng-container>
+    </h3>
+</div>
+
+<!-- <div class="row registration">
+    <div class="col-12">
+        <form *ngIf="registerForm && !registeredSuccessfully" [formGroup]="registerForm" class="form-control auth-form" (ngSubmit)="doRegister()">
+            <h2>
+                <ng-container *ngIf="coachId">{{'registration.editProfile' | translate}}</ng-container>
+                <ng-container *ngIf="!coachId">{{'registration.singup' | translate}}</ng-container>
+            </h2>
+
+            <label class="bold mt-3" for="username">{{ 'registration.name' | translate }} <span class="text-danger">*</span></label>
+
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">{{ 'error.required.username' | translate }}</div>
+            </div>
+
+            <input formControlName="username" class="form-control p-2" type="text" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+
+
+
+            <label class="bold mt-3" for="email">{{ 'registration.email' | translate }} <span class="text-danger">*</span></label>
+
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">{{ 'error.required.email' | translate }}</div>
+                <div *ngIf="f.email.errors.email">{{ 'error.emailInvalid' | translate }}</div>
+                <div *ngIf="f.email.errors.taken">{{ 'error.emailTaken' | translate }}</div>
+            </div>
+
+            <input formControlName="email" class="form-control p-2" type="email" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+
+
+            <label class="bold mt-3" for="country">{{ 'general.country' | translate }} <span class="text-danger">*</span></label>
+
+            <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                <div *ngIf="f.country.errors.required">{{ 'error.required.country' | translate }}</div>
+            </div>
+
+            <ng-select *ngIf="countries"
+                #registrationCountrySelector
+                [(ngModel)]="selectedCountry"
+
+                (change)="onCountrySelect($event)"
+                [searchable]="true"
+                class="form-control p-0"
+                [ngClass]="{ 'is-invalid': submitted && f.country.errors }"
+                name="country"
+                formControlName="country"
+                dropdownPosition="bottom"
+                [ngSelected]="3"
+            >
+                <ng-option *ngFor="let country of countries" [value]="country.id" [ngSelected]="country.id == 3">
+                    {{ 'db.country.' + country.id | translate }}
+                </ng-option>
+            </ng-select>
+
+
+            <label class="bold mt-3" for="region">{{ 'general.region' | translate }}</label>
+
+            <div class="ng-autocomplete w-100">
+              <ng-autocomplete
+                  [data]="regions"
+                  [(ngModel)]="selectedRegion"
+                  [searchKeyword]="'regionName' + lng"
+                  (selected)='onRegionSelect($event)'
+                  [itemTemplate]="itemTemplate1"
+                  formControlName="region"
+                  class="form-control p-1"
+                  [ngClass]="{ 'is-invalid': submitted && f.region.errors }"
+              ></ng-autocomplete>
+
+              <ng-template #itemTemplate1 let-item>
+                  <a style="color: black" >{{('db.region.' + item.regionId) | translate}}</a>
+              </ng-template>
+            </div>
+
+
+            <label class="bold mt-3" for="city">{{ 'registration.city' | translate }}</label>
+            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                <div *ngIf="f.city.errors.required">{{ 'error.required.city' | translate }}</div>
+            </div>
+
+            <div class="ng-autocomplete w-100">
+              <ng-autocomplete
+                [(ngModel)]="selectedCity"
+                [data]="cities"
+                [searchKeyword]="'cityName'"
+                [itemTemplate]="itemTemplate2"
+                formControlName="city"
+                class="form-control p-1"
+                [ngClass]="{ 'is-invalid': submitted && f.city.errors }"
+              ></ng-autocomplete>
+
+              <ng-template #itemTemplate2 let-item>
+                <a style="color: black" [innerHTML]="item.cityName"></a>
+              </ng-template>
+            </div>
+
+            <label class="bold mt-3" for="club">{{ 'general.club' | translate }}</label>
+
+            <div *ngIf="submitted && f.club.errors" class="invalid-feedback">
+                <div *ngIf="f.club.errors.required">{{ 'error.required.club' | translate }}</div>
+            </div>
+
+            <div class="ng-autocomplete w-100">
+              <ng-autocomplete
+                [(ngModel)]="selectedClub"
+                [data]="clubs"
+                [searchKeyword]="'clubName'"
+                [itemTemplate]="itemTemplate3"
+                formControlName="club"
+                class="form-control p-1"
+                [ngClass]="{ 'is-invalid': submitted && f.club.errors }"
+              ></ng-autocomplete>
+
+              <ng-template #itemTemplate3 let-item>
+                <a style="color: black" [innerHTML]="item.clubName"></a>
+              </ng-template>
+            </div>
+
+            <label class="bold mt-3" for="organization">{{ 'general.organization' | translate }} <span class="text-danger">*</span></label>
+
+            <div *ngIf="submitted && f.organization.errors" class="invalid-feedback">
+                <div *ngIf="f.organization.errors.required">{{ 'error.required.organization' | translate }}</div>
+            </div>
+
+            <div class="ng-autocomplete w-100">
+              <ng-autocomplete
+                [(ngModel)]="selectedOrganization"
+                [data]="organizations"
+                [searchKeyword]="'orgName'"
+                [itemTemplate]="itemTemplate4"
+                formControlName="organization"
+                class="form-control p-1"
+                [ngClass]="{ 'is-invalid': submitted && f.organization.errors }"
+              ></ng-autocomplete>
+
+              <ng-template #itemTemplate4 let-item>
+                <a style="color: black" [innerHTML]="item.orgName"></a>
+              </ng-template>
+            </div>
+
+
+            <label class="bold mt-3" for="branch">{{ 'registration.branch' | translate }}</label>
+
+            <ng-select  *ngIf="branches"
+                        [(ngModel)]="selectedBranch"
+                        placeholder=""
+                        name="branch"
+                        formControlName="branch"
+                        class="form-control p-0"
+                        [ngClass]="{ 'is-invalid': submitted && f.branch.errors }"
+                        dropdownPosition="bottom"
+            >
+                <ng-option *ngFor="let branch of branches" [value]="branch.branchId">
+                    {{ branch.branchName }}
+                </ng-option>
+          </ng-select>
+
+
+            <ng-container *ngIf="!coachId">
+            <label class="bold mt-3" for="password">{{ 'registration.password' | translate }} <span class="text-danger">*</span></label>
+
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">{{ 'error.required.password' | translate }}</div>
+            </div>
+
+            <input type="password" class="form-control p-1" formControlName="password" autocomplete="new-password" id="new-password"
+                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+
+
+
+            <label class="bold mt-3" for="confirmPassword">{{ 'registration.confirmPassword' | translate }} <span class="text-danger">*</span></label>
+
+            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="f.confirmPassword.errors.required">{{ 'error.required.confirmPassword' | translate }}</div>
+                <div *ngIf="f.confirmPassword.errors.doesntMatch">{{ 'error.passwordDoesntMatch' | translate }}</div>
+            </div>
+
+            <input type="password" class="form-control p-1" formControlName="confirmPassword" autocomplete="new-password" id="new-password"
+                [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+
+            </ng-container>
+
+            <div *ngIf="submitted && unexpectedError" class="invalid-feedback pt-4">
+                {{ 'registration.unexpectedError' | translate }}
+            </div>
+
+
+            <div class="d-flex justify-content-between align-items-center">
+                <button type="submit" class="btn btn-primary confirm-button mt-4">
+                    <ng-container *ngIf="coachId">{{'registration.saveProfile' | translate}}</ng-container>
+                    <ng-container *ngIf="!coachId">{{'registration.singup' | translate}}</ng-container>
+                </button>
+            </div>
+        </form>
+
+        <div class="form-control auth-form" *ngIf="registeredSuccessfully">
+            <h4 class="doneSuccessfully">
+                <ng-container *ngIf="coachId">{{ 'registration.savedSuccessfully' | translate : {email: f?.email?.value} }}</ng-container>
+                <ng-container *ngIf="!coachId">{{ 'registration.registeredSuccessfully' | translate : {email: f?.email?.value} }}</ng-container>
+            </h4>
+        </div>
+    </div>
+</div> -->

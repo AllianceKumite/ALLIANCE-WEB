@@ -1,0 +1,760 @@
+.shiro-show {
+  display: none;
+}
+
+.tatami-current-participant.aka,
+.tatami-current-participant.shiro {
+  height: 4em;
+  /* height: 4.046em; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0;
+  margin: 0;
+}
+
+.tatami-current-participant.aka {
+  background-color: #c0203c;
+  /* border-bottom: 1px solid #777; */
+  box-sizing: content-box;
+  padding: 0;
+  margin: 0;
+}
+
+.tatami-current-participant.shiro {
+  background-color: white;
+  /* border-bottom: 5px solid #5e6d8e; */
+  box-sizing: content-box;
+  padding: 0;
+  margin: 0;
+}
+
+.tatami-current-participant .participant-club-logo {
+  padding: 0em 0.3em;
+  flex: 0 0 3.36em;
+  max-width: 3.36em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+
+}
+
+.tatami-current-participant .participant-club-logo img {
+  width: 80%;
+  height: auto;
+}
+
+.done-kata {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: #F0EDE5;
+  border: 1px solid #B4B7BA;
+  border-radius: 5px;
+  /* height: auto; */
+  min-height: 30px;
+  padding: 6px;
+  margin: 0;
+}
+
+.item-done-kata {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2F4F4F;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* padding: 2px; */
+
+}
+
+.item-done-kata-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #0000CD;
+  white-space: nowrap;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  padding-left: 12px;
+}
+
+.item-done-kata-choose {
+  color: #DC4C46;
+}
+
+.participant-ath-photo {
+  width: 150px;
+  height: 150px;
+}
+
+.participant-ath-photo img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.tatami-current-participant .participant-country {
+  color: rgb(219, 204, 73);
+  /* color:rgb(14, 67, 80); */
+  font-weight: 500;
+  height: 100%;
+  max-width: 2.2em;
+  padding: 0;
+  margin: 0;
+  background-color: rgb(13, 54, 64);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+
+.tatami-current-participant .participant-country div {
+  transform: rotate(-0.25turn);
+}
+
+.tatami-current-participant .participant-name {
+  font-size: 1.5em;
+}
+
+.tatami-current-participant.aka .participant-name {
+  color: white;
+  width: 100%;
+}
+
+.tatami-current-participant.shiro .participant-name {
+  color: #333333;
+}
+
+.tatami-current-participant .participant-club {
+  /* display: flex; */
+  /* align-items: center; */
+  font-size: 1em;
+}
+
+.tatami-current-participant.aka .participant-club {
+  color: white;
+}
+
+.tatami-current-participant.shiro .participant-club {
+  color: #333333;
+}
+
+.draw-participant.up{
+   background-color: #fff;
+}
+
+.draw-participant.down{
+  background-color:#e8e8e8;
+  margin: 0; 
+  padding: 0;
+}
+
+.draw-participant.aka,
+.draw-participant.shiro,
+.online-tatami-next-participant.aka,
+.online-tatami-next-participant.shiro,
+.online-tatami-current-participant.aka,
+.online-tatami-current-participant.shiro {
+  display: flex;
+}
+
+.draw-participant .left-info,
+.online-tatami-next-participant .left-info,
+.online-tatami-current-participant .left-info {
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  /* position: relative; */
+}
+
+.draw-participant .aka-shiro-mark,
+.online-tatami-next-participant .aka-shiro-mark,
+.online-tatami-current-participant .aka-shiro-mark {
+  width: 1.3em !important;
+  /* height: 4.8em; */
+  background: rgb(236, 236, 236);
+  /* margin: 0 0.2em; */
+  margin: 0;
+/* position: absolute;
+top: 0;
+left: 10px; */
+}
+
+
+@media (max-width: 520px) {
+
+  .draw-participant .aka-shiro-mark,
+  .online-tatami-next-participant .aka-shiro-mark,
+  .online-tatami-current-participant .aka-shiro-mark {
+    width: 0.5em;
+  }
+}
+
+.draw-participant.aka .aka-shiro-mark,
+.online-tatami-next-participant.aka .aka-shiro-mark,
+.online-tatami-current-participant.aka .aka-shiro-mark {
+  background: #ed335c;
+}
+
+.draw-participant .participants-details,
+.online-tatami-next-participant .participants-details,
+.online-tatami-current-participant .participants-details {
+  display: flex;
+  width: 100%;
+  /* height: 4em; */
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+/* .online-tatami-next-participant .participants-details {
+  background-color: #ececec;
+} */
+
+.online-tatami-next-participant .participants-details,
+.online-tatami-current-participant .participants-details {
+  display: flex;
+  width: 100%;
+  /* height: 4em; */
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.participants-details {
+  padding: 0;
+  margin: 0;
+}
+
+.draw-participant .participants-details .details-row,
+.online-tatami-next-participant .participants-details .details-row,
+.online-tatami-current-participant .participants-details .details-row {
+  display: flex;
+}
+
+.online-tatami-next-participant .participants-details:last-child,
+.online-tatami-current-participant .participants-details:last-child {
+  /* padding-bottom: 0.5em */
+}
+
+.draw-participant .participant-number,
+.online-tatami-next-participant .participant-number,
+.online-tatami-current-participant .participant-number {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 10%; */
+}
+
+/* .online-tatami-current-participant .participant-fio {
+color: red;
+} */
+
+.draw-participant .participant-fio,
+.online-tatami-next-participant .participant-fio,
+.online-tatami-current-participant .participant-fio {
+  /* display: flex;
+  align-items: center;
+  justify-content: flex-start; */
+  text-align: left;
+  font-size: 180% !important;
+  font-weight: 700;
+
+}
+
+/* .online-tatami-current-participant.aka .participant-fio { */
+  /* color: rgb(237, 136, 153); */
+  /* font-weight: 700; */
+  /* width: 100%; */
+/* } */
+
+  
+@media (max-width: 1440px) {
+
+  .draw-participant .participant-fio,
+  .online-tatami-next-participant .participant-fio,
+  .online-tatami-current-participant .participant-fio {
+    font-size: 120%
+  }
+}
+
+@media (max-width: 920px) {
+
+  .draw-participant .participant-fio,
+  .online-tatami-next-participant .participant-fio,
+  .online-tatami-current-participant .participant-fio {
+    font-size: 140%
+      /* font-size: 110% */
+  }
+}
+
+@media (max-width: 720px) {
+
+  .draw-participant .participant-fio,
+  .online-tatami-next-participant .participant-fio,
+  .online-tatami-current-participant .participant-fio {
+    font-size: 120%
+      /* font-size: 100% */
+  }
+}
+
+@media (max-width: 520px) {
+
+  .draw-participant .participant-fio,
+  .online-tatami-next-participant .participant-fio,
+  .online-tatami-current-participant .participant-fio {
+    font-size: 100%
+  }
+}
+
+.draw-participant .participant-logo,
+.online-tatami-next-participant .participant-logo,
+.online-tatami-current-participant .participant-logo {
+  /* padding: 0 1em; */
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  /* margin-bottom: 5px; */
+}
+
+.draw-participant .participant-number,
+.online-tatami-next-participant .participant-number,
+.online-tatami-current-participant .participant-number {
+  flex-shrink: 0;
+  width: 15%;
+}
+
+
+.draw-participant .participant-logo,
+.online-tatami-next-participant .participant-logo,
+.online-tatami-current-participant .participant-logo {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+
+.online-tatami-current-participant .participant-number,
+.online-tatami-current-participant .participant-logo {
+  width: 25%;
+}
+
+.draw-participant .participant-logo.participant-place img {
+  width: 1.5em;
+}
+
+.draw-participant .participant-logo img,
+.online-tatami-next-participant .participant-logo img,
+.online-tatami-current-participant .participant-logo img {
+  width: 2.5em
+}
+
+@media (max-width: 550px) {
+
+  .draw-participant .participant-logo img,
+  .online-tatami-next-participant .participant-logo img,
+  .online-tatami-current-participant .participant-logo img {
+    width: 1.5em
+  }
+}
+
+.draw-participant .participant-photo,
+.online-tatami-next-participant .participant-photo,
+.online-tatami-current-participant .participant-photo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2em;
+}
+
+.draw-participant.aka,
+.online-tatami-next-participant.aka,
+.online-tatami-current-participant.aka {
+  /* border-bottom: 1px solid #c2c1c1; */
+  /* background-color: #fff; */
+}
+
+.draw-participant .participants-details,
+.online-tatami-next-participant .participants-details {
+  justify-content: center;
+}
+
+.draw-participant .participant-number,
+.online-tatami-next-participant .participant-number {
+  font-size: 130%;
+}
+
+.draw-participant.row,
+.online-tatami-next-participant.row {
+  height: 4em;
+}
+
+.draw-participant.shiro,
+.online-tatami-next-participant.shiro {
+  border-bottom: 0;
+}
+
+.draw-participant .participant-fio,
+.online-tatami-next-participant .participant-fio {
+  font-weight: 400;
+  font-size: 200%;
+}
+
+.draw-participant .participant-number,
+.online-tatami-next-participant .participant-number {
+  font-weight: 500;
+}
+
+.draw-participant.aka .participant-fio,
+.online-tatami-next-participant.aka .participant-fio {
+  color: #de0241;
+  width: 100%;
+}
+
+.draw-participant.shiro .participant-fio,
+.online-tatami-next-participant.aka .participant-fio {
+  width: 100%;
+}
+
+.draw-participant .participant-fio {
+  max-width: 105%;
+}
+
+.draw-participant .participant-logo img,
+.online-tatami-next-participant .participant-logo img {
+  width: 2.5em;
+}
+
+.draw-participant .participant-number,
+.online-tatami-next-participant .participant-number {
+  color: #444
+}
+
+.draw-participant .participant-fio {
+  font-size: 80% !important;
+  text-transform: uppercase;
+  font-weight: 550 !important;
+  width: 100%;
+}
+
+.draw-participant .participant-number {
+  font-size: 65% !important;
+}
+
+.draw-participant .participant-number,
+.draw-participant .participant-logo {
+  overflow: hidden;
+}
+
+.draw-participant .participant-logo img {
+  margin: 0;
+  padding: 0;
+  width: 1.5em;
+}
+
+
+.draw-participant .participant-number {
+  justify-content: right;
+  width: 10%;
+}
+
+.truncated-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.participant-undefined {
+  color: #888;
+}
+
+.passed,
+.postponed,
+.desqualified {
+  color: #de0241;
+  align-items: center;
+  display: flex;
+}
+
+.participant-passed{
+  border: 1px solid #de0241;
+}
+
+/* .passed{
+  border: 1px solid #ff4100;
+  align-items: center;
+  display: flex;
+} */
+
+.manage-participant.row {
+  height: auto;
+  justify-content: space-between;
+}
+
+.manage-participant.row.aka {
+  color: #242424;
+  background-color: #e9d2d2;
+  background-color: #fff;
+}
+
+.manage-participant.row.shiro {
+  color: #242424;
+  background-color: #e8e8e8;
+  background-color: #fff;
+
+}
+
+.manage-fight-list-item-participant {
+  justify-content: start;
+}
+
+.manage-fight-list-item-participant.row {
+  /* height: 7.4em; */
+  height: 7em;
+  padding: 0 1.5em;
+}
+
+.manage-fight-list-item-participant .fight-details {
+  width: 19%;
+}
+
+.manage-fight-list-item-participant .fight-details .postponed,
+.manage-fight-list-item-participant .fight-details .passed,
+.manage-fight-list-item-participant .fight-details .desqualified {
+  font-size: 200%;
+}
+
+.manage-fight-list-item-participant .fight-details .postponed {
+  color: #f8db00;
+}
+
+.manage-fight-list-item-participant .fight-details .passed {
+  color: green;
+}
+
+.manage-fight-list-item-participant .fight-details .desqualified {
+  color: rgb(200, 0, 0);
+}
+
+.manage-fight-list-item-participant .points {
+  font-size: 150%;
+  color: gray;
+}
+
+.current-fight-time-flags {
+  flex-direction: column;
+  background-color: #ececec;
+}
+
+.current-fight-time-flags .details-row {
+  display: flex;
+  font-size: 1.5em;
+  line-height: 0.9;
+  padding: 0.5em;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.current-fight-time-flags.aka .details-row.aka {
+  background-color: rgb(198, 5, 5);
+  color: white;
+}
+
+.current-fight-time-flags.shiro .details-row.shiro {
+  background-color: #fff;
+  color: black;
+}
+
+.current-fight-time-flags.aka .details-row,
+.current-fight-time-flags.aka .sub-info {
+  flex-direction: row-reverse
+}
+
+.current-fight-time-flags.shiro .details-row,
+.current-fight-time-flags.shiro .sub-info {
+  flex-direction: row
+}
+
+.current-fight-time-flags .sub-info {
+  display: flex;
+}
+
+.current-fight-time-flags.aka .sub-info {
+  justify-content: end;
+  justify-content: center;
+}
+
+.current-fight-time-flags.shiro .sub-info {
+  justify-content: start;
+  justify-content: center;
+}
+
+.current-fight-time-flags.aka .sub-info .kiu {
+  padding-right: 1.5em;
+}
+
+.current-fight-time-flags.shiro .sub-info .kiu {
+  padding-left: 1.5em;
+}
+
+.current-fight-time-flags.aka .sub-info .dan {
+  padding-right: 3.9em;
+}
+
+.current-fight-time-flags.shiro .sub-info .dan {
+  padding-left: 4.1em;
+}
+
+.current-fight-time-flags .details-row .participant-fio {
+  flex-grow: 3;
+  flex-shrink: 3;
+  align-self: center;
+  text-align: center;
+  font-weight: 900;
+}
+
+.current-fight-time-flags.aka .details-row .participant-fio {
+  color: white;
+}
+
+.current-fight-time-flags.aka .details-row .participant-data {
+  /* text-align: center; */
+  text-align: right;
+}
+
+.current-fight-time-flags.shiro .details-row .participant-data {
+  text-align: left;
+  /* text-align: center; */
+}
+
+.current-fight-time-flags .details-row .logo {
+  flex-grow: 1;
+  text-align: center;
+  align-self: center;
+  width: 2em;
+  height: 2em;
+}
+
+.current-fight-time-flags .details-row .logo {
+  max-width: 3em;
+}
+
+.current-fight-time-flags.aka .details-row .logo {
+  padding-left: 1em;
+}
+
+.current-fight-time-flags.shiro .details-row .logo {
+  padding-right: 1em;
+}
+
+.current-fight-time-flags .details-row .logo img {
+  height: 100%;
+  width: auto;
+}
+
+.current-fight-time-flags.aka .details-row .participant-data,
+.current-fight-time-flags.shiro .details-row .participant-data {
+  flex-grow: 3;
+  flex-shrink: 3;
+  color: #004080;
+  font-size: 0.6em;
+  line-height: 1.2;
+}
+
+.current-fight-time-flags .participant-header {
+  height: 5em
+}
+
+.current-fight-time-flags .participant-club-logo {
+  align-self: center;
+  width: 4em;
+}
+
+/* .passed{
+  border-right: 25px solid #57f800;
+} */
+
+@media screen and (max-width: 1300px) {
+  .current-fight-time-flags .details-row .participant-fio {
+    font-size: 1.3em;
+  }
+
+  .current-fight-time-flags.aka .details-row .participant-data,
+  .current-fight-time-flags.shiro .details-row .participant-data {
+    font-size: 0.8em
+  }
+
+  .current-fight-time-flags .participant-header {
+    height: 3em
+  }
+
+  .current-fight-time-flags .participant-club-logo {
+    width: 3em;
+  }
+
+  .current-fight-time-flags .details-row .logo {
+    max-width: 2.5em;
+  }
+
+  .current-fight-time-flags.aka .details-row .logo {
+    padding-left: 0.5em;
+  }
+
+  .current-fight-time-flags.shiro .details-row .logo {
+    padding-right: 0.5em;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .current-fight-time-flags .details-row .participant-fio {
+    font-size: 1em;
+  }
+
+  .current-fight-time-flags.aka .details-row .participant-data,
+  .current-fight-time-flags.shiro .details-row .participant-data {
+    font-size: 0.6em
+  }
+
+  .current-fight-time-flags .participant-club-logo {
+    width: 2em;
+  }
+
+  .current-fight-time-flags .details-row .logo {
+    max-width: 2em;
+  }
+
+  .current-fight-time-flags.aka .details-row .logo {
+    padding-left: 0;
+  }
+
+  .current-fight-time-flags.shiro .details-row .logo {
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .current-fight-time-flags .details-row .logo {
+    display: none
+  }
+
+  .current-fight-time-flags.aka .details-row .participant-data,
+  .current-fight-time-flags.shiro .details-row .participant-data {
+    font-size: 0.5em
+  }
+
+  .current-fight-time-flags .details-row .logo {
+    display: none
+  }
+}

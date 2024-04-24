@@ -1,0 +1,833 @@
+<div class="row p-1 m-0">
+    <div class="col-4 p-1">
+        <div class="box-data" id="setup">
+            <div class="p-0">
+                <div class="row row-header p-1 m-0">
+                    <div class="col-12">{{ 'tools.setup.setup' | translate}}</div>
+                </div>
+            </div>
+            <div class="row p-0 m-0">
+                <div class="col-2 p-1 m-0 d-flex align-items-center justify-content-start ">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <label class="btn btn-primary btn-sm" style="width: 100px" for="stampfile">{{'tools.setup.stamp'
+                            | translate}}</label>
+                        <input id="stampfile" type="file" accept='image/*' (change)="onLoadStamp($event)"
+                            style="visibility:hidden">
+                    </div>
+                </div>
+                <div class="col-2 p-1 m-0 text-end d-flex align-items-center">
+                    <button type="button"
+                        class="btn btn-danger btn-sm opacity-75 d-flex justify-content-center align-items-center"
+                        style="width: 100px" (click)="onDelStamp()">del</button>
+                </div>
+                <div class="col-2 p-1 m-0 d-flex align-items-center justify-content-end">
+                    <input type="number" [(ngModel)]="sizestamp" step="1" class="form-control m-0" style="height: 30px;"
+                        id="sizestamp" placeholder="">
+                </div>
+                <!-- <div class="col-1 p-0 m-0 d-flex align-items-center justify-content-center">
+                </div> -->
+                <div class="col-2 p-1 m-0 d-flex align-items-center justify-content-start">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <label class="btn btn-primary btn-sm " style="width: 100px" for="signfile">{{'tools.setup.sign'
+                            | translate}}</label>
+                        <input id="signfile" type="file" accept='image/*' (change)="onLoadSign($event)"
+                            style="visibility:hidden">
+                    </div>
+                </div>
+                <div class="col-2 p-1 m-0 text-end d-flex align-items-center">
+                    <button type="button"
+                        class="btn btn-danger btn-sm opacity-75 d-flex justify-content-center align-items-center"
+                        style="width: 100px" (click)="onDelSign()">Del</button>
+                </div>
+                <div class="col-2 p-1 m-0 d-flex align-items-center justify-content-end">
+                    <input type="number" [(ngModel)]="sizesign" step="1" class="form-control m-0" style="height: 30px;"
+                        id="sizestamp" placeholder="">
+                </div>
+            </div>
+            <div class="row p-0 m-0">
+                <div class="col-6 p-1 m-0">
+                    <!-- <label for="champname" class="form-label m-0">{{ 'tools.setup.champname' | translate}}</label> -->
+                    <label for="champname" class="form-label m-0">{{ 'tools.setup.champname' | translate}}</label>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <input type="text" [(ngModel)]="champname" class="form-control p-1 m-0 h-32 w-100"
+                            id="champname" placeholder="">
+                        <input type="checkbox" class="ms-1" (change)="onChangeShowName()" checked="showChampName"
+                            id="showChampName">
+                    </div>
+                    <!-- <input 
+                        type="text" 
+                        [(ngModel)]="champname" 
+                        class="form-control p-1 m-0 h-32 w-75" 
+                        id="champname" 
+                        placeholder=""> -->
+                </div>
+                <div class="col-6 p-1 m-0">
+                    <label for="champcity" class="form-label m-0">{{ 'tools.setup.citychamp' | translate}}</label>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <input type="text" [(ngModel)]="champcity" class="form-control m-0 h-32" id="champcity"
+                            placeholder="">
+                        <input type="checkbox" class="ms-1" (change)="onChangeShowCity()" checked="showChampCity"
+                            id="showChampCity">
+                    </div>
+                </div>
+            </div>
+            <div class="row p-0 m-0">
+                <div class="col-12 p-1 m-0">
+                    <label for="champdate" class="form-label m-0">{{ 'tools.setup.date' | translate}}</label>
+                    <div class="input-group p-0 m-0">
+                        <input type="date" [(ngModel)]="datefrom" class="form-control" style="height: 36px;"
+                            id="datefrom" placeholder="">
+                        <input type="date" [(ngModel)]="dateto" class="form-control" style="height: 36px;" id="dateto"
+                            placeholder="">
+                        <input type="checkbox" class="ms-1" (change)="onChangeShowDate()" checked="showChampDate"
+                            id="showChampDate">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row p-0 m-0">
+                <div class="col-6 p-1 m-0">
+                    <label for="direct1" class="form-label m-0 w-100">{{ 'tools.setup.direct1' | translate}}</label>
+                    <input type="text" [(ngModel)]="direct1" class="form-control p-0 m-0 h-32" id="direct1"
+                        placeholder="">
+                </div>
+                <div class="col-6 p-1 m-0">
+                    <label for="direct1name" class="form-label m-0 w-100">{{ 'tools.setup.directname' |
+                        translate}}</label>
+                    <input type="text" [(ngModel)]="direct1name" class="form-control p-0 m-0 h-32" id="direct1name"
+                        placeholder="">
+                </div>
+            </div>
+
+            <div class="row p-0 m-0">
+                <div class="col-6 p-1 m-0">
+                    <label for="direct2" class="form-label m-0 w-100">{{ 'tools.setup.direct2' | translate}}</label>
+                    <input type="text" [(ngModel)]="direct2" class="form-control p-1 m-0 h-32" id="direct2"
+                        placeholder="">
+                </div>
+                <div class="col-6 p-1 m-0">
+                    <label for="direct2name" class="form-label m-0 w-100">{{ 'tools.setup.directname' |
+                        translate}}</label>
+                    <input type="text" [(ngModel)]="direct2name" class="form-control p-1 m-0 h-32" id="direct2name"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="row p-0 m-0">
+                <div class="col-3 p-1 m-0">
+                    <label for="scale" class="form-label m-0">{{ 'tools.setup.bcg' | translate}}</label>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <label class="btn btn-primary w-100" for="bcgfile">{{ 'tools.setup.bcg' | translate}}</label>
+                        <input id="bcgfile" type="file" accept='image/*' (change)="onLoadBcg($event)"
+                            style="visibility:hidden; height: 0; width: 0;">
+                    </div>
+                </div>
+                <div class="col-9 p-1 m-0">
+                    <label for="champname" class="form-label m-0">{{ 'tools.setup.title' | translate}}</label>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <input type="text" [(ngModel)]="title" class="form-control p-1 m-0 w-100" style="height: 36px;"
+                            id="title" placeholder="">
+                        <input type="checkbox" class="ms-1" (change)="onChangeShowTitle()" checked="showTitle"
+                            id="showTitle">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-5 p-1">
+        <div class="row p-1 pt-0 m-0">
+            <div class="col-12 box-add-setup p-1">
+                <div class="box-setup-row">
+                    <div class="w-30">
+                        <div class="w-100 p-1">
+                            <label for="nameFont">{{ 'tools.setup.champname' | translate}}</label>
+                            <ng-select #fontSelName (change)="changeFontName()" [searchable]="false" id="nameFont"
+                                placeholder="" bindLabel="name" bindValue="id" placeholder="Select"
+                                class="box-select-item" name="selectedFont" [(ngModel)]="selFontName"
+                                dropdownPosition="bottom" [items]="arrfonts">
+                                <!-- <ng-option *ngFor="let item of arrfonts" [value]="item.id - 1">
+                                    {{ item.name }}
+                                </ng-option> -->
+                            </ng-select>
+                        </div>
+                        <div class="w-100 p-1">
+                            <label for="nameSize">{{ 'tools.setup.size' | translate}}</label>
+                            <ng-select #sizeSelPart (change)="changeSizeName()" [searchable]="false" id="nameSize"
+                                placeholder="" bindLabel="name" bindValue="selSizeName" placeholder="Select"
+                                class="box-select-item" name="selectedFont" [(ngModel)]="selSizeName"
+                                dropdownPosition="bottom" [items]="arrsize">
+                                <!-- <ng-option *ngFor="let item of arrsize; let i as index" [value]="i">
+                                    {{ item }}
+                                </ng-option> -->
+                            </ng-select>
+                        </div>
+                        <div class="w-100 p-1 d-flex align-items-center">
+                            <input type="checkbox" class="ms-1" (change)="onNameItalic()" id="nameItalic">
+                            <label for="nameItalic" class="ms-1">{{ 'tools.setup.italic' | translate}}</label>
+                        </div>
+                        <div class="w-100 p-1 d-flex align-items-center justify-content-center">
+                            <label for="nameColor" class="form-label"></label>
+                            <input type="color" class="form-control form-control-color box-select-color" id="nameColor"
+                                title="Choose your color" (change)="onClrChampname($event)">
+                        </div>
+                    </div>
+                    <div class="w-30">
+                        <div class="w-100 p-1">
+                            <label for="partFont">{{ 'tools.setup.place' | translate}}</label>
+                            <ng-select #fontSelPart (change)="changeFontPlace()" [searchable]="false" id="placeFont"
+                                placeholder="" bindLabel="name" bindValue="id" placeholder="Select"
+                                class="box-select-item" name="selectedPlace" [(ngModel)]="selFontPlace"
+                                dropdownPosition="bottom" [items]="arrfonts">
+                            </ng-select>
+                        </div>
+                        <div class="w-100 p-1">
+                            <label for="placeSize">{{ 'tools.setup.size' | translate}}</label>
+                            <ng-select #sizeSelPart (change)="changeSizePlace()" [searchable]="false" id="placeSize"
+                                placeholder="" bindLabel="name" bindValue="selSizePlace" placeholder="Select"
+                                class="box-select-item" name="selectedPlace" [(ngModel)]="selSizePlace"
+                                dropdownPosition="bottom" [items]="arrsize">
+                            </ng-select>
+                        </div>
+                        <div class="w-100 p-1 d-flex align-items-center">
+                            <input type="checkbox" class="ms-1" (change)="onPlaceItalic()" id="placeItalic">
+                            <label for="placeItalic" class="ms-1">{{ 'tools.setup.italic' | translate}}</label>
+                        </div>
+                        <div class="w-100 p-1 d-flex align-items-center justify-content-center">
+                            <label for="nameColor" class="form-label"></label>
+                            <input type="color" class="form-control form-control-color box-select-color" id="nameColor"
+                                title="Choose your color" (change)="onClrPlace($event)">
+                        </div>
+                    </div>
+                    <div class="w-30">
+                        <div class="w-100 p-1">
+                            <label for="partFont">{{ 'tools.setup.participant' | translate}}</label>
+                            <ng-select #fontSelPart (change)="changeFontPart()" [searchable]="false" id="partFont"
+                                placeholder="" bindLabel="name" bindValue="id" placeholder="Select"
+                                class="box-select-item" name="selectedFont" [(ngModel)]="selFontPart"
+                                dropdownPosition="bottom" [items]="arrfonts">
+                            </ng-select>
+                        </div>
+                        <div class="w-100 p-1">
+                            <label for="partSize">{{ 'tools.setup.size' | translate}}</label>
+                            <ng-select #sizeSelPart (change)="changeSizePart()" [searchable]="false" id="partSize"
+                                placeholder="" bindLabel="name" bindValue="selSizePart" placeholder="Select"
+                                class="box-select-item" name="selectedPlace" [(ngModel)]="selSizePart"
+                                dropdownPosition="bottom" [items]="arrsize">
+                            </ng-select>
+                        </div>
+                        <div class="w-100 p-1 d-flex align-items-center">
+                            <input type="checkbox" class="ms-1" (change)="onPartItalic()" id="partItalic">
+                            <label for="partItalic" class="ms-1">{{ 'tools.setup.italic' | translate}}</label>
+                        </div>
+                        <div class="w-100 p-1 d-flex align-items-center justify-content-center">
+                            <label for="nameColor" class="form-label"></label>
+                            <input type="color" class="form-control form-control-color box-select-color" id="nameColor"
+                                title="Choose your color" (change)="onClrPart($event)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-setup-row" style="margin-top: 5px;">
+                    <div class="w-30">
+                        <div class="w-100 p-1">
+                            <label for="catFont">{{ 'tools.setup.category' | translate}}</label>
+                            <ng-select #fontSelPart (change)="changeFontCat()" [searchable]="false" id="catFont"
+                                placeholder="" bindLabel="name" bindValue="id" placeholder="Select"
+                                class="box-select-item" name="selectedFont" [(ngModel)]="selFontCat"
+                                dropdownPosition="bottom">
+                                <ng-option *ngFor="let item of arrfonts" [value]="item.id - 1">
+                                    {{ item.name }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="w-100 p-1">
+                            <label for="catSize">{{ 'tools.setup.size' | translate}}</label>
+                            <ng-select #sizeSelPart (change)="changeSizeCat()" [searchable]="false" id="catSize"
+                                placeholder="" bindLabel="name" bindValue="id" placeholder="Select"
+                                class="box-select-item" name="selectedFont" [(ngModel)]="selSizeCat"
+                                dropdownPosition="bottom" [items]="arrsize">
+                            </ng-select>
+                        </div>
+                        <div class="w-100 p-1 d-flex align-items-center">
+                            <input type="checkbox" class="ms-1" (change)="onCatItalic()" id="catItalic">
+                            <label for="catItalic" class="ms-1">{{ 'tools.setup.italic' | translate}}</label>
+                        </div>
+                        <div class="w-100 p-1 d-flex align-items-center justify-content-center">
+                            <label for="catColor" class="form-label"></label>
+                            <input type="color" class="form-control form-control-color box-select-color" id="catColor"
+                                title="Choose your color" (change)="onClrCat($event)">
+                        </div>
+                    </div>
+
+                    <div class="w-30">
+                        <div class="w-100 p-1">
+                            <label for="jobFont">{{ 'tools.setup.date' | translate}}</label>
+                            <ng-select #fontSelJob (change)="changeFontJob()" [searchable]="false" id="jobFont"
+                                placeholder="" bindLabel="name" bindValue="id" placeholder="Select"
+                                class="box-select-item" name="selectedJob" [(ngModel)]="selFontJob"
+                                dropdownPosition="top" [items]="arrfonts">
+                            </ng-select>
+                        </div>
+                        <div class="w-100 p-1">
+                            <label for="jobSize">{{ 'tools.setup.size' | translate}}</label>
+                            <ng-select #sizeSelJob (change)="changeSizeJob()" [searchable]="false" id="jobSize"
+                                placeholder="" bindLabel="name" bindValue="selSizeJob" class="box-select-item"
+                                name="selectedFont" [(ngModel)]="selSizeJob" dropdownPosition="top" [items]="arrsize">
+                            </ng-select>
+                        </div>
+                        <div class="w-100 p-1 d-flex align-items-center">
+                            <input type="checkbox" class="ms-1" (change)="onJobItalic()" id="jobItalic">
+                            <label for="jobItalic" class="ms-1">{{ 'tools.setup.italic' | translate}}</label>
+                        </div>
+                        <div class="w-100 p-1 d-flex align-items-center justify-content-center">
+                            <label for="jobColor" class="form-label"></label>
+                            <input type="color" class="form-control form-control-color box-select-color" id="jobColor"
+                                title="Choose your color" (change)="onClrJob($event)">
+                        </div>
+                    </div>
+                    <div class="w-30">
+                        <div class="w-100 d-flex flex-wrap justify-content-between">
+                            <div class="w-100 d-flex justify-content-between">
+                                <label style="display: flex; align-items: center; margin-left: 10px;">
+                                    <input type="radio" id="choice1" style="margin-right: 5px;" name="orientation"
+                                        [(ngModel)]="orientation" (change)="changeOrientation(0)" [value]="0"> {{
+                                    'tools.setup.portrait' | translate}}
+                                </label>
+                                <label style="display: flex; align-items: center; margin-right: 10px;">
+                                    <input type="radio" id="choice2" style="margin-right: 5px;" name="orientation"
+                                        [(ngModel)]="orientation" (change)="changeOrientation(1)" [value]="1"> {{
+                                    'tools.setup.landscape' | translate}}
+                                </label>
+                            </div>
+                            <div class="w-100 d-flex justify-content-between">
+                                <label style="display: flex; align-items: center; margin-left: 10px;">
+                                    <input type="radio" id="choice3" style="margin-right: 5px;" name="pagesize"
+                                        [(ngModel)]="sizepage" [value]="0">A4
+                                </label>
+                                <label style="display: flex; align-items: center; margin-right: 10px;">
+                                    <input type="radio" id="choice4" style="margin-right: 5px;" name="pagesize"
+                                        [(ngModel)]="sizepage" [value]="1">A3
+                                </label>
+                            </div>
+                        </div>
+                        <div class="w-100 d-flex flex-wrap justify-content-center" style="position: relative;">
+                            <div> {{ textprogress }} </div>
+                            <div class="preloader" id="preloader">
+                                <svg class="preloader__image" role="img" fill="#589849" version="1.1" id="Capa_1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="20px" height="20px" viewBox="0 0 399.389 399.389" xml:space="preserve">
+                                    <g>
+                                        <path d="M340.896,58.489C303.18,20.773,253.031,0.001,199.693,0.001c-53.34,0-103.487,20.771-141.204,58.488
+                                        C20.772,96.207,0,146.355,0,199.694c0,53.34,20.772,103.489,58.49,141.206c37.717,37.717,87.864,58.488,141.204,58.488
+                                        c53.339,0,103.486-20.771,141.205-58.488c37.717-37.717,58.49-87.865,58.49-141.206C399.387,146.355,378.613,96.207,340.896,58.489
+                                        z M328.061,71.326c34.289,34.289,53.172,79.878,53.172,128.368h-41.148c0-77.412-62.979-140.391-140.391-140.391
+                                        c-4.593,0-9.134,0.229-13.615,0.662v-41.31c4.508-0.332,9.049-0.5,13.615-0.5C248.184,18.155,293.771,37.038,328.061,71.326z
+                                         M199.693,321.931c-67.401,0-122.236-54.835-122.236-122.236S132.292,77.458,199.693,77.458S321.93,132.293,321.93,199.694
+                                        S267.094,321.931,199.693,321.931z" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="w-100 d-flex flex-wrap justify-content-between p-1">
+                                <ng-select placeholder="Time" name="selectedTime" [items]="subtimes"
+                                    class="box-select-item" style="width: 48%;" [(ngModel)]="selectedTime"
+                                    [clearable]="false" [disabled]="subtimes && subtimes.length == 1">
+                                </ng-select>
+                                <ng-select placeholder="Татамi" name="selectedTatami" 
+                                    bindLabel="name" bindValue="id" [items]="tatamies"
+                                    class="box-select-item" style="width: 50%;" [(ngModel)]="selectedTatami"
+                                    [clearable]="false" [disabled]="tatamies && tatamies.length == 1">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 p-1">
+        <div class="box-category" id="setup">
+            <div class="p-0">
+                <div class="row row-header p-1 m-0">
+                    <div class="col-11">{{'tools.setup.category' | translate}}</div>
+                    <div class="col-1  col-attr">
+                        <button class="btn btn-primary btn-pdf-all" title="Export All Categories in PDF"
+                            (click)="drawAll()">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16" height="16"
+                                fill="#fff" viewBox="0 0 102.55 122.88" style="enable-background:new 0 0 102.55 122.88"
+                                xml:space="preserve">
+
+                                <g>
+                                    <path class="st0"
+                                        d="M102.55,122.88H0V0h77.66l24.89,26.43V122.88L102.55,122.88z M87.01,69.83c-1.48-1.46-4.75-2.22-9.74-2.29 c-3.37-0.03-7.43,0.27-11.7,0.86c-1.91-1.1-3.88-2.31-5.43-3.75c-4.16-3.89-7.64-9.28-9.8-15.22c0.14-0.56,0.26-1.04,0.37-1.54 c0,0,2.35-13.32,1.73-17.82c-0.08-0.61-0.14-0.8-0.3-1.27l-0.2-0.53c-0.64-1.47-1.89-3.03-3.85-2.94l-1.18-0.03 c-2.19,0-3.97,1.12-4.43,2.79c-1.42,5.24,0.05,13.08,2.7,23.24l-0.68,1.65c-1.9,4.64-4.29,9.32-6.39,13.44l-0.28,0.53 c-2.22,4.34-4.23,8.01-6.05,11.13l-1.88,1c-0.14,0.07-3.36,1.78-4.12,2.24c-6.41,3.83-10.66,8.17-11.37,11.62 c-0.22,1.1-0.05,2.51,1.08,3.16L17.32,97c0.79,0.4,1.62,0.6,2.47,0.6c4.56,0,9.87-5.69,17.18-18.44 c8.44-2.74,18.04-5.03,26.45-6.29c6.42,3.61,14.3,6.12,19.28,6.12c0.89,0,1.65-0.08,2.27-0.25c0.95-0.26,1.76-0.8,2.25-1.54 c0.96-1.46,1.16-3.46,0.9-5.51c-0.08-0.61-0.56-1.36-1.09-1.88L87.01,69.83L87.01,69.83z M18.79,94.13 c0.83-2.28,4.13-6.78,9.01-10.78c0.3-0.25,1.06-0.95,1.75-1.61C24.46,89.87,21.04,93.11,18.79,94.13L18.79,94.13L18.79,94.13z M47.67,27.64c1.47,0,2.31,3.7,2.38,7.17c0.07,3.47-0.74,5.91-1.75,7.71c-0.83-2.67-1.24-6.87-1.24-9.62 C47.06,32.89,47,27.64,47.67,27.64L47.67,27.64L47.67,27.64z M39.05,75.02c1.03-1.83,2.08-3.76,3.17-5.81 c2.65-5.02,4.32-8.93,5.57-12.15c2.48,4.51,5.57,8.35,9.2,11.42c0.45,0.38,0.93,0.77,1.44,1.15 C51.05,71.09,44.67,72.86,39.05,75.02L39.05,75.02L39.05,75.02L39.05,75.02z M85.6,74.61c-0.45,0.28-1.74,0.44-2.56,0.44 c-2.67,0-5.98-1.22-10.62-3.22c1.78-0.13,3.41-0.2,4.88-0.2c2.68,0,3.48-0.01,6.09,0.66C86.01,72.96,86.05,74.32,85.6,74.61 L85.6,74.61L85.6,74.61L85.6,74.61z M96.12,115.98V30.45H73.44V5.91H6.51v110.07H96.12L96.12,115.98z" />
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
+
+                <ng-container *ngFor="let category of categories; let i = index">
+                    <div class="row row-data p-1 m-0" (click)="onRowClick(category)"
+                        [ngClass]="{'selected-row-color': category.name.id == selectedCategory?.name.id}" name="selectedCategory">
+                        <div class="col-1 col-attr">{{ i + 1}}</div>
+                        <div class="col-10 col-attr"><app-category-name id="{{category.name.id}}"></app-category-name></div>
+                        <div class="col-1  col-attr">
+                            <button *ngIf="category.name.id == selectedCategory?.name.id" class="btn btn-primary btn-pdf"
+                                title="Export selected category in PDF" (click)="drawcategory(category)">
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16" height="16"
+                                    fill="#fff" viewBox="0 0 102.55 122.88"
+                                    style="enable-background:new 0 0 102.55 122.88" xml:space="preserve">
+
+                                    <g>
+                                        <path class="st0"
+                                            d="M102.55,122.88H0V0h77.66l24.89,26.43V122.88L102.55,122.88z M87.01,69.83c-1.48-1.46-4.75-2.22-9.74-2.29 c-3.37-0.03-7.43,0.27-11.7,0.86c-1.91-1.1-3.88-2.31-5.43-3.75c-4.16-3.89-7.64-9.28-9.8-15.22c0.14-0.56,0.26-1.04,0.37-1.54 c0,0,2.35-13.32,1.73-17.82c-0.08-0.61-0.14-0.8-0.3-1.27l-0.2-0.53c-0.64-1.47-1.89-3.03-3.85-2.94l-1.18-0.03 c-2.19,0-3.97,1.12-4.43,2.79c-1.42,5.24,0.05,13.08,2.7,23.24l-0.68,1.65c-1.9,4.64-4.29,9.32-6.39,13.44l-0.28,0.53 c-2.22,4.34-4.23,8.01-6.05,11.13l-1.88,1c-0.14,0.07-3.36,1.78-4.12,2.24c-6.41,3.83-10.66,8.17-11.37,11.62 c-0.22,1.1-0.05,2.51,1.08,3.16L17.32,97c0.79,0.4,1.62,0.6,2.47,0.6c4.56,0,9.87-5.69,17.18-18.44 c8.44-2.74,18.04-5.03,26.45-6.29c6.42,3.61,14.3,6.12,19.28,6.12c0.89,0,1.65-0.08,2.27-0.25c0.95-0.26,1.76-0.8,2.25-1.54 c0.96-1.46,1.16-3.46,0.9-5.51c-0.08-0.61-0.56-1.36-1.09-1.88L87.01,69.83L87.01,69.83z M18.79,94.13 c0.83-2.28,4.13-6.78,9.01-10.78c0.3-0.25,1.06-0.95,1.75-1.61C24.46,89.87,21.04,93.11,18.79,94.13L18.79,94.13L18.79,94.13z M47.67,27.64c1.47,0,2.31,3.7,2.38,7.17c0.07,3.47-0.74,5.91-1.75,7.71c-0.83-2.67-1.24-6.87-1.24-9.62 C47.06,32.89,47,27.64,47.67,27.64L47.67,27.64L47.67,27.64z M39.05,75.02c1.03-1.83,2.08-3.76,3.17-5.81 c2.65-5.02,4.32-8.93,5.57-12.15c2.48,4.51,5.57,8.35,9.2,11.42c0.45,0.38,0.93,0.77,1.44,1.15 C51.05,71.09,44.67,72.86,39.05,75.02L39.05,75.02L39.05,75.02L39.05,75.02z M85.6,74.61c-0.45,0.28-1.74,0.44-2.56,0.44 c-2.67,0-5.98-1.22-10.62-3.22c1.78-0.13,3.41-0.2,4.88-0.2c2.68,0,3.48-0.01,6.09,0.66C86.01,72.96,86.05,74.32,85.6,74.61 L85.6,74.61L85.6,74.61L85.6,74.61z M96.12,115.98V30.45H73.44V5.91H6.51v110.07H96.12L96.12,115.98z" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="box-diplom-landscape" id="box-diplom"
+            [ngClass]="{'box-diplom-landscape': orientation == 1, 'box-diplom-portrait': orientation == 0}">
+            <div class="bcg p-0 m-0">
+                <img [src]="bcg_bytes" id="bcgorientation" width="100%" class="p-0 m-0" />
+            </div>
+
+            <div class="show-data-diplom" id="show-data-diplom">
+                <div class="champname" id="rchampname" [hidden]="!showChampName" cdkDrag> {{champname}}</div>
+
+                <div class="title" id="rtitle" [hidden]="!showTitle" cdkDrag> {{title | uppercase}}</div>
+
+                <div class="job-title" id="rjob" cdkDrag>
+                    <div>{{direct1}}</div>
+                    <div>{{direct1name}}</div>
+                </div>
+
+                <div class="job-title" id="rjob1" cdkDrag>
+                    <div>{{direct2}}</div>
+                    <div>{{direct2name}}</div>
+                </div>
+
+                <div class="date" id="rdate" cdkDrag>
+                    <div class="w-100 text-end" [hidden]="!showChampDate">{{dDateto | date : 'dd.MM.yy'}}</div>
+                    <div class="w-100 text-end" [hidden]="!showChampCity">{{ champcity }}</div>
+                </div>
+
+                <div class="rplace" id="rplace" cdkDrag>
+                    <!-- {{ place }} -->
+                </div>
+
+                <div class="paticipant" id="participant" cdkDrag>
+                    {{ participant }}
+                </div>
+
+                <div class="catname" cdkDrag id="rcat">
+                    {{('champ.categories.' + categoryId) | translate | uppercase }}
+                </div>
+
+                <div *ngIf="stamp_bytes">
+                    <div class="img-box" [style.width]="getsize()" [style.height]="getsize()" cdkDrag>
+                        <img [src]="stamp_bytes" width="100%" />
+                    </div>
+                </div>
+
+                <div *ngIf="sign_bytes">
+                    <div class="img-box" [style.width]="getsizeSign()" [style.height]="getsizeSign()" cdkDrag>
+                        <img [src]="sign_bytes" width="100%" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="row p-1 m-0">
+    <div  class="col-4 p-1">
+        <div class="box-data" id="setup">
+            <div class="p-0">
+                <div class="row row-header p-1 m-0">
+                    <div class="col-12">{{ 'tools.setup.setup' | translate}}</div>
+                </div>
+            </div>
+            <div class="row p-0 m-0" >
+                <div class="col-2 p-1 m-0 d-flex align-items-center justify-content-start ">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <label class="btn btn-primary btn-sm" style="width: 100px" for="stampfile">{{'tools.setup.stamp' | translate}}</label>
+                        <input id="stampfile" type="file" accept='image/*' (change)="onLoadStamp($event)" style="visibility:hidden">
+                    </div>
+                </div>
+                <div class="col-2 p-1 m-0 text-end d-flex align-items-center">
+                    <button type="button" class="btn btn-danger btn-sm opacity-75 d-flex justify-content-center align-items-center"
+                        style="width: 100px" (click)="onDelStamp()">del</button>
+                </div>
+                <div class="col-2 p-1 m-0 d-flex align-items-center justify-content-end">
+                    <input type="number" [(ngModel)]="sizestamp" step="1" class="form-control m-0" style="height: 30px;"
+                        id="sizestamp" placeholder="">
+                </div>
+                <div class="col-2 p-1 m-0 d-flex align-items-center justify-content-start">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <label class="btn btn-primary btn-sm " style="width: 100px" for="signfile">{{'tools.setup.sign' | translate}}</label>
+                        <input id="signfile" type="file" accept='image/*' (change)="onLoadSign($event)"
+                            style="visibility:hidden">
+                    </div>
+                </div>
+                <div class="col-2 p-1 m-0 text-end d-flex align-items-center">
+                    <button type="button" class="btn btn-danger btn-sm opacity-75 d-flex justify-content-center align-items-center"
+                        style="width: 100px" (click)="onDelSign()">Del</button>
+                </div>
+                <div class="col-2 p-1 m-0 d-flex align-items-center justify-content-end">
+                    <input type="number" [(ngModel)]="sizesign" step="1" class="form-control m-0" style="height: 30px;"
+                        id="sizestamp" placeholder="">
+                </div>
+            </div>
+            <div class="row p-0 m-0">
+                <div class="col-6 p-1 m-0">
+                    <label for="champname" class="form-label m-0">{{ 'tools.setup.champname' | translate}}</label>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <input type="text" [(ngModel)]="champname" class="form-control p-1 m-0 h-32 w-100" id="champname" placeholder="">
+                        <input type="checkbox" class="ms-1" (change)="onChangeShowName()" checked="showChampName" id="showChampName">
+                    </div>
+                </div>
+                <div class="col-6 p-1 m-0">
+                    <label for="champcity" class="form-label m-0">{{ 'tools.setup.citychamp' | translate}}</label>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <input type="text" [(ngModel)]="champcity" class="form-control m-0 h-32" id="champcity" placeholder="">
+                        <input type="checkbox" class="ms-1" (change)="onChangeShowCity()" checked="showChampCity" id="showChampCity">
+                    </div>
+                </div>
+            </div>
+            <div class="row p-0 m-0">
+                <div class="col-5 p-1 m-0">
+                    <label for="champdate" class="form-label m-0">{{ 'tools.setup.date' | translate}}</label>
+                    <div class="input-group p-0 m-0">
+                        <input type="date" [(ngModel)]="datefrom" class="form-control"  style="height: 36px;" id="datefrom" placeholder="">
+                        <input type="date" [(ngModel)]="dateto" class="form-control" style="height: 36px;" id="dateto" placeholder="">
+                        <input type="checkbox" class="ms-1" (change)="onChangeShowDate()" checked="showChampDate" id="showChampDate">
+                    </div>
+                </div>
+                <div class="col-3 p-1 m-0">
+                    <label for="scale" class="form-label m-0">{{ 'tools.setup.bcg' | translate}}</label>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <label class="btn btn-primary w-100" for="bcgfile">{{ 'tools.setup.bcg' | translate}}</label>
+                        <input id="bcgfile" type="file" accept='image/*' (change)="onLoadBcg($event)"
+                            style="visibility:hidden; height: 0; width: 0;">
+                    </div>
+                </div>
+                <div class="col-4 p-1 m-0">
+                    <label for="champname" class="form-label m-0">{{ 'tools.setup.title' | translate}}</label>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <input type="text" [(ngModel)]="title" class="form-control p-1 m-0 w-100" style="height: 36px;" id="title"
+                            placeholder="">
+                        <input type="checkbox" class="ms-1" (change)="onChangeShowTitle()" checked="showTitle" id="showTitle">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row p-0 m-0">
+                <div class="col-6 p-1 m-0">
+                    <label for="direct1" class="form-label m-0 w-100">{{ 'tools.setup.direct1' | translate}}</label>
+                    <input type="text" [(ngModel)]="direct1" class="form-control p-0 m-0 h-32" id="direct1" placeholder="">
+                </div>
+                <div class="col-6 p-1 m-0">
+                    <label for="direct1name" class="form-label m-0 w-100">{{ 'tools.setup.directname' | translate}}</label>
+                    <input type="text" [(ngModel)]="direct1name" class="form-control p-0 m-0 h-32" id="direct1name" placeholder="">
+                </div>
+            </div>
+
+            <div class="row p-0 m-0">
+                <div class="col-6 p-1 m-0">
+                    <label for="direct2" class="form-label m-0 w-100">{{ 'tools.setup.direct2' | translate}}</label>
+                    <input type="text" [(ngModel)]="direct2" class="form-control p-1 m-0 h-32" id="direct2" placeholder="">
+                </div>
+                <div class="col-6 p-1 m-0">
+                    <label for="direct2name" class="form-label m-0 w-100">{{ 'tools.setup.directname' | translate}}</label>
+                    <input type="text" [(ngModel)]="direct2name" class="form-control p-1 m-0 h-32" id="direct2name" placeholder="">
+                </div>
+            </div>
+        </div>
+        <div class="box-category mt-2" id="setup">
+            <div class="p-0">
+                <div class="row row-header p-1 m-0">
+                    <div class="col-11">{{'tools.setup.category' | translate}}</div>
+                    <div class="col-1  col-attr">
+                        <button class="btn btn-primary btn-pdf-all" title="Export All Categories in PDF" (click)="drawAll()">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                x="0px" y="0px" width="16" height="16" fill="#fff" viewBox="0 0 102.55 122.88"
+                                style="enable-background:new 0 0 102.55 122.88" xml:space="preserve">
+                    
+                                <g>
+                                    <path class="st0"
+                                        d="M102.55,122.88H0V0h77.66l24.89,26.43V122.88L102.55,122.88z M87.01,69.83c-1.48-1.46-4.75-2.22-9.74-2.29 c-3.37-0.03-7.43,0.27-11.7,0.86c-1.91-1.1-3.88-2.31-5.43-3.75c-4.16-3.89-7.64-9.28-9.8-15.22c0.14-0.56,0.26-1.04,0.37-1.54 c0,0,2.35-13.32,1.73-17.82c-0.08-0.61-0.14-0.8-0.3-1.27l-0.2-0.53c-0.64-1.47-1.89-3.03-3.85-2.94l-1.18-0.03 c-2.19,0-3.97,1.12-4.43,2.79c-1.42,5.24,0.05,13.08,2.7,23.24l-0.68,1.65c-1.9,4.64-4.29,9.32-6.39,13.44l-0.28,0.53 c-2.22,4.34-4.23,8.01-6.05,11.13l-1.88,1c-0.14,0.07-3.36,1.78-4.12,2.24c-6.41,3.83-10.66,8.17-11.37,11.62 c-0.22,1.1-0.05,2.51,1.08,3.16L17.32,97c0.79,0.4,1.62,0.6,2.47,0.6c4.56,0,9.87-5.69,17.18-18.44 c8.44-2.74,18.04-5.03,26.45-6.29c6.42,3.61,14.3,6.12,19.28,6.12c0.89,0,1.65-0.08,2.27-0.25c0.95-0.26,1.76-0.8,2.25-1.54 c0.96-1.46,1.16-3.46,0.9-5.51c-0.08-0.61-0.56-1.36-1.09-1.88L87.01,69.83L87.01,69.83z M18.79,94.13 c0.83-2.28,4.13-6.78,9.01-10.78c0.3-0.25,1.06-0.95,1.75-1.61C24.46,89.87,21.04,93.11,18.79,94.13L18.79,94.13L18.79,94.13z M47.67,27.64c1.47,0,2.31,3.7,2.38,7.17c0.07,3.47-0.74,5.91-1.75,7.71c-0.83-2.67-1.24-6.87-1.24-9.62 C47.06,32.89,47,27.64,47.67,27.64L47.67,27.64L47.67,27.64z M39.05,75.02c1.03-1.83,2.08-3.76,3.17-5.81 c2.65-5.02,4.32-8.93,5.57-12.15c2.48,4.51,5.57,8.35,9.2,11.42c0.45,0.38,0.93,0.77,1.44,1.15 C51.05,71.09,44.67,72.86,39.05,75.02L39.05,75.02L39.05,75.02L39.05,75.02z M85.6,74.61c-0.45,0.28-1.74,0.44-2.56,0.44 c-2.67,0-5.98-1.22-10.62-3.22c1.78-0.13,3.41-0.2,4.88-0.2c2.68,0,3.48-0.01,6.09,0.66C86.01,72.96,86.05,74.32,85.6,74.61 L85.6,74.61L85.6,74.61L85.6,74.61z M96.12,115.98V30.45H73.44V5.91H6.51v110.07H96.12L96.12,115.98z" />
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
+                <ng-container *ngFor="let category of categories; let i = index">
+                    <div class="row row-data p-1 m-0" (click)="onRowClick(category)"
+                        [ngClass]="{'selected-row-color': category.id == selectedCategory?.id}" name="selectedCategory">
+                        <div class="col-1 col-attr">{{ i + 1}}</div>
+                        <div class="col-10 col-attr"><app-category-name id="{{category.id}}"></app-category-name></div>
+                        <div class="col-1  col-attr">
+                            <button 
+                                *ngIf="category.id == selectedCategory?.id" 
+                                class="btn btn-primary btn-pdf" 
+                                title="Export selected category in PDF"
+                                (click)="drawcategory(category)">
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16" height="16" fill="#fff"
+                                    viewBox="0 0 102.55 122.88" style="enable-background:new 0 0 102.55 122.88" xml:space="preserve">
+                
+                                    <g>
+                                        <path class="st0"
+                                            d="M102.55,122.88H0V0h77.66l24.89,26.43V122.88L102.55,122.88z M87.01,69.83c-1.48-1.46-4.75-2.22-9.74-2.29 c-3.37-0.03-7.43,0.27-11.7,0.86c-1.91-1.1-3.88-2.31-5.43-3.75c-4.16-3.89-7.64-9.28-9.8-15.22c0.14-0.56,0.26-1.04,0.37-1.54 c0,0,2.35-13.32,1.73-17.82c-0.08-0.61-0.14-0.8-0.3-1.27l-0.2-0.53c-0.64-1.47-1.89-3.03-3.85-2.94l-1.18-0.03 c-2.19,0-3.97,1.12-4.43,2.79c-1.42,5.24,0.05,13.08,2.7,23.24l-0.68,1.65c-1.9,4.64-4.29,9.32-6.39,13.44l-0.28,0.53 c-2.22,4.34-4.23,8.01-6.05,11.13l-1.88,1c-0.14,0.07-3.36,1.78-4.12,2.24c-6.41,3.83-10.66,8.17-11.37,11.62 c-0.22,1.1-0.05,2.51,1.08,3.16L17.32,97c0.79,0.4,1.62,0.6,2.47,0.6c4.56,0,9.87-5.69,17.18-18.44 c8.44-2.74,18.04-5.03,26.45-6.29c6.42,3.61,14.3,6.12,19.28,6.12c0.89,0,1.65-0.08,2.27-0.25c0.95-0.26,1.76-0.8,2.25-1.54 c0.96-1.46,1.16-3.46,0.9-5.51c-0.08-0.61-0.56-1.36-1.09-1.88L87.01,69.83L87.01,69.83z M18.79,94.13 c0.83-2.28,4.13-6.78,9.01-10.78c0.3-0.25,1.06-0.95,1.75-1.61C24.46,89.87,21.04,93.11,18.79,94.13L18.79,94.13L18.79,94.13z M47.67,27.64c1.47,0,2.31,3.7,2.38,7.17c0.07,3.47-0.74,5.91-1.75,7.71c-0.83-2.67-1.24-6.87-1.24-9.62 C47.06,32.89,47,27.64,47.67,27.64L47.67,27.64L47.67,27.64z M39.05,75.02c1.03-1.83,2.08-3.76,3.17-5.81 c2.65-5.02,4.32-8.93,5.57-12.15c2.48,4.51,5.57,8.35,9.2,11.42c0.45,0.38,0.93,0.77,1.44,1.15 C51.05,71.09,44.67,72.86,39.05,75.02L39.05,75.02L39.05,75.02L39.05,75.02z M85.6,74.61c-0.45,0.28-1.74,0.44-2.56,0.44 c-2.67,0-5.98-1.22-10.62-3.22c1.78-0.13,3.41-0.2,4.88-0.2c2.68,0,3.48-0.01,6.09,0.66C86.01,72.96,86.05,74.32,85.6,74.61 L85.6,74.61L85.6,74.61L85.6,74.61z M96.12,115.98V30.45H73.44V5.91H6.51v110.07H96.12L96.12,115.98z" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="col-8 p-1">
+        <div class="row p-1 pt-0 m-0">
+            <div class="col-3 box-add-setup p-1">
+                <div class="box-setup-row">
+                    <div class="w-50 p-1">
+                        <label for="nameFont">{{ 'tools.setup.champname' | translate}}</label>
+                        <ng-select #fontSelName (change)="changeFontName()" [searchable]="false" id="nameFont" placeholder=""
+                            bindLabel="name" bindValue="id" placeholder="Select" class="box-select-item" name="selectedFont"
+                            [(ngModel)]="selFontName" dropdownPosition="bottom" [items]="arrfonts">
+                        </ng-select>
+                    </div>
+                    <div class="w-50 p-1">
+                        <label for="nameSize">{{ 'tools.setup.size' | translate}}</label>
+                        <ng-select #sizeSelPart (change)="changeSizeName()" [searchable]="false" id="nameSize" placeholder=""
+                            bindLabel="name" bindValue="selSizeName" placeholder="Select" class="box-select-item" name="selectedFont"
+                            [(ngModel)]="selSizeName" dropdownPosition="bottom" [items]="arrsize">
+                        </ng-select>
+                    </div>
+                    <div class="w-50 p-1 d-flex align-items-center">
+                        <input type="checkbox" class="ms-1" (change)="onNameItalic()" id="nameItalic">
+                        <label for="nameItalic" class="ms-1">{{ 'tools.setup.italic' | translate}}</label>
+                    </div>
+                    <div class="w-50 p-1 d-flex align-items-center justify-content-center">
+                        <label for="nameColor" class="form-label"></label>
+                        <input type="color" class="form-control form-control-color box-select-color" id="nameColor"
+                            title="Choose your color" (change)="onClrChampname($event)">
+                    </div>               
+                </div>
+
+                <div class="box-setup-row">
+                    <div class="w-50 p-1">
+                        <label for="partFont">{{ 'tools.setup.place' | translate}}</label>
+                        <ng-select #fontSelPart (change)="changeFontPlace()" [searchable]="false" id="placeFont" placeholder=""
+                            bindLabel="name" bindValue="id" placeholder="Select" class="box-select-item" name="selectedPlace"
+                            [(ngModel)]="selFontPlace" dropdownPosition="bottom" [items]="arrfonts">
+                        </ng-select>
+                    </div>
+                    <div class="w-50 p-1">
+                        <label for="placeSize">{{ 'tools.setup.size' | translate}}</label>
+                        <ng-select #sizeSelPart (change)="changeSizePlace()" [searchable]="false" id="placeSize" placeholder=""
+                            bindLabel="name" bindValue="selSizePlace" placeholder="Select" class="box-select-item" name="selectedPlace"
+                            [(ngModel)]="selSizePlace" dropdownPosition="bottom" [items]="arrsize">
+                        </ng-select>
+                    </div>
+                    <div class="w-50 p-1 d-flex align-items-center">
+                        <input type="checkbox" class="ms-1" (change)="onPlaceItalic()" id="placeItalic">
+                        <label for="placeItalic" class="ms-1">{{ 'tools.setup.italic' | translate}}</label>
+                    </div>
+                    <div class="w-50 p-1 d-flex align-items-center justify-content-center">
+                        <label for="nameColor" class="form-label"></label>
+                        <input type="color" class="form-control form-control-color box-select-color" id="nameColor" 
+                            title="Choose your color" (change)="onClrPlace($event)">
+                    </div>                
+                </div>
+
+                <div class="box-setup-row">
+                    <div class="w-50 p-1">
+                        <label for="partFont">{{ 'tools.setup.participant' | translate}}</label>
+                        <ng-select #fontSelPart (change)="changeFontPart()" [searchable]="false" id="partFont" placeholder=""
+                            bindLabel="name" bindValue="id" placeholder="Select" class="box-select-item" name="selectedFont"
+                            [(ngModel)]="selFontPart" dropdownPosition="bottom" [items]="arrfonts">
+                        </ng-select>
+                    </div>
+                    
+                    <div class="w-50 p-1">
+                        <label for="partSize">{{ 'tools.setup.size' | translate}}</label>
+
+                        <ng-select #sizeSelPart (change)="changeSizePart()" [searchable]="false" id="partSize" placeholder=""
+                            bindLabel="name" bindValue="selSizePart" placeholder="Select" class="box-select-item" name="selectedPlace"
+                            [(ngModel)]="selSizePart" dropdownPosition="bottom" [items]="arrsize">
+                        </ng-select>
+                    </div>
+
+                    <div class="w-50 d-flex align-items-center">
+                        <input type="checkbox" class="ms-1" (change)="onPartItalic()" id="partItalic">
+                        <label for="partItalic" class="ms-1">{{ 'tools.setup.italic' | translate}}</label>
+                    </div>
+                    <div class="w-50 p-1 d-flex align-items-center justify-content-center">
+                        <label for="nameColor" class="form-label"></label>
+                        <input type="color" class="form-control form-control-color box-select-color" id="nameColor" 
+                            title="Choose your color" (change)="onClrPart($event)">
+                    </div>              
+                </div>
+
+                <div class="box-setup-row">
+                    <div class="w-50 p-1">
+                        <label for="catFont">{{ 'tools.setup.category' | translate}}</label>
+                        <ng-select #fontSelPart (change)="changeFontCat()" [searchable]="false" id="catFont" placeholder=""
+                            bindLabel="name" bindValue="id" placeholder="Select" class="box-select-item" name="selectedFont"
+                            [(ngModel)]="selFontCat" dropdownPosition="bottom">
+                            <ng-option *ngFor="let item of arrfonts" [value]="item.id - 1">
+                                {{ item.name }}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="w-50 p-1">
+                        <label for="catSize">{{ 'tools.setup.size' | translate}}</label>
+                        <ng-select #sizeSelPart (change)="changeSizeCat()" [searchable]="false" id="catSize" placeholder=""
+                            bindLabel="name" bindValue="id" placeholder="Select" class="box-select-item" name="selectedFont"
+                            [(ngModel)]="selSizeCat" dropdownPosition="bottom" [items]="arrsize">
+                        </ng-select>
+                    </div>
+                    <div class="w-50 d-flex align-items-center">
+                        <input type="checkbox" class="ms-1"(change)="onCatItalic()" id="catItalic">
+                        <label for="catItalic" class="ms-1">{{ 'tools.setup.italic' | translate}}</label>
+                    </div>
+                    <div class="w-50 p-1 d-flex align-items-center justify-content-center">
+                        <label for="catColor" class="form-label"></label>
+                        <input type="color" class="form-control form-control-color box-select-color" id="catColor" 
+                            title="Choose your color" (change)="onClrCat($event)">
+                    </div>
+                </div>
+
+                <div class="box-setup-row">
+                    <div class="w-50 p-1">
+                        <label for="jobFont">{{ 'tools.setup.date' | translate}}</label>
+                        <ng-select #fontSelJob (change)="changeFontJob()" [searchable]="false" id="jobFont" placeholder=""
+                            bindLabel="name" bindValue="id" placeholder="Select" class="box-select-item" name="selectedJob"
+                            [(ngModel)]="selFontJob" dropdownPosition="top" [items]="arrfonts">
+                        </ng-select>
+                    </div>
+                    <div class="w-50 p-1">
+                        <label for="jobSize">{{ 'tools.setup.size' | translate}}</label>
+                        <ng-select #sizeSelJob (change)="changeSizeJob()" [searchable]="false" id="jobSize" placeholder=""
+                            bindLabel="name" bindValue="selSizeJob" class="box-select-item" name="selectedFont"
+                            [(ngModel)]="selSizeJob" dropdownPosition="top" [items]="arrsize">
+                        </ng-select>
+                    </div>
+                    <div class="w-50 d-flex align-items-center">
+                        <input type="checkbox" class="ms-1" (change)="onJobItalic()" id="jobItalic">
+                        <label for="jobItalic" class="ms-1">{{ 'tools.setup.italic' | translate}}</label>
+                    </div>
+                    <div class="w-50 p-1 d-flex align-items-center justify-content-center">
+                        <label for="jobColor" class="form-label"></label>
+                        <input type="color" class="form-control form-control-color box-select-color" id="jobColor" 
+                            title="Choose your color" (change)="onClrJob($event)">
+                    </div>
+                </div>
+                <div class="box-setup-row">
+                    <label style="display: flex; align-items: center; margin-left: 10px;">
+                        <input type="radio" id="choice1" style="margin-right: 5px;" name="orientation" [(ngModel)]="orientation"
+                            (change)="changeOrientation(0)"
+                            [value]="0"> {{ 'tools.setup.portrait' | translate}}
+                    </label>
+                    <label style="display: flex; align-items: center; margin-right: 10px;">
+                        <input type="radio" id="choice2" style="margin-right: 5px;" name="orientation" [(ngModel)]="orientation"
+                            (change)="changeOrientation(1)"
+                            [value]="1"> {{ 'tools.setup.landscape' | translate}}
+                    </label>
+                    <label style="display: flex; align-items: center; margin-left: 10px;">
+                        <input type="radio" id="choice3" style="margin-right: 5px;" name="pagesize" [(ngModel)]="sizepage"
+                            [value]="0">A4
+                    </label>
+                    <label style="display: flex; align-items: center; margin-right: 10px;">
+                        <input type="radio" id="choice4" style="margin-right: 5px;" name="pagesize" [(ngModel)]="sizepage"
+                            [value]="1">A3
+                    </label>
+                </div>
+                <div class="box-setup-row  w-100 d-flex justify-content-around align-items-center" style="position: relative;">
+                        <div> {{ textprogress }} </div>
+                        <div class="preloader" id="preloader">
+                            <svg class="preloader__image" role="img" fill="#589849" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 399.389 399.389"
+                                xml:space="preserve">
+                                <g>
+                                    <path d="M340.896,58.489C303.18,20.773,253.031,0.001,199.693,0.001c-53.34,0-103.487,20.771-141.204,58.488
+                            		C20.772,96.207,0,146.355,0,199.694c0,53.34,20.772,103.489,58.49,141.206c37.717,37.717,87.864,58.488,141.204,58.488
+                            		c53.339,0,103.486-20.771,141.205-58.488c37.717-37.717,58.49-87.865,58.49-141.206C399.387,146.355,378.613,96.207,340.896,58.489
+                            		z M328.061,71.326c34.289,34.289,53.172,79.878,53.172,128.368h-41.148c0-77.412-62.979-140.391-140.391-140.391
+                            		c-4.593,0-9.134,0.229-13.615,0.662v-41.31c4.508-0.332,9.049-0.5,13.615-0.5C248.184,18.155,293.771,37.038,328.061,71.326z
+                            		 M199.693,321.931c-67.401,0-122.236-54.835-122.236-122.236S132.292,77.458,199.693,77.458S321.93,132.293,321.93,199.694
+                            		S267.094,321.931,199.693,321.931z" />
+                                </g>
+                            </svg>
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="col-9 box-preview d-flex align-items-center justify-content-center">
+                <div class="box-diplom-landscape" id="box-diplom" [ngClass]="{'box-diplom-landscape': orientation == 1, 'box-diplom-portrait': orientation == 0}">
+                    <div class="bcg p-0 m-0">
+                        <img [src]="bcg_bytes" id="bcgorientation" width="100%" class="p-0 m-0"/>
+                    </div>
+
+                    <div class="show-data-diplom" id="show-data-diplom">
+                        <div class="champname" id="rchampname" [hidden]="!showChampName" cdkDrag> {{champname}}</div>
+
+                        <div class="title" id="rtitle" [hidden]="!showTitle" cdkDrag> {{title | uppercase}}</div>
+
+                        <div class="job-title" id="rjob" cdkDrag>
+                            <div>{{direct1}}</div>
+                            <div>{{direct1name}}</div>
+                        </div>
+
+                        <div class="job-title" id="rjob1" cdkDrag>
+                            <div>{{direct2}}</div>
+                            <div>{{direct2name}}</div>
+                        </div>
+
+                        <div class="date" id="rdate" cdkDrag>
+                            <div class="w-100 text-end" [hidden]="!showChampDate">{{dDateto | date : 'dd.MM.yy'}}</div>
+                            <div class="w-100 text-end" [hidden]="!showChampCity">{{ champcity }}</div>
+                        </div>
+            
+                        <div class="rplace" id="rplace" cdkDrag>
+                            ____________
+                        </div>
+            
+                        <div class="paticipant" id="participant" cdkDrag>
+                            {{ participant }}
+                        </div>
+            
+                        <div class="catname" cdkDrag id="rcat">
+                            {{('champ.categories.' + categoryId) | translate | uppercase }}
+                        </div>
+            
+                        <div *ngIf="stamp_bytes">
+                            <div class="img-box" [style.width]="getsize()" [style.height]="getsize()" cdkDrag>
+                                <img [src]="stamp_bytes" width="100%" />
+                            </div>
+                        </div>
+
+                        <div *ngIf="sign_bytes">
+                            <div class="img-box" [style.width]="getsizeSign()" [style.height]="getsizeSign()" cdkDrag>
+                                <img [src]="sign_bytes" width="100%" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

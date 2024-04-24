@@ -1,0 +1,44 @@
+<div *ngIf="this.safeUrl" class="pt-2 pb-2" style="overflow: auto;">
+    <object type="image/svg+xml" [data]="this.safeUrl" class="w-100"></object>
+</div>
+
+<ng-container *ngIf="isDrawnFromData(data)">
+    <div class="container-fluid p-2">
+        <h1><app-category-name id="{{category}}"></app-category-name></h1>
+        <h2 *ngIf="data?.category?.tatamiId"><tatami-title [id]="data?.category?.tatamiId"></tatami-title></h2>
+        <div style="height: 2px; width:100%; margin-top: 20px; background-color: #243949;"></div>
+
+        <!-- TODO? Move to separate component -->
+        <div class="container-fluid p-0 m-0 d-flex align-items-center">
+            <!-- <div class="container-fluid scrolled-x" style="margin: 2em auto;"> -->
+            <div *ngIf="winners.length > 0" class="row winners p-0 m-0 d-flex align-items-center">
+                <div *ngFor="let winner of winners; let i = index" class="col-2 participant"
+                    >
+                    <participant *ngIf="winner" [info]="winner" [akaShiroType]="'shiro'" [viewType]="'drawParticipant'"
+                        [showExtendedInfo]="showExtendedInfo" style="padding: 0; margin:0; width: 100%;"></participant>
+                </div>
+            </div>
+        </div>
+        <div style="height: 2px; width:100%; margin-top: 20px; background-color: #243949;"></div>
+
+
+        <div *ngIf="isOlympic(this.data)" class="draw">
+            <app-draw-olympic [fights]="data.fights" [blocks]="data.blocks"
+                [showExtendedInfo]="champType == 1"></app-draw-olympic>
+        </div>
+
+        <div *ngIf="isCircle(this.data)" class="draw">
+            <app-draw-circle [fights]="data.fights" [blocks]="data.blocks" [category]="data?.category"
+                [participants]="this.participants" [showExtendedInfo]="champType == 1"></app-draw-circle>
+        </div>
+
+        <div *ngIf="isWkb(this.data)" class="draw">
+            <app-draw-wkb [fights]="data.fights" [blocks]="data.blocks" [category]="data?.category"
+                [participants]="this.participants" [showExtendedInfo]="champType == 1"></app-draw-wkb>
+        </div>
+
+        <div *ngIf="noData(this.data)">
+            <info-box [label]="'general.noData'"></info-box>
+        </div>
+    </div>
+</ng-container>

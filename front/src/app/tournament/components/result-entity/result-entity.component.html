@@ -1,0 +1,66 @@
+<!--
+  entity : [club, coach, country, organization, region]
+-->
+<div class="container p-0">
+    <div class="box-table">
+        <div class="row row-header p-2 m-0">
+            <div class="col-3 col-sm-1 col-md-1 col-lg-1 text-center">{{ 'results.place' | translate }}</div>
+            <div class="col-9 col-sm-3 col-md-3 col-lg-3 ">{{ ('general.' + entityName ) | translate }}</div>
+            <div class="col-3 col-sm-2 col-md-2 col-lg-2 text-center">{{ 'results.gold' | translate }}</div>
+            <div class="col-3 col-sm-2 col-md-2 col-lg-2 text-center">{{ 'results.silver' | translate }}</div>
+            <div class="col-3 col-sm-2 col-md-2 col-lg-2 text-center">{{ 'results.bronze' | translate }}</div>
+            <div class="col-3 col-sm-2 col-md-2 col-lg-2 text-center">{{ 'results.total' | translate }}</div>
+        </div>
+
+        <div *ngFor="let item of data; let idx = index;">
+            <div *ngFor="let entity of item.entities; let m = index;">
+                <div class="row row-data p-2 m-0 d-flex align-items-center border-bottom border-secondary-subtle">
+                    <div class="col-3 col-sm-1 col-md-1 col-lg-1 text-center">{{item.place }}</div>
+                    <div class="col-9 col-sm-3 col-md-3 col-lg-3 d-flex align-items-center justify-content-start">
+                        <div class="participant-logo">
+                            <img *ngIf="entity.logo" src="{{logosDir}}/{{entity.logo}}" width="40px"/>
+                        </div>
+                    
+                        <div>
+                            {{
+                            entityName == "country" ? (('db.country.' + entity.name) | translate) :
+                            entityName == "region" ? (('db.region.' + entity.name) | translate) :
+                            entity.name
+                            }}
+                        </div>
+                    </div>
+                    <div class="result-gold col-3 col-sm-2 col-md-2 col-lg-2 text-center">
+                        <div class="result-place">
+                            <img src="{{logosDir}}/cup-1.svg" width="32px" height="32px" />
+                        </div>
+                        
+                        {{ entity.medals['1'] }}
+                    </div>
+                    <div class="result-gold col-3 col-sm-2 col-md-2 col-lg-2 text-center">
+                        <div class="result-place">
+                            <img src="{{logosDir}}/cup-2.svg" width="32px" height="32px" />
+                        </div>
+                    
+                        {{ entity.medals['2'] }}
+                    </div>
+                    <div class="result-gold col-3 col-sm-2 col-md-2 col-lg-2 text-center">
+                        <div class="result-place">
+                            <img src="{{logosDir}}/cup-3.svg" width="32px" height="32px" />
+                        </div>
+                    
+                        {{ entity.medals['3'] }}
+                    </div>
+                    <div class="result-gold col-3 col-sm-2 col-md-2 col-lg-2 text-center">
+                        <div>
+                            {{ (+entity.medals['1']) + (+entity.medals['2']) + (+entity.medals['3']) }}
+                            (
+                            {{entity.points}} )
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

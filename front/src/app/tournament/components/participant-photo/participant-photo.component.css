@@ -1,0 +1,17 @@
+img {
+  height: auto;
+  width: 4em;
+  padding: 0 5%;
+}
+
+@media (max-width: 520px) {
+  img {
+    width: 2em;
+  }
+}
+
+@media (max-width: 350px) {
+  img {
+    display: none;
+  }
+}

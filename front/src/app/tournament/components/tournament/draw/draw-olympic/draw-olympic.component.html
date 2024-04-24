@@ -1,0 +1,221 @@
+<!-- TODO: refactor to be self-descriptive -->
+<div class="container-fluid scrolled-x" *ngIf="this.levels">
+    <div class="row draw scroll-width-{{this.levels.length + 1}}">
+
+        <!-- Draw 0 level fights with participants -->
+
+        <div *ngIf="this.levels" class="col-3 level">
+            <div *ngFor="let fight of this.levels[0]; let i = index;"
+                [ngClass]="{
+                    'pair': true,
+                    'pair-single-participant': isSingleParticipant(fight)}
+                    "
+            >
+                <ng-container *ngIf="isSingleParticipant(fight)">
+                    <div [ngClass]="{
+                      'participant' : true,
+                      'participant-single' : true,
+                      'participant-passed' : true,
+                      'up' : i <= middleIdx,
+                      'down' : i > middleIdx
+                    }">
+                        <participant
+                            [info]="fight.red"
+                            [akaShiroType]="'aka'"
+                            [viewType]="'drawParticipant'"
+                            [showExtendedInfo]="showExtendedInfo"
+                            [idxMiddle]="middleIdx"
+                            [idx]="i"
+                            style="width: 100%;"
+                        ></participant>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="!isSingleParticipant(fight)">
+                    <div [ngClass]="{
+                      'participant' : true,
+                      'participant-aka' : true,
+                      'participant-passed' : isWinnerAka(fight),
+                      'up' : i <= middleIdx,
+                      'down' : i > middleIdx
+
+                  
+                    }">
+                        <participant
+                            [info]="fight.red"
+                            [akaShiroType]="'aka'"
+                            [viewType]="'drawParticipant'"
+                            [showExtendedInfo]="showExtendedInfo"
+                            [idxMiddle]="middleIdx"
+                            [idx]="i"
+                            style="width: 100%;"
+                        ></participant>
+                    </div>
+                    <div [ngClass]="{
+                        'participant' : true,
+                        'participant-shiro' : true,
+                        'participant-passed' : isWinnerShiro(fight),
+                        'up' : i <= middleIdx,
+                        'down' : i > middleIdx
+  
+                      }">
+                        <participant
+                            [info]="fight.white"
+                            [akaShiroType]="'shiro'"
+                            [viewType]="'drawParticipant'"
+                            [showExtendedInfo]="showExtendedInfo"
+                            [idxMiddle]="middleIdx"
+                            [idx]="i"
+                            style="width: 100%;"
+                        ></participant>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <!-- Draw fights lines -->
+
+        <div class="col-1 level level-{{i}}" *ngFor="let fights of this.levels; let i = index;" >
+            <ng-container *ngFor="let fight of fights; let j = index;" >
+                <div *ngIf="shouldBeDrawn(fight)" [ngClass]="{'pair': true, 'pair-from-single-participant': isSingleParticipant(fight)}">
+                    <ng-container *ngIf="!isSingleParticipant(fight)">
+                        <div class="num-fight-wrapper">
+                            <div [ngClass]="{
+                              'num-fight': true,
+                              'duelIsPlace': duelIsPlace(fight),
+                              'line-had-place': fightAlreadyHadPlace(fight),
+                              'num-3-place-fight': isFightFor3Place(fight)
+                            }">{{fight?.details?.NumDuel}}</div>
+                        </div>
+
+                        <ng-container *ngIf="!isFightFor3Place(fight)">
+                            <div [ngClass]="{
+                                'line-from-top':true,
+                                'line-winner': isWinnerAka(fight),
+                                'line-had-place': fightAlreadyHadPlace(fight) || wasPreviousAkaSingle(fight)
+                              }"></div>
+                            <div [ngClass]="{
+                                'line-from-bottom':true,
+                                'line-winner': isWinnerShiro(fight),
+                                'line-had-place': fightAlreadyHadPlace(fight) || wasPreviousShiroSingle(fight)
+                              }"></div>
+                        </ng-container>
+                    </ng-container>
+
+                    <ng-container *ngIf="isSingleParticipant(fight)">
+                        <div class="line-from-single line-winner"></div>
+                        <div class="line-from-single-transparent"></div>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="col-1 level level-{{this.levels?.length}}">
+            <div class="pair">
+                <div [ngClass]="{
+                  'line-from-single':true,
+                  'line-winner': fightAlreadyHadPlace(getFilalFight())
+                }"></div>
+            </div>
+        </div>
+
+        <!-- Draw final fights with participants / results  -->
+
+        <div class="col-3 level level-{{this.levels?.length}}">
+
+            <!-- Final fight -->
+            <div class="pair">
+                <div [ngClass]="{
+                  'participant' : true,
+                  'participant-aka' : true,
+                  'duelIsPlace': isWinnerAka(getFilalFight()),
+                  'participant-passed' : isWinnerAka(getFilalFight()),
+                  'participant-winner' : true
+                }">
+                    <participant
+                        [info]="getFilalFight()?.red"
+                        [akaShiroType]="'aka'"
+                        [viewType]="'drawParticipant'"
+                        [showExtendedInfo]="showExtendedInfo"
+                        style="width: 100%;"
+                    ></participant>
+                </div>
+                <div [ngClass]="{
+                    'participant' : true,
+                    'participant-shiro' : true,
+                    'duelIsPlace': isWinnerShiro(getFilalFight()),
+                    'participant-passed' : isWinnerShiro(getFilalFight())
+                  }">
+
+                      <participant
+                          [info]="getFilalFight()?.white"
+                          [akaShiroType]="'shiro'"
+                          [viewType]="'drawParticipant'"
+                          [showExtendedInfo]="showExtendedInfo"
+                          style="width: 100%;"
+                      ></participant>
+                </div>
+            </div>
+
+
+            <!-- Fight for 3 place-->
+            <div class="pair" *ngIf="get3PlaceFight()">
+              <div class="draw-label" *ngIf="get3PlaceFight()">
+                  {{ 'draw.fight3Place' | translate}}
+              </div>
+
+              <div [ngClass]="{
+                'participant' : true,
+                'duelIsPlace': isWinnerAka(get3PlaceFight()),
+                'participant-aka' : true,
+                'participant-passed' : isWinnerAka(get3PlaceFight())
+              }">
+                  <participant
+                      [info]="get3PlaceFight()?.red"
+                      [akaShiroType]="'aka'"
+                      [viewType]="'drawParticipant'"
+                      [showExtendedInfo]="showExtendedInfo"
+                      style="width: 100%;"
+                  ></participant>
+              </div>
+
+              <!-- <div class="num-fight-wrapper">
+                <div [ngClass]="{
+                  'num-fight': true,
+                  'line-had-place': fightAlreadyHadPlace(fight),
+                  'num-3-place-fight': isFightFor3Place(fight)
+                }">{{fight?.details?.NumDuel}}</div>
+            </div> -->
+
+              <ng-container *ngIf="get3PlaceFight()">
+                  <div [ngClass]="{
+                    'num-fight-wrapper': true,
+                    'num-3-place-fight': isFightFor3Place(get3PlaceFight())
+                  }">
+                      <div [ngClass]="{
+                        'num-fight': true,
+                        'duelIsPlace': duelIsPlace(get3PlaceFight()),
+                        'line-had-place': fightAlreadyHadPlace(get3PlaceFight()),
+                        'num-3-place-fight': isFightFor3Place(get3PlaceFight())
+                      }">{{get3PlaceFight()?.details?.NumDuel}}</div>
+                  </div>
+              </ng-container>
+
+              <div [ngClass]="{
+                  'participant' : true,
+                  'duelIsPlace': isWinnerShiro(get3PlaceFight()),
+                  'participant-shiro' : true,
+                  'participant-passed' : isWinnerShiro(get3PlaceFight())
+                }">
+                    <participant
+                        [info]="get3PlaceFight()?.white"
+                        [akaShiroType]="'shiro'"
+                        [viewType]="'drawParticipant'"
+                        [showExtendedInfo]="showExtendedInfo"
+                        style="width: 100%;"
+                    ></participant>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

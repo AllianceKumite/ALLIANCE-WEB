@@ -1,0 +1,12 @@
+<ng-container *ngIf="id && id != 0 && id != 'None'">
+    <ng-container *ngIf="uppercase">
+      {{ ('champ.categories.' + id) | translate | uppercase }}
+    </ng-container>
+    <ng-container *ngIf="!uppercase">
+      {{ ('champ.categories.' + id) | translate }}
+    </ng-container>
+
+    <ng-container *ngIf="blockCount > 1 && getBlockName() != ''">
+      ({{ 'draw.block' | translate }} {{getBlockName()}})
+    </ng-container>
+</ng-container>

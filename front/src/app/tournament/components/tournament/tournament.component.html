@@ -1,0 +1,247 @@
+<!-- <div class="container-fluid"> -->
+<div class="box-stiky">
+    <nav class="navbar navbar-expand-lg navbar-dark  additional-filters tournament-info" style="padding-left: 3.4em;">
+        <a class="navbar-brand" href="#"></a>
+
+        <button class="navbar-toggler hamburger hamburger--3dy" id="navbar-toggler" type="button" appHamburgerToggle>
+            <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+            <!-- <span class="navbar-toggler-icon"></span> -->
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollaseable">
+            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" routerLinkActive="active">
+                    <a [routerLink]="['home']" class="nav-link">{{ 'navbar.home' | translate }}</a>
+                </li>
+
+                <ng-container *ngIf="isMobileView">
+
+                    <li class="nav-item" [class.active]="isLinkActive('/participants?category=')">
+                        <ng-select *ngIf="categoriesWithAll" #categorySelector bindLabel="name" bindValue="id"
+                            [(ngModel)]="selectedParticipantsCategory" (change)="setCategory($event)"
+                            [searchable]="false" class="nav-link filter-item filter-item-custom m-0"
+                            placeholder="{{ 'navbar.participants' | translate }}" name="selectedCategory"
+                            (mouseenter)="expandCategories()" (mouseleave)="collapseCategories()"
+                            (focus)="blurCategories()" dropdownPosition="bottom" [routerLink]="['participants']"
+                            [queryParams]="{'category': this.selectedParticipantsCategory}">
+                            <ng-option *ngFor="let category of categoriesWithAll" [value]="category.id">
+
+                                <ng-container *ngIf="category.id == '0'">{{ 'general.allParticipants'|
+                                    translate}}</ng-container>
+                                <app-category-name *ngIf="category.id != '0'" id="{{category.id}}"></app-category-name>
+                            </ng-option>
+                        </ng-select>
+                    </li>
+                </ng-container>
+
+                <ng-container *ngIf="!isMobileView">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a [routerLink]="['participants']" [queryParams]="{'category': 0}" class="nav-link">{{
+                            'navbar.participants'| translate}}</a>
+                    </li>
+                </ng-container>
+
+                <li class="nav-item" routerLinkActive="active">
+                    <a [routerLink]="['referys']" class="nav-link">{{ 'navbar.referys' | translate }}</a>
+                </li>
+
+                <li class="nav-item" [class.active]="isLinkActive('/participants?country=')">
+                    <!-- && countries.length > 1 -->
+                    <ng-select *ngIf="showCountriesFilter && countries" #countrySelector [(ngModel)]="selectedCountry"
+                        bindLabel="name" bindValue="id" (change)="setCountry()" [searchable]="false"
+                        class="nav-link filter-item filter-item-custom m-0"
+                        placeholder="{{ 'navbar.countries' | translate }}" name="selectedCountry"
+                        (mouseenter)="expandCountries()" (mouseleave)="collapseCountries()" (focus)="blurCountries()"
+                        dropdownPosition="bottom" [routerLink]="['participants']"
+                        [queryParams]="{'country': this.selectedCountry}">
+                        <!-- style="display: flex; align-items: center;" -->
+                        <ng-option *ngFor="let country of countries" [value]="country.id">
+                            <img src="{{logosDir}}/{{ country.countryFlag.trim() }}" class="menu-dropdown-img">
+                            {{ 'db.country.' + country.id | translate }}
+                        </ng-option>
+                    </ng-select>
+                </li>
+
+                <li class="nav-item" [class.active]="isLinkActive('/participants?club=')">
+                    <!-- clubs.length > 1 -->
+                    <ng-select *ngIf="showClubsFilter && clubs" #clubSelector [(ngModel)]="selectedClub"
+                        bindLabel="name" bindValue="id" (change)="changeClub()" [searchable]="false"
+                        class="nav-link filter-item filter-item-custom m-0"
+                        placeholder="{{ 'navbar.club' | translate }}" name="selectedClub" (mouseenter)="expandClubs()"
+                        (mouseleave)="collapseClubs()" (focus)="blurClubs()" dropdownPosition="bottom"
+                        [routerLink]="['participants']" [queryParams]="{'club': this.selectedClub}">
+                        <ng-option *ngFor="let club of clubs" [value]="club.id">
+                            <img src="{{logosDir}}/{{ club.logo }}" class="menu-dropdown-img" />
+                            {{club.name}}
+                        </ng-option>
+                    </ng-select>
+                </li>
+
+                <li class="nav-item" [class.active]="isLinkActive('/participants?coach=')">
+                    <!-- coaches.length > 0 -->
+                    <ng-select *ngIf="showCoachesFilter && coaches" #coachSelector [items]="coaches" bindLabel="name"
+                        bindValue="id" [(ngModel)]="selectedCoach" (change)="changeCoach()" [searchable]="false"
+                        class="nav-link filter-item filter-item-custom m-0"
+                        placeholder="{{ 'navbar.coaches' | translate }}" name="selectedCoach"
+                        (mouseenter)="expandCoaches()" (mouseleave)="collapseCoaches()" (focus)="blurCoaches()"
+                        dropdownPosition="bottom" [routerLink]="['participants']"
+                        [queryParams]="{'coach': selectedCoach}">
+                        <!-- <ng-option *ngFor="let club of clubs" [value]="club.name"><img src="{{logosDir}}/{{ club.logo }}" style="width: 32.5px; height: auto;"> {{club.name}} {{club.count}}</ng-option> -->
+                    </ng-select>
+                </li>
+
+                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="routerLinkActiveOptions">
+                    <a [routerLink]="['tatami']" (click)="clearSelect()" class="nav-link">{{ 'navbar.tatami' |
+                        translate }}</a>
+                </li>
+
+                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="routerLinkActiveOptions">
+                    <ng-select *ngIf="categories" #drawSelector bindLabel="name" bindValue="id"
+                        [(ngModel)]="selectedDraw" (change)="setDraw()" [searchable]="false"
+                        class="nav-link filter-item" placeholder="{{ 'navbar.draw' | translate }}" name="selectedDraw"
+                        (mouseenter)="expandDraws()" (mouseleave)="collapseDraws()" (focus)="blurDraws()"
+                        dropdownPosition="bottom" [clearable]="false" [routerLink]="['draw']"
+                        [queryParams]="{'category': selectedDraw}">
+                        <ng-option *ngFor="let category of categories" [value]="category.id">
+                            <app-category-name id="{{category.id}}"></app-category-name>
+                        </ng-option>
+                    </ng-select>
+                </li>
+
+                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="routerLinkActiveOptions">
+                    <ng-select *ngIf="tatamis" #tatamiSelector (change)="setTatami()" [searchable]="false"
+                        placeholder="{{ 'navbar.online' | translate }}" bindLabel="name" bindValue="id"
+                        class="nav-link filter-item filter-item-custom m-0" name="selectedTatami"
+                        [(ngModel)]="selectedTatami" (mouseenter)="expandTatamis()" (mouseleave)="collapseTatamis()"
+                        (focus)="blurTatamis()" dropdownPosition="bottom" [routerLink]="['online']"
+                        [queryParams]="{'tatami': selectedTatami}">
+                        <ng-option *ngFor="let tatami of tatamis" [value]="tatami.id">
+                            <tatami-title [id]='tatami.id' [tatamiType]='tatamiType'></tatami-title>
+                        </ng-option>
+                    </ng-select>
+                </li>
+
+
+                <!-- https://stackoverflow.com/questions/68952309/bootstrap-5-dropdown-is-not-working-on-angular-12 -->
+                <!-- https://valor-software.com/ngx-bootstrap/#/components/dropdowns?tab=api -->
+                <!-- https://bootstrap-menu.com/detail-multilevel.html -->
+                <li class="nav-item dropdown" id="resultsDropdown" routerLinkActive="active"
+                    [routerLinkActiveOptions]="routerLinkActiveOptions">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" (click)="false">
+                        {{ 'navbar.results' | translate }}
+                    </a>
+
+                    <ul class="mainsubmenu dropdown-menu">
+                        <li> <a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 0}"> {{
+                                'results.individualResults' | translate}} &raquo; </a>
+                            <ul class="submenu dropdown-menu">
+                                <li *ngFor="let tatami of resultsMenuItems;let i = index">
+                                    <a class="dropdown-item" [routerLink]="['result']"
+                                        [queryParams]="{'offset': 0, 'tatami': tatami.id}">{{tatami.displayName}}
+                                        &raquo; </a>
+                                    <ul class="submenu dropdown-menu">
+                                        <li *ngFor="let time of tatami.children">
+                                            <a class="dropdown-item time-item" [routerLink]="['result']"
+                                                [queryParams]="{'offset': 0, 'tatami': tatami.id, 'time': time.id}">{{
+                                                time.displayName }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li><a class="dropdown-item" [routerLink]="['winnerclub']">{{
+                                'results.clubsResults' | translate }}</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 1}">{{
+                                'results.clubResults' | translate }}</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 9}">{{
+                                'results.clubPlaceOnly' | translate }}</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 10}">{{
+                                'results.clubWomenOnly' | translate }}</a></li>
+                        <li *ngIf="isCheckQuota"><a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 6}">{{
+                                'results.clubResultsQuota' | translate }}</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 2}">{{
+                                'results.coachResults' | translate }}</a></li>
+                        <li *ngIf="isCheckQuota"><a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 8}">{{
+                                'results.coachResultsQuota' | translate }}</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 3}">{{
+                                'results.countryResults' | translate }}</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 4}">{{
+                                'results.organizationResults' | translate }}</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 5}">{{
+                                'results.regionResults' | translate }}</a></li>
+                        <li *ngIf="isCheckQuota"><a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 7}">{{
+                                'results.regionResultsQuota' | translate }}</a></li>
+                    </ul>
+                </li>
+
+                <li *ngIf="hasRightToManage && manageable" class="nav-item" routerLinkActive="active">
+                    <a [routerLink]="['manage']" class="nav-link">{{ 'navbar.manage' | translate }}</a>
+                </li>
+
+                <li *ngIf="registerableCoach" class="nav-item" routerLinkActive="active"
+                    [routerLinkActiveOptions]="routerLinkActiveOptions">
+                    <a [routerLink]="['coach']" class="nav-link">{{ 'navbar.coach' | translate }}({{ 'navbar.registry' |
+                        translate }})</a>
+                </li>
+
+                <li *ngIf="registerableRefery" class="nav-item" routerLinkActive="active"
+                    [routerLinkActiveOptions]="routerLinkActiveOptions">
+                    <a [routerLink]="['regrefery']" class="nav-link">{{ 'navbar.regrefery' | translate }}({{
+                        'navbar.registry' | translate }})</a>
+                </li>
+
+                <!-- <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="routerLinkActiveOptions">
+                    <ng-select *ngIf="registerable" #registrySelector (change)="setRegistry()" [searchable]="false"
+                        placeholder="{{ 'navbar.registry' | translate }}" bindLabel="name" bindValue="id"
+                        class="nav-link filter-item filter-item-custom m-0" name="selectedRegistry"
+                        [(ngModel)]="selectedRegistry" (mouseenter)="expandRegistry()" (mouseleave)="collapseRegistry()"
+                        (focus)="blurRegistry()" dropdownPosition="bottom">
+                        <ng-option *ngFor="let item of registry" [value]="item.id">
+                            <a class="reg-item" [routerLink]="[item.path]"><span>{{ "navbar." + item.name | translate }}</span> </a>
+                        </ng-option>
+                    </ng-select>
+                </li> -->
+
+                <li *ngIf="!isMobileView" class="nav-item" routerLinkActive="active"
+                    [routerLinkActiveOptions]="routerLinkActiveOptions">
+                    <ng-select *ngIf="tools" #toolsSelector (change)="changeTools()" [searchable]="false"
+                        placeholder="{{ 'navbar.tools' | translate }}" bindLabel="name" bindValue="id"
+                        class="nav-link filter-item filter-item-custom m-0" name="selectedTools"
+                        [(ngModel)]="selectedTools" (mouseenter)="expandTools()" (mouseleave)="collapseTools()"
+                        (focus)="blurTools()" dropdownPosition="bottom">
+                        <ng-option *ngFor="let item of tools" [value]="item.id">
+                            <a class="reg-item" [routerLink]="[item.path]">{{ "tools." + item.name | translate }}</a>
+                            <!-- {{ "tools." + item.name | translate }} -->
+                        </ng-option>
+                    </ng-select>
+                </li>
+
+                <li *ngIf="isSuperAdmin && !isMobileView" class="nav-item" routerLinkActive="active"
+                    [routerLinkActiveOptions]="routerLinkActiveOptions">
+                    <ng-select *ngIf="admins" #adminSelector (change)="changeAdmins()" [searchable]="false"
+                        placeholder="{{ 'navbar.admin' | translate }}" bindLabel="name" bindValue="id"
+                        class="nav-link filter-item filter-item-custom m-0" name="selectedAdmin"
+                        [(ngModel)]="selectedAdmin" (mouseenter)="expandAdmins()" (mouseleave)="collapseAdmins()"
+                        (focus)="blurAdmins()" dropdownPosition="bottom">
+                        <ng-option *ngFor="let item of admins" [value]="item.id">
+                            <a class="reg-item" [routerLink]="[item.path]">{{ "admin." + item.name | translate }}</a>
+                        </ng-option>
+                    </ng-select>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" style="color: khaki">{{userLabel}}</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="p-0 m-0" [ngClass]="{'router-outlet' : !isCoachPage}">
+    <router-outlet></router-outlet>
+</div>
+<!-- </div> -->
+<!-- </div> -->

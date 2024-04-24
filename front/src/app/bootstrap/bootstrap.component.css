@@ -1,0 +1,10 @@
+.container-fluid.body {
+  padding: 0;
+  margin: 0;
+  /* padding-top: 4em; */
+  padding-top: 92px;
+  width: 100%;
+  /* position: sticky; */
+  /* z-index: 25; */
+  position: relative;
+}

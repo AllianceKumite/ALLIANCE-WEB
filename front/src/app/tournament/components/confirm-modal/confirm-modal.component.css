@@ -1,0 +1,13 @@
+.modal-header, .btn-primary, .btn-outline-primary:hover {
+    background-color: #004080;
+    color:white;
+}
+
+.btn-primary {
+    border-color: white;
+}
+
+.btn-outline-primary {
+    border-color: #004080;
+    color:#004080;
+}

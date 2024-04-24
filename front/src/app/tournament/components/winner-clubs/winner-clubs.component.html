@@ -1,0 +1,88 @@
+<div class="container m-0 d-flex justify-content-start">
+    <div class="d-flex col-12 p-1 m-0">
+        <div class="col-6 p-2">
+            <h4>
+                {{'results.clubsResults' | translate}}
+            </h4>    
+        </div>
+        <div class="col-6 p-2">
+            <h4>
+                {{selectedClub}} - {{clubWinners1.length + clubWinners2.length + clubWinners3.length}}
+            </h4>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between flex-wrap p-0 m-0">
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 p-1">
+        <!-- <h2>
+            {{'results.clubsResults' | translate}}
+        </h2> -->
+        <div class="box-data" id="box-data">
+            <div class="row row-header p-0 m-0">
+                <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                    <div class="p-2" style="color: #fff;">{{ 'general.club' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div *ngFor="let club of clubs; let i = index" class="row row-data p-0 m-0" (click)="onRowClick(club.name)"
+                [ngClass]="{ 'row-data-gray': i % 2 === 0}">
+                <div class="col-1 d-flex justify-content-center align-items-center">
+                    <img class="logo-club" src="{{logosDir}}/{{club.logo?.trim()}}" alt="" />
+                </div>
+                <div class="col-10"> {{club.name}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap col-12 col-sm-8 col-md-8 col-lg-8 p-1">
+        <!-- <h2>
+            {{selectedClub}} - {{clubWinners1.length + clubWinners2.length + clubWinners3.length}}
+        </h2> -->
+        <div class="box-winner col-12 col-sm-4 col-md-4 col-lg-4" id="box-winner">
+            <div class="row row-header p-0 m-0">
+                <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                    <div class="p-2" style="color: #fff;">{{ 'results.gold' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div *ngFor="let winner of clubWinners1; let i = index" class="row row-data p-0 m-0"
+                [ngClass]="{ 'row-data-gray': i % 2 === 0}">
+                <div class="col-1">
+                    <img class="logo-cup" src="{{getLogo(winner.place)}}" />
+                </div>
+                <div class="col-10"> {{winner.FIO}}</div>
+            </div>
+        </div>
+        <div class="box-winner col-12 col-sm-4 col-md-4 col-lg-4" id="box-winner">
+            <div class="row row-header p-0 m-0">
+                <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                    <div class="p-2" style="color: #fff;">{{ 'results.silver' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div *ngFor="let winner of clubWinners2; let i = index" class="row row-data p-0 m-0"
+                [ngClass]="{ 'row-data-gray': i % 2 === 0}">
+                <div class="col-1">
+                    <img class="logo-cup" src="{{getLogo(winner.place)}}" />
+                </div>
+                <div class="col-10"> {{winner.FIO}}</div>
+            </div>
+        </div>
+        <div class="box-winner col-12 col-sm-4 col-md-4 col-lg-4" id="box-winner">
+            <div class="row row-header p-0 m-0">
+                <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                    <div class="p-2" style="color: #fff;">{{ 'results.bronze' | translate}}
+                    </div>
+                </div>
+            </div>
+            <div *ngFor="let winner of clubWinners3; let i = index" class="row row-data p-0 m-0"
+                [ngClass]="{ 'row-data-gray': i % 2 === 0}">
+                <div class="col-1">
+                    <img class="logo-cup" src="{{getLogo(winner.place)}}" />
+                </div>
+                <div class="col-10"> {{winner.FIO}}</div>
+            </div>
+        </div>
+    </div>
+</div>

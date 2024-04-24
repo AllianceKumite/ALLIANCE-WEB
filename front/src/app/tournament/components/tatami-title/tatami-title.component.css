@@ -1,0 +1,11 @@
+.upercased {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 6em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* height: 2em; */
+    overflow: hidden;
+    /* margin-top: -0.3em; */
+}

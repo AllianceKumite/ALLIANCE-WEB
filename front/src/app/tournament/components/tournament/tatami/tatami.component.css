@@ -1,0 +1,123 @@
+.participants-list {
+    background-color: #fff;
+}
+
+.tatami-table {
+    background-color: rgb(68, 84, 106);
+}
+
+tr:nth-child(2n) {
+    background-color: rgb(243, 243, 243);
+}
+
+.tatami-max-height {
+    max-height: 225px;
+}
+
+@media screen and (max-device-width: 712px) {
+    .up-2 {
+        padding-top: 1.5rem;
+    }
+}
+
+/* .tatamis-current-bout-and-categories .list-group {
+  border-top: 5px solid #5e6d8e;
+} */
+
+.tatamis-current-bout-and-categories .list-group-item, .card-footer {
+  border: 0;
+}
+
+.tatamis-current-bout-and-categories .tatami {
+  margin-bottom: 3em;
+}
+
+.tatamis-current-bout-and-categories .card-body {
+  padding: 0;
+}
+
+.tatamis-current-bout-and-categories .card-title {
+  margin-bottom: 0;
+}
+
+.tatamis-current-bout-and-categories .tatami-number {
+  margin-bottom: 0;
+  /* border: 1px solid #333333; */
+  height: 2.2em;
+  padding: .5em 0;
+  font-size: 1.5rem;
+}
+
+.tatamis-current-bout-and-categories .tatami-0 .tatami-number {
+  background-color: #7798c0;
+}
+
+.tatamis-current-bout-and-categories .tatami-1 .tatami-number {
+  background-color: #8FBC8F;
+}
+
+.tatamis-current-bout-and-categories .tatami-2 .tatami-number {
+  background-color: #A392C5;
+}
+
+.tatamis-current-bout-and-categories .tatami-3 .tatami-number {
+  background-color: #698FCA;
+}
+
+.tatamis-current-bout-and-categories .tatami-4 .tatami-number {
+  background-color: #769376;
+}
+.tatamis-current-bout-and-categories .tatami-5 .tatami-number {
+  background-color: #826FB0;
+}
+.tatamis-current-bout-and-categories .tatami-6 .tatami-number {
+  background-color: #637BA0;
+}
+.tatamis-current-bout-and-categories .tatami-7 .tatami-number {
+  background-color: #7D8E85;
+}
+.tatamis-current-bout-and-categories .tatami-8 .tatami-number {
+  background-color: #70688A;
+}
+.tatamis-current-bout-and-categories .tatami-9 .tatami-number {
+  background-color: #6488A0;
+}
+.tatamis-current-bout-and-categories .tatami-10 .tatami-number {
+  background-color: #628C81;
+}
+.tatamis-current-bout-and-categories .tatami-11 .tatami-number {
+  background-color: #735889;
+}
+.tatamis-current-bout-and-categories .card {
+  overflow: hidden;
+  word-wrap: unset;
+  /* border: 1px solid #5e6d8e; */
+  /* border-top-left-radius: 15px;
+  border-top-right-radius: 15px; */
+  /*
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+}
+
+/* TODO: DRY and move out to common styles */
+.truncated-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 610px) {
+  h1 {
+    text-align: center;
+  }
+
+  .row {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+
+  .row .tatami {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}

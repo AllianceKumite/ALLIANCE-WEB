@@ -1,0 +1,16 @@
+div {
+    border-radius: 0 0 5px 5px;
+    color: #405b8f;
+    text-align: center;
+    background-color: rgba(255,255,255, 0.4);
+}
+
+.color-variant- {
+    border: 0.5px solid #405b8f;
+    /* background-color: #d9e1f2; */
+    /* background-color: white; */
+}
+
+.color-variant-transparent {
+    border: none;
+}

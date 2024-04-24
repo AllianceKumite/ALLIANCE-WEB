@@ -1,0 +1,170 @@
+.row-header {
+    /* background-color: #122239; */
+    background-image: linear-gradient(to right, #243949 0%, #507899 100%);
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    color: #f0f0f0;
+    font-weight: 300;
+}
+
+.box-data{
+    height: 15em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* border-radius: 4px; */
+    /* border: 1px solid #cfc9c9; */
+    background-color: #fff;
+}
+
+.box-setup{
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #cfc9c9;
+    background-color: #fff;
+}
+
+#boxportrait {
+    position: relative;
+    height: auto;
+    width: auto;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* background-color: #f6f6f6; */
+}
+
+.box-preview{
+    position: absolute;
+    top: 44px;
+    left: 50%;    
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
+    width: 50%;
+    overflow-x: hidden;
+    /* height: 42em;
+    overflow-y: auto;
+    overflow-x: hidden; */
+    /* border-radius: 4px; */
+    /* border: 1px solid #cfc9c9; */
+    background-color: #fff;
+}
+
+.box-draw {
+    /* display: none; */
+    /* position: absolute;
+    top: 0;
+    left: 50%; */
+    overflow-x: hidden;
+    width: 100%;
+    height: auto;
+    padding-left: 20px;
+    transform-origin: top left;
+    transform: scaleX(1) scaleY(1);
+}
+
+.box-shape{
+    position: relative;
+    min-height: 250px;
+    padding-left: 20px;
+    /* background-color: aqua; */
+}
+
+.img-box{
+    position: absolute;
+    top: 120px;
+    left: 200px;
+    width: 200px;
+    height: 200px;
+}
+
+.img-box:hover {
+    outline: 1px dashed rgb(195, 160, 3);
+    cursor: move;
+}
+
+.champname{
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.champline{
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.champcity {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.row-data{
+    background-color: #fff;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color:#444;
+    font-weight: 300;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.btn-pdf{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: #122239;
+}
+
+.btn-pdf-all{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.selected-row-color{
+    background-color: #c1bebe;
+    color: #fff;
+}
+
+.h-32{
+    height: 36px;
+}
+
+.edit-box{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.form-label{
+    font-size: 14px;
+}
+
+.printing {
+    visibility: hidden;
+}
+
+.printView {
+    visibility: visible;
+}
+
+.printing .printView {
+    /* You can have any CSS here to make the view better on print */
+    position: absolute;
+    top: 0;
+}

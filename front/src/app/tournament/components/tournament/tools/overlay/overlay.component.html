@@ -1,0 +1,149 @@
+<!-- <div class="d-flex justify-content-center flex-wrap" style="width: 1350px; background-color: #e6e4e4;">
+    <div class="d-flex align-items-center justify-content-center" style="width: 100%;">
+        <span> KKKKKKKKKKKKKKKKKKKKKKKK</span>
+    </div>
+    <div class="d-flex align-items-center" style="height: 100px;">
+        <div class="box-main-aka"></div>
+        <div class="box-number"></div>
+        <div class="box-main-shiro"></div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center" style="width: 100%;">
+        <span> KKKKKKKKKKKKKKKKKKKKKKKK</span>
+    </div>
+</div> -->
+<div class="container-fluid">
+    <div class="row row-overlay">
+        <div class="p-1 m-0" *ngFor="let tatami of tatamies; let i = index;">
+            <div class="box-overlay">
+                <div class="d-flex align-items-center justify-content-center p-0 m-0" style="width: 100%;">
+                    <div class="d-flex align-items-center justify-content-center p-0 m-0" style="width: 40%; font-size: 16px; font-weight: 500;">
+                        <app-category-name id="{{tatami.fight?.details?.CategoryId}}" uppercase="{{false}}"
+                        blockCount="{{tatami.fight?.details?.CategoryBlockCount}}"
+                        block="{{tatami.fight?.details?.BlockNum}}">
+                    </app-category-name>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center p-0 m-0" style="width: 20%">
+                        <span class="p-0 m-0" style="font-size: 24px; font-weight: 600;"> {{'navbar.tatami' | translate}} {{tatami.tatamiId}} </span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center p-0 m-0" style="width: 40%; font-size: 16px; font-weight: 500;">
+                        <app-level-name [details]="tatami.fight?.details"></app-level-name>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center  p-0 m-0" style="height: 70px;">
+                    <div class="box-main-aka p-0 m-0">
+                        <div class="d-flex align-items-center justify-content-center" style="width: 10%">
+                            <img src="/assets/media/logos/{{tatami.fight?.red?.ClubLogo}}" alt="" width="32px">
+                        </div>
+                        <div class="d-flex justify-content-start flex-wrap" style="width: 70%">
+                            <div class="fio w-100">{{getFIO(tatami.fight?.red.FIO)}}</div>
+                            <div class="club w-100">{{tatami.fight?.red.clubName}}</div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-start" style="width: 15%">
+                            <img src="/assets/media/logos/{{tatami.fight?.red.countryFlag}}" width="40px">
+                        </div>
+                    </div>
+                    <div class="box-number p-0 m-0">
+                        {{tatami.fight?.details.NumDuel}}
+                        <!-- 122 -->
+                    </div>
+                    <div class="box-main-shiro p-0 m-0">
+                        <div class="d-flex align-items-center justify-content-end" style="width: 15%">
+                            <img src="/assets/media/logos/{{tatami.fight?.white.countryFlag}}" width="40px">
+                        </div>
+                        <div class="d-flex justify-content-end flex-wrap" style="width: 70%">
+                            <div class="fio d-flex justify-content-end w-100">{{getFIO(tatami.fight?.white.FIO)}}</div>
+                            <div class="club d-flex justify-content-end w-100">{{tatami.fight?.white.clubName}}</div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center" style="width: 10%">
+                            <img src="/assets/media/logos/{{tatami.fight?.white?.ClubLogo}}" alt="" width="32px">
+                        </div>
+                    </div>
+                </div>
+                <div class="champtitle">
+                    <span> {{champtitle}} </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="container-fluid">
+    <div class="row row-overlay p-1">
+        <div class="col-12 p-1 m-0" *ngFor="let tatami of tatamies; let i = index;">
+            <div class="box-overlay"></div>
+            <div class="box-info">
+                <div class="shape">
+                    {{'navbar.tatami' | translate}} {{tatami.tatamiId}}
+                </div>
+                <div *ngIf="tatami.fight" style="width: 100%; height: 100%;">
+                    <div *ngIf="tatami.fight" class="shape-category">
+                        <div class="category-name truncated-content">
+                            <app-category-name id="{{tatami.fight?.details?.CategoryId}}" uppercase="{{false}}"
+                                blockCount="{{tatami.fight?.details?.CategoryBlockCount}}"
+                                block="{{tatami.fight?.details?.BlockNum}}">
+                            </app-category-name>
+                        </div>
+                        <div style="flex-shrink: 0;" class="category-level truncated-content">
+                            <app-level-name [details]="tatami.fight?.details"></app-level-name>
+                        </div>
+                        <div style="flex-shrink: 0;" class="category-duel truncated-content text-center">
+                            #{{tatami.fight?.details.NumDuel}}
+                        </div>
+                    </div>
+                    <div *ngIf="tatami.fight" class="main-info">
+                        <div class="ak-logo-box">
+                            <img src="/assets/img/logo2.png" width="100%" alt="">
+                        </div>
+                        <div class="row-part">
+                            <div class="row-part-50">
+                                <div class="club-logo-box">
+                                    <img src="{{tatami.fight?.red.logo}}" width="32px">
+                                </div>
+                                <div class="country-box">
+                                    <span>{{tatami.fight?.red.countryKod}}</span>
+                                </div>
+                                <div class="fio-club-box aka">
+                                    <div>
+                                        <div class="fio">{{getFIO(tatami.fight?.red.FIO)}}</div>
+                                        <div class="club">{{tatami.fight?.red.clubName}}</div>
+                                    </div>
+                                    <div
+                                        style="width: 50px; height: 30px; display: flex; align-items: center; justify-content: center;">
+                                        <img src="/assets/media/logos/{{tatami.fight?.red.countryFlag}}" width="32px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-part-50">
+                                <div class="club-logo-box">
+                                    <img src="{{tatami.fight?.white.logo}}" width="32px">
+                                </div>
+                                <div class="country-box">
+                                    <span>{{tatami.fight?.white.countryKod}}</span>
+                                </div>
+                                <div class="fio-club-box shiro">
+                                    <div>
+                                        <div class="fio">{{getFIO(tatami.fight?.white.FIO)}}</div>
+                                        <div class="club">{{tatami.fight?.white.clubName}}</div>
+                                    </div>
+                                    <div
+                                        style="width: 50px; height: 30px; display: flex; align-items: center; justify-content: center;">
+                                        <img src="/assets/media/logos/{{tatami.fight?.white.countryFlag}}" width="32px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div *ngIf="tatami.fight" class="shape-champ">
+                        {{champtitle}}
+                    </div>
+                </div>
+                <div *ngIf="!tatami.fight" style="width: 100%; height: 100%;">
+                    <div class="shape-empty fs-2">
+                        {{'tatami.fightsFinished' |translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

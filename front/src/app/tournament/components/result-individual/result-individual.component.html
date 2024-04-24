@@ -1,0 +1,42 @@
+<div class="row p-1 m-0" *ngIf="data">
+
+    <div *ngFor="let categoryResult of data; let idx = index;"
+        class="col-sm-12 col-md-6 col-lg-4 color-variant-{{idx % 3}}">
+        <div class="card">
+            <div class="card-header fight-category truncated-content">
+                <app-category-name id="{{categoryResult.category.categoryId}}"></app-category-name>
+            </div>
+
+            <ng-container *ngIf="categoryResult.places.length > 0">
+                <div class="card-body">
+                    <ng-container *ngif></ng-container>
+                    <ng-container *ngFor="let place of [1,2,3,4]; let i = index">
+                        <!-- <div *ngIf="categoryResult.places[i]" style="height: 3.5em"> -->
+                        <div style="height: 3.5em">
+                            <participant [info]="categoryResult.places[i]" [akaShiroType]="'shiro'"
+                                [viewType]="'drawParticipant'" [showExtendedInfo]="showExtendedInfo"
+                                style="width: 100%;"></participant>
+                        </div>
+                    </ng-container>
+
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="categoryResult.places.length == 0">
+                <info-box [label]="" [colorVariant]="'transparent'"></info-box>
+            </ng-container>
+        </div>
+    </div>
+
+</div>
+
+<ng-container *ngIf="!data || data.length == 0">
+    <div class="col-12 color-variant-0" style="padding-left: 0; padding-right: 0">
+        <div class="card">
+            <div class="card-header fight-category truncated-content"></div>
+            <div class="card-body">
+                <info-box [label]="" [colorVariant]="'transparent'"></info-box>
+            </div>
+        </div>
+    </div>
+</ng-container>

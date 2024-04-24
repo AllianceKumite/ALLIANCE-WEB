@@ -1,0 +1,196 @@
+<div class="container">
+  <div class="row d-flex align-items-center p-0 m-0">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+      <h3>
+        {{'navbar.participants' | translate}}
+        <ng-container *ngIf="filter.category && filter.category != '0'">
+          <app-category-name id="{{filter.category}}"></app-category-name>
+        </ng-container>
+        {{ filter && filter.country && ((('db.country.' + filter.country) | translate) )}}
+        -
+        {{participants.length}}
+      </h3>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 p-0 m-0 d-flex align-items-center justify-content-end">
+      <div class="w-100 d-flex align-items-center justify-content-between p-2">
+        <div class="form-check d-flex align-items-center">
+          <input class="form-check-input" type="checkbox" value="" id="showPhoto" (change)="onShowPhoto()">
+          <label class="form-check-label" for="showPhoto">
+            {{'dataTable.photo' | translate}}
+          </label>
+        </div>
+        <div class="box-search">
+          <input type="text" class="input form-control" [(ngModel)]="searchValue" (input)="onInputSearch()">
+          <label class="label" (click)="clearSearch()">×</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="box-data" id="box-data"> -->
+  <div class="d-flex  col-12" style="height: 48em;">
+
+    <div *ngIf=" clubs?.length > 0 && !isMobileView" class="col-3  pe-5 d-flex flex-wrap">
+      <div class="box-data-club" id="box-data-club">
+        <div class="row row-header p-0 m-0 w-100 d-flex justify-content-center" style="color: #fff; font-size: 16px; height: 35px;"> 
+          <span>{{'navbar.club' | translate}} - {{clubs.length}}</span> 
+        </div>
+        <div *ngFor="let item of clubs" class="row row-data-club p-0 m-0 w-100" (click)="getParticipantsByClub(item)" [ngClass]="{ 'row-data-select': item.id == selectedclub}">
+          <div class="col-1">
+            <ng-container *ngIf="item.id != '0'"> <img src="{{logosDir}}/{{ item.logo }}" style="width: 16px; height: auto;"> </ng-container>           
+          </div>
+          <div class="col-8">
+            <ng-container *ngIf="item.id == '0'">{{ 'general.allParticipants'| translate}}</ng-container>
+            <ng-container *ngIf="item.id != '0'">{{ item.name }}</ng-container>           
+          </div>
+          <div class="col-2 text-end">
+            <ng-container *ngIf="item.id == '0'">{{ countparticipants}}</ng-container>
+            <ng-container *ngIf="item.id != '0'"> {{ item.count }}</ng-container>           
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf=" categories?.length > 0 && !isMobileView" class="box-data-club" id="box-data-category">
+        <div class="row row-header p-0 m-0 w-100 d-flex align-items-center" style="color: #fff; font-size: 16px; height: 35px;"> 
+          <div class="col-12" >
+            <span>{{'navbar.categories' | translate}} - {{categories.length}}</span>
+          </div>
+        </div>
+        <div *ngFor="let category of categories" class="row row-data-club p-0 m-0 w-100" (click)="getCategory(category)" [ngClass]="{ 'row-data-select': category.id == selectedcategory}">
+          <div class="col-12" >
+            <ng-container *ngIf="category.id == '0'">{{ 'general.allParticipants'| translate}}</ng-container>
+            <app-category-name *ngIf="category.id != '0'" id="{{category.id}}"></app-category-name>  
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div [ngClass]="{ 'col-9': clubs?.length > 0 && !isMobileView, 'col-12': clubs?.length == 0}">
+
+      <div class="box-data" id="box-data-part">
+        <!-- <div class="col-12 ms-1"> -->
+        <div class="row row-header p-0 m-0 w-100">
+          <!-- num -->
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+            <div class="col-header num" style="text-align: center;">#
+            </div>
+          </div>
+          <!-- name -->
+          <div class="col-6 col-sm-5 col-md-5 col-lg-2 p-0 m-0">
+            <div class="col-header">
+              <span>{{'dataTable.participant' | translate}}</span>
+            </div>
+          </div>
+          <!-- coach -->
+          <div class="col-5 col-sm-6 col-md-6 col-lg-2 p-0 m-0">
+            <div class="col-header">
+              <span>{{'dataTable.coach' | translate}}</span>
+            </div>
+          </div>
+          <!-- date -->
+          <div class="col-2 col-sm-3 col-md-3 col-lg-1 p-0 m-0">
+            <div class="col-header" style="text-align: center;">
+              {{'dataTable.date' | translate}}
+            </div>
+          </div>
+          <div class="col-2 col-sm-3 col-md-3 col-lg-1 p-0 m-0">
+            <div class="col-header" style="text-align: center;">
+              {{'dataTable.date' | translate}}
+            </div>
+          </div>
+
+          <!-- weight -->
+          <div class="col-2 col-sm-2 col-md-2 col-lg-1 p-0 m-0">
+            <div class="col-header" style="text-align: center;">
+              <span>{{'dataTable.weight' | translate}}</span>
+            </div>
+          </div>
+          <!-- grade -->
+          <div class="col-2 col-sm-2 col-md-2 col-lg-1 p-0 m-0">
+            <div class="col-header" style="text-align: center;">
+              <span>{{'dataTable.rank' | translate}}</span>
+            </div>
+          </div>
+          <!-- category -->
+          <div class="col-12 col-sm-2 col-md-4 col-lg-3 p-0 m-0">
+            <div class="col-header">
+              <span>{{'dataTable.category' | translate}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div *ngFor="let participant of customParticipants; let i = index" class="row row-data p-0 m-0 w-100"
+          [ngClass]="{ 'row-data-gray': i % 2 === 0}">
+          <!-- Number -->
+          <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+            <div class="col-data num">
+              <span>{{i + 1}}</span>
+            </div>
+          </div>
+          <!-- Name -->
+          <div class="col-6 col-sm-5 col-md-5 col-lg-2 p-0 m-0">
+            <div class="col-data box-name">
+              <div *ngIf="isShowPhotos" class="info-photo">
+                <img class="photo" *ngIf="participant.Photo" src="{{ participant.Photo }}">
+                <img class="photo" *ngIf="isShowPhotos && !participant.Photo" src="{{defaultPhotosDir}}/NoPhoto.png">
+              </div>
+              <div class="info-name">
+                <div class="text-name">{{ participant.FIO }}</div>
+                <div *ngIf="champType === 4 || champType === 5" class="d-flex align-items-center ">
+                  <img *ngIf="participant?.countryFlag?.trim() !=''" class="flag-name"
+                    src="{{logosDir}}/{{ participant?.countryFlag?.trim() }}" />
+                  <span class="px-1 fw-normal">{{ 'db.country.' + participant?.CountryId | translate }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- club-coach -->
+          <div class="col-5 col-sm-6 col-md-6 col-lg-2 p-0 m-0">
+            <div class="col-data box-name">
+              <div class="info-club">
+                <div class="text-coach w-100">{{participant?.coachName}}</div>
+                <div class="text-club w-100">
+                  <div>
+                    <img class="logo-club" src="{{logosDir}}/{{ participant?.ClubLogo?.trim() }}"
+                      *ngIf="participant?.ClubLogo?.trim() !=''" />
+                  </div>
+                  <div style="padding-left: 5px;">
+                    {{participant?.ClubName}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- date -->
+          <div class="col-2 col-sm-3 col-md-3 col-lg-1 p-0 m-0">
+            <div class="col-d-w-g">{{ participant.DateBR | date: 'dd.MM.yy' }}</div>
+          </div>
+          <div class="col-2 col-sm-3 col-md-3 col-lg-1 p-0 m-0">
+            <div class="col-d-w-g">{{ getAge(participant.DateBR)}}</div>
+          </div>
+
+          <!-- weight -->
+          <div class="col-2 col-sm-2 col-md-2 col-lg-1 p-0 m-0">
+            <div class="col-d-w-g">{{ participant.Weight}}</div>
+          </div>
+          <!-- grade -->
+          <div class="col-2 col-sm-2 col-md-2 col-lg-1 p-0 m-0">
+            <div class="col-d-w-g">{{ participant.DAN}}</div>
+          </div>
+          <!-- category -->
+          <div class="col-12 col-sm-2 col-md-4 col-lg-3 p-0 m-0">
+            <!-- <div class="category"> -->
+            <div *ngFor="let category of participant.categoryId" (click)="setCategory(category)"
+              style="cursor: pointer;">
+              <div class="category">
+                <app-category-name id="{{category}}"></app-category-name>
+              </div>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>

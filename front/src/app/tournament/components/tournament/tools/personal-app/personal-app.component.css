@@ -1,0 +1,32 @@
+.data {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #c3c1c1;
+}
+
+.img-box {
+    width: 30px;
+    height: 20px;
+    /* border-radius: 100%; */
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: help;
+}
+
+/* .modal{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0;
+  } */
+
+  .modal-dialog{
+    max-width: 1000px;
+    max-height: 500px;
+  }

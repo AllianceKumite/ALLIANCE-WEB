@@ -1,0 +1,82 @@
+<header class="header">
+    <div class="container">
+        <div class="header_content">
+            <div class="logo">
+                <img src="/assets/img/landing/logotip.gif" alt="" routerLink=''>
+                <!-- <span class="title-general">AllianceKumite</span> -->
+            </div>
+
+            <nav class="header_nav">
+                <li>
+                    <a routerLink='/' class="nav_link">{{'landing.menu.main' | translate}}</a>
+                </li>
+                <li>
+                    <a href='#about' class="nav_link">{{'landing.menu.aboutUs' | translate}}</a>
+                </li>
+                <li>
+                    <a href='#functions' class="nav_link">{{'landing.menu.possibilities' | translate}}</a>
+                </li>
+                <li>
+                    <a routerLink="/tournaments" class="nav_link">{{'landing.menu.tournaments' | translate}}</a>
+                </li>
+                <li class="nav_link p-0" style="margin-top: 1px;"> 
+                    <ng-select [searchable]="false" style="padding: 0; margin: 0; border: 0;"
+                        [(ngModel)] = "selectedVideo"
+                        placeholder="{{ 'navbar.video' | translate }}" bindLabel="name" bindValue="id"
+                        class="nav_link"
+                        name="selectedVideo"
+                        (change)="setVideo()"
+                        dropdownPosition="bottom">
+                        <ng-option *ngFor="let item of videos" [value]="item.id">
+                            <!-- <div style="width: 100%; height: 100%;"> -->
+                                
+                                <a class="reg-item" target="_blank" href="{{ videofile }}">{{ "navbar." + item.path | translate }}</a>
+                            <!-- </div> -->
+                        </ng-option>
+                    </ng-select>
+                </li>                
+
+                <li style="padding-right: 4em" [hidden]="filter.coach">
+                    <a class="nav_link" routerLink="/login">{{'landing.menu.login' | translate}}</a>
+                </li>
+
+                <li *ngIf="filter.isSuperAdmin">
+                    <a routerLink="/administrator" class="nav_link nav-user">{{filter.coach}}</a>
+                </li>
+
+                <li *ngIf="!filter.isSuperAdmin">
+                    <a routerLink="/coach" class="nav_link nav-user">{{filter.coach}}</a>
+                </li>
+
+                <li style="padding-right: 1em" [hidden]="!filter.coach">
+                    <a class="nav_link" (click)="logout()">{{'landing.menu.logout' | translate}}</a>
+                </li>
+
+                <language-selector></language-selector>
+
+                <div class="header_burger">
+                    <div id="open" (click)="openMenu()">
+                        <span></span>
+                    </div>
+
+                    <div id="close" (click)="closeMenu()">
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="burger_menu" id="burger">
+    <div class="burger_content">
+        <a routerLink='/' class="nav_link" (click)="closeMenu()">{{'landing.menu.main' | translate}}</a>
+        <a routerLink='/' class="nav_link" (click)="closeMenu()">{{'landing.menu.possibilities' | translate}}</a>
+        <a routerLink='/' class="nav_link" (click)="closeMenu()">{{'landing.menu.aboutUs' | translate}}</a>
+        <a routerLink="/tournaments" class="nav_link" (click)="closeMenu()">{{'landing.menu.tournaments' | translate}}</a>
+        <a class="nav_link" [hidden]="filter.coach" routerLink="/login">{{'landing.menu.login' | translate}}</a>
+        <a *ngIf="filter.isSuperAdmin" routerLink="/coach" class="nav_link nav-user">{{filter.coach}}</a>
+        <a *ngIf="!filter.isSuperAdmin" routerLink="/coach" class="nav_link nav-user">{{filter.coach}}</a>
+        <a class="nav_link" (click)="logout()">{{'landing.menu.logout' | translate}}</a>
+    </div>
+</div>

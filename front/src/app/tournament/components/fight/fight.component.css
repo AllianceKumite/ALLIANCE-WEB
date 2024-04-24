@@ -1,0 +1,502 @@
+.fight-category {
+  background-color: #5e6d8e;
+  /* background-image: linear-gradient(to right, #2c475c 0%, #476e8d 100%); */
+  padding: 0.3em 0.5em 0.3em;
+  width: 100%;
+}
+
+.fight-category .category-name {
+  height: 1.2em;
+
+  /* width: 80% !important; */
+  text-align: start;
+
+  /* padding-left: 0.2em; */
+  font-size: 100%;
+}
+
+.fight-category .kata-name {
+  width: 100%;
+  height: 1.2em;
+  text-align: start;
+  /* padding-left: 0.2em; */
+  font-size: 90%;
+}
+
+.fight-category .category-level {
+  font-size: 100%;
+  padding-left: 0.2em;
+}
+
+/* .online-tatami-current-fight  */
+
+
+.online-tatami-current-fight {
+  font-size: 150%;
+}
+
+.online-tatami-current-fight .current-category {
+  background-color: #405B8F
+}
+
+.online-tatami-current-fight .fight-card {
+  background-color: #6782b4
+}
+
+.online-tatami-current-fight .fight-card .fight-number {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  /* font-size: 2.5em; */
+  font-size: 150% !important;
+  font-weight: 600;
+}
+
+
+@media (max-width: 400px) {
+  .online-tatami-current-fight .fight-card .fight-number {
+    font-size: 130%;
+  }
+}
+
+.online-tatami-current-fight .fight-card .participants {
+  width: 100%;
+  overflow: hidden;
+}
+
+
+/* online-tatami-next-fight */
+
+
+.online-tatami-next-fight {
+  font-size: 90%;
+  border: 1px solid #cdcdcd;
+  border: 1px solid #99a5ae;
+  
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1em;
+  background-color: #f9f9f9;
+}
+
+.online-tatami-next-fight .fight-category {
+  /* height: 4em; */
+  align-items: baseline;
+}
+
+.online-tatami-next-fight .fight-category div {
+  color: white
+}
+
+.online-tatami-next-fight .fight-number {
+  padding: 0 1.5em 0 0.5em;
+  /* padding: 0; */
+  font-weight: 500;
+  font-size: 110%;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.online-tatami-current-fight .fight-number {
+  /* padding: 0 1.5em 0 0.5em; */
+  /* padding: 0; */
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  font-size: 120%;
+  /* width: 15%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.online-tatami-next-fight .category-level {
+  text-align: left;
+  padding-left: 0;
+}
+
+.online-tatami-next-fight .fight-category .category-name {
+  height: auto;
+  /* padding-right: 0.5em; */
+  margin: 0;
+}
+
+
+/* TODO: move common logic from tatami component  */
+
+
+.online-tatami-next-fight .fight-category.color-1,
+.online-tatami-next-fight .fight-category.color-13,
+.online-tatami-next-fight .fight-category.color-25,
+.online-tatami-next-fight .fight-category.color-37,
+.online-tatami-next-fight .fight-category.color-49,
+.online-tatami-next-fight .fight-category.color-61,
+.online-tatami-next-fight .fight-category.color-73,
+.online-tatami-next-fight .fight-category.color-85,
+.online-tatami-next-fight .fight-category.color-97,
+.online-tatami-next-fight .fight-category.color-109,
+.online-tatami-next-fight .fight-category.color-121
+{ background-color: #7798c0; }
+
+.online-tatami-next-fight .fight-category.color-2,
+.online-tatami-next-fight .fight-category.color-14,
+.online-tatami-next-fight .fight-category.color-26,
+.online-tatami-next-fight .fight-category.color-38,
+.online-tatami-next-fight .fight-category.color-50,
+.online-tatami-next-fight .fight-category.color-62,
+.online-tatami-next-fight .fight-category.color-74,
+.online-tatami-next-fight .fight-category.color-86,
+.online-tatami-next-fight .fight-category.color-98,
+.online-tatami-next-fight .fight-category.color-110,
+.online-tatami-next-fight .fight-category.color-122
+{ background-color: #8FBC8F; }
+
+.online-tatami-next-fight .fight-category.color-3,
+.online-tatami-next-fight .fight-category.color-15,
+.online-tatami-next-fight .fight-category.color-27,
+.online-tatami-next-fight .fight-category.color-39,
+.online-tatami-next-fight .fight-category.color-51,
+.online-tatami-next-fight .fight-category.color-69,
+.online-tatami-next-fight .fight-category.color-81,
+.online-tatami-next-fight .fight-category.color-93,
+.online-tatami-next-fight .fight-category.color-99,
+.online-tatami-next-fight .fight-category.color-111,
+.online-tatami-next-fight .fight-category.color-123
+{ background-color: #A392C5; }
+
+.online-tatami-next-fight .fight-category.color-4,
+.online-tatami-next-fight .fight-category.color-16,
+.online-tatami-next-fight .fight-category.color-28,
+.online-tatami-next-fight .fight-category.color-40,
+.online-tatami-next-fight .fight-category.color-52,
+.online-tatami-next-fight .fight-category.color-64,
+.online-tatami-next-fight .fight-category.color-76,
+.online-tatami-next-fight .fight-category.color-88,
+.online-tatami-next-fight .fight-category.color-100,
+.online-tatami-next-fight .fight-category.color-112,
+.online-tatami-next-fight .fight-category.color-124
+{ background-color: #698FCA; }
+
+.online-tatami-next-fight .fight-category.color-5,
+.online-tatami-next-fight .fight-category.color-17,
+.online-tatami-next-fight .fight-category.color-29,
+.online-tatami-next-fight .fight-category.color-41,
+.online-tatami-next-fight .fight-category.color-53,
+.online-tatami-next-fight .fight-category.color-65,
+.online-tatami-next-fight .fight-category.color-77,
+.online-tatami-next-fight .fight-category.color-89,
+.online-tatami-next-fight .fight-category.color-101,
+.online-tatami-next-fight .fight-category.color-113,
+.online-tatami-next-fight .fight-category.color-125
+{ background-color: #769376; }
+
+.online-tatami-next-fight .fight-category.color-6,
+.online-tatami-next-fight .fight-category.color-18,
+.online-tatami-next-fight .fight-category.color-30,
+.online-tatami-next-fight .fight-category.color-42,
+.online-tatami-next-fight .fight-category.color-54,
+.online-tatami-next-fight .fight-category.color-66,
+.online-tatami-next-fight .fight-category.color-78,
+.online-tatami-next-fight .fight-category.color-90,
+.online-tatami-next-fight .fight-category.color-102,
+.online-tatami-next-fight .fight-category.color-114,
+.online-tatami-next-fight .fight-category.color-126
+{ background-color: #826FB0; }
+
+.online-tatami-next-fight .fight-category.color-7,
+.online-tatami-next-fight .fight-category.color-19,
+.online-tatami-next-fight .fight-category.color-31,
+.online-tatami-next-fight .fight-category.color-43,
+.online-tatami-next-fight .fight-category.color-55,
+.online-tatami-next-fight .fight-category.color-67,
+.online-tatami-next-fight .fight-category.color-79,
+.online-tatami-next-fight .fight-category.color-91,
+.online-tatami-next-fight .fight-category.color-103,
+.online-tatami-next-fight .fight-category.color-115,
+.online-tatami-next-fight .fight-category.color-127
+{ background-color: #637BA0; }
+
+.online-tatami-next-fight .fight-category.color-8,
+.online-tatami-next-fight .fight-category.color-20,
+.online-tatami-next-fight .fight-category.color-32,
+.online-tatami-next-fight .fight-category.color-44,
+.online-tatami-next-fight .fight-category.color-56,
+.online-tatami-next-fight .fight-category.color-68,
+.online-tatami-next-fight .fight-category.color-80,
+.online-tatami-next-fight .fight-category.color-104,
+.online-tatami-next-fight .fight-category.color-116,
+.online-tatami-next-fight .fight-category.color-128
+{ background-color: #7D8E85; }
+
+.online-tatami-next-fight .fight-category.color-9,
+.online-tatami-next-fight .fight-category.color-21,
+.online-tatami-next-fight .fight-category.color-33,
+.online-tatami-next-fight .fight-category.color-45,
+.online-tatami-next-fight .fight-category.color-57,
+.online-tatami-next-fight .fight-category.color-63,
+.online-tatami-next-fight .fight-category.color-75,
+.online-tatami-next-fight .fight-category.color-87,
+.online-tatami-next-fight .fight-category.color-105,
+.online-tatami-next-fight .fight-category.color-117,
+.online-tatami-next-fight .fight-category.color-129
+{ background-color: #70688A; }
+
+.online-tatami-next-fight .fight-category.color-10,
+.online-tatami-next-fight .fight-category.color-22,
+.online-tatami-next-fight .fight-category.color-34,
+.online-tatami-next-fight .fight-category.color-46,
+.online-tatami-next-fight .fight-category.color-58,
+.online-tatami-next-fight .fight-category.color-70,
+.online-tatami-next-fight .fight-category.color-82,
+.online-tatami-next-fight .fight-category.color-94,
+.online-tatami-next-fight .fight-category.color-106,
+.online-tatami-next-fight .fight-category.color-118,
+.online-tatami-next-fight .fight-category.color-130
+{ background-color: #6488A0; }
+
+.online-tatami-next-fight .fight-category.color-11,
+.online-tatami-next-fight .fight-category.color-23,
+.online-tatami-next-fight .fight-category.color-35,
+.online-tatami-next-fight .fight-category.color-47,
+.online-tatami-next-fight .fight-category.color-59,
+.online-tatami-next-fight .fight-category.color-71,
+.online-tatami-next-fight .fight-category.color-83,
+.online-tatami-next-fight .fight-category.color-95,
+.online-tatami-next-fight .fight-category.color-107,
+.online-tatami-next-fight .fight-category.color-119,
+.online-tatami-next-fight .fight-category.color-131
+{ background-color: #628C81; }
+
+.online-tatami-next-fight .fight-category.color-12,
+.online-tatami-next-fight .fight-category.color-24,
+.online-tatami-next-fight .fight-category.color-36,
+.online-tatami-next-fight .fight-category.color-48,
+.online-tatami-next-fight .fight-category.color-60,
+.online-tatami-next-fight .fight-category.color-72,
+.online-tatami-next-fight .fight-category.color-84,
+.online-tatami-next-fight .fight-category.color-96,
+.online-tatami-next-fight .fight-category.color-108,
+.online-tatami-next-fight .fight-category.color-120,
+.online-tatami-next-fight .fight-category.color-132
+{ background-color: #735889; }
+
+
+/* TODO: DRY and move out to common styles */
+
+
+.truncated-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* width: 100%; */
+}
+
+
+.online-tatami-next-fight.managed-fight .fight-category {
+  background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);   
+   /* background-color: rgb(228,161,27); */
+}
+
+
+/* .online-tatami-next-fight.manage-fight-list-item {
+  border: 3px solid #dddddd;
+  height: 20em
+} */
+/*
+.online-tatami-next-fight.manage-fight-list-item.circle,
+.online-tatami-next-fight.manage-fight-list-item.circle.managed-selected {
+  height: 20em;
+} */
+
+.manage-fight-list-item .fight-passed {
+    background-color: lemonchiffon
+}
+
+.online-tatami-next-fight.managed-selected {
+    border: 3px solid dodgerblue
+}
+
+
+.manage-fight-in-details-with-flags {
+  background-color: transparent;
+}
+
+.manage-fight-in-details-with-flags .container-fluid {
+  background-color: #eeeeee;
+  /* background-color: red; */
+}
+
+.manage-fight-in-details-with-flags .fight-category {
+  margin-bottom: 1em;
+  background-color: #004080;
+}
+
+.manage-fight-in-details-with-flags .fight-category div {
+  color: white;
+}
+
+
+
+
+.current-fight-with-time .fight-number {
+    font-size: 4em;
+    font-weight: 800;
+    /* width: 100%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* text-align: center; */
+    color: rgb(28, 14, 97);
+}
+
+.current-fight-with-time .champ-name {
+    background-color:#004080;
+    text-align: center;
+    color: white;
+    font-size: 3em;
+}
+
+.current-fight-with-time {
+    overflow: hidden;
+}
+
+.current-fight-with-time .timer {
+    font-family: "digi-mono";
+    font-size: 15em;
+    text-align: center;
+    color: white;
+    background-color: gray;
+    overflow: hidden;
+    /* position: absolute; */
+    /* height: 1em; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.kataname {
+  /* font-family: "OpenSans"; */
+  /* height: 150px; */
+  font-size: 2em;
+  text-align: start;
+  color: white;
+  background-color: #efefef;
+  overflow: hidden;
+  /* height: 1em; */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* min-height: 30%; */
+  /* justify-content: flex-start; */
+
+}
+
+.current-fight-with-time .timer div {
+    margin-top: 0em;
+}
+
+.current-fight-with-time .fight-details {
+  /* font-size: 1.2em; */
+  display: flex;
+  padding: 0;
+  margin: 0;
+  flex-direction: column;
+  width: 100%;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+
+@media screen and (max-width: 1440px) {
+  .current-fight-with-time .timer {
+    font-size: 10em;
+  }
+
+  .online-tatami-current-fight {
+    font-size: 110%;
+  }
+  
+
+  .current-fight-tatami-title{
+    font-size: 0.5em;
+
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .current-fight-with-time .fight-details {
+    font-size: 1.2em;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .current-fight-with-time .fight-number {
+      font-size: 2em;
+  }
+
+  .current-fight-with-time .champ-name {
+      font-size: 2.2em;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+    .current-fight-with-time .fight-details {
+      font-size: 1em;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    .current-fight-with-time .fight-number {
+        font-size: 2em;
+    }
+
+    .current-fight-with-time .champ-name {
+        font-size: 1.4em;
+    }
+}
+
+@media screen and (max-width: 700px) {
+  .online-tatami-current-fight{
+    width: 100%;
+  }
+    .current-fight-with-time .fight-details {
+      font-size: 0.8em;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    .current-fight-with-time .fight-number {
+        display: none;
+    }
+
+    .current-fight-with-time .champ-name {
+        font-size: 0.8em;
+    }
+}
+
+.fullscreened {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+    /* align-items: flex-end; */
+    /* min-width: 100%;
+    min-height: 100%; */
+    /* position: relative; */
+    /* justify-content: center */
+}
+
+.btn-cpu {
+  margin-left:0.3em;
+  padding: 0.5em 0.7em;
+}

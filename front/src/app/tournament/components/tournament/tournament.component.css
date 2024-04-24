@@ -1,0 +1,224 @@
+.container-fluid{
+  position: sticky;
+}
+
+.main-box{
+  width: 100%;
+}
+
+/* .container-fluid{
+  position: relative;
+} */
+
+/* .ng-dropdown-panel .scroll-host{
+  max-height: 600px;
+} */
+
+.box-stiky{
+  position: sticky;
+  top: 90px;
+  z-index: 25;
+}
+
+/* .navbar{
+  position: sticky;
+  top: 0;
+} */
+
+.tournament-info {
+  top: 0;
+  /* background-color: #122239; */
+  background-image: linear-gradient(to right, #243949 0%, #507899 100%);
+}
+
+.filter {
+    border: 1px solid none;
+    /* background-color: #fff; */
+}
+
+.filter-item {
+    /* border: 1px solid #DADADA; */
+    padding: 0px 30px;
+    /* background-color: #fff; */
+    color: #ffffff;
+}
+
+.filter-item-a {
+    /* border: 1px solid #DADADA; */
+    padding: 6px 35px;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    /* background-color: #fff; */
+}
+
+@media screen and (max-device-width: 990px) {
+  .tournament-wrapper {
+      flex-direction: column;
+  }
+
+  .additional-filters {
+    width: 100%;
+  }
+
+  .filter-item {
+      padding: 0px 10px !important;
+  }
+
+  .filter-item-a {
+      padding: 6px 20px !important;
+  }
+}
+
+.filter-item-custom {
+    padding: 0px 20px;
+}
+
+.w-small {
+    width: 14.3%;
+}
+
+.additional-filters {
+    position: relative;
+}
+
+.menu-dropdown-img {
+    width: 1.5em;
+    height: auto;
+    /* border: 0.5px solid gray; */
+    margin-right: 0.5em;
+}
+
+.router-outlet {
+    padding: 2em 15px 0 15px;
+}
+
+@media (max-width: 667px) {
+  .router-outlet {
+      padding: 2em 0 0;
+  }
+  
+  .ng-dropdown-panel .scroll-host{
+    max-height: 450px;
+  }
+  
+}
+
+
+.hamburger-inner,
+.hamburger-inner::after,
+.hamburger-inner::before {
+    background-color: #a4a4a4;
+}
+
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::after,
+.hamburger.is-active .hamburger-inner::before {
+  background-color: #a4a4a4;
+}
+
+
+.nav-item {
+  /* color: #64707e; */
+  color: #9ea0a3;
+}
+
+.nav-item span {
+  color: inherit;
+}
+
+.nav-item.active, .nav-item:hover {
+  color: white
+}
+
+.nav-item .nav-link {
+    color: inherit;
+    align-items: baseline !important;
+}
+
+.nav-item a.nav-link {
+  padding-top: 5px;
+}
+
+.nav-item .ng-select.nav-link .ng-select-container:hover,
+.nav-item .ng-select.nav-link .ng-select-container .ng-value-container:hover,
+.nav-item.active .ng-select.nav-link .ng-select-container .ng-value-container{
+  color: #ffffff !important;
+}
+
+.nav-item .ng-select.nav-link ::ng-deep .ng-select-container {
+  color: inherit;
+}
+
+/* .nav-item.active ::deep .ng-select.nav-link .ng-select-container .ng-value-label,
+.nav-item.active ::deep .ng-select.nav-link .ng-select-container .ng-value-container {
+  color: #fff;
+} */
+
+.nav-item .ng-select.nav-link .ng-select-container .ng-value-container {
+  /* color: #64707e; */
+  color: #9ea0a3;
+
+}
+
+.nav-item.active .ng-select.nav-link .ng-select-container .ng-value-container {
+  color: white
+}
+
+
+.nav-item .ng-select.nav-link  .ng-select-container .ng-value-container .ng-placeholder,
+.nav-item .ng-select.nav-link  .ng-select-container .ng-value-container .ng-value,
+.nav-item .ng-select.nav-link  .ng-select-container .ng-value-container .ng-value .ng-value-label {
+  color: inherit
+}
+
+.dropdown-menu {
+  border-radius: 0 0 3px;
+  border: 1px solid #bbb;
+  font-size:1em;
+  margin-top: -7px !important;
+}
+
+.dropdown-item {
+  color: #09111d;
+}
+
+.reg-item:link{
+  color: #09111d;
+  width: 100%;
+  height: 100%;
+}
+
+.reg-item{
+  color: #09111d;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  /* display: block; */
+}
+
+.reg-item span{
+  padding: 0;
+  margin: 0;
+  color: red;
+  width: 100%;
+  height: 20px;
+  display: block;
+}
+
+.hidden{
+  display: none;
+}
+
+.item{
+  font-size: 32px;
+}
+
+@media (max-width: 992px) {
+    .navbar-nav .dropdown-menu {
+        position: static;
+    }
+}
+
+

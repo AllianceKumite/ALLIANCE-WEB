@@ -1,0 +1,69 @@
+<!--  -->
+<!-- <div style="height: 4px; background-color: #004080;">
+</div> -->
+
+<div class="panel-duel">
+    <div class="col-10 d-flex justify-content-start">{{'manage.fight' | translate}} - {{fightNum}}</div>
+    <div class="col-2 d-flex justify-content-center">{{'manage.round' | translate}} - {{numRound + 1}}</div>
+</div>
+
+<!-- <div style="height: 4px; background-color: #004080;">
+</div> -->
+
+<div class="p-0 m-0" style="display: flex; justify-content: space-between; align-items: center; background-color: #fff;">
+    <div class="col-2 p-0 m-0">
+        <div style="display: flex; justify-content: center; align-items: center">
+            <form [formGroup]="timerForm" novalidate>
+                <div>
+                    <input type="radio" class="input-label" name="timeDuration" value="60" id="durationOne"
+                        style="margin-right: 0.5em;" formControlName="timeDuration" (change)="handleChange($event)" />
+                    <label class="input-label" for="durationOne"> 1 min</label>
+                </div>
+
+                <div>
+                    <input type="radio" class="input-label" name="timeDuration" value="90" id="durationOneAndHalf"
+                        style="margin-right: 0.5em;" formControlName="timeDuration" (change)="handleChange($event)" />
+                    <label class="input-label" for="durationOneAndHalf"> 1,5 min</label>
+                </div>
+                <div>
+                    <input type="radio" class="input-label" name="timeDuration" value="120" id="durationTwo"
+                        style="margin-right: 0.5em;" formControlName="timeDuration" (change)="handleChange($event)" />
+                    <label class="input-label" for="durationTwo"> 2 min</label>
+                </div>
+                <div>
+                    <input type="radio" class="input-label" name="timeDuration" value="180" id="durationThree"
+                        style="margin-right: 0.5em;" formControlName="timeDuration" (change)="handleChange($event)" />
+                    <label class="input-label" for="durationThree"> 3 min</label>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div *ngIf="showTime == true" class="col-8  p-0 m-0">
+        <div class="details-row d-flex flex-wrap participant-manage-btns p-0 m-0"
+            style="align-items: center; justify-content: center; position: relative;">
+            <span class="timer-indicator text-center w-100 p-0 m-0" [ngClass]="{'blink': isPaused}" style="position: absolute"
+                >
+                {{ getTimerString()}} 
+            </span>
+            <span>{{posttime}}</span>
+        </div>
+    </div>
+
+    <div class="col-2 p-1 m-0">
+        <div class="details-row d-flex flex-wrap participant-manage-btns p-0 m-0"
+            style="align-items: center; justify-content: center;">
+            <div class="d-flex flex-wrap flex-column justify-content-center align-items-center p-0 m-0 w-100">
+                <button id="start" [disabled]="!startEnabled" class="btn btn-sm btn-player p-1 w-50"
+                    (click)="handleStart($event)"><fa-icon [icon]="faPlay"></fa-icon></button>
+                <button id="pauseCont" [disabled]="!pauseEnabled" class="btn btn-sm btn-player p-1 w-50"
+                    (click)="handlePauseCont($event)"><fa-icon [icon]="faPause"></fa-icon></button>
+                <button id="stop" [disabled]="!stopEnabled" class="btn btn-sm btn-player p-1 w-50"
+                    (click)="handleStop($event)"><fa-icon [icon]="faStop"></fa-icon></button>
+                <button (click)="addWindow()" class="btn btn-sm btn-player btn-secondary p-1 w-50">
+                    <fa-icon [icon]="faShareFromSquare"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

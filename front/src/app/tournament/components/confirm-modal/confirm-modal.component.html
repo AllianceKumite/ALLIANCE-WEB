@@ -1,0 +1,15 @@
+<ng-template #confirmModal [style.right]="position">
+    <div class="modal-header">
+        <h5 class="modal-title pull-left">
+          {{!alertMode ? ('manage.confirmTitle' | translate) : ''}}
+        </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true"></span>
+        </button>
+    </div>
+    <div class="modal-body text-center" >
+        <p [innerHTML]="text"></p>
+        <button *ngIf="!alertMode" type="button" class="btn btn-outline-primary" (click)="decline()" >{{noText}}</button>
+        <button type="button" class="btn btn-primary" (click)="confirm()" style="margin-left:1em">{{yesText}}</button>
+    </div>
+</ng-template>

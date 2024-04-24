@@ -1,0 +1,437 @@
+<container-element [ngSwitch]="viewType">
+    <some-element *ngSwitchCase="'tatamiCurrentParticipant'" [ngTemplateOutlet]="tatamiCurrentParticipant"></some-element>
+    <some-element *ngSwitchCase="'onlineTatamiCurrentParticipant'" [ngTemplateOutlet]="onlineTatamiCurrentParticipant"></some-element>
+    <some-element *ngSwitchCase="'onlineTatamiNextParticipant'" [ngTemplateOutlet]="onlineTatamiNextParticipant"></some-element>
+    <some-element *ngSwitchCase="'drawParticipant'" [ngTemplateOutlet]="drawParticipant"></some-element>
+    <some-element *ngSwitchCase="'manageFightListItemParticipant'" [ngTemplateOutlet]="manageFightListItemParticipant"></some-element>
+    <some-element *ngSwitchCase="'manageParticipantWithFlags'" [ngTemplateOutlet]="manageParticipantWithFlags"></some-element>
+    <some-element *ngSwitchCase="'manageParticipantWithMarks'" [ngTemplateOutlet]="manageParticipantWithMarks"></some-element>
+    <some-element *ngSwitchCase="'currentFightWithTimeWithFlags'" [ngTemplateOutlet]="currentFightWithTimeWithFlags"></some-element>
+    <some-element *ngSwitchCase="'currentFightWithTimeWithMarks'" [ngTemplateOutlet]="currentFightWithTimeWithMarks"></some-element>
+
+    <some-element *ngSwitchDefault [ngTemplateOutlet]="otherCurrentParticipant"></some-element>
+</container-element>
+
+
+<ng-template #tatamiCurrentParticipant>
+    <div class="tatami-current-participant {{akaShiroType}} row" *ngIf="isParticipantDefined()">
+        <!-- <div class="participant-club-logo col-1">
+            <img *ngIf="info?.logo" src="{{info.logo}}" />
+        </div>
+
+        <div class="col-1 d-flex" style="background-color: #e8e80d; min-height: 100%; height: 100%;">fff
+        </div>
+        <div class="col-9">
+            <div class="participant-name truncated-content">{{info?.FIO}}</div>
+            <div class="participant-club truncated-content">{{info?.clubName}}</div>
+        </div> -->
+        <div class="participant-club-logo col-1" style="background-color: #fff">
+            <img *ngIf="info?.logo" src="{{info.logo}}" />
+        </div>
+        <div class="col-1 participant-country">
+           <div> {{info?.countryKod}} </div> 
+        </div>
+        <div class="col-10">
+            <div class="participant-name truncated-content">{{getFIO(info?.FIO)}}</div>
+            <div class="participant-club truncated-content">{{info?.clubName}}</div>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #onlineTatamiCurrentParticipant>
+    <div class="online-tatami-current-participant {{akaShiroType}} p-0 m-0">
+        <div class="left-info">
+            <div class="aka-shiro-mark"></div>
+
+            <div class="participants-details">
+                <div class="details-row p-0 m-0">
+                    <div class="participant-number" style="width: 70px">
+                        <!-- <span *ngIf="isParticipantDefined()">{{info?.OrdNum}}</span> -->
+                        <span *ngIf="isParticipantDefined()">{{get4DigitOrdNum()}}</span>
+                    </div>
+                    <div *ngIf="isParticipantDefined()" class="participant-fio {{akaShiroType}} truncated-content">
+                        <span class="d-flex align-items-center">
+                            <span style="width: 50px;" class="d-flex align-items-center">
+                                <img *ngIf="info?.logo" src="{{info.logo}}"
+                            style="height: auto;width: 40px;" />
+                            </span>
+                            {{getFIO(info?.FIO)}}
+                        </span> 
+                    </div>
+                </div>
+
+                <div class="details-row d-flex align-items-center p-0 m-0">
+                    <!-- <div *ngIf="champType === 4 || champType === 5"> -->
+                        <!-- <img class="flag-name" src="{{logosDir}}/{{ info?.countryFlag?.trim() }}"
+                            *ngIf="info?.countryFlag?.trim() !=''" /> -->
+                    <!-- </div> -->
+                    
+                    <!-- <div class="participant-logo">
+                        <img *ngIf="info?.logo" src="{{info.logo}}"
+                            style="height: 1.3em;width: auto;" />
+                    </div> -->
+
+                    <div class="participant-number"  style="width: 70px">
+                    </div>
+                    <app-participant-club-info
+                        withCoach="{{showExtendedInfo}}"
+                        club="{{info?.clubName}}"
+                        coach="{{info?.coachName}}"
+                    ></app-participant-club-info>
+                </div>
+            </div>
+        </div>
+
+        <div class="participant-photo">
+            <participant-photo src="{{info?.Photo}}"></participant-photo>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #onlineTatamiNextParticipant>
+    <div class="online-tatami-next-participant {{akaShiroType}} row">
+        <div class="participants-details">
+            <div class="details-row">
+                <div class="participant-number">
+                    <!-- <ng-component *ngIf="isParticipantDefined()">{{info?.OrdNum}}</ng-component> -->
+                    <span *ngIf="isParticipantDefined()">{{get4DigitOrdNum()}}</span>
+                </div>
+
+                <div class="participant-fio truncated-content align-items-center">
+                    <span [ngClass]="{'participant-undefined' : isParticipantUndefined(info) }" class="d-flex align-items-center">
+                        <span style="width: 40px;" class="d-flex align-items-center"> <img *ngIf="info?.logo" src="{{info.logo}}"
+                            style="height: 0.8em; width: auto"
+                            />
+                        </span>
+                        <!-- <img *ngIf="info?.logo" src="{{info.logo}}"
+                        style="height: 1em; width: auto"
+                        /> -->
+                        {{isParticipantDefined(info) ? getFIO(info?.FIO) : (('manage.' + getKey(info?.FIO) | translate) + getValue(info?.FIO))}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="details-row d-flex align-items-center" *ngIf="info?.logo || info?.clubName" >
+                <div class="participant-number">
+                    <!-- <span *ngIf="isParticipantDefined()">{{get4DigitOrdNum()}}</span> -->
+                </div>
+                <!-- <div class="participant-logo">
+                    <img *ngIf="info?.logo" src="{{info.logo}}"
+                        style="height: 1.5em; width: auto"
+                    />
+                </div> -->
+                <app-participant-club-info
+                    withCoach="{{champType == 1}}"
+                    club="{{info?.clubName}}"
+                    coach="{{info?.coachName}}"
+                ></app-participant-club-info>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #drawParticipant>
+  <div class="draw-participant {{akaShiroType}} row">
+      <div class="participants-details">
+          <div [ngClass]="{
+            'details-row' : true,
+            'participant-passed' : false
+          }">
+              <div class="participant-number participant-logo participant-place d-flex justify-content-center m-0 p-0">
+                  <ng-container *ngIf="info?.place && drawPlace">
+                    <!-- <div class="box-img d-flex justify-content-center align-items-center"> -->
+                        <img *ngIf="info.place < 4" src="{{logosDir}}/cup-{{info.place}}.png" />
+                    <!-- </div> -->
+                  </ng-container>
+                  <ng-container *ngIf="!info?.place || !drawPlace">
+                      <span *ngIf="isParticipantDefined()">{{get4DigitOrdNum()}}</span>
+                  </ng-container>
+              </div>
+
+              <div class="participants-details">
+                  <div class="participant-fio truncated-content" >
+                    <!-- style="display: flex; align-items: center;" -->
+                      <span *ngIf="isParticipantDefined(info)" [ngClass]="{'participant-undefined' : isParticipantUndefined(info) }">
+                        {{isParticipantDefined(info) ? getFIO(info?.FIO) : (('manage.' + getKey(info?.FIO) | translate) + getValue(info?.FIO))}}
+                      </span>
+                  </div>
+                  <app-participant-club-info
+                          withCoach="{{champType == 1}}"
+                          club="{{info?.clubName}}"
+                          coach="{{info?.coachName}}"
+                  ></app-participant-club-info>
+              </div>
+
+              <div class="passed" *ngIf="passed">●</div>
+
+              <div class="participant-logo" *ngIf="info?.logo">
+                  <img  src="{{info.logo}}" />
+              </div>
+          </div>
+      </div>
+  </div>
+</ng-template>
+
+<ng-template #manageFightListItemParticipant>
+  <div class="online-tatami-next-participant manage-fight-list-item-participant {{akaShiroType}} row"
+      [ngClass]="{'with-points': points && info?.athId > 0}" 
+  >
+
+      <div class="participants-details" style="width: 10%; flex-direction: column; align-items: center; justify-content: space-evenly;">
+          <div class="participant-number">
+              <!-- <ng-component *ngIf="isParticipantDefined()">{{info?.OrdNum}}</ng-component> -->
+              <span *ngIf="isParticipantDefined()">{{get4DigitOrdNum()}}</span>
+          </div>
+
+          <!-- <div class="participant-logo">
+              <img *ngIf="info?.logo" src="{{info.logo}}"
+                  style="height: 2em; width: auto;"
+              />
+          </div> -->
+      </div>
+
+      <div class="participants-details"  style="flex-direction: column; width: 73%">
+          <div class="participant-fio truncated-content">
+              <span [ngClass]="{'participant-undefined' : isParticipantUndefined(info) }">
+                <img *ngIf="info?.logo" src="{{info.logo}}"
+                style="height: 1.4em; width: auto;"/>
+                 {{isParticipantDefined(info) ? getFIO(info?.FIO) : (('manage.' + getKey(info?.FIO) | translate) + getValue(info?.FIO))}}
+              </span>
+          </div>
+
+          <div>
+            <span style="font-size: 1.3em;">{{ info?.clubName }}
+                <span *ngIf="points && info?.athId > 0"> [{{getFormattedPoints(points)}}]</span>
+                <!-- <div class="truncated-content points details-row" *ngIf="points && info?.athId > 0">
+                    {{getFormattedPoints(points)}}
+                </div>                 -->
+            </span>
+            <div *ngIf="groupkata && groupkata > 0">
+              <span style="font-size: 1.1em;">{{ getDoneKataName() }}</span>
+            </div>
+   
+          </div>
+      </div>
+
+      <div class="participants-details fight-details" style="justify-content: center; width: 16%; font-size:1em">
+        <div style="align-self: center;" *ngIf="passed && info?.athId > 0"
+            [ngClass]="{
+                'passed': passed == true,
+                'postponed': passed == 'postponed',
+                'desqualified': passed == 'desqualified'
+            }"
+            >●</div>
+      </div>
+  </div>
+</ng-template>
+
+<ng-template #manageParticipantWithFlags>
+    <div class="manage-participant online-tatami-next-participant {{akaShiroType}} row m-0 p-1">
+        <div class="col-7 p-1 m-0">
+            <!-- FIO -->
+            <div class="row m-0">
+                <div class="participant-fio truncated-content p-0 d-flex justify-content-start align-items-center">
+                    <div class="participant-logo" style="width: auto; padding: 0">
+                        <img *ngIf="info?.logo" src="{{info.logo}}" style="height: auto; width: 1.3em; align-self: self-end;"
+                        />
+                    </div>
+                    <span [ngClass]="{'participant-undefined' : isParticipantUndefined(info) }" style="padding-left: 0.5em; font-weight: 500;">
+                        {{isParticipantDefined(info) ? getFIO(info?.FIO) : (('manage.' + getKey(info?.FIO) | translate) + getValue(info?.FIO))}}
+                    </span>
+                    <!-- <span *ngIf="isParticipantDefined()" style="margin-left: 10px;">{{[get4DigitOrdNum()]}}</span> -->
+                </div>
+            </div>
+
+            <!-- club/coach -->
+            <div class="details-row" *ngIf="info?.logo || info?.clubName" >
+                <div class="col-11">
+                <app-participant-club-info
+                    withCoach="{{champType == 1}}"
+                    club="{{info?.clubName}}"
+                    coach="{{info?.coachName}}">
+                </app-participant-club-info>
+                </div>
+            </div>
+
+            <!-- flags/winner -->
+            <div *ngIf="isParticipantDefined()" class="details-row participant-manage-btns" style="padding-top: 0.2em; padding-bottom: 0.2em; padding-left: 0; padding-right: 0;" >
+                <participant-fight-manager-flag
+                    [fight]="fight"
+                    [info]="info"
+                    [akaShiroType]="akaShiroType"
+                    [onWinner]="onWinner"
+                    [details]="details">
+                </participant-fight-manager-flag>
+            </div>
+
+            <div *ngIf="details?.CategoryType == 3" class="truncated-content points details-row" style="color: #e8e80d; background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);">
+                <span class="p-2">{{'manage.totalball' | translate}}: {{info?.CountBallKata | number:'1.2-2'}}</span>
+            </div>
+                
+            <!-- manage kata -->
+            <div *ngIf="isParticipantDefined() && katagroup > 0" class="details-row d-flex flex-wrap" style="padding-top:0.2em; padding-bottom: 0.2em;" >
+                <div class="col-12 d-flex justify-content-between" style="padding-right: 5px">
+                    <div style="width: 100%" class="{{akaShiroType}}-{{show}}">
+                        <label for="selectedKataMandat" style="width: 100%;">{{'manage.mandatlabel' | translate}}</label>
+                        <ng-select *ngIf="kataMandat"
+                            style="width: 100%; height: 34px; border: 1px solid rgb(199, 198, 198); border-radius: 5px; background-color: #fff;" 
+                            name="selectedKataMandat"
+                            [(ngModel)]="selectedKataMandat" 
+                            (change)="onSelectChangeRefery()"
+                            [searchable]="false"
+                            dropdownPosition="bottom" 
+                            [clearable]="false"
+                            [disabled]="isDisabledMandat()"
+                            >
+                            <ng-option *ngFor="let item of kataMandat" [value]="item.KataId" class="w-100">
+                                {{ getItemNameMandat(item.KataId) }}
+                            </ng-option>
+                        </ng-select>    
+                    </div>
+                    <div class="{{akaShiroType}}-{{show}}" style="width: 50px; margin-left: 5px;">
+                        <label for="selectedKataMandat" style="width: 100%;"> </label>
+                        <!-- <button class="btn btn-warning p-2 d-flex align-items-center justify-content-center" (click)="onSelectReferyKata()" style="height: 34px;"> <i class="fa fa-hand-paper-o fa-2x" aria-hidden="true"></i>
+                        </button>     -->
+                        <button 
+                            class="btn btn-warning p-2 d-flex align-items-center justify-content-center" 
+                            (click)="onSelectReferyKata()" 
+                            style="height: 34px; width: 100%"
+                            [disabled]="isDisabledMandat()"
+                            title="{{'manage.mandatlabel' | translate}}"> 
+                            <img src="{{logosDir}}/select-refery.png" alt="" height="25px">
+                            <!-- <i class="fa fa-hand-paper-o fa-2x" aria-hidden="true"></i> -->
+                        </button>    
+                    </div>
+                </div>
+                <div class="col-12" style="padding-right: 5px">
+                    <label for="selectedKataChoose" style="width: 100%;">{{'manage.chooselabel' | translate}}</label>
+                    
+                    <ng-select *ngIf="kataChoose"
+                        [(ngModel)]="selectedKataChoose" [searchable]="false"
+                        (change)="onSelectChangeYour()"
+                        style="width: 100%; height: 34px; border: 1px solid rgb(199, 198, 198); border-radius: 5px; background-color: #fff;" name="selectedKataChoose"
+                        dropdownPosition="bottom" [clearable]="false" [disabled]="isDisabledChoose()">
+                        <ng-option *ngFor="let item of kataChoose" [value]="item.KataId">
+                            {{ getItemNameChoose(item.KataId) }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div *ngIf="isError" class="details-row d-flex justify-content-center" style="padding-top:0.2em; padding-bottom: 0.2em;">
+                <span style="color: rgb(237, 25, 25); font-size: 16px; font-weight: 500;">{{ 'manage.errorusedkata' | translate}}!!!</span>
+            </div>
+        </div>
+        <div *ngIf="isParticipantDefined() && katagroup > 0" class="row col-5 done-kata ">
+            <div class="d-flex flex-wrap p-0 m-0 col-6" *ngFor="let kata of donekata; let i = index;">
+                <div class="col-12 p-0 m-0">
+                    <span 
+                        class="item-done-kata p-0 m-0"
+                        [ngClass]="{'item-done-kata-choose': kata.level >= chooselevel}"
+                        >                         
+                        {{ 'level.' + kata.level | translate  }} 
+                    </span>                        
+                </div>
+                <div class="col-12 p-0 m-0">
+                    <span class="item-done-kata-text p-0 m-0">{{getkataName(kata.level)}}</span> 
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #manageParticipantWithMarks>
+  <div class="manage-participant online-tatami-next-participant {{akaShiroType}} row">
+      <div class="participants-details" style="padding-right: 1.8em;">
+          <div class="details-row">
+              <div class="participant-number">
+                  <!-- <ng-component *ngIf="isParticipantDefined()">{{info?.OrdNum}}</ng-component> -->
+                  <span *ngIf="isParticipantDefined()">{{get4DigitOrdNum()}}</span>
+              </div>
+
+              <div class="participant-fio truncated-content">
+                  <span [ngClass]="{'participant-undefined' : isParticipantUndefined(info) }">
+                    {{isParticipantDefined(info) ? getFIO(info?.FIO) : (('manage.' + getKey(info?.FIO) | translate) + getValue(info?.FIO))}}
+                  </span>
+              </div>
+
+              <div class="participant-logo">
+                  <img *ngIf="info?.logo" src="{{info.logo}}"
+                      style="height: 2.2em; width: auto;"
+                  />
+              </div>
+          </div>
+
+          <div class="details-row" *ngIf="info?.logo || info?.clubName" style="padding-left: 15%">
+              <app-participant-club-info
+                      withCoach="{{champType == 1}}"
+                      club="{{info?.clubName}}"
+                      coach="{{info?.coachName}}"
+              ></app-participant-club-info>
+          </div>
+      </div>
+  </div>
+
+  <div NgModel #btns *ngIf="isParticipantDefined()" class="details-row participant-manage-marks"style="padding: 1em 3em 2em" >
+      <participant-fight-manager-mark
+          [info]="info"
+          [akaShiroType]="akaShiroType"
+          [onWinner]="onWinner"
+          [addWindow]="addWindow"
+      ></participant-fight-manager-mark>
+  </div>
+
+</ng-template>
+
+
+<ng-template #currentFightWithTimeWithFlags>
+    <div class="manage-participant online-tatami-next-participant current-fight-time-flags {{akaShiroType}} participants-details">
+        <div class="details-row {{akaShiroType}} participant-header" >
+            <div class="participant-fio">
+                <span *ngIf="isParticipantUndefined(info)" class='participant-undefined'>
+                    {{('manage.' + getKey(info?.FIO) | translate) + getValue(info?.FIO)}}
+                </span>
+
+                <div *ngIf="isParticipantDefined(info)">
+                    {{firstName}}
+                </div>
+                <div *ngIf="isParticipantDefined(info)">
+                    {{lastName}}
+                </div>
+            </div>
+            <div class="logo">
+                <img *ngIf="info?.logo" src="{{info.logo}}" />
+            </div>
+        </div>
+
+        <div class="details-row" >
+            <div class="participant-data">
+                <div class="sub-info">
+                    <!-- <div class="dan fs-1 fw-bold">{{info?.DAN.substring(0, info?.DAN.length - 1)}} {{('manage.level.'+info?.DAN[info?.DAN.length - 1]) | translate }}</div> -->
+                    <div *ngIf="isParticipantDefined()" class="fs-1 fw-bold">{{get4DigitOrdNum()}}</div>
+                </div>
+
+                <div class="sub-info">
+                    <div>{{info?.DateBR | date: 'dd.MM.yyyy'}}</div>
+                    <div class="kiu">{{info?.Weight}} {{'manage.kilos' | translate}}</div>
+                </div>
+                <app-participant-club-info
+                    withCoach="{{champType == 1}}"
+                    club="{{info?.clubName}}"
+                    coach="{{info?.coachName}}"
+                ></app-participant-club-info>
+
+                <div *ngIf="info?.regionId != 'None' && info?.regionId > 0">{{('db.region.' + info?.regionId) | translate}}</div>
+                <div>{{('db.country.' + info?.countryId) | translate}}</div>
+            </div>
+            <!-- *ngIf="info?.logo || info?.clubName" -->
+            <div class="participant-ath-photo">
+                <!-- <p>{{info.Photo}}</p> -->
+                <img *ngIf="info?.Photo" src="{{info.Photo}}" />
+            </div>
+        </div>
+        <div class="row">
+            <participant-flags [marks]="marks" [akaShiroType]="akaShiroType"></participant-flags>
+        </div>
+    </div>
+</ng-template>

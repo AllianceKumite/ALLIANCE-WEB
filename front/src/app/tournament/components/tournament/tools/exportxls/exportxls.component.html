@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="d-flex justify-content-between mt-3 mb-3">
+        <h3>{{'tools.exportxls' | translate}}</h3>
+        <button class="btn btn-primary" (click)="export()">Export</button>
+    </div>
+    <table class="table table-sm bg-white" id="exceltable" >
+        <thead class="thead-dark">
+            <tr>
+                <th class="col-12 fs-4">{{champname}}</th>
+            </tr>
+            <tr>
+                <th class="col-12 fs-5">{{champcity}}, {{dDateto | date : 'dd.MM.yyyy'}}</th>
+            </tr>
+            <tr>
+                <th class="col-12 fs-5">{{"results.individualResults" | translate}}</th>
+            </tr>
+            <tr>
+                <th class="col-12"></th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let category of categories; let i = index">
+            <tr>
+                <th class="col-12"></th>
+            </tr>
+            <tr>
+                <th class="col-12 row-category"><app-category-name id="{{category.id}}"></app-category-name></th>
+            </tr>
+            <table class="table table-sm table-result bg-light" >
+                <thead>
+                    <tr>
+                        <th class="col-1 col-header">#</th>
+                        <th class="col-3 col-header">{{'coach.fio' | translate}}</th>
+                        <th class="col-3 col-header">{{'general.club' | translate}}</th>
+                        <th class="col-2 col-header">{{'general.country' | translate}}</th>
+                        <th class="col-3 col-header">{{'general.coach' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let itemwinner of winnerscategory[i]; let j = index">
+                    <tr>
+                        <td class="col-1 itemdata">{{ j + 1}}</td>
+                        <td class="col-3 itemdata">{{itemwinner.FIO}}</td>
+                        <td class="col-3 itemdata">{{itemwinner.clubName}}</td>
+                        <td class="col-2 itemdata">{{itemwinner.countryKod}}</td>
+                        <td class="col-3 itemdata">{{itemwinner.coachName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tbody>
+    </table>
+</div>

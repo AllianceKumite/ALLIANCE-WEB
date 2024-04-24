@@ -1,0 +1,361 @@
+<container-element [ngSwitch]="viewType">
+    <some-element *ngSwitchCase="'tatamiCurrentFight'" [ngTemplateOutlet]="tatamiCurrentFight"></some-element>
+    <some-element *ngSwitchCase="'onlineTatamiCurrentFight'"
+        [ngTemplateOutlet]="onlineTatamiCurrentFight"></some-element>
+    <some-element *ngSwitchCase="'onlineTatamiNextFight'" [ngTemplateOutlet]="onlineTatamiNextFight"></some-element>
+    <some-element *ngSwitchCase="'manageFightListItem'" [ngTemplateOutlet]="manageFightListItem"></some-element>
+    <some-element *ngSwitchCase="'manageFightInDetailsWithFlags'"
+        [ngTemplateOutlet]="manageFightInDetailsWithFlags"></some-element>
+    <some-element *ngSwitchCase="'manageFightInDetailsWithMarks'"
+        [ngTemplateOutlet]="manageFightInDetailsWithMarks"></some-element>
+    <some-element *ngSwitchCase="'currentFightWithTime'" [ngTemplateOutlet]="currentFightWithTime"></some-element>
+
+    <some-element *ngSwitchDefault [ngTemplateOutlet]="otherCurrentFight"></some-element>
+</container-element>
+
+<ng-template #tatamiCurrentFight>
+    <div *ngIf="fight" class="tatami-current-fight">
+        <div class="fight-category text-light text-center" style="display: flex">
+            <div class="category-name truncated-content">
+                <app-category-name id="{{fight?.details?.CategoryId}}" uppercase="{{true}}"
+                    blockCount="{{fight?.details?.CategoryBlockCount}}" block="{{fight?.details?.BlockNum}}">
+                </app-category-name>
+            </div>
+            <div style="flex-shrink: 0" class="category-level truncated-content">
+                {{ ' - ' }}<app-level-name [details]="fight?.details"></app-level-name>. {{fight?.details.NumDuel}} of
+                {{fight?.details.total}}
+            </div>
+        </div>
+
+        <!-- class="d-flex justify-content-start" -->
+        <div class="container-fluid p-0 m-0">
+            <participant [info]="fight?.red" [akaShiroType]="'aka'" [viewType]="'tatamiCurrentParticipant'"
+                [showExtendedInfo]="champType == 1"></participant>
+            <participant [info]="fight?.white" [akaShiroType]="'shiro'" [viewType]="'tatamiCurrentParticipant'"
+                [showExtendedInfo]="champType == 1"></participant>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #onlineTatamiCurrentFight>
+    <div class="online-tatami-current-fight" style="border-color: #2c475c">
+        <div class="current-category text-light text-center d-flex justify-content-between align-items-center">
+            <div class="fight-number" style="width: 200px;">
+                #{{fight?.details?.NumDuel}}
+            </div>
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <div class="truncated-content">
+                    <app-category-name id="{{fight?.details?.CategoryId}}" uppercase="{{true}}"
+                        blockCount="{{fight?.details?.CategoryBlockCount}}"
+                        block="{{fight?.details?.BlockNum}}"></app-category-name>
+                </div>
+                <div class="truncated-content w-25">
+                    <app-level-name [details]="fight?.details"></app-level-name>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- {{details.CurrentDuel}}  of {{details.total}} -->
+
+        <div class="d-flex text-light fight-card">
+            <div style="width: 10px;">
+                <!-- #{{fight?.details?.NumDuel}} -->
+            </div>
+
+            <div class="participants" >
+                <participant [info]="fight?.red" [akaShiroType]="'aka'" [viewType]="'onlineTatamiCurrentParticipant'"
+                    [showExtendedInfo]="champType == 1"></participant>
+                <participant [info]="fight?.white" [akaShiroType]="'shiro'"
+                    [viewType]="'onlineTatamiCurrentParticipant'" [showExtendedInfo]="champType == 1" ></participant>
+                <!-- <div style="height: 10px;"></div> -->
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #onlineTatamiNextFight>
+    <div *ngIf="fight?.details" class="online-tatami-next-fight" style="padding-bottom: 10px;">
+
+        <!-- color -->
+        <div [ngClass]="'fight-category text-light text-center color-' + headerColor" 
+            style="display: flex; justify-content: left; align-items: center">
+            <div class="fight-number">#{{fight?.details?.NumDuel}} </div>
+
+            <!-- <div style="width: 75%;"> -->
+            <div class="category-name truncated-content col-8">
+                <app-category-name id="{{fight?.details?.CategoryId}}" uppercase="{{true}}"
+                    blockCount="{{fight?.details?.CategoryBlockCount}}"
+                    block="{{fight?.details?.BlockNum}}"></app-category-name>
+            </div>
+            <div class="category-level truncated-content"> 
+                <app-level-name [details]="fight?.details"></app-level-name>
+            </div>
+            <!-- </div> -->
+        </div>
+
+        <!-- class="d-flex justify-content-start" -->
+        <div class="container-fluid">
+            <participant [info]="fight?.red" [akaShiroType]="'aka'" [viewType]="'onlineTatamiNextParticipant'"
+                [showExtendedInfo]="champType == 1"></participant>
+            <!-- <div style="height: 1px; background-color: #99a5ae; margin-top: 6px;"></div> -->
+            <participant [info]="fight?.white" [akaShiroType]="'shiro'" [viewType]="'onlineTatamiNextParticipant'"
+                [showExtendedInfo]="champType == 1"></participant>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #manageFightListItem>
+    <div *ngIf="fight?.details" (click)="selectFight($event)" class="online-tatami-next-fight manage-fight-list-item"
+        id="mng-{{fight?.details?.ownId}}" [ngClass]="{
+          'managed-selected' : fight?.selected,
+          'circle': fight?.details?.CategoryType == 1
+      }">
+
+        <!-- color -->
+        <div [ngClass]="'fight-category text-light text-center color-' + headerColor"
+            style="display: flex; justify-content: left; align-items: center;">
+            <div class="fight-number d-flex align-items-center justify-content-center p-0 m-0" style="color: #fff; font-weight: 500; font-size: 1.3em;">#{{fight?.details?.NumDuel}} </div>
+
+            <div class="p-0 m-0 d-flex">
+                <div class="category-name truncated-content" style="color: #fff; font-weight: 500; font-size: 1.3em; padding-left: 10px;">
+                    <app-category-name id="{{fight?.details?.CategoryId}}" uppercase="{{true}}"
+                        blockCount="{{fight?.details?.CategoryBlockCount}}"
+                        block="{{fight?.details?.BlockNum}}"></app-category-name>
+                </div>
+
+                <div class="category-level truncated-content" style="color: #fff; font-weight: 500; ; font-size: 1.3em; padding-left: 10px;"> <app-level-name
+                        [details]="fight?.details"></app-level-name></div>
+            </div>
+
+            <div style="width: 100%; text-align: right;">
+                <button class="btn btn-sm btn-light btn-cpu" (click)="onCancel(fight)"
+                    [disabled]="!eligibleToCancel(fight)" title="{{'manage.cancelSelected'     | translate}}">C</button>
+                <button class="btn btn-sm btn-light btn-cpu" (click)="onPostpone(fight)"
+                    [disabled]="!eligibleToPostpone(fight)"
+                    title="{{'manage.postponeSelected'   | translate}}">P</button>
+                <button class="btn btn-sm btn-light btn-cpu" (click)="onUnpostpone(fight)"
+                    [disabled]="!eligibleToUnpostpone(fight)"
+                    title="{{'manage.unpostponeSelected' | translate}}">U</button>
+            </div>
+        </div>
+
+        <!-- TODO: false
+    investigate why backgroung changing is no dynamically updated-->
+        <div class="container-fluid" [ngClass]="{'fight-passed':false && isFightPassed(fight)}">
+            <participant [info]="fight?.red" [passed]="getPassedMark(fight, fight?.red)" [akaShiroType]="'aka'"
+                [viewType]="'manageFightListItemParticipant'" [showExtendedInfo]="champType == 1"
+                [points]="getPoints('aka')" [kataMandat]="kataMandat" [kataChoose]="kataChoose" [katagroup]="kataGroup"></participant>
+            <!-- <div style="height: 1px; background-color: #cdcdcd; width: 100%"></div> -->
+            <participant [info]="fight?.white" [passed]="getPassedMark(fight, fight?.white)" [akaShiroType]="'shiro'"
+                [viewType]="'manageFightListItemParticipant'" [showExtendedInfo]="champType == 1"
+                [points]="getPoints('shiro')" [kataMandat]="kataMandat" [kataChoose]="kataChoose" [katagroup]="kataGroup"></participant>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #manageFightInDetailsWithFlags>
+    <div *ngIf="fight?.details" class="manage-fight-in-details-with-flags online-tatami-next-fight" style="border-color: #004080">
+
+        <!-- color -->
+        <div [ngClass]="'fight-category text-light text-center'"
+            style="display: flex; justify-content: left; align-items: center; margin: 0;   background-image: linear-gradient(to right, #2c475c 0%, #476e8d 100%);">
+            <!-- <div class="fight-number">{{ fight.details?.NumDuel }} {{ this.count }}</div> -->
+            <!-- #{{fight.details?.NumDuel}} -->
+            <div class="col-6 d-flex flex-wrap justify-content-start">
+                <div class="category-name truncated-content d-flex justify-content-start">
+                    <app-category-name id="{{fight?.details?.CategoryId}}" uppercase="{{true}}"
+                        blockCount="{{fight?.details?.CategoryBlockCount}}"
+                        block="{{fight?.details?.BlockNum}}"></app-category-name>
+                </div>
+                <div class="category-level truncated-content w-100"> <app-level-name
+                        [details]="fight?.details"></app-level-name></div>
+            </div>
+
+            <!-- <div class="fight-number" style="font-size: 1.2em; font-weight: 400;">
+                {{ fightcount }}
+            </div> -->
+
+            <div class="fight-number" style="font-size: 1.2em; font-weight: 400; width:100%">
+                {{(fight?.details?.CategoryType == typeOlimp ? 'olympic (for elimination)' : 
+                fight?.details?.CategoryType == typeKata ? 'kata WKO (refery choice or your own)' : 
+                fight?.details?.CategoryType == typeWKB ? 'kata WKB (points and flags)' :
+                fight?.details?.CategoryType == typeCircle && fight?.details?.CategoryBlockCount != 2 ? 'circle (points only)' :
+                fight?.details?.CategoryType == typeCircle && fight?.details?.CategoryBlockCount == 2 ? 'circle (for all victories)' : '')
+                }}
+            </div>
+            <!-- <div class="category-name truncated-content">
+                {{ fight?.details?.KataGroup }}
+            </div> -->
+        </div>
+
+        <!-- <div [ngClass]="'fight-category text-light text-center'"
+            class="d-flex justify-content-start align-items-center flex-wrap">
+            <div class="kata-name truncated-content">
+                {{ getKataGroupName(fight?.details?.KataGroup) }}
+            </div>
+            <div class="kata-name truncated-content">
+                {{ getKataGroupMandat(fight?.details?.KataGroup) }}
+            </div>
+            <div class="kata-name truncated-content">
+                {{ getKataGroupChoose(fight?.details?.KataGroup) }}
+            </div>
+        </div> -->
+
+        <div class="container-fluid p-0 m-0">
+            <participant [fight]="fight?.details?.ownId" [info]="fight?.red" [akaShiroType]="'aka'"
+                [viewType]="'manageParticipantWithFlags'" [categoryFilter]="categoryFilter" [details]="fight?.details" 
+                [kataMandat]="kataMandat" [kataChoose]="kataChoose" [katagroup]="kataGroup"
+                [showExtendedInfo]="champType == 1"
+                [chooselevel] = "chooselevel"
+                (selectedKataRefery)="getSelectedKataRefery($event)"
+                (selectedKata)="getSelectedKataAka($event)"
+                (updateInfoLevel)="updateKata($event)"
+                >
+            </participant>
+            <!-- <div style="height: 1px; background-color: #cdcdcd; width: 100%"></div> -->
+                       
+            <participant [fight]="fight?.details?.ownId" [info]="fight?.white" [akaShiroType]="'shiro'"
+                [viewType]="'manageParticipantWithFlags'" [categoryFilter]="categoryFilter" [details]="fight?.details" 
+                [kataMandat]="kataMandat" [kataChoose]="kataChoose" [katagroup]="kataGroup"
+                [showExtendedInfo]="champType == 1"
+                [chooselevel] = "chooselevel"
+                (selectedKataRefery)="getSelectedKataRefery($event)"
+                (selectedKata)="getSelectedKataShiro($event)"
+                (updateInfoLevel)="updateKata($event)">
+                >
+            </participant>
+        </div>
+
+        <fight-counter 
+            [fightNum]="fight?.details?.NumDuel" 
+            [duration]="fight?.details?.duration"
+            [addWindow]="addWindow" 
+            [champName]="champName" 
+            [tatamiId]="tatamiId"
+            [katagroup]="kataGroup"
+            [count]="count"
+
+            >
+        </fight-counter>
+    </div>
+</ng-template>
+
+<ng-template #manageFightInDetailsWithMarks>
+    <div *ngIf="fight?.details" class="online-tatami-next-fight">
+
+        <!-- color -->
+        <div [ngClass]="'fight-category text-light text-center color-' + headerColor"
+            style="display: flex; justify-content: left; align-items: center;">
+            <div class="fight-number">#{{fight?.details?.NumDuel}} </div>
+
+            <div>
+                <div class="category-name truncated-content">
+                    <app-category-name id="{{fight?.details?.CategoryId}}" uppercase="{{true}}"
+                        blockCount="{{fight?.details?.CategoryBlockCount}}"
+                        block="{{fight?.details?.BlockNum}}"></app-category-name>
+                </div>
+                <div class="category-level truncated-content"> <app-level-name
+                        [details]="fight?.details"></app-level-name></div>
+            </div>
+        </div>
+
+        <!-- class="d-flex justify-content-start" -->
+        <div class="container-fluid" style="background-color: #00000010;">
+            <participant [fight]="fight?.details.ownId" [info]="fight?.red" [akaShiroType]="'aka'"
+                [viewType]="'manageParticipantWithMarks'" [categoryFilter]="categoryFilter"
+                [showExtendedInfo]="champType == 1" [addWindow]="addWindow"></participant>
+
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #currentFightWithTime>
+    <div *ngIf="isNotEmptyFight()" class="online-tatami-current-fight current-fight-with-time" style="height: 100%; width: 100%; justify-content: space-between;">
+        <!-- <fullscreen-btn style="position: absolute; top: 10px; left: 10px;"></fullscreen-btn> -->
+        <fullscreen-btn type="popout" style="color: red;"></fullscreen-btn>
+        <div class="fullscreened">
+            <div class="current-category text-light text-center" style="background-color:#004080">
+                <!-- <fullscreen-btn type="popup"></fullscreen-btn> -->
+                <div class="truncated-content" style="padding:0.5em">
+                    <app-category-name id="{{fight?.details?.CategoryId}}" uppercase="{{true}}"
+                        blockCount="{{fight?.details?.CategoryBlockCount}}"
+                        block="{{fight?.details?.BlockNum}}"></app-category-name>
+                    &nbsp;
+                    (<app-level-name [details]="fight?.details"></app-level-name>)
+                </div>
+            </div>
+
+            <div>
+                <div style="display: flex">
+                    <div class="col-5 p-0 m-0">
+                        <participant *ngIf="fight?.details?.CategoryType != typeWKB" [fight]="fight?.details?.ownId"
+                            [info]="fight?.white" [akaShiroType]="'shiro'" [viewType]="'currentFightWithTimeWithFlags'"
+                            [categoryFilter]="categoryFilter" [details]="fight?.details"
+                            [showExtendedInfo]="champType == 1" [marks]="marks['shiro']"></participant>
+                        <participant *ngIf="fight?.details?.CategoryType == typeWKB && fight?.details?.Level >= 8"
+                            [fight]="fight?.details?.ownId" [info]="fight?.white" [akaShiroType]="'shiro'"
+                            [viewType]="'currentFightWithTimeWithFlags'" [categoryFilter]="categoryFilter"
+                            [details]="fight?.details" [showExtendedInfo]="champType == 1" [marks]="marks['shiro']">
+                        </participant>
+                    </div>
+
+                    <div class="col-2 d-flex justify-content-between p-0 m-0" style="background-color: #ececec; text-align: center; color: white; padding-bottom: 1em">
+                        <div style="background-color:#004080; width: 3px; height: 100%"></div>
+                        <div class="fight-details">
+                            <div class="fight-number">#{{fight?.details?.NumDuel}}</div>
+                            <div class="fight-number" style="font-size: 2.5em;">{{'manage.round' | translate}}-{{numRound + 1}}</div>    
+                        </div>
+                        <div style="background-color:#004080; width: 3px; height: 100%;"></div>
+                    </div>
+
+                    <div class="col-5 p-0 m-0">
+                        <participant 
+                            [fight]="fight?.details?.ownId" [info]="fight?.red" [akaShiroType]="'aka'"
+                            [viewType]="'currentFightWithTimeWithFlags'" [categoryFilter]="categoryFilter"
+                            [details]="fight?.details" [showExtendedInfo]="champType == 1" [marks]="marks['aka']">
+                        </participant>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background-color:#004080; height: 3px;">
+            </div>
+
+            <div class="timer" *ngIf="fight?.details?.CategoryType != typeWKB && fight?.details?.CategoryType != typeKata">
+                <div>{{formatTime(time)}}</div>
+            </div>
+
+            <div class="kataname" *ngIf="fight?.details?.CategoryType == typeKata" style="height: 50%">
+                <div 
+                    class="col-5 p-0 m-0 d-flex align-items-center justify-content-center" 
+                    style="color: #242424; font-size: 5rem; font-weight: 800;"> 
+                    {{ selectedkataService.selectedKataNameShiro }}
+                </div>
+                <div class="col-2 p-0 m-0 "></div>
+                <div 
+                    class="col-5 p-0 m-0 d-flex align-items-center justify-content-center" 
+                    style="color: red; font-size: 5rem; font-weight: 800;"> 
+                    {{ selectedkataService.selectedKataNameAka }}
+                </div>
+            </div>
+
+            <div style="background-color:#004080; height: 3px;">
+            </div>
+
+            <div class="current-fight-tatami-title d-flex align-items-center justify-content-center" style="height: 20%; background-color:#041d37; text-align: center; color: white;">
+                <tatami-title [id]='fight?.details?.TatamiId' [up]='true'></tatami-title>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!isNotEmptyFight()" class="online-tatami-current-fight current-fight-with-time" style="height: 100%; width: 100%; justify-content: space-between;">
+        <div class="d-flex align-items-center justify-content-center text-center" style="height: 100%; width: 100%; font-size: 8em; font-weight: 600;color: rgb(255, 3, 3); background-color: #fff;">
+            <div class="text-center" style="width: 100%;">
+                {{'manage.nofight' | translate}}
+            </div>           
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,15 @@
+<div class="clubs-list p-0">
+    <div class="" *ngFor="let item of clubs">
+        <div class="clubs-card d-flex p-1 pr-2 pl-3 pb-0">
+            <div class="image-and-name d-flex align-items-center w-100 text-center">
+                <div class="counter" style="width: 15%;margin-left: 6%; text-align: right;">
+                    {{ item.count }}
+                </div>
+                <div style="cursor: pointer; text-align: left; margin-left: 5%; width: 50%;" (click)="getParticipantsByClub(item.name)">{{ item.name }}</div>
+                <div style="margin-left: auto; max-width: 32.5px; max-height: 20px;"><img src="{{logosDir}}/{{ item.logo }}" style="width: 100%; height: auto;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- {{ item.logo }} -->

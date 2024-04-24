@@ -1,0 +1,42 @@
+/* TODO: DRY and move out to common styles */
+.truncated-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.draw-participant .participant-club,
+.online-tatami-next-participant .participant-club,
+.online-tatami-current-participant .participant-club
+/* .participant-club  */
+{
+    color: #242424;
+    text-align:left;
+    font-size: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.draw-participant .participant-club,
+.online-tatami-next-participant .participant-club
+/* .participant-club  */
+{
+    color: gray;
+}
+
+.draw-participant .participant-club
+/* .participant-club  */
+{
+    font-size: 70% !important;
+    font-weight: 500;
+}
+
+.current-fight-time-flags .participant-club {
+    color: inherit;
+    font-size: inherit;
+    display: flex;
+}
+
+.current-fight-time-flags.aka .participant-club {
+    justify-content: end;
+}

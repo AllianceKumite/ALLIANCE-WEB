@@ -1,0 +1,44 @@
+<div>
+    <!-- <h3 class="p-1"><a [routerLink]="['../online']" [queryParams]="{tatami: 0}" style="text-decoration: underline; color: #595959">{{'general.tatamiCategories' | translate}}</a></h3> -->
+    <!-- <h3>{{'general.tatamiCategories' | translate}}</h3> -->
+    <!-- <a [routerLink]="['../online']" [queryParams]="{tatami: 0}" style="text-decoration: underline">{{ 'tatami.showAllTatamis' | translate }}</a> -->
+</div>
+
+<div class="row p-1 mt-2 tatamis-current-bout-and-categories">
+    <div [ngClass]="'tatami tatami-' + i" class="col col-sm-12 col-md-6 col-lg-4" *ngFor="let tatami of tatamies; let i = index;">
+        <div class="card h-100 ">
+            <div class="card-body">
+                <div class="card-title">
+                    <h5 class="tatami-number text-light text-center">
+                        <tatami-title [id]='tatami.tatamiId' [tatamiType] = 'tatamiType'></tatami-title>
+                    </h5>
+                </div>
+
+                <fight
+                    [viewType]="'tatamiCurrentFight'"
+                    [fight]="tatami.fight"
+                    [champName]="champName"
+                ></fight>
+
+                <ul class="list-group list-group-flush">
+                    <li *ngFor="let category of tatami.categoriesIds" class="list-group-item truncated-content">
+                        <app-category-name id="{{category}}"></app-category-name>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="btn-group card-footer bg-light" role="group" style="justify-content: flex-start;">
+                <div *ngIf="tatamiesVideo[i].url" class="text-center" style="cursor: pointer; padding-right: 0.5em;">
+                    <!-- <div *ngIf="tatami.fight" class="text-center" style="cursor: pointer; padding-right: 0.5em;"> -->
+                        <!-- <a style="text-decoration: none; color: rgb(19, 60, 164)" href="http://youtube.com/" target="_blank" [queryParams]="{tatami: (i + 1)}">{{ 'tatami.stream' | translate }}</a> -->
+                    <a style="text-decoration: none; color: rgb(19, 60, 164)" href="{{ tatamiesVideo[i].url }}" target="_blank">{{ 'tatami.stream' | translate }}</a>
+                </div>
+                <div *ngIf="tatami.fight" class="text-center" style="cursor: pointer; padding-right: 0.5em;">
+                      <a style="text-decoration: none; color: rgb(19, 60, 164)" [routerLink]="['../online']" [queryParams]="{tatami: (i + 1)}">{{ 'tatami.goToFights' | translate }}</a>
+                </div>
+                <div class="text-center" style="cursor: pointer;" *ngIf="!isActive[i]" (click)="showMore(i)">{{'tatami.showMore' | translate}}</div>
+                <div class="text-center" style="cursor: pointer;" *ngIf="isActive[i]" (click)="showLess(i)">{{'tatami.showLess' | translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>

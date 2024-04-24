@@ -1,0 +1,13 @@
+<div class="countries-list p-0">
+    <div class="" *ngFor="let item of items">
+        <div class="countries-card d-flex">
+            <div class="image-and-name d-flex align-items-center text-center w-100">
+                <!-- <div style="max-width: 32.5px;"><img src="{{logosDir}}/{{ item.kod.trim() }}" style="width: 100%; height: auto;"></div> -->
+                <div (click)="filterParticipants(item.id)" style="cursor: pointer; margin-left: 10px;">{{ item.name }}</div>
+                <div class="counter" style="margin-left: auto;">
+                    {{ item.count }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

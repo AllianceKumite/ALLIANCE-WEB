@@ -1,0 +1,27 @@
+.champ-info {
+    display: flex;
+    align-items: center;
+    /* padding-top: 0.3em; */
+}
+
+.name, .date {
+    margin: 0;
+    padding: 0 0.5em;
+    font-size: 1.5rem;
+    color: #64707e;
+}
+
+
+@media (max-width: 500px) {
+  .date
+  {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .name, .date {
+    font-size: 1em;
+  }
+}
+

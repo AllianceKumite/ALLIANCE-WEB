@@ -1,0 +1,179 @@
+
+<div class="container">
+    <div *ngIf="!model.isSuperAdmin && model.coachId > 0 " class="d-flex justify-content-between flex-wrap">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 p-1 m-0" id="box-data">
+            <div class="box-data">
+                <div class="row row-header p-0 m-0">
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                        <div class="col-header" style="text-align: center;">#
+                        </div>
+                    </div>
+                    <div class="col-7 col-sm-3 col-md-7 col-lg-3 p-0 m-0">
+                        <div class="col-header" style="text-align: start;">
+                        <span>{{'referyTable.fio' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="col-3 col-sm-2 col-md-3 col-lg-1 p-0 m-0">
+                        <div class="col-header" style="text-align: center;">
+                        <span>{{'referyTable.gender' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                        <div class="col-header" style="text-align: center;">
+                        {{'referyTable.dan' | translate}}
+                        </div>
+                    </div>
+                    <div class="col-5 col-sm-2 col-md-5 col-lg-2 p-0 m-0">
+                        <div class="col-header" style="text-align: start;">
+                        <span>{{'referyTable.club' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                        <div class="col-header" style="text-align: center;">
+                        <span>{{'referyTable.countryflag' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-2 col-md-5 col-lg-2 p-0 m-0">
+                        <div class="col-header" style="text-align: start;">
+                        <span>{{'referyTable.countrykod' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="col-2 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                    </div>
+            </div>
+
+            <div *ngFor="let refery of referys; let i = index" 
+                class="row row-data" 
+                (click)="onSelectRefery($event, refery)"
+                [ngClass]="{ 'row-data-gray': i % 2 == 0, 'row-select': activeRefery.FIO && refery.FIO == activeRefery.FIO}">  
+                <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                    <div class="col-data num">
+                    <span>{{i + 1}}</span>
+                    </div>
+                </div>
+                <div class="col-7 col-sm-8 col-md-7 col-lg-3 p-0 m-0">
+                    <div class="col-data fio">
+                        <span>{{refery.FIO}}</span>
+                    </div>
+                </div>   
+                <div class="col-3 col-sm-2 col-md-3 col-lg-1 p-0 m-0">
+                    <div class="col-data gender">
+                        <span>{{refery.Gender}}</span>
+                    </div>
+                </div>
+                <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                    <div class="col-data grade">
+                        <span>{{refery.DAN}}</span>
+                    </div>
+                </div>
+                <div class="col-5 col-sm-5 col-md-5 col-lg-2 p-0 m-0">
+                    <div class="col-data club">
+                        <span>{{refery.ClubName}}</span>
+                    </div>
+                </div>
+                <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0 d-flex justify-content-center align-items-center">
+                    <div class="col-data flag">
+                        <img src="{{ flagDir}}/{{refery.countryFlag }}" alt="">
+                    </div>
+                </div>
+                <div class="col-4 col-sm-5 col-md-5 col-lg-2 p-0 m-0">
+                    <div class="col-data country">
+                        <span>{{ 'db.country.' + refery.countryId | translate }}</span>
+                    </div>
+                </div>
+                <div class="col-2 col-sm-1 col-md-1 col-lg-1 p-0 m-0 d-flex justify-content-center align-items-center">
+                    <div *ngIf="isSelectedRow(refery)" class="col-header d-flex justify-content-center align-items-center">
+                        <button class="btn btn-sm btn-outline-danger" 
+                        (click)="deleteRefery()"> DELETE
+                        </button>
+                    </div>
+                </div>
+
+            </div>  
+        </div>
+
+        </div>
+        
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 p-1 m-0">
+            <div class="box-edit">
+                <div class="row row-header p-0 m-0 d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="col-8">
+                            <span style="margin-left: 10px;width: 50%;"> {{"navbar.regrefery" | translate}} </span>
+                            <ng-container *ngIf="!this.model.isSuperAdmin">
+                                <a target="_blank" href="{{ videofile }}">
+                                    <img src="{{logosDir}}/video-camera.svg" alt="" style="width: 30px; height: 20px; cursor: help;"> 
+                                </a>                
+                            </ng-container>
+        
+                        </div>
+                        <div class="col-2 p-1">
+                            <button class="btn btn-warning" (click)="insertNewRefery()"> Add </button>
+                        </div>
+                        <div class="col-2 p-1">
+                            <button class="btn btn-success" (click)="saveNewRefery()"> Save </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-0 m-0">
+                    <span></span>
+                </div>
+
+                <div class="row p-0 m-0">
+                    <div class="col-12 p-1 m-0">
+                        <label for="fio">{{"coach.fio" | translate}} 
+                            <div *ngIf="submitted && activeReferyValidationError && activeReferyValidationError.FIO == 'exists' "
+                            class="invalid-feedback">{{ "referyTable.exists" | translate: { refery: activeRefery.FIO} }}
+                        </div>   
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-control h-40  ng-select" 
+                            name="FIO" id="fio"
+                            [(ngModel)]="activeRefery.FIO" 
+                            (input)="onSelectChange()"
+                            [ngClass]="{ 'is-invalid': submitted && activeReferyValidationError && activeReferyValidationError.FIO }"
+                            (ngModelChange)="cleanErrors()">
+                    </div>
+                </div>
+    
+                <div class="row p-0 m-0">
+                    <div class="col-6 p-1 m-0">
+                        <label for="gender">{{"coach.gender" | translate}}</label>
+                        <ng-select 
+                            bindLabel="name" 
+                            bindValue="name" 
+                            name="gender" id="gender"
+                            [items]="gender" 
+                            [(ngModel)]="activeRefery.Gender"
+                            class="form-control ng-select" 
+                            (change)="onSelectChange()"
+                            [ngClass]="{ 'is-invalid': submitted && activeReferyValidationError && activeReferyValidationError.Gender }">
+                        </ng-select>
+                    </div>
+                    <!-- DAN -->
+                    <div class="col-6 p-1 m-0">
+                        <label for="rang">{{"coach.rang" | translate}}</label>
+                        <ng-select 
+                            bindLabel="name" 
+                            bindValue="name" name="dan" 
+                            [items]="dan"
+                            [(ngModel)]="activeRefery.DAN" 
+                            class="form-control  ng-select" 
+                            (change)="onSelectChange()"
+                            [ngClass]="{ 'is-invalid': submitted && activeReferyValidationError && activeReferyValidationError.DAN }">
+                        </ng-select>
+                    </div>   
+                </div>    
+            </div>
+        </div>     
+    </div>
+    <div *ngIf="model.isSuperAdmin || model.coachId == 0 || model.coachId == null" class="d-flex justify-content-center align-items-center flex-wrap">
+        <div style="border: 1px solid #444; background-color: #fff; border-radius: 2px; padding: 30px; color: brown;">
+            <h2>
+                {{'referyTable.errorUser' | translate}}!!!
+            </h2>
+        </div>
+    </div>
+</div>

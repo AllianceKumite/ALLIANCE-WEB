@@ -1,0 +1,20 @@
+
+<div class="card rounded-0 p-0 m-0" (click)='goToTournament(tournament.id)'>
+    <div  class="d-flex justify-content-center">
+        <img  ngSrc="{{mediaDir}}/champ/{{tournament.id}}.avif"  width="270" height="180" class="card-img-bcg rounded-0">
+        <!-- <img alt="Not found file" src="{{mediaDir}}/champ/{{tournament.id}}.avif" onerror = "this.src = 'assets/media/champ/default_champ1.avif'" class="card-img-bcg rounded-0"> -->
+        <!-- <img src="{{mediaDir}}/champ/{{tournament.id}}.avif" onerror = "this.src = 'assets/media/champ/default_champ1.avif'" class="card-img-bcg rounded-0" alt=""> -->
+    </div>
+    <div class="card-body rounded-0 d-flex p-2 w-100 flex-wrap align-items-center justify-content-between">
+        <div style="height: 40%; opacity: 1;" class="w-100">
+            <h5 class="card-title text-center">{{ ('db.champs.' + tournament.id + ".name") | translate}}</h5>
+        </div>
+        <div style="height: 30%; opacity: 1;" class="w-100">
+            <span class="card-text">{{ ('db.champs.' + tournament.id + ".city") | translate}},</span>
+            <span class="card-text m-1">{{getFullDateSting(tournament.date, tournament.dateTo)}}</span>
+        </div>
+        <div *ngIf="!endRegistration" style="height: 30%; opacity: 1;" class="w-100">
+            <span class="card-text">{{'landing.endregistration' | translate}}: {{getDateSting(tournament.dateEndReg)}}</span>
+        </div>
+    </div>
+</div>

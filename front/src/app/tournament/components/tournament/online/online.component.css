@@ -1,0 +1,26 @@
+.row.justify-content-center {
+  /* background-image: url(/assets/img/BackGroundAK.svg); */
+  min-width: 40em !important;
+  background-size: 3000px;
+  background-position: center;
+  align-items: center;
+}
+
+h1 {
+  padding-bottom: 0.5em;
+  color: #0d1829;
+}
+
+h2 {
+  color: #122239;
+}
+
+.center-horizontally {
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.top-horizontally {
+  justify-content:center;
+  align-items: flex-start;
+}

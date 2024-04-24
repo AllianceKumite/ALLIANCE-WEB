@@ -1,0 +1,21 @@
+<!-- pb-2 pt-2 -->
+    <div class="navbar p-0 m-0 fixed-nav" id="bootNav">
+        <div class="global-header d-flex justify-content-between align-items-center">
+            <div class="logo d-flex justify-content-start">
+                <div style="max-width: 80px; margin: auto 0;">
+                    <a routerLink="/" class="nav_link">
+                        <img src="/assets/img/logo2.png" style="width: 100%; height: auto;" alt="Alliance Kumite">
+                    </a>
+                </div>
+            </div>
+    
+            <div style="width: 100%">
+                <champ-info [champName]="champName" [champFrom]="info?.champFrom" [champTo]="info?.champTo" style="width: 100%"></champ-info>
+                <!-- <span class="nav-item p-3" style="width: 100%; color: darkgreen;">{{userLabel}}</span>     -->
+            </div>
+    
+            <div class="p-0 m-0">
+                <language-selector></language-selector>
+            </div>
+        </div>
+    </div>   

@@ -1,0 +1,10 @@
+{{
+  (
+      details?.CategoryType == typeCircle && details?.CategoryBlockCount == 1
+      ||
+      details?.CategoryType == typeCircle && details?.CategoryBlockCount == 2 && +details.Level < 8
+  ) ? ((+details?.LevePair + 1) + (('level.lap.' + (+details?.LevePair + 1)) | translate) + ' ' + ('level.lap.word' | translate)) :
+
+ (details?.CategoryType == typeWKB ? (('levelWkb.' + details?.Level ) | translate) :
+                                     (('level.' + details?.Level ) | translate))
+}}

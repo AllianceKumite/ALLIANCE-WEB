@@ -1,0 +1,77 @@
+.w-65 {
+    width: 65%;
+}
+
+.box-button {
+    /* height: 44px; */
+    width: 100%;
+    /* background-color: blue; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding: 2px; */
+}
+
+.box-fight {
+    max-height: 630px;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+}
+
+.box-fight::-webkit-scrollbar {
+    width: 10px;
+    /* ширина всей полосы прокрутки */
+}
+
+.box-fight::-webkit-scrollbar-track {
+    background: #fff;
+    /* цвет зоны отслеживания */
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
+}
+
+.box-fight::-webkit-scrollbar-thumb {
+    background-color: #034f84;
+    height: 50px;
+    /* цвет бегунка */
+    border-radius: 2px;
+    /* округлось бегунка */
+    border: 2px solid #fff;
+    /* отступ вокруг бегунка */
+}
+
+
+.btn {
+    /* padding: 45px; */
+    /* background-color: blueviolet; */
+    width: 30px;
+    height: 30px;
+    /* height: 35px; */
+    /* padding: 8px; */
+    padding: 8px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ng-select .ng-select-container .ng-dropdown-panel {
+    width: 100%;
+    z-index: 300;
+}
+
+@media (max-widt: 550px) {
+    .btn {
+        width: 28px;
+    }
+
+    .box-fight {
+        max-height: 100px;
+    }
+}
+
+@media (max-widt: 1500px) {
+    .box-fight {
+        height: 100px;
+    }
+}

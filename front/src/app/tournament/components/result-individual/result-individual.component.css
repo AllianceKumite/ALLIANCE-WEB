@@ -1,0 +1,16 @@
+.card {
+    margin-bottom: 1em;
+    margin-top: 0.5em;
+    height: 95%;
+}
+
+.fight-category {
+    color: white;
+    padding-left: 10%;
+}
+
+.card-body {
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}

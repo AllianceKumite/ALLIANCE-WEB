@@ -1,0 +1,303 @@
+<div class="container-fluid">
+    <div class="row d-flex align-items-center p-0 m-0  d-flex align-items-center">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <h3>
+                {{'navbar.referys' | translate}}
+            </h3>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap">
+        <div class="col-4 box-data">
+            <div class="row row-header p-2 m-0">
+                <!-- <div class="box-data"> -->
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                        <div class="col-header num">#
+                        </div>
+                    </div>
+    
+                    <div class="col-7 col-sm-8 col-md-7 col-lg-3 p-0 m-0">
+                        <div class="col-header fio">
+                            <span>{{'referyTable.fio' | translate}}</span>
+                        </div>
+                    </div>
+    
+                    <div class="col-3 col-sm-2 col-md-3 col-lg-1 p-0 m-0">
+                        <div class="col-header gender">
+                            <span>{{'referyTable.gender' | translate}}</span>
+                        </div>
+                    </div>
+    
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                    </div>
+    
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0 d-flex align-items-center">
+                        <div class="col-header flag">
+                            <span>{{'referyTable.countrykod' | translate}}</span>
+                        </div>
+                    </div>
+    
+                    <div class="col-4 col-sm-5 col-md-5 col-lg-2 p-0 m-0">
+                        <div class="col-header country">
+                            <span>{{'referyTable.countryflag' | translate}}</span>
+                        </div>
+                    </div>
+    
+                    <div class="col-5 col-sm-5 col-md-5 col-lg-2 p-0 m-0">
+                        <div class="col-header club">
+                            <span>{{'referyTable.club' | translate}}</span>
+                        </div>
+                    </div>
+    
+                <!-- </div> -->
+            </div>
+
+            <div *ngFor="let refery of referys; let i = index" class="row row-data p-1 m-0" 
+                [ngClass]="{ 'row-data-gray': i % 2 == 0}">
+                <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                    <div class="col-data num">
+                        <span>{{i + 1}}</span>
+                    </div>
+                </div>
+                <div class="col-7 col-sm-8 col-md-7 col-lg-3 p-0 m-0">
+                    <div class="col-data fio">
+                        <span [ngClass]="{ 'usedrefery': isUsedRefery(refery)}">{{refery.FIO}}</span>
+                    </div>
+                </div>
+                <div class="col-3 col-sm-2 col-md-3 col-lg-1 p-0 m-0">
+                    <div class="col-data gender">
+                        <span>{{refery.Gender}}</span>
+                    </div>
+                </div>
+                <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                    <div class="col-data grade">
+                        <span>{{refery.DAN}}</span>
+                    </div>
+                </div>
+                <div class="col-5 col-sm-6 col-md-5 col-lg-3 p-0 m-0">
+                    <div class="col-data country flex-wrap">
+                        <img src="{{ flagDir}}/{{refery.countryFlag }}" alt="" height="30">
+                        <span style="width: 100%;">{{ 'db.country.' + refery.countryId | translate }}</span>
+                    </div>
+                </div>
+                <div class="col-5 col-sm-5 col-md-5 col-lg-2 p-0 m-0">
+                    <div class="col-data club">
+                        <span>{{refery.ClubName}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-1">
+        </div>
+        <div class="col-7">
+            <div class="box-edit">
+                <div class="row p-0 m-0 d-flex">
+                    <div class="col-6 p-2">
+                        <label for="tatamicount" class="form-label m-0">{{ 'referyTable.tatamicount' |
+                            translate}}</label>
+                        <input type="number" [(ngModel)]="tatamicount" step="1" class="form-control m-0" min="1"
+                            style="height: 30px" id="tatamicount" placeholder="" (input)="onChange()">
+                    </div>
+                    <div class="col-6 p-2">
+                        <label for="brigadecount" class="form-label m-0">{{ 'referyTable.brigadecount' |
+                            translate}}</label>
+                        <input type="number" [(ngModel)]="brigadecount" step="1" class="form-control m-0" min="1"
+                            style="height: 30px" id="brigadecount" placeholder="" (input)="onChange()">
+                    </div>
+                </div>
+
+                <div class="row p-0 m-0 d-flex">
+                    <div class="col-3 p-2">
+                        <button type="button" class="btn btn-success opacity-75 p-2 w-100" (click)="updateReferyBrigade()">Save changes</button>
+                    </div>
+                    <div class="col-3 p-2">
+                        <button type="button" class="btn btn-warning opacity-75 p-2 w-100" (click)="export()">Export Brigade</button>
+                    </div>
+                    <div class="col-3 p-2">
+                        <button type="button" class="btn btn-warning opacity-75 p-2 w-100" (click)="exportReferies()">Export Referies</button>
+                    </div>
+                    <div class="col-3 p-2">
+                        <button type="button" class="btn btn-warning opacity-75 p-2 w-100" (click)="onBuildPDF()">Export to PDF</button>
+                    </div>
+                </div>
+
+                <div class="row p-0 m-0 d-flex justify-content-between flex-wrap">
+                    <div class="col-6 p-2" *ngFor="let item of referyBrigades; let i = index">
+                        <div class="card">
+                            <div class="card-header fs-5 text-bg-dark">
+                                {{ 'referyTable.tatami' | translate }} {{item.tatamiId}} - {{ 'referyTable.team' |
+                                translate }} {{ item.brigadeid}}
+                            </div>
+                            <div class="card-body">
+                                <label for="shushin">{{ 'referyTable.shushin' | translate }} </label>
+                                <ng-select *ngIf="referys" [(ngModel)]="item.selectedSushin"
+                                    (change)="onReferySelect($event, this, i, item.tatamiId, item.brigadeid, 0)"
+                                    (clear)="onClose($event, this, i, item.tatamiId, item.brigadeid, 0)"
+                                    [searchable]="true" class="form-control p-0 m-0" name="shushin"
+                                    dropdownPosition="bottom" [ngClass]="{ 'is-invalid': item.sushinValidationError}"
+                                    [ngClass]="{ 'is-invalid': item.sushinValidationError, 'sushin': item.sushin >= 0}">
+
+                                    <ng-option *ngFor="let refery of referys" [value]="refery.ReferyId">
+                                        <img src="{{ flagDir}}/{{refery.countryFlag }}" alt="" height="30"> {{ 'db.country.' +
+                                        refery?.countryId | translate }}({{refery?.ClubName}}) {{refery?.FIO}}
+                                    </ng-option>
+
+                                </ng-select>
+
+                                <label for="fukuushin1">{{ 'referyTable.fukushin' | translate }} </label>
+                                <ng-select *ngIf="referys" #fukushin1Selector id="fukushin1"
+                                    [(ngModel)]="item.selectedFukushin1"
+                                    (change)="onReferySelect($event, this, i, item.tatamiId, item.brigadeid, 1)"
+                                    (clear)="onClose($event, this, i, item.tatamiId, item.brigadeid, 1)"
+                                    [searchable]="true" class="form-control h-40 p-0" name="fukushin1"
+                                    dropdownPosition="bottom"
+                                    [ngClass]="{ 'is-invalid': item.fukushin1ValidationError, 'fukushin': item.fukushin1 >= 0}"
+                                    [ngSelected]="3">
+                                    <ng-option *ngFor="let refery of referys" [value]="refery.ReferyId">
+                                        <img src="{{ flagDir}}/{{refery.countryFlag }}" alt="" height="30"> {{ 'db.country.' +
+                                        refery?.countryId | translate }}({{refery?.ClubName}}) {{refery?.FIO}}
+                                    </ng-option>
+                                </ng-select>
+
+                                <ng-select *ngIf="referys" #fukushin2Selector id="fukushin2"
+                                    [(ngModel)]="item.selectedFukushin2"
+                                    (change)="onReferySelect($event, this, i, item.tatamiId, item.brigadeid, 2)"
+                                    (clear)="onClose($event, this, i, item.tatamiId, item.brigadeid, 2)"
+                                    [searchable]="true" class="form-control h-40 p-0 mt-1" name="fukushin2"
+                                    [ngClass]="{ 'is-invalid': item.fukushin2ValidationError, 'fukushin': item.fukushin2 >= 0}"
+                                    dropdownPosition="bottom" [ngSelected]="3">
+                                    <ng-option *ngFor="let refery of referys" [value]="refery.ReferyId">
+                                        <img src="{{ flagDir}}/{{refery.countryFlag }}" alt="" height="30"> {{ 'db.country.' +
+                                        refery?.countryId | translate }}({{refery?.ClubName}}) {{refery?.FIO}}
+                                    </ng-option>
+                                </ng-select>
+                                <ng-select *ngIf="referys" #fukushin3Selector id="fukushin3"
+                                    [(ngModel)]="item.selectedFukushin3"
+                                    (change)="onReferySelect($event, this, i, item.tatamiId, item.brigadeid, 3)"
+                                    (clear)="onClose($event, this, i, item.tatamiId, item.brigadeid, 3)"
+                                    [searchable]="true" class="form-control h-40 p-0 mt-1" name="fukushin3"
+                                    dropdownPosition="bottom"
+                                    [ngClass]="{ 'is-invalid': item.fukushin3ValidationError, 'fukushin': item.fukushin3 >= 0}"
+                                    [ngSelected]="3">
+                                    <ng-option *ngFor="let refery of referys" [value]="refery.ReferyId">
+                                        <img src="{{ flagDir}}/{{refery.countryFlag }}" alt="" height="30"> {{ 'db.country.' +
+                                        refery?.countryId | translate }}({{refery?.ClubName}}) {{refery?.FIO}}
+                                    </ng-option>
+                                </ng-select>
+                                <ng-select *ngIf="referys" #fukushin4Selector id="fukushin4"
+                                    [(ngModel)]="item.selectedFukushin4"
+                                    (change)="onReferySelect($event, this, i, item.tatamiId, item.brigadeid, 4)"
+                                    (clear)="onClose($event, this, i, item.tatamiId, item.brigadeid, 4)"
+                                    [searchable]="true" class="form-control h-40 p-0 mt-1" name="fukushin4"
+                                    dropdownPosition="bottom"
+                                    [ngClass]="{ 'is-invalid': item.fukushin4ValidationError, 'fukushin': item.fukushin4 >= 0}"
+                                    [ngSelected]="3">
+                                    <ng-option *ngFor="let refery of referys" [value]="refery.ReferyId">
+                                        <img src="{{ flagDir}}/{{refery.countryFlag }}" alt="" height="30"> {{ 'db.country.' +
+                                        refery?.countryId | translate }}({{refery?.ClubName}}) {{refery?.FIO}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-edit" style="background-color: #fff; display: none;" id="tablePDF">
+                <div class="row p-0 m-0 d-flex justify-content-between flex-wrap">
+                    <div class="col-6 p-2" *ngFor="let item of referyBrigades; let i = index">
+                        <div class="card">
+                            <div class="card-header fs-5 text-bg-dark">
+                                {{ 'referyTable.tatami' | translate }} {{item.tatamiId}} - {{ 'referyTable.team' |
+                                translate }} {{ item.brigadeid}}
+                            </div>
+                            <div class="card-body" style="background-color: #fff;">
+                                <label class="header-sushin" for="shushin">{{ 'referyTable.shushin' | translate }} </label>
+                                <p class="data-sushin"> {{ getFio(item.sushin) }} </p>
+
+                                <label class="header-fukushin"  for="fukuushin1">{{ 'referyTable.fukushin' | translate }} </label>
+                                <p class="data-sushin"> 1. {{ getFio(item.fukushin1) }} </p>
+                                <p class="data-sushin"> 2. {{ getFio(item.fukushin2) }} </p>
+                                <p class="data-sushin"> 3. {{ getFio(item.fukushin3) }} </p>
+                                <p class="data-sushin"> 4. {{ getFio(item.fukushin4) }} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                <table class="table table-sm bg-white" id="tablerefery" style="display: none;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="fs-4"> Referies Teams</th>
+                            <th class="fs-4"></th>
+                            <th class="fs-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of referyBrigades; let i = index">
+                        <tr>
+                            <td  style="width: 150px;" class="itemtatami">Tatami {{ item.tatamiId }} - Team {{ item.brigadeid }} </td>
+                            <td class="itemtatami"> </td>
+                            <td class="itemtatami"> </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 100px;"></td>
+                            <td class="itemdata">Sushin</td>
+                            <td class="itemdata">{{ getFio(item.sushin) }}</td>
+                        </tr>   
+                        <tr>
+                            <td style="width: 100px;"></td>
+                            <td class="itemdata">Fukusins</td>
+                            <td class="itemtatami"> </td>
+                        </tr>   
+                        <tr>
+                            <td style="width: 100px;"></td>
+                            <td class="itemdata"> 1.</td>
+                            <td class="itemdata">{{ getFio(item.fukushin1) }}</td>
+                        </tr>   
+                        <tr>
+                            <td style="width: 100px;"></td>
+                            <td class="itemdata">2.</td>
+                            <td class="itemdata">{{ getFio(item.fukushin2) }}</td>
+                        </tr>   
+                        <tr>
+                            <td style="width: 100px;"></td>
+                            <td class="itemdata">3.</td>
+                            <td class="itemdata">{{ getFio(item.fukushin3) }}</td>
+                        </tr>   
+                        <tr>
+                            <td style="width: 100px;"></td>
+                            <td class="itemdata">4.</td>
+                            <td class="itemdata">{{ getFio(item.fukushin4) }}</td>
+                        </tr>   
+                        <tr>
+                            <td class="itemdata"> </td>
+                        </tr>   
+                    </tbody>
+                </table>
+                <table class="table table-sm bg-white" id="tablereferies" style="display: none;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="fs-4"> Name</th>
+                            <th class="fs-4"> Gender</th>
+                            <th class="fs-4"> Grade</th>
+                            <th class="fs-4"> Country</th>
+                            <th class="fs-4"> Club</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of referys; let i = index">
+                        <tr>
+                            <td  style="width: 150px;" class="itemtatami">{{ item.FIO }}</td>
+                            <td style="width: 100px;">{{ item.Gender}}</td>
+                            <td style="width: 100px;"class="itemdata">{{ item.DAN}}</td>
+                            <td style="width: 100px;"class="itemdata">{{item.countryNameEn}}</td>
+                            <td style="width: 100px;"class="itemdata">{{ item.ClubName}}</td>
+                        </tr>   
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

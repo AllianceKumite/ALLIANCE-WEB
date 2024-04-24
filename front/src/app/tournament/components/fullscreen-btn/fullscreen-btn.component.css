@@ -1,0 +1,18 @@
+button.btn-outline-secondary {
+  position: absolute;
+  z-index:1000;
+  border: 0;
+  right:0;
+  top:0;
+  /* color: #405B8F; */
+  /* border-color: white; */
+  color: white !important;
+  /* background-color: #405B8F; */
+}
+
+button.btn-outline-secondary:hover,
+button.btn-outline-secondary:active {
+  /* color: #405B8F !important;*/
+  background-color: transparent;
+  font-weight: 900;
+}

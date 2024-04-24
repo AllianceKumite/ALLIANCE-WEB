@@ -1,0 +1,61 @@
+<button (click)="addWindow()" class="btn btn-sm btn-outline-secondary" style="position: absolute; margin-top: 0.4em;">
+  <fa-icon [icon]="faShareFromSquare"></fa-icon>
+</button>
+
+<form [formGroup]="reactiveForm">
+
+<div class="row p-1" style=>
+      <label for="judge1" class="mt-1 col-5 judge" style="padding-right:0">{{ 'manage.judge1' | translate }}</label>
+      <span class="col-1" type="text"></span>
+      <input formControlName="judge1" appOnlynumber name="judge1" type="number" step="0.1" min="0" max="9" value="0.0"  class="p-1 col-6" tabindex="1" #judge1 />
+</div>
+<div class="row p-1">
+      <label for="judge2" class="mt-1 col-5 judge" style="padding-right:0">{{ 'manage.judge2' | translate }}</label>
+      <span class="col-1" type="text"></span>
+      <input formControlName="judge2" appOnlynumber name="judge2" type="number" step="0.1" min="0" max="9" value="0.0"  class="p-1 col-6" tabindex="2" />
+</div>
+<div class="row p-1">
+    <label for="judge3" class="mt-1 col-5 judge" style="padding-right:0">{{ 'manage.judge3' | translate }}</label>
+    <span class="col-1" type="text"></span>
+    <input formControlName="judge3" appOnlynumber name="judge3" type="number" step="0.1" min="0" max="9" value="0.0"  class="p-1 col-6" tabindex="3" />
+</div>
+<div class="row p-1">
+    <label for="judge4" class="mt-1 col-5 judge" style="padding-right:0">{{ 'manage.judge4' | translate }}</label>
+    <span class="col-1" type="text"></span>
+    <input formControlName="judge4" appOnlynumber  name="judge4" type="number" step="0.1" min="0" max="9" value="0.0"  class="p-1 col-6" tabindex="4" />
+</div>
+<div class="row p-1">
+    <label for="refery" class="mt-1 col-5 judge" style="padding-right:0">{{ 'manage.refery' | translate }}</label>
+    <span class="col-1" type="text"></span>
+    <input formControlName="refery" appOnlynumber name="refery" type="number" step="0.1" min="0" max="9" value="0.0"  class="p-1 col-6" tabindex="5" />
+</div>
+
+<div class="row p-1">
+    <span class="col-3">{{ 'manage.min' | translate }}</span>
+    <span class="col-2 calculated" type="text">{{min}}</span>
+    <span class="col-1" type="text"></span>
+
+    <span class="col-3" style="padding-left:0">{{ 'manage.max' | translate }}</span>
+    <span class="col-3 calculated" type="text" >{{max}}</span>
+</div>
+
+<div class="row p-1">
+    <span class="col-3">{{ 'manage.avg' | translate }}</span>
+    <span class="col-2 calculated" type="text" >{{avg}}</span>
+    <span class="col-1" type="text"></span>
+
+
+        <div
+            class="btn btn-sm btn-outline-primary col-6"
+            id="manage-button-{{akaShiroType}}"
+            type="button"
+            value="confirm"
+            (click)="this.confirmWinner()"
+            style="text-align: center"
+            tabindex="6"
+        >{{ 'manage.confirm' | translate}}</div>
+
+
+</div>
+
+</form>

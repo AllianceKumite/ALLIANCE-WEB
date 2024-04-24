@@ -1,0 +1,13 @@
+.all {
+    margin: 10% auto;
+}
+
+.create-btn{
+    background-color: rgb(68, 84, 106);
+    border: none;
+    border-radius: 0 5px 5px 0;
+}
+
+.input-round {
+    border-radius: 5px 0 0 5px;
+}

@@ -1,0 +1,60 @@
+.flags {
+    display: flex;
+    justify-content:space-between;
+    flex-wrap: wrap;
+    cursor:default
+}
+
+.flags > div {
+    font-size: 1.2em;
+    padding: 0 0.5em
+}
+
+.flags > .selected[class*=vazari] {
+    background-color: green;
+    color: white
+}
+
+.flags > .selected[class*=ippon] {
+    background-color: rgb(1, 88, 201);
+    color: white
+}
+
+.flags > .selected[class*=ch1], .flags > .selected[class*=ch2] {
+    background-color: rgb(255, 208, 0)
+}
+
+.flags > .selected[class*=genten], .flags > .selected[class*=sikaku] {
+    background-color: red;
+    color: white
+}
+
+
+
+.flags.aka {
+    justify-content: end;
+}
+
+.flags.shiro {
+    justify-content: start;
+}
+
+
+
+@media screen and (max-width: 1462px) {
+    .flags > div {
+        font-size: 1em
+    }
+}
+
+@media screen and (max-width: 1258px) {
+    .flags > div {
+        font-size: 0.8em
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .flags > div {
+        font-size: 0.6em
+    }
+}
