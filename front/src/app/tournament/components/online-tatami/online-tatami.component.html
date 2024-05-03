@@ -9,7 +9,7 @@
                 <fullscreen-btn></fullscreen-btn>
                 <h4><tatami-title [id]='id' [tatamiType] = "tatamiType"></tatami-title></h4>
             </div>
-            <div *ngIf="fights && fights.length > 0" class="card-body text-dark" style="padding: 0;" >
+            <div *ngIf="fights && fights?.length > 0" class="card-body text-dark" style="padding: 0;" >
                 <fight
                     [viewType]="'onlineTatamiCurrentFight'"
                     [fight]="fights[0]"
@@ -19,6 +19,7 @@
             </div>
             <div *ngIf="!fights || fights.length == 0" class="card-body text-dark" style="padding: 0;" >
                 <info-box [label]="'tatami.fightsFinished'"></info-box>
+                <!-- <info-box {{tatami.fightsFinished}}></info-box> -->
             </div>
         </div>
     </div>

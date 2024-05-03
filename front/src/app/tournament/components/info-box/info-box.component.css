@@ -14,3 +14,10 @@ div {
 .color-variant-transparent {
     border: none;
 }
+
+.no-duel{
+    font-size: 32px;
+    font-weight: 500;
+    color: red;
+    border-bottom: 2px solid red;
+}

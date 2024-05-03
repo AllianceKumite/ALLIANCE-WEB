@@ -19,7 +19,7 @@ export class TatamiComponent implements OnInit, OnDestroy {
     CURRENT_FIGHT_SIZE: 4
   }
 
-  REFRESH_TIMEOUT = 7.5
+  REFRESH_TIMEOUT = 15
   // REFRESH_TIMEOUT = 3.5
 
   tatamies: Tatami[];

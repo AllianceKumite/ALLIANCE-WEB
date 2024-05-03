@@ -22,6 +22,8 @@ urlpatterns = [
     path('api-champ-set-tatami', SetTatamiCategory),                        # set tatami num by category before drop
     path('api-champ-get-referys', GetReferysRequest),                       # get referys from champ
     path('api-champ-get-referys-coach', GetReferysCoachRequest),            # get referys from champ by coach
+    path('api-champ-get-part-next-fight-coach', GetNextFightByCoach),       # get referys from champ by coach
+    path('api-champ-get-part-next-fight-club', GetNextFightByClub),       # get referys from champ by coach
 
 
     path('api-champ-get-coaches', getCoaches),                              # get all clubs taking place in champ

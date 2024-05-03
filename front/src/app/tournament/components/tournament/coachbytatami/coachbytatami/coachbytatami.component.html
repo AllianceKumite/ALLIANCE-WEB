@@ -1,0 +1,77 @@
+<!-- <p>coachbytatami works!</p> -->
+<div class="container">
+    <div class="row p-0 mt-3 d-flex flex-wrap align-items-center justify-content-between">
+        <div class="list-group list-group-horizontal w-100 justify-content-between p-0 m-0">
+            <div class="list-group-item p-0 m-0 col-6" style="border-radius: 4px; border: 1px solid rgb(207, 207, 207);color: #444; background-color: #fff;">
+                <ng-select *ngIf="clubs" #coachSelector [items]="clubs" bindLabel="name" bindValue="id"
+                    [(ngModel)]="selectedClub" (change)="changeClub()" [searchable]="false"
+                    class="nav-link filter-item filter-item-custom m-0" placeholder="{{ 'navbar.club' | translate }}"
+                    name="selectedClub" dropdownPosition="bottom">
+                </ng-select>
+            </div>
+            <div class="list-group-item p-0 m-0 col-6" style="border-radius: 4px; border: 1px solid rgb(207, 207, 207);color: #444; background-color: #fff;">
+                <ng-select *ngIf="coaches" #coachSelector bindLabel="name" bindValue="id" [(ngModel)]="selectedCoach"
+                    (change)="changeCoach()" [searchable]="false"
+                    class="nav-link filter-item filter-item-custom p-0 m-0"
+                    placeholder="{{ 'navbar.coaches' | translate }}" name="selectedCoach" dropdownPosition="bottom">
+                    <ng-option *ngFor="let coach of coaches" [value]="coach.id">
+                        {{coach.name}}
+                    </ng-option>
+                </ng-select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row p-0 mt-3 d-flex flex-wrap align-items-center justify-content-between">
+        <div class="list-group list-group-horizontal w-100 flex-wrap justify-content-between p-0 m-0">
+            <div *ngFor="let tatami of tatamies; let i = index;" class="col-6 p-1"
+                style="border: 1px solid transparent; color: #444; background-color: #fff;">
+
+                <span *ngIf="tatami.fight?.details?.NumDuel">
+                    {{'navbar.tatami' | translate}}{{tatami.tatamiId}}: Fight {{tatami.fight?.details?.NumDuel}} of {{tatami.total}}
+                 </span>
+                 <span *ngIf="!tatami.fight?.details?.NumDuel">
+                    {{'navbar.tatami' | translate}}{{tatami.tatamiId}}: IsComplete
+                 </span>
+              </div>
+        </div>
+    </div>
+
+    <div class="box-data p-0 mt-3 w-100" id="box-data-part">
+        <div class="row p-0 m-0 w-100 row-header align-items-center">
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
+                <div class="col-header num" style="text-align: center;">#</div>
+            </div>
+            <div class="col-7 col-sm-5 col-md-5 col-lg-5 p-0 m-0">
+                <div class="col-header name">
+                    <span>{{'dataTable.participant' | translate}}</span>
+                </div>
+            </div>
+            <div class="col-2 col-sm-3 col-md-3 col-lg-3 p-0 m-0">
+                <div class="col-header name">
+                    <span>{{'navbar.tatami' | translate}}</span>
+                </div>
+            </div>
+            <div class="col-2 col-sm-3 col-md-3 col-lg-3 p-0 m-0">
+                <div class="col-header name">
+                    <span>{{'coach.fight' | translate}}</span>
+                </div>
+            </div>
+        </div>
+        <div *ngFor="let participant of participants; let i = index" class="row row-data"
+            [ngClass]="{ 'row-data-gray': i % 2 === 0}">
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0 text-center">
+                {{i + 1}}
+            </div>
+            <div class="col-7 col-sm-5 col-md-5 col-lg-5 p-0 m-0">
+                {{participant.FIO}}
+            </div>
+            <div class="col-2 col-sm-3 col-md-3 col-lg-3 p-0 m-0">
+                {{participant.TatamiId}}
+            </div>
+            <div class="col-2 col-sm-3 col-md-3 col-lg-3 p-0 m-0">
+                {{participant.NumDuel}}
+            </div>
+        </div>
+    </div>
+</div>

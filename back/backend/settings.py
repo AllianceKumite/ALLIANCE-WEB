@@ -158,6 +158,7 @@ INSTALLED_APPS = [
     'coachPage',
     'management',
     'fight',
+    'webpush',
     'rest_framework',
     'rest_framework.authtoken',
     'dynamic_models',

@@ -8,6 +8,7 @@ import { TranslateHttpLoader }        from '@ngx-translate/http-loader';
 import { ChampTranslationLoader }     from './../shared/loader/ChampTranslateLoader';
 
 import { SharedModule }               from '../shared/shared.module'
+// import { OrderService }               from './services/order.service';
 
 import { TournamentRoutingModule }    from './tournament-routing.module';
 
@@ -75,6 +76,7 @@ import { ReferysComponent } from './components/tournament/referys/referys.compon
 import { ReferyBrigadeComponent } from './components/tournament/refery-brigade/refery-brigade.component';
 import { PersonalAppComponent } from './components/tournament/tools/personal-app/personal-app.component';
 import { WinnerClubsComponent } from './components/winner-clubs/winner-clubs.component';
+import { CoachbytatamiComponent } from './components/tournament/coachbytatami/coachbytatami/coachbytatami.component';
 
 // const DEFAULT_FONT_PICKER_CONFIG: FontPickerConfigInterface = {
 //   apiKey: 'AIzaSyBk1pJ8iQ5BDjZ3N1AEMCa-9E38Vtlu2SQ',
@@ -131,6 +133,7 @@ import { WinnerClubsComponent } from './components/winner-clubs/winner-clubs.com
     ReferyBrigadeComponent,
     PersonalAppComponent,
     WinnerClubsComponent,
+    CoachbytatamiComponent,
 
     // AutoOpenMenuComponent
   ],

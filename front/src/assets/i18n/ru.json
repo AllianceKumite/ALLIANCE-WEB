@@ -76,6 +76,7 @@
         "region": "Регион",
         "branch": "Бранч",
         "allPart": "Всего",
+        "fight": "Поединок",
         "selectPart": "Участников",
         "genList": "Общий список",
         "search": "Поиск",
@@ -227,6 +228,7 @@
         "home": "Главная",
         "participants": "Участники",
         "referys": "Судьи",
+        "coah-tatami": "Предстоящие поединки",
         "categories": "Категории",
         "tatami": "Татами",
         "draw": "Сетка",
@@ -371,7 +373,7 @@
         "showLess": "Показать меньше",
         "goToFights": "Перейти к поединкам",
         "showAllTatamis": "Показать все татами",
-        "fightsFinished": "Нет поединков на татами",
+        "fightsFinished": "Поединки на татами завершены",
         "stream": "Трансляция"
     },
     "draw": {

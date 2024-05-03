@@ -872,12 +872,12 @@ def isCategoryKankuNotFinalOr3PlaceFight(categoryType, fightDetails):
     return isCategoryKanku(categoryType, fightDetails) and not isFinalOr3PlaceFight(fightDetails)
 
 def isFinalOr3PlaceFight(fight):
-    print('ffff')
+    # print('ffff')
     level = fight[8]
-    print(level)
+    # print(level)
 
     isFinalOr3PlaceFight = level == 8 or level == 12
-    print(isFinalOr3PlaceFight)
+    # print(isFinalOr3PlaceFight)
     return isFinalOr3PlaceFight
 
 

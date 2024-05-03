@@ -76,6 +76,7 @@
         "region": "Регіон",
         "branch": "Бранч",
         "allPart": "Всього",
+        "fight": "Поєдинок",
         "selectPart": "Учасників",
         "genList": "Загальний список",
         "search": "Пошук",
@@ -249,6 +250,7 @@
         "home": "Головна",
         "participants": "Учасники",
         "referys": "Судді",
+        "coah-tatami": "Наступнні поєдинки",
         "categories": "Категорії",
         "tatami": "Татамі",
         "draw": "Сітка",
@@ -372,7 +374,7 @@
         "stream": "Трансляція",
         "goToFights": "Перейти до поєдинків",
         "showAllTatamis": "Показати всі татамі",
-        "fightsFinished": "Немає поєдинків на татамі"
+        "fightsFinished": "Поєдинки на татамі завершено"
     },
     "draw": {
         "fight3Place": "Бій за 3-є місце",

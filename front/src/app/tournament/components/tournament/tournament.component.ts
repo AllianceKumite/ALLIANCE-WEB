@@ -27,6 +27,7 @@ import { Dropdown }                    from 'mdb-ui-kit';
   styleUrls: ['./tournament.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
+
 export class TournamentComponent implements OnInit {
   @ViewChild('categorySelector') categorySelector: NgSelectComponent;
   @ViewChild('drawSelector') drawSelector: NgSelectComponent;
@@ -287,12 +288,23 @@ export class TournamentComponent implements OnInit {
   initTatamies(response) {
     const tatamiLength = response['tatamisCount'];
 
-    this.tatamis = [
-      {
-        id: 0,
-        name: this.translateService.instant('general.allTatamis'),
-      },
-    ];
+    // this.tatamis = [
+    //   {
+    //     id: 0,
+    //     name: this.translateService.instant('general.allTatamis'),
+    //   },
+    // ];
+
+    for (let i = 1; i <= tatamiLength; i++) {
+      this.tatamis.push({
+        id: i,
+        name: TatamiTitleComponent.getTitle(
+          this.translateService.instant('navbar.tatami'),
+          this.tatamiType,
+          i
+        ),
+      });
+    }
 
     switch (tatamiLength) {
       case 4:
@@ -531,16 +543,16 @@ export class TournamentComponent implements OnInit {
         break;
     }
 
-    for (let i = 1; i <= tatamiLength; i++) {
-      this.tatamis.push({
-        id: i,
-        name: TatamiTitleComponent.getTitle(
-          this.translateService.instant('navbar.tatami'),
-          this.tatamiType,
-          i
-        ),
-      });
-    }
+    // for (let i = 1; i <= tatamiLength; i++) {
+    //   this.tatamis.push({
+    //     id: i,
+    //     name: TatamiTitleComponent.getTitle(
+    //       this.translateService.instant('navbar.tatami'),
+    //       this.tatamiType,
+    //       i
+    //     ),
+    //   });
+    // }
 
     this.tatamisInit = this.tatamis;
 
@@ -697,6 +709,8 @@ export class TournamentComponent implements OnInit {
   }
 
   setDraw() {
+    this.clearSelect();
+   
     // this.router.navigate(['champ/' + this.nameOfChampionship + '/draw'], { queryParams: { 'category': this.selectedDraw } });
     // console.log(this.selectedDraw);
     

@@ -76,6 +76,7 @@
         "region": "Region",
         "branch": "Branch",
         "allPart": "Total",
+        "fight": "Fight",
         "selectPart": "Participants",
         "genList": "Common list",
         "search": "Search",
@@ -242,6 +243,7 @@
         "home": "Main",
         "participants": "Participants",
         "referys": "Referies",
+        "coah-tatami": "Upcoming fights",
         "categories": "Categories",
         "tatami": "Tatami",
         "draw": "Draw",
@@ -371,7 +373,7 @@
         "showLess": "Show Less",
         "goToFights": "Go to fights",
         "showAllTatamis": "Show all tatamis",
-        "fightsFinished": "No fights on tatami",
+        "fightsFinished": "Fights on the tatami are completed",
         "stream": "Stream"
     },
     "draw": {

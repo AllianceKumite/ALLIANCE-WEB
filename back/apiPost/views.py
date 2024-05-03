@@ -359,6 +359,8 @@ def Champ_File(request):
             cursor.execute('TRUNCATE TABLE ' + title + '_champ')
             f = TextIOWrapper(file, encoding="utf-8")
             reader = csv.reader(f)
+            nCnt = 0
+
             for line in reader:
                 if len(line) > 0:
                     arr_of_values = line[0].split(';')
@@ -368,6 +370,7 @@ def Champ_File(request):
                     zero19 = ', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0'
                     cursor.execute('INSERT INTO ' + title + '_champ VALUES ( null, ' + ', '.join(arr_of_sql_values) + zero19
                                 + ' )')
+                    nCnt = nCnt + 1
 
         except Exception as e:
             return HttpResponse(e, status=400)

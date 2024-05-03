@@ -26,6 +26,7 @@ import { ReferysComponent } from './components/tournament/referys/referys.compon
 import { ReferyBrigadeComponent } from './components/tournament/refery-brigade/refery-brigade.component';
 import { PersonalAppComponent } from './components/tournament/tools/personal-app/personal-app.component';
 import { WinnerClubsComponent } from './components/winner-clubs/winner-clubs.component';
+import { CoachbytatamiComponent } from './components/tournament/coachbytatami/coachbytatami/coachbytatami.component';
 
 
 @Injectable({ providedIn: 'root' })
@@ -65,6 +66,7 @@ const routes: Routes = [
       { path: 'champrefery', component: ReferyBrigadeComponent },
       { path: 'personalapp', component: PersonalAppComponent },
       { path: 'winnerclub', component: WinnerClubsComponent },
+      { path: 'coachbytatami', component: CoachbytatamiComponent },
       {
         path: 'manage',
         component: ManagementComponent,

@@ -1,4 +1,4 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, HostListener, Input, OnInit, OnDestroy } from '@angular/core';
 import { Tatami } from '../../../../models/tatami.model';
 import { TournamentService } from '../../../../services/tournament.service';
 import { HomeService } from 'src/app/shared/services/home.service';
@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './overlay.component.html',
   styleUrls: ['./overlay.component.css'],
 })
-export class OverlayComponent {
+export class OverlayComponent implements OnInit, OnDestroy {
   filter: any = {
     title: null,
   };
@@ -20,7 +20,7 @@ export class OverlayComponent {
     CURRENT_FIGHT_SIZE: 4,
   };
 
-  REFRESH_TIMEOUT = 5.0;
+  REFRESH_TIMEOUT = 15.0;
   REFRESH_TIME_TIMEOUT = 1;
   // REFRESH_TIMEOUT = 3.5
 
@@ -177,7 +177,6 @@ export class OverlayComponent {
 
         return tatami;
       });
-      console.log(this.tatamies);
       
       if (typeof callback == 'function') {
         callback();

@@ -130,6 +130,20 @@ export class TournamentService {
     );
   }
 
+  getNextFightsByCoach(filter: any) {
+    return this.http.post(
+      `${environment.serverApiUrl}/api-champ-get-part-next-fight-coach`,
+      filter
+    );
+  }
+
+  getNextFightsByClub(filter: any) {
+    return this.http.post(
+      `${environment.serverApiUrl}/api-champ-get-part-next-fight-club`,
+      filter
+    );
+  }
+
   getKata(filter: any) {
     return this.http.post(
       `${environment.serverApiUrl}/api-get-kata`,

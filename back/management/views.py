@@ -23,8 +23,8 @@ from apiPost.views import *
 
 
 # arrTimer = ['none', 10, 20, 30, 40, 50, 60, 70, 80, 0, 0, 0, 12]
+arrDuelTatami = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
 arrTimer = []
-
 # TODO: use request.data
 #   https://www.django-rest-framework.org/api-guide/requests/
 
@@ -49,6 +49,23 @@ def GetOnlineTatamiTimer(request):
             # time = item[tatami]
         # print(time)
         return JsonResponse(item, safe=False, status=200)
+        # except:
+        #     return HttpResponse(status=400)
+
+    return HttpResponse(status=200)
+
+@csrf_exempt
+def GetOnlineTatamiFightNumber(request):
+    if request.method == 'POST':
+        # json_string = JSONParser().parse(request)
+
+        # tatamiId = json_string.get('tatami')
+        # if (tatamiId is None):
+        #     return HttpResponse(status=400)
+
+        # item = arrDuelTatami[tatamiId - 1]
+
+        return JsonResponse(arrDuelTatami, safe=False, status=200)
         # except:
         #     return HttpResponse(status=400)
 
@@ -275,9 +292,17 @@ def setFightWinnerRequest(request):
             title = title.replace(" ", "_")
 
             fightDetails = getFightDetails(title, fightOwnId, winner = winner)
-            # print(fightDetails)
+            tatamiId = fightDetails[4];
+
             setFightWinner(title, fightOwnId, winner = winner, points = points, fightDetails = fightDetails, kataidAka = kataidAka, kataidShiro = kataidShiro, level = level)
             nextFight = getCurrentFightForTatamisTimeAndCategory(title, tatami = fightDetails[4], time = fightDetails[7], category = categoryFilter)
+
+            # print('tatamiId=', tatamiId, 'numDuel=', nextFight['details']['NumDuel']);
+            if(nextFight):
+                arrDuelTatami[tatamiId - 1] = nextFight['details']['NumDuel'];
+            else:
+                arrDuelTatami[tatamiId - 1] = -1;
+            # print(arrDuelTatami)
 
             return JsonResponse(nextFight, status=200, safe = False)
         except Exception as e:
@@ -307,6 +332,11 @@ def cancelFightsRequest(request):
             notCanceled = calcelAllFights(title, tatami, time) if fightOwnIds == -1 else cancelFightsByIds(title, fightOwnIds)
             nextFight = getCurrentFightForTatamisTimeAndCategory(title, tatami = tatami, time = time, category = categoryFilter )
             # 'nextFight': getCurrentFightForTatamisTimeAndCategory(title, tatami = fightDetails[4], time = fightDetails[7], category = categoryFilter),
+
+            if(nextFight):
+                arrDuelTatami[tatami - 1] = nextFight['details']['NumDuel'];
+            else:
+                arrDuelTatami[tatami - 1] = -1;
 
             result = {
                 'nextFight': nextFight,

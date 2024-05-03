@@ -328,7 +328,7 @@ def GetOnlineTatamiFights(request):
         champType = getChampType(title)
 
         fights = getCurrentAndAllNextFightsWithParticipants(
-            title, champType, tatami, None
+            title, champType, tatami, 10
         )
 
         return JsonResponse(fights, safe=False, status=200)
@@ -468,10 +468,10 @@ def GetParticipantsRequest(request):
 def GetParticipantsCount(request):
     if request.method == "POST":
         json_string = JSONParser().parse(request)
-        print(json_string)
+        # print(json_string)
         title = json_string.get("title")
-        print('GetParticipantsCount')
-        print(title)
+        # print('GetParticipantsCount')
+        # print(title)
         if title is None:
             return HttpResponse(status=400)
 
@@ -479,10 +479,10 @@ def GetParticipantsCount(request):
             title = title.replace(" ", "_")
             cursor = connection.cursor()
             query = f'SELECT Count(*) FROM {title}_athchamp'
-            print(query)
+            # print(query)
             cursor.execute(query)
             hasPlace = cursor.fetchall()[0][0]
-            print('count=',hasPlace)
+            # print('count=',hasPlace)
 
         except Exception as e:
             return HttpResponse(getPrintableInfo(e), status=400)
@@ -510,6 +510,51 @@ def GetReferysRequest(request):
         try:
             responseObject = getReferys(
                 title,
+            )
+
+        except Exception as e:
+            return HttpResponse(getPrintableInfo(e), status=400)
+
+        return JsonResponse(responseObject, status=200, safe=True)
+
+    return HttpResponse(status=200)
+
+
+@csrf_exempt
+def GetNextFightByCoach(request):
+    if request.method == "POST":
+        json_string = JSONParser().parse(request)
+        title = json_string.get("title")
+        coachId = json_string.get('coachid')
+
+        if title is None:
+            return HttpResponse(status=400)
+
+        try:
+            responseObject = getFightByCoach(
+                title, coachId
+            )
+
+        except Exception as e:
+            return HttpResponse(getPrintableInfo(e), status=400)
+
+        return JsonResponse(responseObject, status=200, safe=True)
+
+    return HttpResponse(status=200)
+
+@csrf_exempt
+def GetNextFightByClub(request):
+    if request.method == "POST":
+        json_string = JSONParser().parse(request)
+        title = json_string.get("title")
+        clubId = json_string.get('clubid')
+        print(clubId)
+        if title is None:
+            return HttpResponse(status=400)
+
+        try:
+            responseObject = getFightByClub(
+                title, clubId
             )
 
         except Exception as e:
@@ -566,7 +611,7 @@ def GetTatamiCurrentFightAndAllCategories(request):
             totalDuel = getTatamisTotalDuel(title, tatamiId)
             cntDuelUpToSemi = getTatamisUpToSemiDuel(title, tatamiId)
             cntDuelSemiFinalFinal = getTatamisSemiFinalFinalDuel(title, tatamiId)
-            print('tatami', tatamiId, '=', totalDuel, cntDuelUpToSemi, cntDuelSemiFinalFinal)
+            # print('tatami', tatamiId, '=', totalDuel, cntDuelUpToSemi, cntDuelSemiFinalFinal)
             currentFightDetails = getCurrentFight(
                 title, champType, tatamiId, None, None
             )
@@ -637,6 +682,7 @@ def SetTatamiCategory(request):
             if len(arr_of_values) > 0:
                 tatamiId = arr_of_values["tatamiId"]
                 categoriesIds = arr_of_values["categoriesIds"]
+                # print('tatami=', tatamiId, 'categoriesIds=', categoriesIds)
                 for categoryId in categoriesIds:
                     query = (
                         f"UPDATE "
@@ -646,7 +692,7 @@ def SetTatamiCategory(request):
                         + f" WHERE CategoryId = {categoryId}"
                     )
                     cursor.execute(query)
-        print(renumber)
+        # print(renumber)
         if renumber:
             renumberFights(title, len(data))
         if title is None:
@@ -681,13 +727,20 @@ def renumberFights(title, tatamicount):
                 place1 = int(arr_of_values[12])
                 place3 = int(arr_of_values[13])
                 UpDuelRed = int(arr_of_values[18])
+                # LevelPair = int(arr_of_values[16])
                 UpDuelWhite = int(arr_of_values[19])
+                DuelIsPlace = int(arr_of_values[8])
 
-                # noDuel = (athRed <= 0 or athWhite <= 0) and (level < 8)
-                noDuel = (athWhite < 0 and UpDuelRed < 0 and UpDuelWhite < 0)
+                # noDuel = (athRed <= 0 and athWhite <= 0) and (level == 7)
+                # noDuel = (athRed > 0 and athWhite < 0 and DuelIsPlace == 1)
+                # if not noDuel:
+                #     noDuel = (athRed < 0 and athWhite < 0 and DuelIsPlace == 1) 
+                noDuel = (athRed < 0 or athWhite < 0) and (UpDuelRed < 0 and UpDuelWhite <= 0 and DuelIsPlace == 1)
+                # noDuel = DuelIsPlace
+                noDuel = (athRed <= 0 or athWhite <= 0) and (level <= 8 and DuelIsPlace == 1)
                 final = (athRed <= 0 or athWhite <= 0) and (level == 12)
                 final3 = (
-                    (athRed <= 0 or athWhite <= 0) and (level == 12) and (place3 == 1)
+                    (athRed <= 0 or athWhite <= 0) and (level == 8) and (place3 == 1)
                 )
                 final1 = (
                     (athRed <= 0 or athWhite <= 0) and (level == 12) and (place1 == 1)
@@ -984,7 +1037,7 @@ def GetCategoryDynamic(request):
             # query = f"SELECT {title}_category.categoryId, {title}_category.Time, TatamiId FROM {title}_champ JOIN {title}_category ON {title}_champ.categoryId = {title}_category.categoryId  ORDER BY TatamiId, Time"
             query = f"SELECT {title}_category.categoryId, {title}_category.Time, TatamiId FROM {title}_champ JOIN {title}_category ON {title}_champ.CategoryId = {title}_category.CategoryId GROUP BY {title}_category.categoryId, {title}_category.Time, TatamiId ORDER BY categoryId"
 
-            print(query)
+            # print(query)
             cursor.execute(query)
 
             # cursor.execute(
@@ -993,7 +1046,7 @@ def GetCategoryDynamic(request):
             # )
             if(cursor.rowcount == 0):
                 query = f"SELECT {title}_category.categoryId, {title}_category.Time, {title}_category.Time FROM {title}_category  ORDER BY {title}_category.categoryId"
-                print(query)
+                # print(query)
                 cursor.execute(query)
 
             data_to_return = fetch_categories(cursor)

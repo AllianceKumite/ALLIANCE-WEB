@@ -31,19 +31,34 @@ export class ChangetatamiComponent {
   isMobileView: boolean = false;
   champName;
 
+  // listName = [
+  //   'list1',
+  //   'list2',
+  //   'list3',
+  //   'list4',
+  //   'list5',
+  //   'list6',
+  //   'list7',
+  //   'list8',
+  //   'list9',
+  //   'list10',
+  //   'list11',
+  //   'list12'
+  // ];
+
   listName = [
-    'list1',
-    'list2',
-    'list3',
-    'list4',
-    'list5',
-    'list6',
-    'list7',
-    'list8',
-    'list9',
-    'list10',
-    'list11',
-    'list12'
+    ['list2', 'list3', 'list4', 'list5', 'list6', 'list7', 'list8', 'list9', 'list10', 'list11', 'list12'],
+    ['list1', 'list3', 'list4', 'list5', 'list6', 'list7', 'list8', 'list9', 'list10', 'list11', 'list12'],
+    ['list1', 'list2', 'list4', 'list5', 'list6', 'list7', 'list8', 'list9', 'list10', 'list11', 'list12'],
+    ['list1', 'list2', 'list3', 'list5', 'list6', 'list7', 'list8', 'list9', 'list10', 'list11', 'list12'],
+    ['list1', 'list2', 'list3', 'list4', 'list6', 'list7', 'list8', 'list9', 'list10', 'list11', 'list12'],
+    ['list1', 'list2', 'list3', 'list4', 'list5', 'list7', 'list8', 'list9', 'list10', 'list11', 'list12'],
+    ['list1', 'list2', 'list3', 'list4', 'list5', 'list6', 'list8', 'list9', 'list10', 'list11', 'list12'],
+    ['list1', 'list2', 'list3', 'list4', 'list5', 'list6', 'list7', 'list9', 'list10', 'list11', 'list12'],
+    ['list1', 'list2', 'list3', 'list4', 'list5', 'list6', 'list7', 'list8', 'list10', 'list11', 'list12'],
+    ['list1', 'list2', 'list3', 'list4', 'list5', 'list6', 'list7', 'list8', 'list9', 'list11', 'list12'],
+    ['list1', 'list2', 'list3', 'list4', 'list5', 'list6', 'list7', 'list8', 'list9', 'list10', 'list12'],
+    ['list1', 'list2', 'list3', 'list4', 'list5', 'list6', 'list7', 'list8', 'list9', 'list10', 'list11']
   ];
 
   @HostListener('window:resize', ['$event'])
@@ -57,6 +72,9 @@ export class ChangetatamiComponent {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.listName[0]);
+    console.log(this.listName[1]);
+    
     this.isMobileView = window.screen.width < 990;
     this.getData()
     // this.activatedRouter.parent.params.subscribe((params) => {
@@ -110,8 +128,9 @@ export class ChangetatamiComponent {
       })
       .subscribe((response) => {
           wait.style.display = 'none';
+          this.getData();
     });
-    this.getData()
+    // this.getData()
   }
 
   async saveChangeRenumber() {
@@ -129,6 +148,9 @@ export class ChangetatamiComponent {
   ngOnDestroy(): void {}
 
   drop(event: CdkDragDrop<string[]>) {
+    let up = event.container.data;
+    console.log(up);
+    
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -143,6 +165,8 @@ export class ChangetatamiComponent {
         event.currentIndex
       );
     }
+    let down = event.container.data;
+    console.log(down);
     this.saveChange()
   }
 }

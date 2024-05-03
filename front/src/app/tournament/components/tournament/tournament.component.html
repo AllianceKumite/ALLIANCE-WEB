@@ -42,9 +42,15 @@
                     </li>
                 </ng-container>
 
-                <li class="nav-item" routerLinkActive="active">
+                <li class="nav-item" routerLinkActive="active" (click)="clearSelect()">
                     <a [routerLink]="['referys']" class="nav-link">{{ 'navbar.referys' | translate }}</a>
                 </li>
+
+                <ng-container *ngIf="isMobileView">
+                    <li class="nav-item" routerLinkActive="active" (click)="clearSelect()">
+                        <a [routerLink]="['coachbytatami']" class="nav-link">{{ 'navbar.coah-tatami' | translate }}</a>
+                    </li>
+                </ng-container>
 
                 <li class="nav-item" [class.active]="isLinkActive('/participants?country=')">
                     <!-- && countries.length > 1 -->
@@ -133,10 +139,11 @@
                     </a>
 
                     <ul class="mainsubmenu dropdown-menu">
-                        <li> <a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 0}"> {{
+                        <li (click)="clearSelect()"> <a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 0}"> {{
                                 'results.individualResults' | translate}} &raquo; </a>
                             <ul class="submenu dropdown-menu">
-                                <li *ngFor="let tatami of resultsMenuItems;let i = index">
+                                <li *ngFor="let tatami of resultsMenuItems;let i = index" (click)="clearSelect()">
                                     <a class="dropdown-item" [routerLink]="['result']"
                                         [queryParams]="{'offset': 0, 'tatami': tatami.id}">{{tatami.displayName}}
                                         &raquo; </a>
@@ -152,30 +159,37 @@
                             </ul>
                         </li>
 
-                        <li><a class="dropdown-item" [routerLink]="['winnerclub']">{{
+                        <li (click)="clearSelect()"><a class="dropdown-item" [routerLink]="['winnerclub']">{{
                                 'results.clubsResults' | translate }}</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 1}">{{
+                        <li (click)="clearSelect()"><a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 1}">{{
                                 'results.clubResults' | translate }}</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 9}">{{
+                        <li (click)="clearSelect()"><a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 9}">{{
                                 'results.clubPlaceOnly' | translate }}</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 10}">{{
+                        <li (click)="clearSelect()"><a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 10}">{{
                                 'results.clubWomenOnly' | translate }}</a></li>
-                        <li *ngIf="isCheckQuota"><a class="dropdown-item" [routerLink]="['result']"
-                                [queryParams]="{'offset': 6}">{{
+                        <li *ngIf="isCheckQuota" (click)="clearSelect()"><a class="dropdown-item"
+                                [routerLink]="['result']" [queryParams]="{'offset': 6}">{{
                                 'results.clubResultsQuota' | translate }}</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 2}">{{
+                        <li (click)="clearSelect()"><a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 2}">{{
                                 'results.coachResults' | translate }}</a></li>
-                        <li *ngIf="isCheckQuota"><a class="dropdown-item" [routerLink]="['result']"
-                                [queryParams]="{'offset': 8}">{{
+                        <li *ngIf="isCheckQuota" (click)="clearSelect()"><a class="dropdown-item"
+                                [routerLink]="['result']" [queryParams]="{'offset': 8}">{{
                                 'results.coachResultsQuota' | translate }}</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 3}">{{
+                        <li (click)="clearSelect()"><a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 3}">{{
                                 'results.countryResults' | translate }}</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 4}">{{
+                        <li (click)="clearSelect()"><a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 4}">{{
                                 'results.organizationResults' | translate }}</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['result']" [queryParams]="{'offset': 5}">{{
+                        <li (click)="clearSelect()"><a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 5}">{{
                                 'results.regionResults' | translate }}</a></li>
-                        <li *ngIf="isCheckQuota"><a class="dropdown-item" [routerLink]="['result']"
-                                [queryParams]="{'offset': 7}">{{
+                        <li *ngIf="isCheckQuota" (click)="clearSelect()"><a class="dropdown-item"
+                                [routerLink]="['result']" [queryParams]="{'offset': 7}">{{
                                 'results.regionResultsQuota' | translate }}</a></li>
                     </ul>
                 </li>

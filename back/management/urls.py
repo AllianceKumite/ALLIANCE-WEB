@@ -7,6 +7,8 @@ urlpatterns = [
     path('api-get-fights-to-manage', getFightsToManageRequest),
     path('api-get-categories-by-filter', getСategoryForTimeAndTatami),
     path('api-set-fight-winner', setFightWinnerRequest),
+    path('api-champ-get-online-tatami-fight-number', GetOnlineTatamiFightNumber),
+
     path('api-cancel-fights', cancelFightsRequest),
     path('api-postpone-fights', postponeFightsRequest),
     path('api-unpostpone-fights', unpostponeFightsRequest),

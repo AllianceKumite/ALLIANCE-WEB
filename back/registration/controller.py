@@ -139,3 +139,37 @@ def getReferysCoach(title, coachId = None):
     }
 
     return responseObject
+
+def getFightByCoach(title, coachId):
+    cursor = connection.cursor()
+
+    query = ('SELECT ' + 
+            f'{title}_athchamp.FIO, {title}_champ.NumDuel, {title}_champ.TatamiId from {title}_athchamp inner join {title}_champ on '
+            f'({title}_athchamp.athId = {title}_champ.AthIdRed or {title}_athchamp.athId = {title}_champ.AthIdWhite) and {title}_champ.NumDuel > 0 and {title}_champ.DuelIsPlace = 0 '
+            f'where {title}_athchamp.CoachId = {coachId} order by {title}_champ.TatamiId, {title}_champ.NumDuel'
+    )   
+    print(query)
+    cursor.execute(query)
+
+    dict_to_return = dict_fetch_all(cursor)
+
+    responseObject =  dict_to_return
+
+    return responseObject
+
+def getFightByClub(title, clubId):
+    cursor = connection.cursor()
+
+    query = ('SELECT ' + 
+            f'{title}_athchamp.FIO, {title}_champ.NumDuel, {title}_champ.TatamiId from {title}_athchamp inner join {title}_champ on '
+            f'({title}_athchamp.athId = {title}_champ.AthIdRed or {title}_athchamp.athId = {title}_champ.AthIdWhite) and {title}_champ.NumDuel > 0 and {title}_champ.DuelIsPlace = 0 '
+            f'where {title}_athchamp.ClubId = {clubId} order by {title}_champ.TatamiId, {title}_champ.NumDuel'
+    )   
+    print(query)
+    cursor.execute(query)
+
+    dict_to_return = dict_fetch_all(cursor)
+
+    responseObject =  dict_to_return
+
+    return responseObject

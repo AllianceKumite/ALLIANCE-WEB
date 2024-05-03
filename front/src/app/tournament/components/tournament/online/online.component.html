@@ -9,9 +9,14 @@
     </div>   -->
 
     <div class="col" >
-        <div  *ngIf="tatamiId !== 0 && tatamiId < 12">
-               <online-tatami [id]="tatamiId" [fights]='tatamis[0] ? tatamis[0].fights : null' [champType]="champType" 
-            [champName]="nameOfChampionship" [tatamiType] = "tatamiType"></online-tatami>
+        <!-- <div  *ngIf="tatamiId != 0 && tatamiId < 12"> -->
+        <div  *ngIf="tatamiId > 0 && tatamiId < 12 && tatamis?.length > 0">
+            <online-tatami 
+                [id]="tatamiId" 
+                [fights]='tatamis[0] ? tatamis[0]?.fights : null' 
+                [champType]="champType" 
+                [champName]="nameOfChampionship" [tatamiType] = "tatamiType">
+            </online-tatami>
         </div>
 
         <ng-container *ngIf="tatamiId == 0">

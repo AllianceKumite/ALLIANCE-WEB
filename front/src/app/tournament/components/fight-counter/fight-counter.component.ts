@@ -82,11 +82,10 @@ export class FightCounterComponent implements OnInit {
     this.subscriptions.push(s1);
     this.subscriptions.push(s2);
 
-    this.tournamentService
-      .setTatamiTime(this.tatamiId, 0, this.champName)
-      .subscribe((response) => {
-        // console.log(response);
-      });
+    // this.tournamentService
+    //   .setTatamiTime(this.tatamiId, 0, this.champName)
+    //   .subscribe((response) => {
+    //   });
   }
 
   ngOnDestroy() {
@@ -193,11 +192,11 @@ export class FightCounterComponent implements OnInit {
     //   this.showTimer(0, 1, 30);
     this.minutes = Math.floor(this.timerCurrent / 60);
     this.seconds = this.timerCurrent - this.minutes * 60;
-    this.tournamentService
-      .setTatamiTime(this.tatamiId, this.timerCurrent, this.champName)
-      .subscribe((response) => {
-        // console.log(response);
-      });
+    // this.tournamentService
+    //   .setTatamiTime(this.tatamiId, this.timerCurrent, this.champName)
+    //   .subscribe((response) => {
+    //     // console.log(response);
+    //   });
 
     this.drawCounterAtPosition(this.timerCurrent, this.timerMax);
     this.сonfirmService.sendCurrentFightUpdate({ time: this.timerCurrent });

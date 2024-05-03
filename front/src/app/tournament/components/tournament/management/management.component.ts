@@ -11,6 +11,8 @@ import { HomeService } from 'src/app/shared/services/home.service';
 import { environment } from '../../../../../environments/environment';
 import { KataGroup, Kata } from '../../../models/katagroup.model'
 import { SelectedkataService } from '../../../services/selectedkata.service';
+import { OrderService } from 'src/app/tournament/services/order.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-manage-tournament',
@@ -62,6 +64,9 @@ export class ManagementComponent implements OnInit {
     videofile;
     readonly logosDir: string = `${environment.logosDir}`;
 
+    count = 0;
+    clickEventsubscription: Subscription;
+
     constructor(
         private activeRoute: ActivatedRoute,
         private tournamentService: TournamentService,
@@ -71,12 +76,14 @@ export class ManagementComponent implements OnInit {
         private popoutService: PopoutService,
         private homeService: HomeService,
         private selectedkataService: SelectedkataService,
+        private orderService: OrderService,
 
     ) { }
 
     subscriptions = []
 
     async ngOnInit() {
+        this.clickEventsubscription = this.orderService.count.subscribe((count) => this.log(count));
         window.scroll(0, 0);
 
         this.activeRoute.parent.params.subscribe(params => {
@@ -129,6 +136,10 @@ export class ManagementComponent implements OnInit {
         this.loadLevelKata();
     }
 
+    private log(data: number): void {
+        this.count = data;
+    }
+
     getVideoName() {
         let lng = localStorage.getItem('lng');
         if (lng.toUpperCase() == "UA") {
@@ -143,21 +154,22 @@ export class ManagementComponent implements OnInit {
 
     }
 
-    getEstimatedTime(){
+    getEstimatedTime() {
         const result = this.fights?.reduce((acc, currItem) => {
             if (Number(currItem.details.DuelIsPlace) == 0) {
-              if(Number(currItem.details.CategoryType) < 2){ // Это kumite
-              acc += Number(currItem.details?.TimeFDuel1) + Number(currItem.details?.TimeFDuel2) + Number(currItem.details?.TimeFDuel3 ) + 30}
-              else if(Number(currItem.details.CategoryType) == 2){ // Это ката WKO
-                acc += 210
-              }
-              else if(Number(currItem.details.CategoryType) == 3){ // Это ката WKB/KAN
-                acc += 100
-              }
+                if (Number(currItem.details.CategoryType) < 2) { // Это kumite
+                    acc += Number(currItem.details?.TimeFDuel1) + Number(currItem.details?.TimeFDuel2) + Number(currItem.details?.TimeFDuel3) + 30
+                }
+                else if (Number(currItem.details.CategoryType) == 2) { // Это ката WKO
+                    acc += 210
+                }
+                else if (Number(currItem.details.CategoryType) == 3) { // Это ката WKB/KAN
+                    acc += 100
+                }
             }
             return acc;
-          }, 0);
-       return `${Math.trunc(result / 3600)}h ${Math.trunc((result - Math.trunc(result / 3600) * 3600)  / 60)}min`
+        }, 0);
+        return `${Math.trunc(result / 3600)}h ${Math.trunc((result - Math.trunc(result / 3600) * 3600) / 60)}min`
     }
 
     ngOnDestroy() {
@@ -573,9 +585,7 @@ export class ManagementComponent implements OnInit {
     async loadFights() {
         this.tournamentService.getFightsToManage(this.filter).subscribe(response => {
 
-            this.fights = response;          
-            console.log(this.fights);
-            
+            this.fights = response;
             this.countFight = this.fights.length;
             this.fightsMap = new Map(this.fights.map(f => [f.details.ownId, f]));
 

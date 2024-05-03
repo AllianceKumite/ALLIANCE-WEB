@@ -7,6 +7,9 @@ import { TournamentService } from './../../services/tournament.service';
 import { KataGroup, Kata } from '../../models/katagroup.model'
 import { TranslateService } from '@ngx-translate/core';
 import { SelectedkataService } from '../../services/selectedkata.service';
+import { OnlineService } from '../../services/online.service';
+import { OrderService } from '../../services/order.service';
+// import { OnlineComponent } from '../tournament/online/online.component';
 
 @Component({
   selector: 'participant',
@@ -96,6 +99,8 @@ export class ParticipantComponent implements OnInit {
 
   level;
 
+  cntWinner = 0;
+
   // donekata : [];
 
   lng: string;
@@ -113,7 +118,10 @@ export class ParticipantComponent implements OnInit {
     private translateService: TranslateService,
     private selectedkataService: SelectedkataService,
     private cdr: ChangeDetectorRef,
-    private сonfirmService: ConfirmService
+    private сonfirmService: ConfirmService,
+    private onlineService : OnlineService,
+    private orderService: OrderService,
+    // private onlineComponent : OnlineComponent
   ) {
     this.tournamentService = tournamentService;
   }
@@ -126,6 +134,7 @@ export class ParticipantComponent implements OnInit {
     this.selectedKataChoose = null;
 
     this.parseFio(this?.info?.FIO);
+
   }
 
   async ngOnChanges(changes: SimpleChanges) {
@@ -421,19 +430,21 @@ export class ParticipantComponent implements OnInit {
       }
       )
       .subscribe((response) => {
-        this.updateInfo();
-
         this.сonfirmService.updateFightsAfterWinnerSet(
           response,
           this.akaShiroType,
           points
         );
-      });
+        // this.loadTatamiesData();
+      })
+      ;
   };
 
-  updateInfo() {
-    this.updateInfoLevel.emit(this.level);
-  }
+  // public loadTatamiesData():void{
+  //   // this.cntWinner= this.cntWinner + 1;   
+  //   this.orderService.sendClickEvent(Math.random());
+  // }
+
 
   ff(number, presision) {
     return (+number).toFixed(presision);

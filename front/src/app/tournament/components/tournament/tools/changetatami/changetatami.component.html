@@ -13,13 +13,15 @@
                 <div class="card-title p-0 m-0">
                     <h5 class="tatami-number" style="background-color: rgb(37, 55, 87);">
                         <tatami-title [id]='tatami.tatamiId'></tatami-title>
-                        <span>total - {{tatami.total}}</span>
-                        <span>up to semifinal - {{tatami.upsemi}}</span>
-                        <span>semifinal/final - {{tatami.semi_final}}</span>
                     </h5>                    
+                    <span class="tatami-duel" style="background-color: rgb(37, 55, 87);">
+                        <span>total - {{tatami.total}}</span>
+                        <span>up to 1/2 - {{tatami.upsemi}}</span>
+                        <span>1/2 / final - {{tatami.semi_final}}</span>
+                    </span>                    
                 </div>
-                <div cdkDropList id={{listName[i]}} [cdkDropListData]=' tatami.categoriesIds'
-                    [cdkDropListConnectedTo]=listName
+                <div cdkDropList id="list{{[i+1]}}" [cdkDropListData]=' tatami.categoriesIds'
+                    [cdkDropListConnectedTo]=listName[i]
                     class="categoty-list p-0 m-0" style="overflow: auto;" (cdkDropListDropped)="drop($event)">
                     <div class="category-box" *ngFor="let category of tatami.categoriesIds" cdkDrag><app-category-name
                             id="{{category}}"></app-category-name></div>

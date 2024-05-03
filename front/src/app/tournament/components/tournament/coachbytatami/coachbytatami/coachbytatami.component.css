@@ -1,0 +1,48 @@
+.row-header {
+    background-image: linear-gradient(to right, #243949 0%, #507899 100%);
+    height: 50px;
+    position: sticky;
+    top: 0;
+  }
+  
+  .row-data {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  .row-data-gray{
+    padding: 0;
+    margin: 0;
+    height: 40px;
+    width: 100%;
+    background-color: #ededed;
+  }
+  
+  .col-header {
+    font-size: 1em;
+    color: #c2c2c2;
+  }
+  
+  .num {
+    justify-content: center;
+    padding-right: 10px;
+  }
+
+  .box-data {
+    margin: 0;
+    padding: 0;
+    max-height: 35em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap; 
+    border: 1px solid #243949;
+  }
+  
+  
