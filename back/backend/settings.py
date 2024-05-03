@@ -286,7 +286,7 @@ APP_PORT = 80
 # FRONT_APP_LOCATION = "/var/www/front/"
 # local dev internationalyzation resources
 # FRONT_APP_LOCATION = "/Users/sweet/dev/alliance-kumite/repo/web/front/src/"
-FRONT_APP_LOCATION = "/web/front/src/"
+FRONT_APP_LOCATION = "/WEB/ALLIANCE-WEB/front/src/"
 
 APP_I18N_LOCATION = FRONT_APP_LOCATION + "assets/i18n/"
 ATHLETES_PHOTOS_LOCATION = FRONT_APP_LOCATION + "assets/media/athletes_photo/"
