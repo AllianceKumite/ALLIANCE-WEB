@@ -158,7 +158,6 @@ INSTALLED_APPS = [
     'coachPage',
     'management',
     'fight',
-    'webpush',
     'rest_framework',
     'rest_framework.authtoken',
     'dynamic_models',
@@ -204,11 +203,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
          # 'NAME': 'tmp',
+        #'USER': 'root',
+        #'PASSWORD': 'Tii17038229',
+        'NAME': 'karate_db',
         'USER': 'root',
         'PASSWORD': 'Tii17038229',
-        'NAME': 'karate_db',
-        #'USER': 'ak-user',
-        #'PASSWORD': 'slidfFHasjf',
         'HOST': '127.0.0.1',
         #'HOST': 'localhost',
         'PORT': '3306'
@@ -283,10 +282,10 @@ APP_PORT = 80
 # APP_ADDRESS = "alliancekumite.com"
 
 # TODO: put in order all resources
-# FRONT_APP_LOCATION = "/var/www/front/"
+#FRONT_APP_LOCATION = "/var/www/front/"
 # local dev internationalyzation resources
 # FRONT_APP_LOCATION = "/Users/sweet/dev/alliance-kumite/repo/web/front/src/"
-FRONT_APP_LOCATION = "/WEB/ALLIANCE-WEB/front/src/"
+FRONT_APP_LOCATION = "/web/alliance-web/front/src/"
 
 APP_I18N_LOCATION = FRONT_APP_LOCATION + "assets/i18n/"
 ATHLETES_PHOTOS_LOCATION = FRONT_APP_LOCATION + "assets/media/athletes_photo/"
