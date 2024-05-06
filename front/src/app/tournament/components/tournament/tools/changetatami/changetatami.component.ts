@@ -19,6 +19,7 @@ import {
 export class ChangetatamiComponent {
   filter: any = {
     title: null,
+    level: null
   };
 
   tatamies: Tatami[];
@@ -30,6 +31,7 @@ export class ChangetatamiComponent {
 
   isMobileView: boolean = false;
   champName;
+  levelselect = 0;
 
   // listName = [
   //   'list1',
@@ -98,7 +100,7 @@ export class ChangetatamiComponent {
         title: result,
       };
     });
-
+    this.filter.level = 6;
     this.requestTatamisInfo();
   }
 
@@ -169,6 +171,42 @@ export class ChangetatamiComponent {
     console.log(down);
     this.saveChange()
   }
+
+  changeLevelSelect(value){
+    switch(value){
+      case 0:
+        this.filter.level = 6;
+        break;    
+      case 1:
+        this.filter.level = 7;
+        break;    
+      case 2:
+        this.filter.level = 12;
+        break;    
+    }   
+  }
+
+  selectDataByLevel(){
+    this.tournamentService.selectDataByLevel(
+      this.filter
+    )
+    .subscribe((response) => {
+        
+  });
+
+  }
+
+  createcopychamp(){
+    this.tournamentService.createCopyChamp(
+      this.filter
+    )
+    .subscribe((response) => {
+        
+  });
+
+  }
+
 }
+
 
 

@@ -41,7 +41,7 @@ export class OnlineComponent implements OnInit, OnDestroy {
   isMobileView: boolean = false;
 
   subsription: Subscription;
-  private clickEventsubscription: Subscription;
+  clickEventsubscription: Subscription;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -195,7 +195,7 @@ export class OnlineComponent implements OnInit, OnDestroy {
   // }
 
   ngOnDestroy(): void {
-    this.subsription.unsubscribe();
-    this.clickEventsubscription.unsubscribe();
+    if(this.subsription){this.subsription.unsubscribe()};
+    if(this.clickEventsubscription){this.clickEventsubscription.unsubscribe()};
   }
 }

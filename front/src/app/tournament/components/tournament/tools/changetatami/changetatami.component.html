@@ -1,9 +1,63 @@
 <div class="container-fluid">
-    <div class="row mt-2">
-        <div class="col col-sm-12 col-md-6 col-lg-4 p-1">
-            <div class="d-flex w-100 align-items-center justify-content-between p-0 m-0">
-                <h4>{{'admin.changetatami' | translate}}</h4>
-                <button class="btn btn-primary m-0" style="width: 250px;" (click)="setTatamiCategory()"> Save change & renumbering</button>
+    <div>
+        <div class="row mt-2">
+            <div class="col col-sm-12 col-md-6 col-lg-4 p-1">
+                <div class="d-flex w-100 align-items-center justify-content-between p-0 m-0">
+                    <h4>{{'admin.changetatami' | translate}}</h4>
+                    <button class="btn btn-primary m-0" style="width: 250px;" (click)="setTatamiCategory()"> Save change
+                        &
+                        renumbering</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2 d-flex align-items-center">
+            <!-- <h5>
+                {{'tools.changetatami.levelchoice' | translate}}
+            </h5> -->
+            <div class="col-3 d-flex flex-wrap justify-content-evenly">
+                <div class="col-4 d-flex align-items-center justify-content-center">
+                    <div>
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" id="choice1" style="margin-right: 5px;" name="level"
+                                [(ngModel)]="levelselect" (change)="changeLevelSelect(0)" [value]="0"> {{
+                            'tools.changetatami.level14'
+                            | translate}}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-4 d-flex align-items-center justify-content-center">
+                    <div>
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" id="choice2" style="margin-right: 5px;" name="level"
+                                [(ngModel)]="levelselect" (change)="changeLevelSelect(1)" [value]="1"> {{
+                            'tools.changetatami.semifinal' | translate}}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-4 d-flex align-items-center justify-content-center">
+                    <div>
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" id="choice3" style="margin-right: 5px;" name="level"
+                                [(ngModel)]="levelselect" (change)="changeLevelSelect(2)" [value]="2"> {{
+                            'tools.changetatami.final' | translate}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-success m-0 w-100" (click)="selectDataByLevel()"> {{
+                    'tools.changetatami.selectdata' | translate}}</button>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-success m-0 w-100" (click)="createcopychamp()"> {{
+                    'tools.changetatami.createcopy' | translate}}</button>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-success m-0 w-100" (click)="setTatamiCategory()"> {{
+                    'tools.changetatami.saveandrenumber' | translate}}</button>
             </div>
         </div>
     </div>
@@ -13,16 +67,16 @@
                 <div class="card-title p-0 m-0">
                     <h5 class="tatami-number" style="background-color: rgb(37, 55, 87);">
                         <tatami-title [id]='tatami.tatamiId'></tatami-title>
-                    </h5>                    
+                    </h5>
                     <span class="tatami-duel" style="background-color: rgb(37, 55, 87);">
                         <span>total - {{tatami.total}}</span>
                         <span>up to 1/2 - {{tatami.upsemi}}</span>
                         <span>1/2 / final - {{tatami.semi_final}}</span>
-                    </span>                    
+                    </span>
                 </div>
                 <div cdkDropList id="list{{[i+1]}}" [cdkDropListData]=' tatami.categoriesIds'
-                    [cdkDropListConnectedTo]=listName[i]
-                    class="categoty-list p-0 m-0" style="overflow: auto;" (cdkDropListDropped)="drop($event)">
+                    [cdkDropListConnectedTo]=listName[i] class="categoty-list p-0 m-0" style="overflow: auto;"
+                    (cdkDropListDropped)="drop($event)">
                     <div class="category-box" *ngFor="let category of tatami.categoriesIds" cdkDrag><app-category-name
                             id="{{category}}"></app-category-name></div>
                 </div>
@@ -30,9 +84,9 @@
         </div>
     </div>
     <div class="preloader" id="preloader">
-        <svg class="preloader__image" role="img" fill="rgb(37, 55, 87)" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 399.389 399.389"
-            xml:space="preserve">
+        <svg class="preloader__image" role="img" fill="rgb(193, 88, 14)" version="1.1" id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px"
+            viewBox="0 0 399.389 399.389" xml:space="preserve">
             <g>
                 <path d="M340.896,58.489C303.18,20.773,253.031,0.001,199.693,0.001c-53.34,0-103.487,20.771-141.204,58.488
                                         C20.772,96.207,0,146.355,0,199.694c0,53.34,20.772,103.489,58.49,141.206c37.717,37.717,87.864,58.488,141.204,58.488

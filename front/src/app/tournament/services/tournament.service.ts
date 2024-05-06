@@ -177,6 +177,16 @@ export class TournamentService {
       `${environment.serverApiUrl}/api-champ-set-tatami`, model );
   }
 
+  selectDataByLevel(model: any) {
+    return this.http.post(
+      `${environment.serverApiUrl}/api-champ-create-virtual-data`, model );
+  }
+
+  createCopyChamp(model: any) {
+    return this.http.post(
+      `${environment.serverApiUrl}/api-champ-create-copy-champ-data`, model );
+  }
+
   getAllTatami(filter: any) {
     return this.http.post(
       `${environment.serverApiUrl}/api-champ-get-tatami-all`,

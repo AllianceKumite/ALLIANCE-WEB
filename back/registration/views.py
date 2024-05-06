@@ -669,6 +669,175 @@ def GetTatamiUrlVideo(request):
 
     return HttpResponse(status=200)
 
+def create_champ_virtual(title, addname):
+    cursor = connection.cursor()
+    if(len(addname) > 0):
+        cursor.execute('CREATE TABLE ' + title + '_champ_' + addname + '( ' +
+            'ownId int AUTO_INCREMENT PRIMARY KEY, ' +
+            'TatamiId int NOT NULL, ' +
+            'CategoryId int NOT NULL, ' +
+            'BlockNum int NOT NULL, ' +
+            'AthIdRed int NOT NULL, ' +
+            'AthIdWhite int NOT NULL, ' +
+            'NumDuel int NOT NULL, ' +
+            'NextDuel int NOT NULL, ' +
+            'DuelIsPlace bool NOT NULL, ' +
+            'WinnerRed bool NOT NULL, ' +
+            'WinnerWhite bool NOT NULL, ' +
+            'Level int NOT NULL, ' +
+            'Duel1Place bool NOT NULL, ' +
+            'Duel3Place bool NOT NULL, ' +
+            'Duel5Place bool NOT NULL, ' +
+            'Duel7Place bool NOT NULL, ' +
+            'LevePair int NOT NULL, ' +
+            'NumPair int NOT NULL, ' +
+            'UpDuelRed int NOT NULL, ' +
+            'UpDuelWhite int NOT NULL, ' +
+            'pointsRed int NOT NULL, ' +
+            'pointsWhite int NOT NULL, ' +
+
+            'Chu1R bool, ' +
+            'Chu2R bool, ' +
+            'Chu3R bool, ' +
+            'Vaz1R bool, ' +
+            'Vaz2R bool, ' +
+            'IpponR bool, ' +
+
+            'Chu1W bool, ' +
+            'Chu2W bool, ' +
+            'Chu3W bool, ' +
+            'Vaz1W bool, ' +
+            'Vaz2W bool, ' +
+            'IpponW bool, ' +
+
+            'TimeRemain float, ' +
+            'Refery1 float, ' +
+            'Refery2 float, ' +
+            'Refery3 float, ' +
+            'Refery4 float, ' +
+            'Refery5 float, ' +
+            'Avg float ' +
+        ')')
+    else:
+        cursor.execute('CREATE TABLE ' + title + '_champ ' + '( ' +
+            'ownId int AUTO_INCREMENT PRIMARY KEY, ' +
+            'TatamiId int NOT NULL, ' +
+            'CategoryId int NOT NULL, ' +
+            'BlockNum int NOT NULL, ' +
+            'AthIdRed int NOT NULL, ' +
+            'AthIdWhite int NOT NULL, ' +
+            'NumDuel int NOT NULL, ' +
+            'NextDuel int NOT NULL, ' +
+            'DuelIsPlace bool NOT NULL, ' +
+            'WinnerRed bool NOT NULL, ' +
+            'WinnerWhite bool NOT NULL, ' +
+            'Level int NOT NULL, ' +
+            'Duel1Place bool NOT NULL, ' +
+            'Duel3Place bool NOT NULL, ' +
+            'Duel5Place bool NOT NULL, ' +
+            'Duel7Place bool NOT NULL, ' +
+            'LevePair int NOT NULL, ' +
+            'NumPair int NOT NULL, ' +
+            'UpDuelRed int NOT NULL, ' +
+            'UpDuelWhite int NOT NULL, ' +
+            'pointsRed int NOT NULL, ' +
+            'pointsWhite int NOT NULL, ' +
+
+            'Chu1R bool, ' +
+            'Chu2R bool, ' +
+            'Chu3R bool, ' +
+            'Vaz1R bool, ' +
+            'Vaz2R bool, ' +
+            'IpponR bool, ' +
+
+            'Chu1W bool, ' +
+            'Chu2W bool, ' +
+            'Chu3W bool, ' +
+            'Vaz1W bool, ' +
+            'Vaz2W bool, ' +
+            'IpponW bool, ' +
+
+            'TimeRemain float, ' +
+            'Refery1 float, ' +
+            'Refery2 float, ' +
+            'Refery3 float, ' +
+            'Refery4 float, ' +
+            'Refery5 float, ' +
+            'Avg float ' +
+        ')')
+
+def select_data_virtual(title, level):
+    cursor = connection.cursor()
+    query = (f'INSERT INTO {title}_champ ' +
+    f'(SELECT * FROM {title}_champ_main where Level >= {level})'
+    )
+    print('select_data_virtual', query)
+
+    cursor.execute(query)
+
+def rename_table_champ(title):
+    cursor = connection.cursor()
+    try:
+        query = (f'DELETE TABLE {title}_champ_main')
+        cursor.execute(query)
+    except Exception as e:
+        print(e)
+    query = (f'RENAME TABLE {title}_champ TO {title}_champ_main')
+    print('rename_table_champ', query)
+    cursor.execute(query)
+
+@csrf_exempt
+def CreateCopyChampData(request):
+    if request.method == "POST":
+        json_string = JSONParser().parse(request)
+        title = json_string.get("title")
+        try:
+            create_champ_virtual(title, 'copy')
+        except Exception as e:
+            print(e)
+        cursor = connection.cursor()
+        query = (f'INSERT INTO {title}_champ_copy ' +
+        f'(SELECT * FROM {title}_champ)'
+        )
+        cursor.execute(query)
+    return HttpResponse(status=200)
+
+@csrf_exempt
+def SelectByLevelAndCreateTable(request):
+    if request.method == "POST":
+        json_string = JSONParser().parse(request)
+        title = json_string.get("title")
+        level = json_string.get("level")
+
+        try:
+            rename_table_champ(title)
+            create_champ_virtual(title, '')
+        except Exception as e:
+            print(e)
+
+        print('table created')
+        select_data_virtual(title, level)
+        # cursor = connection.cursor()
+        # for arr_of_values in data:
+        #     if len(arr_of_values) > 0:
+        #         tatamiId = arr_of_values["tatamiId"]
+        #         categoriesIds = arr_of_values["categoriesIds"]
+        #         # print('tatami=', tatamiId, 'categoriesIds=', categoriesIds)
+        #         for categoryId in categoriesIds:
+        #             query = (
+        #                 f"UPDATE "
+        #                 + title
+        #                 + "_champ"
+        #                 + f' SET TatamiId = "{tatamiId}"'
+        #                 + f" WHERE CategoryId = {categoryId}"
+        #             )
+        #             cursor.execute(query)
+        # # print(renumber)
+        # if renumber:
+        #     renumberFights(title, len(data))
+        # if title is None:
+        #     return HttpResponse(status=400)
+    return HttpResponse(status=200)
 
 @csrf_exempt
 def SetTatamiCategory(request):
@@ -791,6 +960,7 @@ def renumberFights(title, tatamicount):
         for currRow in cursorLevel.fetchall():
             arrLevel.append(int(currRow[0]))
 
+        print(arrLevel)
         query = f"SELECT * FROM {title}_champ WHERE CategoryId = {categoryId} order by Level, CategoryId, LevePair, NumPair"
         cursorcurrDuel.execute(query)
         for currRow in cursorcurrDuel.fetchall():
@@ -800,51 +970,101 @@ def renumberFights(title, tatamicount):
             currNumDuel = (currRow[6])
 
             numNextlevel = -1
-            for i in range(len(arrLevel)):
-                
-                if currlevel == arrLevel[i]:
-                    if i + 1 < len(arrLevel):
-                        numNextlevel = int(arrLevel[i + 1])
-                        break
+            
+            if currlevel < 7:
+                for i in range(len(arrLevel)):
+                    
+                    if currlevel == arrLevel[i]:
+                        if i + 1 < len(arrLevel):
+                            numNextlevel = int(arrLevel[i + 1])
+                            break
 
             numPairNext = currNumPair // 2 # Номер пары в следующем уровне
             
             bEven = currNumPair % 2 # если true - это ака
-
-            if numNextlevel == 12:  #это финальные поединки 3-е и 1-е место
+            print(numNextlevel)
+            if numNextlevel == 12 or numNextlevel == 8:  #это финальные поединки 3-е и 1-е место
                 nextNumDuel = -1
                 numPairNext = currNumPair
                 bEven       = numPairNext
                 numPairNext = 1
-
-            query = f"SELECT *  FROM {title}_champ WHERE CategoryId = {categoryId} and Level = {numNextlevel} and NumPair = {numPairNext} order by Level, CategoryId, LevePair, NumPair"
-            cursornextDuel.execute(query)
-            nextRow = cursornextDuel.fetchone()
-            if nextRow is not None:
-                nextOwnId = nextRow[0]
-                nextNumDuel = nextRow[6]
-                if numNextlevel != 12:
+            if currlevel < 7:
+                query = f"SELECT *  FROM {title}_champ WHERE CategoryId = {categoryId} and Level = {numNextlevel} and NumPair = {numPairNext} order by Level, CategoryId, LevePair, NumPair"
+                cursornextDuel.execute(query)
+                nextRow = cursornextDuel.fetchone()
+                if nextRow is not None:
+                    nextOwnId = nextRow[0]
+                    nextNumDuel = nextRow[6]
+                    # if numNextlevel != 12 and numNextlevel != 8:
                     if bEven == 0:
                         query = f"UPDATE {title}_champ SET UpDuelRed = {currNumDuel} where ownId = {nextOwnId}"
                         cursorUpdate.execute(query)
                     if bEven == 1:
                         query = f"UPDATE {title}_champ SET UpDuelWhite = {currNumDuel} where ownId = {nextOwnId}"
                         cursorUpdate.execute(query)
+                    # else:
+                    #     query = f"SELECT *  FROM {title}_champ WHERE CategoryId = {categoryId} and Level = {numNextlevel} order by Level, CategoryId, LevePair, NumPair"
+                    #     cursornextDuel.execute(query)
+                    #     for nextItem in cursornextDuel.fetchall():
+                    #         if numPairNext == 0:
+                    #             query = f"UPDATE {title}_champ SET UpDuelRed = {currNumDuel} where ownId = {nextItem[0]}"
+                    #         if numPairNext == 1:
+                    #             query = f"UPDATE {title}_champ SET UpDuelWhite = {currNumDuel} where ownId = {nextItem[0]}"
+                    #         cursornextDuel.execute(query)
+
                 else:
-                    query = f"SELECT *  FROM {title}_champ WHERE CategoryId = {categoryId} and Level = {numNextlevel} order by Level, CategoryId, LevePair, NumPair"
-                    cursornextDuel.execute(query)
-                    for nextItem in cursornextDuel.fetchall():
-                        if numPairNext == 0:
-                            query = f"UPDATE {title}_champ SET UpDuelRed = {currNumDuel} where ownId = {nextItem[0]}"
-                        if numPairNext == 1:
-                            query = f"UPDATE {title}_champ SET UpDuelWhite = {currNumDuel} where ownId = {nextItem[0]}"
-                        cursornextDuel.execute(query)
-
+                    nextNumDuel = -1
+                query = f"UPDATE {title}_champ SET NextDuel = {nextNumDuel} where ownId = {currOwnId}"
+                cursorUpdate.execute(query)
             else:
-                nextNumDuel = -1
+                if currlevel == 7:
+                    query = f"SELECT *  FROM {title}_champ WHERE CategoryId = {categoryId} and Level = 8 order by Level, CategoryId, LevePair, NumPair"
+                    cursornextDuel.execute(query)
+                    nextRow = cursornextDuel.fetchone()
+                    if nextRow is not None:
+                        nextOwnId = nextRow[0]
+                        nextNumDuel = nextRow[6]
+                        print('level=8 ', nextNumDuel)
+                        is3place = nextRow[13]
+                        # if numNextlevel != 12 and numNextlevel != 8:
+                        if is3place:
+                            if bEven == 0:
+                                query = f"UPDATE {title}_champ SET UpDuelRed = {currNumDuel} where ownId = {nextOwnId}"
+                                cursorUpdate.execute(query)
+                            if bEven == 1:
+                                query = f"UPDATE {title}_champ SET UpDuelWhite = {currNumDuel} where ownId = {nextOwnId}"
+                                cursorUpdate.execute(query)
+                        else:
+                            query = f"UPDATE {title}_champ SET UpDuelRed = -1 where ownId = {nextOwnId}"
+                            cursorUpdate.execute(query)
+                            query = f"UPDATE {title}_champ SET UpDuelWhite = -1 where ownId = {nextOwnId}"
+                            cursorUpdate.execute(query)
+                    query = f"UPDATE {title}_champ SET NextDuel = {nextNumDuel} where ownId = {currOwnId}"
+                    cursorUpdate.execute(query)
+            
 
-            query = f"UPDATE {title}_champ SET NextDuel = {nextNumDuel} where ownId = {currOwnId}"
-            cursorUpdate.execute(query)
+                    query = f"SELECT *  FROM {title}_champ WHERE CategoryId = {categoryId} and Level = 12 order by Level, CategoryId, LevePair, NumPair"
+                    cursornextDuel.execute(query)
+
+                    nextRow = cursornextDuel.fetchone()
+                    if nextRow is not None:
+                        nextOwnId = nextRow[0]
+                        nextNumDuel = nextRow[6]
+                        print('level=12 ', nextNumDuel)
+                        # if numNextlevel != 12 and numNextlevel != 8:
+                        if bEven == 0:
+                            query = f"UPDATE {title}_champ SET UpDuelRed = {currNumDuel} where ownId = {nextOwnId}"
+                            cursorUpdate.execute(query)
+                        if bEven == 1:
+                            query = f"UPDATE {title}_champ SET UpDuelWhite = {currNumDuel} where ownId = {nextOwnId}"
+                            cursorUpdate.execute(query)
+                    query = f"UPDATE {title}_champ SET NextDuel = {nextNumDuel} where ownId = {currOwnId}"
+                    cursorUpdate.execute(query)
+
+                if currlevel == 8 or currlevel == 12:
+                    nextNumDuel = -1
+                    query = f"UPDATE {title}_champ SET NextDuel = {nextNumDuel} where ownId = {currOwnId}"
+                    cursorUpdate.execute(query)
     return
 
 @csrf_exempt

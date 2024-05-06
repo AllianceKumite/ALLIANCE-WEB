@@ -34,14 +34,14 @@
   }
 
   .box-data {
-    margin: 0;
-    padding: 0;
+    /* margin: 0;
+    padding: 0; */
     max-height: 35em;
     overflow-y: auto;
     overflow-x: hidden;
     background-color: #fff;
-    display: flex;
-    flex-wrap: wrap; 
+    /* display: flex;
+    flex-wrap: wrap;  */
     border: 1px solid #243949;
   }
   

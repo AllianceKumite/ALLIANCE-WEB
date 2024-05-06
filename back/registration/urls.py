@@ -19,11 +19,16 @@ urlpatterns = [
     path('api-champ-get-tatami', GetTatamiCurrentFightAndAllCategories),    # get tatami referenced with cat. for dropL.
     path('api-champ-get-tatami-urlvideo', GetTatamiUrlVideo),
     path('api-champ-get-tatamis-current-fight', GetTatamisCurrentFight),    # get tatami referenced with cat. for dropL.
-    path('api-champ-set-tatami', SetTatamiCategory),                        # set tatami num by category before drop
     path('api-champ-get-referys', GetReferysRequest),                       # get referys from champ
     path('api-champ-get-referys-coach', GetReferysCoachRequest),            # get referys from champ by coach
     path('api-champ-get-part-next-fight-coach', GetNextFightByCoach),       # get referys from champ by coach
-    path('api-champ-get-part-next-fight-club', GetNextFightByClub),       # get referys from champ by coach
+    path('api-champ-get-part-next-fight-club', GetNextFightByClub),         # get referys from champ by coach
+
+    path('api-champ-set-tatami', SetTatamiCategory),                        # set tatami num by category before drop
+    path('api-champ-create-virtual-data', SelectByLevelAndCreateTable),     # set tatami num by category before drop
+    path('api-champ-create-copy-champ-data', CreateCopyChampData),     # set tatami num by category before drop
+
+    
 
 
     path('api-champ-get-coaches', getCoaches),                              # get all clubs taking place in champ

@@ -46,11 +46,11 @@
                     <a [routerLink]="['referys']" class="nav-link">{{ 'navbar.referys' | translate }}</a>
                 </li>
 
-                <ng-container *ngIf="isMobileView">
+                <!-- <ng-container *ngIf="isMobileView"> -->
                     <li class="nav-item" routerLinkActive="active" (click)="clearSelect()">
                         <a [routerLink]="['coachbytatami']" class="nav-link">{{ 'navbar.coah-tatami' | translate }}</a>
                     </li>
-                </ng-container>
+                <!-- </ng-container> -->
 
                 <li class="nav-item" [class.active]="isLinkActive('/participants?country=')">
                     <!-- && countries.length > 1 -->

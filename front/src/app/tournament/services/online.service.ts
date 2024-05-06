@@ -35,6 +35,9 @@ export class OnlineService {
 
   tatamiNumFight = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
 
+  nextFightSelectedCoach;
+  nextFightSelectedClub;
+
   loadTatami(nameOfChampionship, numberTatami, startTatami = 0, endTatamiId = 0, tatamiAmount = 0) {
     // loadTatami(nameOfChampionship, numberTatami, startTatami = 0, endTatamiId = 0, tatamiAmount = 0) {
     this.startingTatamiId = startTatami;

@@ -282,6 +282,15 @@
         "exportAllDiplomToPdf": "Build Diploms (all participants)",
         "overlay": "Television overlay",
         "personalapp": "Personal Application",
+        "changetatami": {
+            "levelchoice": "Select a level to create a new tournament",
+            "level14": "1/4 finals",
+            "semifinal": "semifinal",
+            "final": "final",
+            "selectdata": "Create a virtual tournament",
+            "createcopy": "Create copy of the tourmanent",
+            "saveandrenumber": "Save change and renumber"
+        },
         "setup": {
             "setup": "Setup",
             "category": "Category",
@@ -720,13 +729,14 @@
             "244": "UnitedKingdom",
             "245": "UnitedNations",
             "246": "UnitedStates",
+            "247": "Unknown",
             "248": "Uruguay",
             "249": "USVirginIslands",
             "250": "Uzbekistan",
             "251": "Vanuatu",
             "252": "VaticanCity",
             "253": "Venezuela",
-            "254": " Vietnam",
+            "254": " ",
             "255": "Wales",
             "256": "WallisAndFutuna",
             "257": "WesternSahara",
@@ -739,10 +749,10 @@
             "1": "Kharkiv Region",
             "2": "Cherkasy Region",
             "3": "Chernihiv Region",
-            "4": "Chernovetskaya Region",
+            "4": "Chernivtsi Region",
             "5": "Dnipropetrovsk Region",
             "6": "Donetsk Region",
-            "7": "Ivano-Frankivsk Region",
+            "7": "IvanoFrankivsk Region",
             "8": "Zhytomyr Region",
             "9": "Kiev Region",
             "10": "Kirovograd Region",
@@ -786,20 +796,471 @@
             "56": "Tschechische Republik",
             "57": "Київська область",
             "58": "",
-            "59": "Bengkulu"
+            "59": "Bengkulu",
+            "60": "",
+            "61": "",
+            "62": "",
+            "63": "",
+            "64": "",
+            "65": "",
+            "66": "",
+            "67": "Punjab",
+            "68": "podlaskie",
+            "69": "Vilniaus m. savivaldybė",
+            "70": "warmińsko-mazurskie",
+            "71": "Gästrikland",
+            "72": "Mazowsze",
+            "73": "",
+            "74": "Kauno",
+            "75": "Dolnoslaskie",
+            "76": " ",
+            "77": "",
+            "78": "",
+            "79": "lubelskie",
+            "80": "mazowieckie",
+            "81": "",
+            "82": "",
+            "83": "Lviv",
+            "84": "Запоріжжя ",
+            "85": "",
+            "86": ""
         },
         "champs": {
+            "cup_hikari": {
+                "name": "Open tournament kiokushin karate `HIKARI CUP`",
+                "city": "Kiev City"
+            },
+            "cup_ukraine_25_12": {
+                "name": "Ukrainian Kiokushinkai Karate Championship/Cup",
+                "city": "Kiev City"
+            },
+            "champ_ua_02_2022": {
+                "name": "Championship of Ukraine in Kyokushin karate",
+                "city": "Lviv city"
+            },
+            "champ_kwu_2022": {
+                "name": "2nd Ukrainian Championship KWU",
+                "city": "Poltava city"
+            },
+            "cup_wkb_12_02_2022": {
+                "name": "Championship of Ukraine kiokushin Budo karate WKB",
+                "city": "Poltava City"
+            },
+            "champ_zhytomyr_19_02_2022": {
+                "name": "Championship Zhytomyr\r\n",
+                "city": "Zhytomyr"
+            },
+            "lutsk_2022": {
+                "name": "Open charity tournament `HONOR AND GLORY TO THE UNBREAKABLE!`",
+                "city": "Lutsk City"
+            },
+            "champ_ua_2022": {
+                "name": "Ukrainian Championship, WKO",
+                "city": "Zhytomyr"
+            },
+            "mukachevo_open_cup": {
+                "name": "Mukachevo Open Cup",
+                "city": "Mukachevo city"
+            },
+            "cup_kanku_2022": {
+                "name": "CUP KANKU 2022",
+                "city": "Lviv city"
+            },
+            "cup_lofkk_2022": {
+                "name": "Championship of Lviv region\r\n",
+                "city": "Lviv city"
+            },
+            "cup_monolit_2022": {
+                "name": "All-Ukrainian tournament Cup `Monolith`",
+                "city": "Kiev city"
+            },
+            "cup_wko_2022": {
+                "name": "Championship of Ukraine in Kyokushin karate",
+                "city": "Lviv city"
+            },
+            "cup_zhytomyr_2022": {
+                "name": "Championship of the Zhytomyr region",
+                "city": "Zhytomyr city"
+            },
             "cup_germany_open": {
+                "name": "The 2st WKB German Open 2023",
+                "city": "Saarbruecken"
+            },
+            "cup_olgy_2023": {
+                "name": "All-Ukrainian tournament `Cup of Princess Olga`\r\n",
+                "city": "Gostomel City"
+            },
+            "champ_zhytomyr_2023": {
+                "name": "Championship of Zhytomyr Region kyokushinkai karate `ZVYAGELS BELLS`",
+                "city": "Lviv city"
+            },
+            "champ_lviv_2023": {
+                "name": "Championship of the Lviv region",
+                "city": "Lviv city"
+            },
+            "cup_royama_2023": {
+                "name": "All-Ukrainian Tournament `Warrior of Light`",
+                "city": "Kamenskoye City"
+            },
+            "champ_ua_04_23": {
+                "name": "Ukrainian Championship, WKO",
+                "city": "Lviv"
+            },
+            "champ_ua_05_23": {
+                "name": "Championship of Ukraine in Kyokushin karate",
+                "city": "Kropyvnytskyi"
+            },
+            "lutsk_05_23": {
+                "name": "Lutsk Kyokushinkai Karate Championship `Western Border`",
+                "city": "Lutsk city"
+            },
+            "champ_ua_02_23": {
+                "name": "Ukrainian Championship, WKO",
+                "city": "Lviv"
+            },
+            "gran_pri_monolit_2023": {
+                "name": "All-Ukrainian tournament `GRAND_PRI`",
+                "city": "Kyiv"
+            },
+            "cup_curpatia_23": {
+                "name": "Open championship of the Transcarpathian region",
+                "city": "Uzhorod"
+            },
+            "cup_kanku_04_23": {
+                "name": "SC KANKU CUP\r\n",
+                "city": "Lviv-Vynnyky"
+            },
+            "glory_cup": {
+                "name": "All-Ukrainian tournament `GLORY CUP`",
+                "city": "Kyiv"
+            },
+            "first_step_2023": {
+                "name": "Tournament `First Step`",
+                "city": "Lviv city"
+            },
+            "cup_berdychiv": {
+                "name": "Berdychev Open Championship\r\n",
+                "city": "Berdychev city"
+            },
+            "cup_misak": {
+                "name": "IV club kumite tournament `Mysak Dojo`",
+                "city": "Kyiv"
+            },
+            "cup_kanku_23_23": {
+                "name": "SC KANKU CUP",
+                "city": "Lviv"
+            },
+            "palmira2023": {
+                "name": "Open Odesa shinkyokushinkai cup  'PIVDENNA PALMIRA XIV'",
+                "city": "Odesa"
+            },
+            "muromec2023": {
+                "name": "Cup of the Sports Club 'Ilya Muromets'",
+                "city": "Primorske village of Izmailsky district"
+            },
+            "wkb2023": {
+                "name": "Championship of Ukraine in Kyokushin BuDo karate WKB",
+                "city": "Uzhhorod City"
+            },
+            "koziatyn2023": {
+                "name": "Open cup Koziatyn with Kyokushinkai karate `TAKO CUP`",
+                "city": "Koziatyn"
+            },
+            "kiev2023": {
+                "name": "Open Championship of Kyiv `Summer of Victory`",
+                "city": "Kiev"
+            },
+            "mamuka2023": {
+                "name": "II open tournament `Battle of Champions`, KENBUKAI",
+                "city": "Kyiv city"
+            },
+            "royama2023": {
+                "name": "All-Ukrainian Tournament `Cup Royama`, KYOKUSHIN-KAN",
+                "city": "Kamenskoye City"
+            },
+            "latvia2024": {
+                "name": "First Open European Kumite Cup `LKKL / Karate Skola 2024`",
+                "city": "Salaspils city, Latvia"
+            },
+            "lvivopencup23": {
+                "name": "Open tournament 'Lviv Open Cup', WKO",
+                "city": "Lviv-Vynnyky"
+            },
+            "monolit_09_23": {
+                "name": "II open tournament `Battle of Champions`, KENBUKAI",
+                "city": "Kyiv city"
+            },
+            "mamuka2024": {
+                "name": "II 3rd Kyokushin Budo Karate Kenbukai `Way of the Warrior` Open Tournament",
+                "city": "Kiev city"
+            },
+            "cup_olgy_2024": {
+                "name": "All-Ukrainian tournament `Cup of Princess Olga`, WKO",
+                "city": "Irpin city"
+            },
+            "lofkk_09_23": {
+                "name": "Tournament `First Step/Cup Lviv region`",
+                "city": "Lviv city"
+            },
+            "yastrub_10_23": {
+                "name": "Mukachevo Open Cup, IKO MATSUSHIMA",
+                "city": "Mukachevo city"
+            },
+            "zhytomir_11_23": {
+                "name": "Championship of Zhytomyr «ZHYTOMIR OPEN», WKO",
+                "city": "Zhytomyr city"
+            },
+            "nakamura_11_23": {
+                "name": "1st open championship of Kyiv city IKO NAKAMURA",
+                "city": "Kyiv City"
+            },
+            "wko_kata_11_23": {
+                "name": "Ukrainian Championship(kata), WKO",
+                "city": "Lviv"
+            },
+            "monolit_12_23": {
+                "name": "SK MONOLITH Cup - Kiev Championship, KENBUKAI\r\n",
+                "city": "Bucha"
+            },
+            "hikary_12_23": {
+                "name": "II-OPEN TOURNAMENT WITH KYOKUSHINKAI KARATE HIKARI CUP, WKO",
+                "city": "Kyiv"
+            },
+            "cup_wko_12_23": {
+                "name": "CUP Ukrainian, WKO",
+                "city": "Vinnytca"
+            },
+            "champ_ua_04_24": {
                 "name": "Championship of Ukraine `Fighters of the nation`",
                 "city": "Kyiv"
             },
+            "poltava_kiodo_10_23": {
+                "name": "Championship of Poltava region, Poltava city, KyodoKyokushin",
+                "city": "Poltava"
+            },
+            "poltava_kiodo_11_23": {
+                "name": "Open all-Ukrainian tournament, Poltava city, KyodoKyokushin",
+                "city": "Poltava"
+            },
+            "granpri_2024": {
+                "name": "All-Ukrainian tournament `GRAND_PRI`, Kenbukai",
+                "city": "Kyiv"
+            },
+            "kanku_10_23": {
+                "name": "SC KANKU CUP",
+                "city": "Lviv-Vynnyky"
+            },
+            "lutck_11_23": {
+                "name": "Lutsk Kyokushinkai Karate Championship",
+                "city": "Lutsk city"
+            },
+            "lutck_04_24": {
+                "name": "Lutsk Kyokushinkai Karate Championship `Western Border`, WKO",
+                "city": "Lutsk city"
+            },
+            "kanku_11_23": {
+                "name": "SC KANKU CUP",
+                "city": "Lviv"
+            },
+            "kyev_kata_23": {
+                "name": "5th Kyiv Kyokushinkai Karate Championship in the KATA section",
+                "city": "Kiev"
+            },
+            "kan_10_23": {
+                "name": "Cup of UKRAINE with Kyokushin-kan karate, KyokushinKAN",
+                "city": "Brody"
+            },
+            "kan_11_23": {
+                "name": "Open championship of the Zakarpattia region, KyokushinKAN",
+                "city": "Mukachevo"
+            },
+            "war_of_light_24": {
+                "name": "All-Ukrainian Tournament `Warrior of Light`",
+                "city": "Kamenskoye City"
+            },
+            "champ_wkb_24": {
+                "name": "Ukrainian Kyokushin Karate Championship",
+                "city": "Uzhhorod"
+            },
+            "sihiv_11_23": {
+                "name": "SC KANKU CUP",
+                "city": "Lviv"
+            },
+            "kiev_zfp_23": {
+                "name": "1st cup of Kyiv in general physical training, WKO",
+                "city": "Kyiv"
+            },
+            "cup_kanku_kata": {
+                "name": "SK KANKU Cup in the KATA section. WKO\r\n",
+                "city": "Lviv"
+            },
+            "champ_ua_02_24": {
+                "name": "Championship of Ukraine in the sections `kata`, team `kata` and `kumite`",
+                "city": "Lviv"
+            },
+            "zviagel_03_24": {
+                "name": "Championship of Zhytomyr region",
+                "city": "Zvyagel"
+            },
+            "champ_ibu_04_24": {
+                "name": "Ukrainian Open Kyokushin Karate Championship (IBU)",
+                "city": "Poltava"
+            },
+            "champ_kan_04_24": {
+                "name": "Ukrainian Kyokushin Karate Championship (KyokushinKan)",
+                "city": "Ternopil"
+            },
+            "brodi_05_24": {
+                "name": "All-Ukrainian Kyokushin Karate Tournament",
+                "city": "Brodi"
+            },
+            "shin_europe_07_24": {
+                "name": "The 3rd European Open Cup, Shin Karate",
+                "city": "Zwiesel, Germany"
+            },
+            "fastov_2024": {
+                "name": "Charity Kyokushin Karate Tournament (WKO)",
+                "city": "Vishneve"
+            },
+            "first_step_2024": {
+                "name": "Tournament `First Step/Championship Lviv region`\r\n",
+                "city": "Lviv city"
+            },
+            "tako_cup_2024": {
+                "name": "Open cup Koziatyn with Kyokushinkai karate `TAKO CUP`",
+                "city": "Koziatyn"
+            },
             "kiev_open_2024": {
+                "name": "Opening Championship Kiev",
+                "city": "Kyiv city"
+            },
+            "volin_2024": {
+                "name": "Championship of the Volyn region and the city of Lutsk",
+                "city": "Lutsk city"
+            },
+            "businkan_rooki": {
+                "name": "Open club tournament for beginners `Rookie CUP`",
+                "city": "Kamianske"
+            },
+            "zhovkva_2024": {
+                "name": "Kyokushinkai Karate Cup of the Lviv region",
+                "city": "Zhovkva"
+            },
+            "cup_berdichiv_05_24": {
+                "name": "Open tournament 'Berdichev Cup'",
+                "city": "Berdichev"
+            },
+            "cup_kanku_04_24": {
+                "name": "Open tournament 'Championship of SC KANKU'",
+                "city": "Lviv-Vynnyky"
+            },
+            "cup_kozak_2024": {
+                "name": "2nd KDYUSSH KOZAK Open Cup with kyokushinkai karate",
+                "city": "Kyiv city"
+            },
+            "champ_ua_06_24": {
+                "name": "Ukrainian Championship",
+                "city": "Kropyvnytskyi city"
+            },
+            "kanku_03_24": {
+                "name": "SC KANKU CUP",
+                "city": "Lviv"
+            },
+            "cup_test": {
+                "name": "Championship of Ukraine `Fighters of the nation`\r\n",
+                "city": "Kyiv"
+            },
+            "cup_oyama_09_24": {
+                "name": "All-Ukrainian tournament `Cup OYAMA`, WKO",
+                "city": "Irpin city"
+            },
+            "firststep_09_24": {
+                "name": "Tournament `First Step/Cup Lviv region`",
+                "city": "Lviv city"
+            },
+            "mamuka_09_24": {
+                "name": "III open tournament `Battle of Champions`, KENBUKAI",
+                "city": "Kyiv city"
+            },
+            "lviv_open_24": {
+                "name": "Open tournament 'Lviv Open Cup', WKO",
+                "city": "Lviv-Vynnyky"
+            },
+            "jumior_open_24": {
+                "name": "All-Ukrainian tournament `JUNIOR KYIV OPEN 2024`, KENBUKAI",
+                "city": "Bucha"
+            },
+            "yastrub_10_24": {
+                "name": "Mukachevo Open Cup, IKO MATSUSHIMA",
+                "city": "Mukachevo city"
+            },
+            "cup_ua_10_24": {
+                "name": "All-Ukrainian changes in the Kumite section",
+                "city": "Kyiv"
+            },
+            "zhytomir_11_24": {
+                "name": "Championship of Zhytomyr «ZHYTOMIR OPEN»",
+                "city": "Zhytomyr city"
+            },
+            "champ_lviv_12_24": {
+                "name": "Absolute championship of Lviv region",
+                "city": "Lviv city"
+            },
+            "cup_ua_12_24": {
+                "name": "CUP Ukrainian, WKO",
+                "city": ""
+            },
+            "monolit_02_25": {
+                "name": "SK MONOLITH Cup - Kiev Championship, KENBUKAI",
+                "city": "Bucha"
+            },
+            "cup_olgy_2025": {
+                "name": "All-Ukrainian tournament `Cup of Princess Olga`, WKO",
+                "city": "Irpin city"
+            },
+            "way_wrrior_25": {
+                "name": "IV Kyokushin Budo Karate Kenbukai `Way of the Warrior` Open Tournament",
+                "city": "Kiev city"
+            },
+            "kenbukai_open_25": {
+                "name": "yokushin Budo Karate Kenbukai Open Tournament",
+                "city": "Kiev city"
+            },
+            "lutck_11_24": {
+                "name": "Kyokushinkai Karate Tournament `The Way to Victory`",
+                "city": "Lutsk city"
+            },
+            "hikari_12_24": {
+                "name": "III-OPEN TOURNAMENT WITH KYOKUSHINKAI KARATE HIKARI CUP, WKO",
+                "city": "Kyiv"
+            },
+            "busido_06_24": {
+                "name": "BUSHIDO Club Open Cup",
+                "city": "Lviv"
+            },
+            "cup_kanku_04_24_sunday": {
                 "name": "Open tournament 'Championship of SC KANKU'\r\n",
                 "city": "Lviv-Vynnyky"
             },
-            "cup_olgy_2024": {
-                "name": "",
-                "city": ""
+            "champ_zakarp_2024": {
+                "name": "Open championship of the Zakarpattia region, KyokushinKAN",
+                "city": "Mukachevo"
+            },
+            "kryukivshchyna_open_cup_25": {
+                "name": "Open tournament `Kryukivshchyna Open Cup 2025`",
+                "city": "Vishneve"
+            },
+            "western_border_25": {
+                "name": "Lutsk Kyokushinkai Karate Championship `Western Border`",
+                "city": "Lutsk city"
+            },
+            "kyev_kata_05_24": {
+                "name": "The 6th Kyiv Kyokushinkai Karate Cup in the KATA section",
+                "city": "Kiev"
+            },
+            "test_ua": {
+                "name": "Championship of Ukraine `Fighters of the nation`",
+                "city": "Kyiv"
             }
         }
     }

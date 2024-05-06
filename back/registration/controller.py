@@ -148,7 +148,6 @@ def getFightByCoach(title, coachId):
             f'({title}_athchamp.athId = {title}_champ.AthIdRed or {title}_athchamp.athId = {title}_champ.AthIdWhite) and {title}_champ.NumDuel > 0 and {title}_champ.DuelIsPlace = 0 '
             f'where {title}_athchamp.CoachId = {coachId} order by {title}_champ.TatamiId, {title}_champ.NumDuel'
     )   
-    print(query)
     cursor.execute(query)
 
     dict_to_return = dict_fetch_all(cursor)
