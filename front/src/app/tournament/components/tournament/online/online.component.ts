@@ -197,5 +197,6 @@ export class OnlineComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if(this.subsription){this.subsription.unsubscribe()};
     if(this.clickEventsubscription){this.clickEventsubscription.unsubscribe()};
+    this.onlineService.clearAllTimer();
   }
 }

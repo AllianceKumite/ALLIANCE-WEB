@@ -21,7 +21,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
   };
 
   REFRESH_TIMEOUT = 15.0;
-  REFRESH_TIME_TIMEOUT = 1;
+  // REFRESH_TIME_TIMEOUT = 1;
   // REFRESH_TIMEOUT = 3.5
 
   tatamies: Tatami[];

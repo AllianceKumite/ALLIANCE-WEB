@@ -184,7 +184,7 @@
 .box-data {
   margin: 0;
   padding: 0;
-  max-height: 48em;
+  max-height: 46em;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #fff;
@@ -196,12 +196,14 @@
 .box-data-club {
   margin: 0;
   padding: 0;
-  max-height: 24em;
+  height: 23em;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #fff;
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  /* display: flex;
+  jus
+  flex-wrap: wrap; */
   cursor: pointer;
 
 }

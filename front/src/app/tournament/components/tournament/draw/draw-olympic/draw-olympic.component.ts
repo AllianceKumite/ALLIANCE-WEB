@@ -25,7 +25,7 @@ export class DrawOlympicComponent implements OnInit {
     ngOnInit(): void {
         this.levels = this.blocks && this.blocks.length > 1 ? this.blocks[1] : null
         this.middleIdx = this.levels[0]?.length / 2 - 1;
-        console.log(this.middleIdx);
+        // console.log(this.middleIdx);
         
     }
 

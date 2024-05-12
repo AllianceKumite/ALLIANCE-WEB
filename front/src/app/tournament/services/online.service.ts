@@ -38,6 +38,11 @@ export class OnlineService {
   nextFightSelectedCoach;
   nextFightSelectedClub;
 
+  clearAllTimer(){
+    clearInterval(this.intervalIdOne);
+    clearInterval(this.intervalId);
+  }
+
   loadTatami(nameOfChampionship, numberTatami, startTatami = 0, endTatamiId = 0, tatamiAmount = 0) {
     // loadTatami(nameOfChampionship, numberTatami, startTatami = 0, endTatamiId = 0, tatamiAmount = 0) {
     this.startingTatamiId = startTatami;
@@ -73,7 +78,7 @@ export class OnlineService {
               this.loadData(nameOfChampionship, tatamiId, this.tatamiIdStart, this.tatamiIdEnd, this.tatamisAmount);
             }
 
-            console.log(this.tatamiNumFight);
+            // console.log(this.tatamiNumFight);
             
           }
           );
@@ -98,6 +103,7 @@ export class OnlineService {
             if (this.isUpdate) {
               this.loadDataOneTatami(nameOfChampionship, tatamiId)
             }
+            // console.log(this.tatamiNumFight);
           }
           );
 

@@ -221,7 +221,7 @@ def Participants_File(request):
                 # print(arr_of_sql_values)
                 query = (
                     f'INSERT INTO {title}_athchamp' +
-                    '(athId, CoachId, ClubId, CountryId, RegionId, CategoryId, Category2Id, FIO, Photo, DAN, Gender, DateBR, Weight, CountWinner, CountBall, CountBallKata, OrdNum, Kumite, Kata, KataGroup, Favorit1, Favorit2, teamcompetition, CountVazary, CountIppon, CountRefery ) ' +
+                    '(athId, CoachId, ClubId, CountryId, RegionId, CategoryId, Category2Id, FIO, Photo, DAN, Gender, DateBR, Age, Weight, CountWinner, CountBall, CountBallKata, OrdNum, Kumite, Kata, KataGroup, Favorit1, Favorit2, teamcompetition, CountVazary, CountIppon, CountRefery ) ' +
                     'VALUES ('+ ', '.join(arr_of_sql_values) + ', 0, 0, 0' + ' )'
                 )
 
@@ -1085,78 +1085,80 @@ def generateTranslations():
     langsUpercased = ['En', 'Ru', 'Ua']
     langsExt = '.json'
 
-    for i in range(len(langs)):
-        countryJson = {}
+    try:
+        for i in range(len(langs)):
+            countryJson = {}
 
-        for country in countries:
-            countryJson[country["countryId"]] = country["countryName" + langsUpercased[i]]
+            for country in countries:
+                countryJson[country["countryId"]] = country["countryName" + langsUpercased[i]]
 
-        regionJson = {}
+            regionJson = {}
 
-        for region in regions:
-            regionJson[region["regionId"]] = region["regionName" + langsUpercased[i]]
+            for region in regions:
+                regionJson[region["regionId"]] = region["regionName" + langsUpercased[i]]
 
-        champsJson = {}
+            champsJson = {}
 
-        for champ in champs:
-            champJson = {}
+            for champ in champs:
+                champJson = {}
 
-            try:
-                query = (f'SELECT {champ["title"]}_category.CategoryName{langsUpercased[i]}, categoryId ' +
-                        f' FROM {champ["title"]}_category')
-                cursor.execute(query)
-                categories = tatami_one_fetch(cursor, None)
-
-
-                categoriesJson = {}
-
-                for category in categories:
-                    categoriesJson[category["categoryId"]] = category["CategoryName" + langsUpercased[i]]
-
-                champJson["categories"] = categoriesJson
-            except:
-                pass
-
-            champJson["champInfo"] = champ["champInfo" + langsUpercased[i]]
-            champJson["address"] = champ["address" + langsUpercased[i]]
-
-            champWrapper = {}
-            champWrapper["champ"] = champJson
-
-            fileName = settings.APP_I18N_LOCATION + 'champs/' + champ["title"].lower() + '-' + langs[i] + langsExt
-
-            with open(fileName, "w", encoding="utf-8") as openedFile:
-                json.dump(champWrapper, openedFile, ensure_ascii=False, indent=4, separators=(',',': '))
-
-            openedFile.close()
+                try:
+                    query = (f'SELECT {champ["title"]}_category.CategoryName{langsUpercased[i]}, categoryId ' +
+                            f' FROM {champ["title"]}_category')
+                    cursor.execute(query)
+                    categories = tatami_one_fetch(cursor, None)
 
 
+                    categoriesJson = {}
 
-            champsJson[champ["title"].lower()] = {
-                "name": champ["champName" + langsUpercased[i]],
-                "city": champ["champCity" + langsUpercased[i]],
-                # "categories": categoriesJson
-            }
+                    for category in categories:
+                        categoriesJson[category["categoryId"]] = category["CategoryName" + langsUpercased[i]]
 
-            fileName = settings.APP_I18N_LOCATION + langs[i] + langsExt
+                    champJson["categories"] = categoriesJson
+                except:
+                    pass
 
-            with open(fileName, encoding="utf-8") as openedFile:
-                i18nJson = json.load(openedFile)
+                champJson["champInfo"] = champ["champInfo" + langsUpercased[i]]
+                champJson["address"] = champ["address" + langsUpercased[i]]
 
-            openedFile.close()
+                champWrapper = {}
+                champWrapper["champ"] = champJson
 
-            i18nJson["db"] = {
-                "country" : countryJson,
-                "region" : regionJson,
-                "champs": champsJson
-            }
+                fileName = settings.APP_I18N_LOCATION + 'champs/' + champ["title"].lower() + '-' + langs[i] + langsExt
 
-            # i18nJson=i18nJson.decode(encoding='utf-8')
-            with open(fileName, "w", encoding="utf-8") as openedFile:
-                json.dump(i18nJson, openedFile, ensure_ascii=False, indent=4, separators=(',',': '))
-            openedFile.close()
+                
+                with open(fileName, "w", encoding="utf-8") as openedFile:
+                    json.dump(champWrapper, openedFile, ensure_ascii=False, indent=4, separators=(',',': '))
 
-        # except Exception as e:
-        #     print('EXCEPTION: ', e)
-        #     return HttpResponse(e, status=400)
+                openedFile.close()
+
+
+
+                champsJson[champ["title"].lower()] = {
+                    "name": champ["champName" + langsUpercased[i]],
+                    "city": champ["champCity" + langsUpercased[i]],
+                    # "categories": categoriesJson
+                }
+
+                fileName = settings.APP_I18N_LOCATION + langs[i] + langsExt
+
+                with open(fileName, encoding="utf-8") as openedFile:
+                    i18nJson = json.load(openedFile)
+
+                openedFile.close()
+
+                i18nJson["db"] = {
+                    "country" : countryJson,
+                    "region" : regionJson,
+                    "champs": champsJson
+                }
+
+                # i18nJson=i18nJson.decode(encoding='utf-8')
+                with open(fileName, "w", encoding="utf-8") as openedFile:
+                    json.dump(i18nJson, openedFile, ensure_ascii=False, indent=4, separators=(',',': '))
+                openedFile.close()
+
+    except Exception as e:
+        print('EXCEPTION: ', e)
+        return HttpResponse(e, status=400)
 

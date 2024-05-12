@@ -118,13 +118,14 @@
         </div>
         <div class="row p-1 m-0" style="font-size: 70%; background-color: transparent">
             <div class="row p-3">
-                <h4>
-                    {{ 'manage.totalfight' | translate}}{{filter.tatami}}: {{ countFight }}({{ 'manage.current' | translate}}
-                    {{currentFight?.details?.NumDuel}} [{{countFight - currentFight?.details?.NumDuel}}])
-                </h4>
-                <h4>
+                <h5>
+                    {{ 'manage.totalfight' | translate}}{{filter.tatami}}: {{ countFight }} {{'manage.current' | translate}}(
+                    {{currentFight?.details?.NumDuel}} [{{ countFight - currentFight?.details?.NumDuel + 1 }}]
+                    )
+                </h5>
+                <h5>
                     {{ 'manage.estimatedtime' | translate}} {{getEstimatedTime()}}
-                </h4>
+                </h5>
             </div>
         </div>
     </div>

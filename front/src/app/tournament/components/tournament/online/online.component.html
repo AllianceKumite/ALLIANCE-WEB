@@ -22,9 +22,10 @@
         <ng-container *ngIf="tatamiId == 0">
 
             <ng-container *ngIf="tatamis.length == 1">
-                <div class="row top-horizontally">
+                <div class="row top-horizontally d-flex flex-wrap">
                     <div class="col-5" *ngFor="let tatami of tatamis; let idx = index;">
-                        <online-tatami [id]="tatami.tatamiId" [fights]='tatami.fights' [champType]="champType" [size]="1"
+                    <!-- <div class="col-5" *ngFor="let tatami of tatamis; let idx = index;"> -->
+                            <online-tatami [id]="tatami.tatamiId" [fights]='tatami.fights' [champType]="champType" [size]="1"
                             [colorVariant]="idx" [champName]="nameOfChampionship" [tatamiType] = "tatamiType"></online-tatami>
                     </div>
                 </div>

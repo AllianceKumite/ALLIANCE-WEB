@@ -47,9 +47,9 @@
                 </li>
 
                 <!-- <ng-container *ngIf="isMobileView"> -->
-                    <li class="nav-item" routerLinkActive="active" (click)="clearSelect()">
-                        <a [routerLink]="['coachbytatami']" class="nav-link">{{ 'navbar.coah-tatami' | translate }}</a>
-                    </li>
+                <li class="nav-item" routerLinkActive="active" (click)="clearSelect()">
+                    <a [routerLink]="['coachbytatami']" class="nav-link">{{ 'navbar.coah-tatami' | translate }}</a>
+                </li>
                 <!-- </ng-container> -->
 
                 <li class="nav-item" [class.active]="isLinkActive('/participants?country=')">
@@ -69,20 +69,23 @@
                     </ng-select>
                 </li>
 
-                <li class="nav-item" [class.active]="isLinkActive('/participants?club=')">
-                    <!-- clubs.length > 1 -->
-                    <ng-select *ngIf="showClubsFilter && clubs" #clubSelector [(ngModel)]="selectedClub"
-                        bindLabel="name" bindValue="id" (change)="changeClub()" [searchable]="false"
-                        class="nav-link filter-item filter-item-custom m-0"
-                        placeholder="{{ 'navbar.club' | translate }}" name="selectedClub" (mouseenter)="expandClubs()"
-                        (mouseleave)="collapseClubs()" (focus)="blurClubs()" dropdownPosition="bottom"
-                        [routerLink]="['participants']" [queryParams]="{'club': this.selectedClub}">
-                        <ng-option *ngFor="let club of clubs" [value]="club.id">
-                            <img src="{{logosDir}}/{{ club.logo }}" class="menu-dropdown-img" />
-                            {{club.name}}
-                        </ng-option>
-                    </ng-select>
-                </li>
+                <ng-container *ngIf="isMobileView">
+                    <li class="nav-item" [class.active]="isLinkActive('/participants?club=')">
+                        <!-- clubs.length > 1 -->
+                        <ng-select *ngIf="showClubsFilter && clubs" #clubSelector [(ngModel)]="selectedClub"
+                            bindLabel="name" bindValue="id" (change)="changeClub()" [searchable]="false"
+                            class="nav-link filter-item filter-item-custom m-0"
+                            placeholder="{{ 'navbar.club' | translate }}" name="selectedClub"
+                            (mouseenter)="expandClubs()" (mouseleave)="collapseClubs()" (focus)="blurClubs()"
+                            dropdownPosition="bottom" [routerLink]="['participants']"
+                            [queryParams]="{'club': this.selectedClub}">
+                            <ng-option *ngFor="let club of clubs" [value]="club.id">
+                                <img src="{{logosDir}}/{{ club.logo }}" class="menu-dropdown-img" />
+                                {{club.name}}
+                            </ng-option>
+                        </ng-select>
+                    </li>
+                </ng-container>
 
                 <li class="nav-item" [class.active]="isLinkActive('/participants?coach=')">
                     <!-- coaches.length > 0 -->
@@ -236,7 +239,8 @@
                     </ng-select>
                 </li>
 
-                <li *ngIf="isSuperAdmin && !isMobileView" class="nav-item" routerLinkActive="active"
+                <!-- <li *ngIf="isSuperAdmin && !isMobileView" class="nav-item" routerLinkActive="active" -->
+                <li class="nav-item" routerLinkActive="active"
                     [routerLinkActiveOptions]="routerLinkActiveOptions">
                     <ng-select *ngIf="admins" #adminSelector (change)="changeAdmins()" [searchable]="false"
                         placeholder="{{ 'navbar.admin' | translate }}" bindLabel="name" bindValue="id"

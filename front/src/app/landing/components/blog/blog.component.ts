@@ -150,8 +150,7 @@ export class BlogComponent implements OnInit {
                     date: Date.parse(d.champFrom + 'T00:00:00'),
                     dateTo: Date.parse(d.champTo + 'T00:00:00'),
                     dateEndReg: Date.parse(d.champRegTo + 'T00:00:00'),
-                    description:
-                        'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident quidem rem accusantium eius dolores obcaecati explicabo, ratione aspernatur expedita cumque.',
+                    description: '',
                     results: '/champ/' + d.title + '/result?offset=0',
                     location: d.champCityUa,
                     orgLogo: d.orgId

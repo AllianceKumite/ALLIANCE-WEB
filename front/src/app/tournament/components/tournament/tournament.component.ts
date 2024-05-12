@@ -1,24 +1,24 @@
 import { Component, HostListener, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router, IsActiveMatchOptions } from '@angular/router';
 import { Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
-import { TranslateHttpLoader }        from '@ngx-translate/http-loader';
-import { HttpClient }                 from '@angular/common/http';
-import { NgSelectComponent }          from '@ng-select/ng-select';
-import { TranslateService }           from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+import { NgSelectComponent } from '@ng-select/ng-select';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { environment }                from 'src/environments/environment';
-import { HomeService }                from '../../../shared/services/home.service'
-import { UtilService }                from '../../../shared/services/util.service'
+import { environment } from 'src/environments/environment';
+import { HomeService } from '../../../shared/services/home.service'
+import { UtilService } from '../../../shared/services/util.service'
 
 
-import { TournamentService }          from '../../services/tournament.service';
-import { TatamiTitleComponent }       from '../tatami-title/tatami-title.component';
-import { AuthenticationService }      from '../../../shared/services/authentication.service';
-import { NavItem }                    from '../menu-item/nav-item';
+import { TournamentService } from '../../services/tournament.service';
+import { TatamiTitleComponent } from '../tatami-title/tatami-title.component';
+import { AuthenticationService } from '../../../shared/services/authentication.service';
+import { NavItem } from '../menu-item/nav-item';
 
 import { TatamiComponent } from './tatami/tatami.component';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
-import { Dropdown }                    from 'mdb-ui-kit';
+import { Dropdown } from 'mdb-ui-kit';
 
 
 @Component({
@@ -62,7 +62,7 @@ export class TournamentComponent implements OnInit {
   tatamisInit: any[] = [];
   results: any[];
   teamCompetitionCount = 0;
-  isCheckQuota = false;              
+  isCheckQuota = false;
 
   tools: any[] = [
     { id: 1, name: 'exportDrawToPdf', path: 'exportdraw' },
@@ -218,12 +218,12 @@ export class TournamentComponent implements OnInit {
       });
 
       this.homeService.getChampInfo(name);
-        this.homeService._champInfo.subscribe((champInfo) => {
-          let tournament = champInfo[1];
-          this.teamCompetitionCount = tournament['teamcompetition'];
-          this.isCheckQuota = this.teamCompetitionCount > 0;              
-        });
-    
+      this.homeService._champInfo.subscribe((champInfo) => {
+        let tournament = champInfo[1];
+        this.teamCompetitionCount = tournament['teamcompetition'];
+        this.isCheckQuota = this.teamCompetitionCount > 0;
+      });
+
       this.tournamentService
         .getCountries({
           title: name,
@@ -236,7 +236,7 @@ export class TournamentComponent implements OnInit {
 
       this.tournamentService.getClubs({ title: name }).subscribe((response) => {
         this.clubs = Object.values(response);
-        this.clubs.sort(function(a, b){
+        this.clubs.sort(function (a, b) {
           return a.ClubId - b.ClubId
         })
       });
@@ -245,7 +245,7 @@ export class TournamentComponent implements OnInit {
         .getCoaches({ title: name })
         .subscribe((response) => {
           this.coaches = Object.values(response);
-          });
+        });
 
       this.homeService
         .getCategories({ title: name })
@@ -268,7 +268,7 @@ export class TournamentComponent implements OnInit {
   }
 
   initCategories(response) {
-   
+
     if (response) {
       let vals = Object.values(response);
 
@@ -288,13 +288,6 @@ export class TournamentComponent implements OnInit {
   initTatamies(response) {
     const tatamiLength = response['tatamisCount'];
 
-    // this.tatamis = [
-    //   {
-    //     id: 0,
-    //     name: this.translateService.instant('general.allTatamis'),
-    //   },
-    // ];
-
     for (let i = 1; i <= tatamiLength; i++) {
       this.tatamis.push({
         id: i,
@@ -306,241 +299,306 @@ export class TournamentComponent implements OnInit {
       });
     }
 
-    switch (tatamiLength) {
-      case 4:
-        this.tatamis.push({
-          id: 102,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            102
-          ),
-        });
-        this.tatamis.push({
-          id: 304,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            304
-          ),
-        });
-        break;
-      case 5:
-        this.tatamis.push({
-          id: 103,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            103
-          ),
-        });
-        this.tatamis.push({
-          id: 405,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            405
-          ),
-        });
-        break;
-      case 6:
-        this.tatamis.push({
-          id: 103,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            103
-          ),
-        });
-        this.tatamis.push({
-          id: 406,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            406
-          ),
-        });
-        break;
-      case 7:
-        this.tatamis.push({
-          id: 103,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            103
-          ),
-        });
-        this.tatamis.push({
-          id: 405,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            405
-          ),
-        });
-        this.tatamis.push({
-          id: 607,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            607
-          ),
-        });
-        break;
-      case 8:
-        this.tatamis.push({
-          id: 103,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            103
-          ),
-        });
-        this.tatamis.push({
-          id: 406,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            406
-          ),
-        });
-        this.tatamis.push({
-          id: 708,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            708
-          ),
-        });
-        break;
-      case 9:
-        this.tatamis.push({
-          id: 103,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            103
-          ),
-        });
-        this.tatamis.push({
-          id: 406,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            406
-          ),
-        });
-        this.tatamis.push({
-          id: 709,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            709
-          ),
-        });
-        break;
-      case 10:
-        this.tatamis.push({
-          id: 103,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            103
-          ),
-        });
-        this.tatamis.push({
-          id: 406,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            406
-          ),
-        });
-        this.tatamis.push({
-          id: 708,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            708
-          ),
-        });
-        this.tatamis.push({
-          id: 910,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            910
-          ),
-        });
-        break;
-      case 11:
-        this.tatamis.push({
-          id: 103,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            103
-          ),
-        });
-        this.tatamis.push({
-          id: 406,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            406
-          ),
-        });
-        this.tatamis.push({
-          id: 709,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            709
-          ),
-        });
-        this.tatamis.push({
-          id: 1011,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            1011
-          ),
-        });
-        break;
-      case 12:
-        this.tatamis.push({
-          id: 103,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            103
-          ),
-        });
-        this.tatamis.push({
-          id: 406,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            406
-          ),
-        });
-        this.tatamis.push({
-          id: 709,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            709
-          ),
-        });
-        this.tatamis.push({
-          id: 1012,
-          name: TatamiTitleComponent.getTitle(
-            this.translateService.instant('navbar.tatami'),
-            this.tatamiType,
-            1012
-          ),
-        });
-        break;
+    if (!this.isMobileView) {
+      switch (tatamiLength) {
+        case 2:
+          this.tatamis.push({
+            id: 102,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              102
+            ),
+          });
+          break;
+        case 3:
+          this.tatamis.push({
+            id: 102,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              102
+            ),
+          });
+          break;
+        case 4:
+          this.tatamis.push({
+            id: 102,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              102
+            ),
+          });
+          this.tatamis.push({
+            id: 304,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              304
+            ),
+          });
+          break;
+        case 5:
+          this.tatamis.push({
+            id: 102,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              102
+            ),
+          });
+          this.tatamis.push({
+            id: 304,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              304
+            ),
+          });
+          this.tatamis.push({
+            id: 103,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              103
+            ),
+          });
+          this.tatamis.push({
+            id: 405,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              405
+            ),
+          });
+          break;
+        case 6:
+          this.tatamis.push({
+            id: 102,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              102
+            ),
+          });
+
+          this.tatamis.push({
+            id: 304,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              304
+            ),
+          });
+
+          this.tatamis.push({
+            id: 506,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              506
+            ),
+          });
+
+          this.tatamis.push({
+            id: 103,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              103
+            ),
+          });
+          this.tatamis.push({
+            id: 406,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              406
+            ),
+          });
+          break;
+        case 7:
+          this.tatamis.push({
+            id: 103,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              103
+            ),
+          });
+          this.tatamis.push({
+            id: 405,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              405
+            ),
+          });
+          this.tatamis.push({
+            id: 607,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              607
+            ),
+          });
+          break;
+        case 8:
+          this.tatamis.push({
+            id: 103,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              103
+            ),
+          });
+          this.tatamis.push({
+            id: 406,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              406
+            ),
+          });
+          this.tatamis.push({
+            id: 708,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              708
+            ),
+          });
+          break;
+        case 9:
+          this.tatamis.push({
+            id: 103,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              103
+            ),
+          });
+          this.tatamis.push({
+            id: 406,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              406
+            ),
+          });
+          this.tatamis.push({
+            id: 709,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              709
+            ),
+          });
+          break;
+        case 10:
+          this.tatamis.push({
+            id: 103,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              103
+            ),
+          });
+          this.tatamis.push({
+            id: 406,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              406
+            ),
+          });
+          this.tatamis.push({
+            id: 708,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              708
+            ),
+          });
+          this.tatamis.push({
+            id: 910,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              910
+            ),
+          });
+          break;
+        case 11:
+          this.tatamis.push({
+            id: 103,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              103
+            ),
+          });
+          this.tatamis.push({
+            id: 406,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              406
+            ),
+          });
+          this.tatamis.push({
+            id: 709,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              709
+            ),
+          });
+          this.tatamis.push({
+            id: 1011,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              1011
+            ),
+          });
+          break;
+        case 12:
+          this.tatamis.push({
+            id: 103,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              103
+            ),
+          });
+          this.tatamis.push({
+            id: 406,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              406
+            ),
+          });
+          this.tatamis.push({
+            id: 709,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              709
+            ),
+          });
+          this.tatamis.push({
+            id: 1012,
+            name: TatamiTitleComponent.getTitle(
+              this.translateService.instant('navbar.tatami'),
+              this.tatamiType,
+              1012
+            ),
+          });
+          break;
+      }
     }
 
     // for (let i = 1; i <= tatamiLength; i++) {
@@ -710,10 +768,10 @@ export class TournamentComponent implements OnInit {
 
   setDraw() {
     this.clearSelect();
-   
+
     // this.router.navigate(['champ/' + this.nameOfChampionship + '/draw'], { queryParams: { 'category': this.selectedDraw } });
     // console.log(this.selectedDraw);
-    
+
   }
 
   setResult() {
@@ -785,9 +843,9 @@ export class TournamentComponent implements OnInit {
       let fromChampTime = Date.parse(tournament.champFrom + 'T00:00:00');
       let now = Date.now();
 
-      registerable = /*(now >= fromTime) && */ now <= fromChampTime;      
-      this.registerableCoach = /*(now >= fromTime) && */ now <= toTime;      
-      this.registerableRefery = /*(now >= fromTime) && */ now <= fromChampTime;    
+      registerable = /*(now >= fromTime) && */ now <= fromChampTime;
+      this.registerableCoach = /*(now >= fromTime) && */ now <= toTime;
+      this.registerableRefery = /*(now >= fromTime) && */ now <= fromChampTime;
     }
 
     return registerable;
@@ -796,7 +854,7 @@ export class TournamentComponent implements OnInit {
   clearSelect() {
     setTimeout(() => {
       let elem = document.getElementById('navbar-toggler');
-      if (elem){
+      if (elem) {
         elem.click();
       }
       this.selectedTatami = null;
@@ -932,7 +990,7 @@ export class TournamentComponent implements OnInit {
     }
   }
 
-  expandRegistry() {   
+  expandRegistry() {
     if (!this.isMobileView) {
       this.registrySelector.open();
     }

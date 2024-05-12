@@ -28,14 +28,14 @@
   </div>
 
   <!-- <div class="box-data" id="box-data"> -->
-  <div class="d-flex  col-12" style="height: 48em;">
+  <div class="d-flex  col-12" style="height: 40em;">
 
     <div *ngIf=" clubs?.length > 0 && !isMobileView" class="col-3  pe-5 d-flex flex-wrap">
       <div class="box-data-club" id="box-data-club">
         <div class="row row-header p-0 m-0 w-100 d-flex justify-content-center" style="color: #fff; font-size: 16px; height: 35px;"> 
           <span>{{'navbar.club' | translate}} - {{clubs.length}}</span> 
         </div>
-        <div *ngFor="let item of clubs" class="row row-data-club p-0 m-0 w-100" (click)="getParticipantsByClub(item)" [ngClass]="{ 'row-data-select': item.id == selectedclub}">
+        <div *ngFor="let item of clubs" class="row row-data-club p-0 m-0 w-100 d-flex align-items-center" style="height: 30px;" (click)="getParticipantsByClub(item)" [ngClass]="{ 'row-data-select': item.id == selectedclub}">
           <div class="col-1">
             <ng-container *ngIf="item.id != '0'"> <img src="{{logosDir}}/{{ item.logo }}" style="width: 16px; height: auto;"> </ng-container>           
           </div>
@@ -95,7 +95,7 @@
           </div>
           <div class="col-2 col-sm-3 col-md-3 col-lg-1 p-0 m-0">
             <div class="col-header" style="text-align: center;">
-              {{'dataTable.date' | translate}}
+              {{'dataTable.age' | translate}}
             </div>
           </div>
 
@@ -166,7 +166,7 @@
             <div class="col-d-w-g">{{ participant.DateBR | date: 'dd.MM.yy' }}</div>
           </div>
           <div class="col-2 col-sm-3 col-md-3 col-lg-1 p-0 m-0">
-            <div class="col-d-w-g">{{ getAge(participant.DateBR)}}</div>
+            <div class="col-d-w-g">{{ participant.Age == 'None' ?  '' : participant.Age}}</div>
           </div>
 
           <!-- weight -->

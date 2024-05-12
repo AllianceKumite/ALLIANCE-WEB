@@ -1,10 +1,11 @@
+<!-- class="{{ 'card ' + (size == -1 ? 'col-xl-6 col-lg-8 col-md-12 col-sm-12 col-12' : 'col-lg-12')}}"  -->
 <div class="current-fight row color-variant-{{colorVariant}} size-variant-{{size != -1 ? 'narrow mb-1' : 'wide mb-3'}}">
     <div 
         class="col-md-12 text-center pt-0 justify-content-center" 
         style="display: flex; padding-left: 0; padding-right: 0;">
         <div 
-            class="{{ 'card ' + (size == -1 ? 'col-xl-6 col-lg-8 col-md-12 col-sm-12 col-12' : 'col-lg-12')}}" 
-            style="border: 0; padding: 0; overflow: hidden; ">
+        class="{{ 'card ' + (size == -1 ? 'col-xl-6 col-lg-8 col-md-12 col-sm-12 col-12' : 'col-lg-12')}}" 
+        style="border: 0; padding: 0; overflow: hidden; ">
             <div class="card-header text-light" style="background-color: #405B8F; padding-bottom: 0; border: 0">
                 <fullscreen-btn></fullscreen-btn>
                 <h4><tatami-title [id]='id' [tatamiType] = "tatamiType"></tatami-title></h4>
@@ -29,7 +30,7 @@
   <ng-container *ngFor="let fight of fights; let i = index;">
       <div *ngIf="i > 0"
           style="{{size == -1 ? '' : 'padding-right: 0px; padding-left: 0px;'}}"
-          class="{{size == -1 ? 'col col-sm-12 col-md-6 col-lg-4' : 'col-' + (12/size) }}">
+          class="{{size == -1 ? 'col-12 col-sm-12 col-md-6 col-lg-4' : 'col-' + (12/size) }}">
           <fight
               [viewType]="'onlineTatamiNextFight'"
               [fight]="fight"
@@ -40,3 +41,5 @@
       </div>
   </ng-container>
 </div>
+
+<!-- class="{{size == -1 ? 'col col-sm-12 col-md-6 col-lg-4' : 'col-' + (12/size) }}" -->

@@ -122,6 +122,7 @@ class CreateDynamicChamp:
             'DAN varchar(10) NOT NULL, ' +
             'Gender varchar(40) NOT NULL, ' +
             'DateBR date NOT NULL, ' +
+            'Age int, ' +
             'Weight float, ' +
             'CountWinner int, ' +
             'CountBall float, ' +

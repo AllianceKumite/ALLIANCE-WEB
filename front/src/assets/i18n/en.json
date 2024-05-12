@@ -264,7 +264,7 @@
         "video": "VIDEO"
     },
     "admin": {
-        "changetatami": "Transfer category to tatami",
+        "changetatami": "Administration of tatami fights",
         "managefight": "Manage fights",
         "managerefery": "Formation of judicial teams",
         "exportAllDiplomToPdf": "Build Diploms (all participants)",
@@ -289,7 +289,8 @@
             "final": "final",
             "selectdata": "Create a virtual tournament",
             "createcopy": "Create copy of the tourmanent",
-            "saveandrenumber": "Save change and renumber"
+            "saveandrenumber": "Save change and renumber",
+            "atlevel": "starting from level"
         },
         "setup": {
             "setup": "Setup",
@@ -346,6 +347,7 @@
     "dataTable": {
         "participant": "Participant",
         "date": "Date",
+        "age": "Age",
         "weight": "Weight",
         "rank": "Grade",
         "club": "Club",
@@ -1261,6 +1263,10 @@
             "test_ua": {
                 "name": "Championship of Ukraine `Fighters of the nation`",
                 "city": "Kyiv"
+            },
+            "kyev_open_09_24": {
+                "name": "Opening Championship Kiev",
+                "city": "Kyiv city"
             }
         }
     }

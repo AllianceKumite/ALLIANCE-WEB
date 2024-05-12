@@ -328,7 +328,7 @@ def GetOnlineTatamiFights(request):
         champType = getChampType(title)
 
         fights = getCurrentAndAllNextFightsWithParticipants(
-            title, champType, tatami, 10
+            title, champType, tatami, 7
         )
 
         return JsonResponse(fights, safe=False, status=200)
@@ -372,7 +372,7 @@ def GetOnlineAllTatamisFights(request):
             or fetchedTatamis == 0
         ) and (tatamisCycled < tatamisCount):
             fights = getCurrentAndAllNextFightsWithParticipants(
-                title, champType, tatami, 10
+                title, champType, tatami, 7
             )
 
             tatamisCycled = tatamisCycled + 1

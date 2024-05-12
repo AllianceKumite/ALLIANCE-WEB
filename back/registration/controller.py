@@ -47,7 +47,7 @@ def getParticipants(title, categoryId = None, coachId = None, clubId = None, reg
 
     query = ('SELECT DISTINCT ' +
         # f'FIO, DAN, DateBR, Weight, Photo, {title}_club.ClubName, {title}_coach.coachName, ClubLogo, countryFlag  ' +
-        f'FIO, DAN, DateBR, Weight, Photo, Kumite, Kata, KataGroup, {title}_athchamp.CountryId, {title}_athchamp.RegionId, {title}_athchamp.ClubId, {title}_athchamp.CoachId, {title}_club.ClubName, {title}_club.ClubCity, {title}_coach.coachName, countryFlag, {title}_club.ClubLogo, ' +
+        f'FIO, DAN, DateBR, Age, Weight, Photo, Kumite, Kata, KataGroup, {title}_athchamp.CountryId, {title}_athchamp.RegionId, {title}_athchamp.ClubId, {title}_athchamp.CoachId, {title}_club.ClubName, {title}_club.ClubCity, {title}_coach.coachName, countryFlag, {title}_club.ClubLogo, ' +
         # f'GROUP_CONCAT(DISTINCT {title}_champ.CategoryId) AS categoryId ' +
 
         f' (CASE WHEN ({title}_athchamp.CategoryId > 0 AND {title}_athchamp.Category2Id > 0 ) ' +
