@@ -269,6 +269,44 @@ def getEntityClubCountResults(entity, champName, champType, checkTeamCompetition
 
     return results
 
+def getEntityCoachCountResults(entity, champName, champType, checkTeamCompetition = False):
+    POINTS_1_PLACE = 1
+    POINTS_2_PLACE = 1
+    POINTS_3_PLACE = 1
+    POINTS_4_PLACE = 1
+
+    # retrieveAllEntities = entity == 'coach' or entity == 'club'
+    retrieveAllEntities = True
+
+    results = {}
+
+    results = getEntityPlacesAndAggregate(entity, results, champName, 1, champType, False, POINTS_1_PLACE, not retrieveAllEntities, checkTeamCompetition)
+    results = getEntityPlacesAndAggregate(entity, results, champName, 2, champType, False, POINTS_2_PLACE, not retrieveAllEntities, checkTeamCompetition)
+    results = getEntityPlacesAndAggregate(entity, results, champName, 3, champType, False, POINTS_3_PLACE, not retrieveAllEntities, checkTeamCompetition)
+    results = getEntityPlacesAndAggregate(entity, results, champName, 4, champType, True, POINTS_4_PLACE, not retrieveAllEntities, checkTeamCompetition)
+    # results = getEntityPlacesAndAggregate(entity, results, champName, 1, champType, False, POINTS_1_PLACE, not retrieveAllEntities, checkTeamCompetition)
+    # results = getEntityPlacesAndAggregate(entity, results, champName, 2, champType, False, POINTS_2_PLACE, not retrieveAllEntities, checkTeamCompetition)
+    # results = getEntityPlacesAndAggregate(entity, results, champName, 3, champType, False, POINTS_3_PLACE, not retrieveAllEntities, checkTeamCompetition)
+    # results = getEntityPlacesAndAggregate(entity, results, champName, 4, champType, True, POINTS_4_PLACE, not retrieveAllEntities, checkTeamCompetition)
+
+    # print("==================================++++++++++++")
+    if retrieveAllEntities :
+        allEntities = getAllEntities(entity, champName, champType)
+
+        results = aggregateEntityPlacesTo(entity, results, allEntities)
+
+        if entity == "organization" :
+            entity = "org"
+
+        for entityItem in allEntities:
+            # print(entityItem)
+            results[entityItem[f"{entity}Id"]]["name"] = entityItem[f"{entity}Name"]
+
+            if f"{entity.capitalize()}Logo" in entityItem :
+                results[entityItem[f"{entity}Id"]]["logo"] = entityItem[f"{entity.capitalize()}Logo"]
+
+    return results
+
 def getEntityClubWomenResults(entity, champName, champType, checkTeamCompetition = False):
     POINTS_1_PLACE = 15
     POINTS_2_PLACE = 8
@@ -359,7 +397,7 @@ def getEntityPlacesAndAggregate(entity, aggregated, champName, winnersPlace, cha
 
 def getWinnersEntities(entity, champName, winnersPlace, champType, onlyIfNoFightForUpperPlace = False, verboseMode = False, checkTeamCompetition = False, womenOnly = False):
     cursor = connection.cursor()
-
+    # print(entity)
     if (entity == 'country'):
         entityTable = 'countries'
     elif (entity == 'region'):

@@ -26,6 +26,7 @@ from apiPost.views import generateTranslations
 from django.core.exceptions import ObjectDoesNotExist
 from fight.helpers import *
 import traceback as tb
+from datetime import datetime
 
 
 def getParticipants(title, categoryId = None, coachId = None, clubId = None, regionId = None, countryId = None):
@@ -44,6 +45,12 @@ def getParticipants(title, categoryId = None, coachId = None, clubId = None, reg
     clubJoin    = f'LEFT JOIN {title}_club  ON {title}_club.ClubId = {title}_athchamp.clubId '
     regionJoin = '' #f'JOIN regions ON regions.RegionId = {title}_athchamp.regionId '
     countryJoin = f'LEFT JOIN countries ON countries.countryId = {title}_athchamp.countryId '
+
+    query = 'SELECT champFrom FROM champs WHERE title like ' + f'"{title}"';
+    # print(query)
+    cursor.execute(query)
+    dateFrom = cursor.fetchall()[0][0];
+    # print(dateFrom)
 
     query = ('SELECT DISTINCT ' +
         # f'FIO, DAN, DateBR, Weight, Photo, {title}_club.ClubName, {title}_coach.coachName, ClubLogo, countryFlag  ' +
@@ -70,7 +77,7 @@ def getParticipants(title, categoryId = None, coachId = None, clubId = None, reg
 
     cursor.execute(query)
 
-    dict_to_return = dict_fetch_all(cursor)
+    dict_to_return = dict_fetch_all(cursor, dateFrom)
 
     responseObject = {
         "filter": "",

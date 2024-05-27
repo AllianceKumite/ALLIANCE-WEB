@@ -1727,6 +1727,23 @@ def getClubCountResults(request):
     return JsonResponse(result, status=200, safe=False)
 
 @csrf_exempt
+def getCoachCountResults(request):
+    if request.method == "POST":
+        json_string = JSONParser().parse(request)
+
+        title = json_string.get("title")
+        champType = getChampType(title)
+
+        if all(i is None for i in [title]):
+            return HttpResponse(status=400)
+
+        result = getEntityCoachCountResults("coach", title, champType)
+
+        # except:
+        #     HttpResponse(status=400)
+    return JsonResponse(result, status=200, safe=False)
+
+@csrf_exempt
 def getClubWomenResults(request):
     if request.method == "POST":
         json_string = JSONParser().parse(request)

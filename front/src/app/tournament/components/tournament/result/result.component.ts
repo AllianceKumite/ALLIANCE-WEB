@@ -35,7 +35,8 @@ export class ResultComponent implements OnInit {
     "7" : "region-quota",
     "8" : "coach-quota",
     "9" : "club-count",
-    "10": "club-women"
+    "10": "club-women",
+    "11": "coach-count"
   }
 
   indyvidualResults: any;
@@ -108,7 +109,11 @@ export class ResultComponent implements OnInit {
 
             return this.tournamentService
                 .getGroupedResults({"title": name, "entity": this.entityName})
-                .subscribe(response => this.groupedResults = response)
+                // .subscribe(this.groupedResults = function(responce) {this.groupedResults = response}
+                  .subscribe(response => {
+                    this.groupedResults = response;
+                  }
+                )
         }
         
     }

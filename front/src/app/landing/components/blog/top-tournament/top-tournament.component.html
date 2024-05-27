@@ -19,27 +19,27 @@
         </h2>
         <div class="timer w-100">
           <div *ngIf='diffDays > 0' class="timer_block">
-            <div class="d-flex">
-              <h2 class="p-0 m-0"> {{diffDays}}</h2>
-              <h3 style="margin-left: 10px;">
+            <!-- <div class="d-flex align-items-end"> -->
+              <h2 class="p-1 m-0"> {{diffDays}}</h2>
+              <h3 class="p-1 m-1">
                 {{ ('landing.days.' + (
                 diffDays == 1 ? 'singular' :
                 diffDays > 1 && diffDays < 5 ? 'semiplural' : diffDays>= 5 ? "plural" : "false")) | translate
                   }}
               </h3>
-            </div>
+            <!-- </div> -->
           </div>
 
           <div *ngIf='diffHours > 0' class="timer_block">
-            <div class="d-flex">
-              <h2 class="p-0 m-0">{{ diffHours }}</h2>
-              <h3>
-                {{ ('landing.hours.' + (
+            <!-- <div class="d-flex"> -->
+              <h2 class="p-1 m-0">{{diffHoursStr}}:{{diffMinutesStr}}:{{diffSecondsStr}}</h2>
+              <h3 class="p-2 m-0">
+                <!-- {{ ('landing.hours.' + (
                 diffHours == 1 ? 'singular' :
                 diffHours > 1 && diffHours < 5 ? 'semiplural' : diffHours>= 5 ? "plural" : "false")) | translate
-                  }}
+                  }} -->
               </h3>
-            </div>
+            <!-- </div> -->
           </div>
         </div>
         <div class="p-2 d-flex flex-wrap justify-content-between w-100">

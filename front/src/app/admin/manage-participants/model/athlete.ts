@@ -163,12 +163,13 @@ export class Athlete {
 
 export class AthleteValidation {
     FIO?: 'exists' | boolean;
-    dateBR?: boolean;;
-    gender?: boolean;;
-    DAN?: boolean;;
-    weight?: boolean;;
-    Photo?: boolean;;
-    photo_bytes?: boolean;;
+    dateBR?: boolean;
+    Age?: boolean;
+    gender?: boolean;
+    DAN?: boolean;
+    weight?: boolean;
+    Photo?: boolean;
+    photo_bytes?: boolean;
     Kumite?: boolean;
     Kata?: boolean;
     KataGroup?: boolean;

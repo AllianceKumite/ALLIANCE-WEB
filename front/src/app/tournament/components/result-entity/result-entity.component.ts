@@ -36,7 +36,7 @@ export class ResultEntityComponent implements OnInit {
 
     // console.log(prepared[0].medals[2]);
 
-    if (this.entityName == 'club-count') {
+    if (this.entityName == 'club-count' ||  this.entityName == 'coach-count') {
       // prepared = prepared.sort((entity1, entity2) => entity2.medals[1] - entity1.medals[1])
       prepared = prepared.sort(function (entity1, entity2){
         let result = entity2.medals[1] - entity1.medals[1];
@@ -49,12 +49,15 @@ export class ResultEntityComponent implements OnInit {
         return result
       })
         .reduce((entityAtSinglePlace, entity, index) => {
-          let sharedPlaceEntities = prepared.filter(filteredEntity => filteredEntity.medals[1] == entity.medals[1]);
+          let sharedPlaceEntities = prepared.filter(filteredEntity => filteredEntity.medals[1] == entity.medals[1] && filteredEntity.medals[2] == entity.medals[2] && filteredEntity.medals[3] == entity.medals[3]);
 
           if (entityAtSinglePlace.length > 0
             && entityAtSinglePlace[entityAtSinglePlace.length - 1].entities
             && entityAtSinglePlace[entityAtSinglePlace.length - 1]?.entities.length > 0
-            && entityAtSinglePlace[entityAtSinglePlace.length - 1].entities[0].medals[1] == entity.medals[1]) {
+            && entityAtSinglePlace[entityAtSinglePlace.length - 1].entities[0].medals[1] == entity.medals[1]
+            && entityAtSinglePlace[entityAtSinglePlace.length - 1].entities[0].medals[2] == entity.medals[2]
+            && entityAtSinglePlace[entityAtSinglePlace.length - 1].entities[0].medals[3] == entity.medals[3]
+            ) {
             // sharedPlaceClubs = [];
           } else {
             entityAtSinglePlace[entityAtSinglePlace.length] = {

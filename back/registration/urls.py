@@ -51,6 +51,7 @@ urlpatterns = [
 
     path('api-champ-get-club-count-results', getClubCountResults),
     path('api-champ-get-club-women-results', getClubWomenResults),
+    path('api-champ-get-coach-count-results', getCoachCountResults),
 
     path('api-champ-get-coach-quota-results', getCoachQuotaResults),
     path('api-champ-get-region-quota-results', getRegionQuotaResults),

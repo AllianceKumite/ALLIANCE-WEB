@@ -152,20 +152,28 @@ h5 {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    font-family: 'SF Pro';
 
 
     .timer_block {
-        color: #242424;
+        color: #575757;
         text-align: center;
         // line-height: 0.1;
         display: flex;
-        // align-items: flex-end;
+        align-items: end;
         // align-items: center;
-        margin-right: 50px;
+        // margin-right: 50px;
 
         h2 {
+            font-family: 'clockicons';
+            font-size: 48px;
+            font-weight: 500;
+        }
+        h3 {
+            // font-family: 'SF Pro';
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 500;
+            // margin-bottom: -10px;
         }
     }
 

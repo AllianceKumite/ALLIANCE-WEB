@@ -1,7 +1,7 @@
 /**
  * @author Ilya
  */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Tournament } from './../../../interfaces/tournaments';
@@ -14,7 +14,7 @@ import { HomeService } from './../../../../shared/services/home.service';
   templateUrl: './top-tournament.component.html',
   styleUrls: ['./top-tournament.component.scss'],
 })
-export class TopTournamentComponent implements OnInit {
+export class TopTournamentComponent implements OnInit, OnDestroy {
   readonly mediaDir = `${environment.mediaDir}`;
 
   @Input()
@@ -30,6 +30,10 @@ export class TopTournamentComponent implements OnInit {
   diffMinutes;
   diffSeconds;
 
+  diffHoursStr;
+  diffMinutesStr;
+  diffSecondsStr;
+
   constructor(
     public blogService: BlogService,
     public router: Router,
@@ -40,12 +44,17 @@ export class TopTournamentComponent implements OnInit {
     this.setTimerLeft(this.tournament.date);
     
 
-    // this.timer = setInterval(() => {
-    //     this.setTimerLeft(this.tournament.date);
-    // }, 1000)
+    this.timer = setInterval(() => {
+        this.setTimerLeft(this.tournament.date);
+    }, 1000)
 
     // TODO
     // this.blogService.getTournaments().subscribe((res: any) => this.topTournament = res["topTournament"]);
+  }
+
+
+  ngOnDestroy(): void {
+    clearInterval(this.timer);
   }
 
   // goToTournament(id: number){
@@ -111,6 +120,7 @@ export class TopTournamentComponent implements OnInit {
       let diffSecondsTime = diffMinutesTime - this.diffMinutes * 1000 * 60;
       let diffSecondsExact = diffSecondsTime / 1000;
       this.diffSeconds = Math.trunc(diffSecondsExact);
+
     } else {
       // clearInterval(this.timer )
       this.diffSeconds = 0;
@@ -118,7 +128,10 @@ export class TopTournamentComponent implements OnInit {
       this.diffHours = 0;
       this.diffDays = 0;
     }
-  }
+    this.diffHoursStr = String(this.diffHours).padStart(2, '0')
+    this.diffMinutesStr = String(this.diffMinutes).padStart(2, '0')
+    this.diffSecondsStr = String(this.diffSeconds).padStart(2, '0')
+}
 
   getDaysLeft() {
     return this.diffDays;

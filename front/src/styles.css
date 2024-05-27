@@ -8,6 +8,10 @@
   src: url('/assets/fonts/8895-fontps.ttf');
 }
 
+@font-face {
+  font-family: clockicons;
+  src: url('/assets/fonts/clockicons.ttf');
+}
 
 @font-face {
   font-family: 'Roboto-Regular';

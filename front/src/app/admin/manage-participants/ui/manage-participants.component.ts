@@ -298,18 +298,20 @@ export class ManageParticipantsComponent
       let allParticipants = response as {
         participants: Athlete[];
         not_participants: Athlete[];
+       
       };
+
 
       this.participants = Object.values(allParticipants.participants).map(
         (a: Object) => new Athlete(a)
+
       );
 
 
       this.athletes = Object.values(allParticipants.not_participants).map(
         (a: Object) => new Athlete(a)
       );
-      //  console.log(this.athletes);
-
+      
 
       this.athletesCount = this.athletes.length; //allParticipants.athletesCount;
       this.participantsCount = this.participants.length; //.participantsCount;
@@ -528,6 +530,9 @@ export class ManageParticipantsComponent
   selectAndScrollParticipants(event, current: Athlete): void {
     let athlete: Athlete;
 
+    console.log(current);
+    
+
     athlete = this.selectedAthletes.find(
       (x) => x.athId == this.activeAthlete.athId
     );
@@ -559,6 +564,9 @@ export class ManageParticipantsComponent
         (user) => user.athId == this.activeAthlete.athId
       );
     }
+
+    console.log(this.activeAthlete);
+    
   }
 
   scrollToUserInParticipants(userToScrollToCondition: Function): number {
@@ -771,7 +779,6 @@ export class ManageParticipantsComponent
   processServerErrors(errorWrapepr): void {
     if (errorWrapepr instanceof HttpErrorResponse) {
       if (errorWrapepr.status === 422) {
-        console.log('422');
 
         // TODO: extract errors here and match onto the form
         if (errorWrapepr.error) {

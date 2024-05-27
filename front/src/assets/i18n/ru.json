@@ -209,6 +209,7 @@
         "region": "Регион",
         "club-quota": "Клуб",
         "club-count": "Клуб",
+        "coach-count": "Тренер",
         "club-women": "Клуб",
         "coach-quota": "Тренер",
         "region-quota": "Регион",
@@ -336,6 +337,7 @@
         "clubWomenOnly": "Командные результаты(только женщины)",
         "regionResultsQuota": "Результаты регионов(квота)",
         "coachResultsQuota": "Результаты тренеров(квота)",
+        "coachResultsPlaceOnly": "Результаты тренеров(только количество)",
         "coachResults": "Результаты тренеров",
         "countryResults": "Результаты стран",
         "organizationResults": "Результаты федераций",
@@ -349,7 +351,9 @@
         "club-countResults": "Командные результаты(количество медалей)",
         "club-womenResults": "Командные результаты(только женщины)",
         "region-quotaResults": "Результаты регионов(квота)",
-        "coach-quotaResults": "Результаты тренеров(квота)"
+        "coach-quotaResults": "Результаты тренеров(квота)",
+        "coach-countResults": "Результаты тренеров(только количество)"
+
     },
     "dataTable": {
         "participant": "Участник",

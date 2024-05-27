@@ -211,6 +211,7 @@
         "club-count": "Клуб",
         "club-women": "Клуб",
         "coach-quota": "Тренер",
+        "coach-count": "Тренер",
         "region-quota": "Регіон",
         "showPhotos": "Показати фотографіі",
         "tatamiCategories": "Категорії по татамі",
@@ -336,6 +337,7 @@
         "clubWomenOnly": "Командні результати(тільки жінки)",
         "regionResultsQuota": "Результати регіонов(квота)",
         "coachResultsQuota": "Результати тренерів(квота)",
+        "coachResultsPlaceOnly": "Результати тренерів(тільки кількісь)",
         "coachResults": "Результати тренерів",
         "countryResults": "Результати країн",
         "organizationResults": "Результати федерацій",
@@ -349,7 +351,8 @@
         "club-countResults": "Командні результати(кількість медалей)",
         "club-womenResults": "Командні результати(тільки жінки)",
         "region-quotaResults": "Результати регіонов(квота)",
-        "coach-quotaResults": "Результати тренерів(квота)"
+        "coach-quotaResults": "Результати тренерів(квота)",
+        "coach-countResults": "Результати тренерів(тільки кількісь)"
     },
     "dataTable": {
         "participant": "Учасник",

@@ -1,7 +1,9 @@
 import os
+import re
 from django.conf import settings
 from rest_framework import serializers
 from .models import *
+# from datetime import datetime
 
 class RegionSerializer(serializers.Serializer):
     regionId = serializers.IntegerField()
@@ -37,15 +39,33 @@ class BranchSerializer(serializers.Serializer):
     branchName = serializers.CharField()
 
 
-def fetch_all(cursor):
+def fetch_all(cursor, datecontrol = ''):
     "Return all rows from a cursor as a dict"
     columns = [col[0] for col in cursor.description]
     return [
         dict(zip(columns, row))
         for row in cursor.fetchall()
     ]
+    # "Return all rows from a cursor as a dict"
+    # strDate = str(datecontrol);
+    # if len(strDate) == 0:
+    #     strDate = datetime.now().strftime('%Y-%m-%d')
+    # # arrCheck = strDate.split("-");
+    # # print('#1')
 
-def dict_fetch_all(cursor):
+    # columns = [col[0] for col in cursor.description]
+
+    # array_of_dict = [
+    #     dict(zip(columns, row))
+    #     for row in cursor.fetchall()
+    # ]
+
+    return array_of_dict
+
+
+def dict_fetch_all(cursor, datecontrol = ''):
+    strDate = str(datecontrol);
+    arrCheck = strDate.split("-");
     desc = cursor.description
     array_of_dict = [
             dict(zip([col[0] for col in desc], [str(el) for el in row]))
@@ -54,6 +74,14 @@ def dict_fetch_all(cursor):
     dict_to_return = {}
     it = 1
     for item in array_of_dict:
+        try:
+            birthdate   = item['DateBR'].strip()
+            arrBirth    = birthdate.split('-');       
+            age         = int(arrCheck[0]) - int(arrBirth[0]) - ((int(arrCheck[1]), int(arrCheck[2])) < (int(arrBirth[1]), int(arrBirth[2])))
+            item['Age'] = age             
+        except:
+            pass
+            
         dict_to_return[it] = item
         it += 1
 

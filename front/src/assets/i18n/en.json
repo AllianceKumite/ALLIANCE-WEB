@@ -210,6 +210,7 @@
         "club-quota": "Club",
         "club-women": "Club",
         "club-count": "Club",
+        "coach-count": "Coach",
         "coach-quota": "Coach",
         "region-quota": "Region",
         "showPhotos": "Show photos",
@@ -329,6 +330,7 @@
         "clubWomenOnly": "Team results(women only)",
         "regionResultsQuota": "Region results(Quota)",
         "coachResultsQuota": "Coach results(Quota)",
+        "coachResultsPlaceOnly": "Coach results(medals only)",
         "coachResults": "Results of coaches",
         "countryResults": "Country results",
         "organizationResults": "Federations results",
@@ -342,7 +344,9 @@
         "club-countResults": "Team results(Count Medals Only)",
         "club-womenResults": "Team results(Women Only)",
         "region-quotaResults": "Region results(Quota)",
-        "coach-quotaResults": "Coach results(Quota)"
+        "coach-quotaResults": "Coach results(Quota)",
+        "coach-countResults": "Coach results(medals only)"
+
     },
     "dataTable": {
         "participant": "Participant",

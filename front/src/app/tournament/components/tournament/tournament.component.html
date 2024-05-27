@@ -183,6 +183,9 @@
                                 [routerLink]="['result']" [queryParams]="{'offset': 8}">{{
                                 'results.coachResultsQuota' | translate }}</a></li>
                         <li (click)="clearSelect()"><a class="dropdown-item" [routerLink]="['result']"
+                                [queryParams]="{'offset': 11}">{{
+                                'results.coachResultsPlaceOnly' | translate }}</a></li>
+                        <li (click)="clearSelect()"><a class="dropdown-item" [routerLink]="['result']"
                                 [queryParams]="{'offset': 3}">{{
                                 'results.countryResults' | translate }}</a></li>
                         <li (click)="clearSelect()"><a class="dropdown-item" [routerLink]="['result']"
@@ -240,8 +243,7 @@
                 </li>
 
                 <!-- <li *ngIf="isSuperAdmin && !isMobileView" class="nav-item" routerLinkActive="active" -->
-                <li class="nav-item" routerLinkActive="active"
-                    [routerLinkActiveOptions]="routerLinkActiveOptions">
+                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="routerLinkActiveOptions">
                     <ng-select *ngIf="admins" #adminSelector (change)="changeAdmins()" [searchable]="false"
                         placeholder="{{ 'navbar.admin' | translate }}" bindLabel="name" bindValue="id"
                         class="nav-link filter-item filter-item-custom m-0" name="selectedAdmin"

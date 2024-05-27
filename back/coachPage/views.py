@@ -44,22 +44,31 @@ def GetCoachAth(request):
             # AND_FIND_BY_NAME = f' AND FIO LIKE "%{filters["findByName"]}%" ' if filters['findByName'] != '' else ' '
             # AND_FIND_BY_NAME_LOCAl = f' AND {title}_athchamp.FIO LIKE "%{filters["findByName"]}%" ' if filters['findByName'] != '' else ' '
 
+
             cursor = connection.cursor()
+            dateFrom = ''
+            try:
+                query = 'SELECT champFrom FROM champs WHERE title like ' + f'"{title}"';
+                cursor.execute(query)
+                dateFrom = cursor.fetchall()[0][0];
+            except:
+                pass
+
 
             SELECT_GLOBAL_SIMPLE = (
-                            'SELECT athId, FIO, Photo, dateBR, gender, DAN, Weight, Participant, Kumite, Kata, KataGroup, Favorit1, Favorit2, Division, teamcompetition ' +
+                            'SELECT athId, FIO, Photo, dateBR, Age, gender, DAN, Weight, Participant, Kumite, Kata, KataGroup, Favorit1, Favorit2, Division, teamcompetition ' +
                             f'FROM athonline ')
             SELECT_LOCAL_SIMPLE = (
-                            f'SELECT {title}_athchamp.athId, {title}_athchamp.FIO, {title}_athchamp.Photo, {title}_athchamp.dateBR, {title}_athchamp.gender, {title}_athchamp.DAN, {title}_athchamp.Weight, {title}_athchamp.Kumite, {title}_athchamp.Kata, {title}_athchamp.KataGroup, {title}_athchamp.Favorit1, {title}_athchamp.Favorit2, {title}_athchamp.CoachId, {title}_athchamp.Division, {title}_athchamp.teamcompetition, Participant ' +
+                            f'SELECT {title}_athchamp.athId, {title}_athchamp.FIO, {title}_athchamp.Photo, {title}_athchamp.dateBR, {title}_athchamp.Age, {title}_athchamp.gender, {title}_athchamp.DAN, {title}_athchamp.Weight, {title}_athchamp.Kumite, {title}_athchamp.Kata, {title}_athchamp.KataGroup, {title}_athchamp.Favorit1, {title}_athchamp.Favorit2, {title}_athchamp.CoachId, {title}_athchamp.Division, {title}_athchamp.teamcompetition, Participant ' +
                             f'FROM {title}_athchamp ' +
                             f'JOIN athonline ON {title}_athchamp.athId = athonline.athId ')
             SELECT_GLOBAL = (
-                            f'SELECT athId, FIO, Photo, dateBR, gender, DAN, Weight, Participant, Kumite, Kata, KataGroup, Favorit1, Favorit2, Division, teamcompetition, clubs.clubName, coaches.coachName ' +
+                            f'SELECT athId, FIO, Photo, dateBR, Age, gender, DAN, Weight, Participant, Kumite, Kata, KataGroup, Favorit1, Favorit2, Division, teamcompetition, clubs.clubName, coaches.coachName ' +
                             f'FROM athonline ' +
                             f'LEFT JOIN clubs ON clubs.clubId = athonline.ClubId ' +
                             f'LEFT JOIN coaches ON coaches.coachId = athonline.CoachId ')
             SELECT_LOCAL = (
-                            f'SELECT {title}_athchamp.athId, {title}_athchamp.FIO, {title}_athchamp.Photo, {title}_athchamp.dateBR, {title}_athchamp.gender, {title}_athchamp.DAN, {title}_athchamp.Weight, {title}_athchamp.Kumite, {title}_athchamp.Kata, {title}_athchamp.KataGroup, {title}_athchamp.Favorit1, {title}_athchamp.Favorit2, {title}_athchamp.CoachId, {title}_athchamp.Division, {title}_athchamp.teamcompetition, Participant, clubs.clubName, coaches.coachName ' +
+                            f'SELECT {title}_athchamp.athId, {title}_athchamp.FIO, {title}_athchamp.Photo, {title}_athchamp.dateBR, {title}_athchamp.Age, {title}_athchamp.gender, {title}_athchamp.DAN, {title}_athchamp.Weight, {title}_athchamp.Kumite, {title}_athchamp.Kata, {title}_athchamp.KataGroup, {title}_athchamp.Favorit1, {title}_athchamp.Favorit2, {title}_athchamp.CoachId, {title}_athchamp.Division, {title}_athchamp.teamcompetition, Participant, clubs.clubName, coaches.coachName ' +
                             f'FROM {title}_athchamp ' +
                             f'JOIN athonline ON {title}_athchamp.athId = athonline.athId ' +
                             f'LEFT JOIN clubs ON clubs.clubId = {title}_athchamp.ClubId ' +
@@ -122,7 +131,8 @@ def GetCoachAth(request):
                         # print(query)
                         cursor.execute(query)
 
-                not_participants_ath = fetch_all(cursor)
+                # print('Select is Ok')
+                not_participants_ath = fetch_all(cursor, dateFrom)
                 total_not_participants = len(not_participants_ath)
 
                 participants_ath = []
@@ -168,7 +178,7 @@ def GetCoachAth(request):
                             # print(query)
                             cursor.execute(query)
 
-                    participants_ath = fetch_all(cursor)
+                    participants_ath = fetch_all(cursor, dateFrom)
                     total_participant = len(participants_ath)
 
                 athletes = {
@@ -204,7 +214,7 @@ def GetCoachAth(request):
                     # print(query)
                     cursor.execute(query)
 
-                not_participants_ath = fetch_all(cursor)
+                not_participants_ath = fetch_all(cursor, dateFrom)
                 total_not_participants = len(not_participants_ath)
                 participants_ath = []
                 total_participant = 0
@@ -232,7 +242,7 @@ def GetCoachAth(request):
                         # print(query)
                         cursor.execute(query)
 
-                    participants_ath = fetch_all(cursor)
+                    participants_ath = fetch_all(cursor, dateFrom)
                     total_participant = len(participants_ath)
 
                 athletes = {
@@ -518,8 +528,8 @@ def InsertNewAth(request):
         if participant and _athId is not None and (champ is not None and champ != ''):
             cursor.execute(
                 f'INSERT INTO {champ}_athchamp ' +
-                f'(athId, CoachId, ClubId, CountryId, RegionId, FIO, Photo, DAN, Gender, DateBR, Weight, Kumite, Kata, KataGroup, Favorit1, Favorit2) ' +
-                f'SELECT athId, CoachId, ClubId, CountryId, RegionId, FIO, Photo, DAN, Gender, DateBR, Weight, Kumite, Kata, KataGroup, Favorit1, Favorit2 ' +
+                f'(athId, CoachId, ClubId, CountryId, RegionId, FIO, Photo, DAN, Gender, DateBR, Age, Weight, Kumite, Kata, KataGroup, Favorit1, Favorit2) ' +
+                f'SELECT athId, CoachId, ClubId, CountryId, RegionId, FIO, Photo, DAN, Gender, DateBR, Age, Weight, Kumite, Kata, KataGroup, Favorit1, Favorit2 ' +
                 f'FROM athonline WHERE athId = {_athId}')
 
         responceData = {"athId" : _athId} if _athId is not None else {}
@@ -695,7 +705,7 @@ def InsertAthIntoChamp(request):
 
             if not participantExists:
                 # query=f'INSERT INTO {title}_athchamp (athId, CoachId, ClubId, CountryId, RegionId, FIO, Photo, DAN, Gender, DateBR, Weight, Kumite, Kata, KataGroup, Favorit1, Favorit2, Division) SELECT athId, CoachId, ClubId, CountryId, RegionId, FIO, Photo, DAN, Gender, DateBR, Weight, Kumite, Kata, KataGroup, Favorit1, Favorit2, Division, lvl1, lvl2, lvl3, lvl4, lvl5, lvl6, lvl7, lvl8, lvl12 FROM athonline WHERE athId = {athId}'
-                query=f'INSERT INTO {title}_athchamp (athId, CoachId, ClubId, CountryId, RegionId, FIO, Photo, DAN, Gender, DateBR, Weight, Kumite, Kata, KataGroup, Favorit1, Favorit2, Division) SELECT athId, CoachId, ClubId, CountryId, RegionId, FIO, Photo, DAN, Gender, DateBR, Weight, Kumite, Kata, KataGroup, Favorit1, Favorit2, Division FROM athonline WHERE athId = {athId}'
+                query=f'INSERT INTO {title}_athchamp (athId, CoachId, ClubId, CountryId, RegionId, FIO, Photo, DAN, Gender, DateBR, Age, Weight, Kumite, Kata, KataGroup, Favorit1, Favorit2, Division) SELECT athId, CoachId, ClubId, CountryId, RegionId, FIO, Photo, DAN, Gender, DateBR, Age, Weight, Kumite, Kata, KataGroup, Favorit1, Favorit2, Division FROM athonline WHERE athId = {athId}'
                 cursor.execute(query)
                 cursor.execute(f'UPDATE athonline SET Participant = 1 WHERE EXISTS (SELECT athId FROM {title}_athchamp WHERE athId = {athId}) AND athId = {athId}')
 

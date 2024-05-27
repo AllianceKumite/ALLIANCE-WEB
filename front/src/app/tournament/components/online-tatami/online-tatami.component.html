@@ -29,8 +29,7 @@
 <div class="row color-variant-{{colorVariant}} size-variant-{{size != -1 ? 'narrow' : 'wide'}}">
   <ng-container *ngFor="let fight of fights; let i = index;">
       <div *ngIf="i > 0"
-          style="{{size == -1 ? '' : 'padding-right: 0px; padding-left: 0px;'}}"
-          class="{{size == -1 ? 'col-12 col-sm-12 col-md-6 col-lg-4' : 'col-' + (12/size) }}">
+          style="{{size == -1 ? '' : 'padding-right: 0px; padding-left: 0px;'}}" class="{{size == -1 ? 'col-12 col-sm-12 col-md-6 col-lg-4' : 'col-' + (12/size) }}">
           <fight
               [viewType]="'onlineTatamiNextFight'"
               [fight]="fight"
