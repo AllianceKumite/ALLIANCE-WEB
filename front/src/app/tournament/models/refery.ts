@@ -93,6 +93,7 @@ export class Refery {
   // FIO, DAN, Gender, ReferyId, TatamiId, BrigadeId, sushin, clubs.ClubId, clubs.ClubName, countries.countryId, countryNameEn, countryNameRu, countryNameUa, countryFlag
   
   FIO: string;
+  DateBR: Date;
   DAN: Dan;
   Gender: Gender;
   ReferyId : number;
@@ -110,7 +111,7 @@ export class Refery {
   // selectedSushin: any;
   title: string;
 
-  static DEFAULT_ATHLETE_DATA = {
+  static DEFAULT_REFERY_DATA = {
     Gender: Gender.MALE,
     DAN: '1D',
   };
@@ -119,7 +120,7 @@ export class Refery {
     data =
       typeof data !== 'undefined' && data !== null
         ? data
-        : Refery.DEFAULT_ATHLETE_DATA;
+        : Refery.DEFAULT_REFERY_DATA;
 
     for (let p in data) {
       this[p] = data[p];
@@ -129,8 +130,9 @@ export class Refery {
   isNotEmpty(): boolean {
     return (
       (typeof this.FIO != 'undefined' && this.FIO != null && this.FIO != '') ||
-      (typeof this.Gender != 'undefined' && this.Gender != null && this.Gender != Refery.DEFAULT_ATHLETE_DATA.Gender) ||
-      (typeof this.DAN != 'undefined' && this.DAN != null && this.DAN != Refery.DEFAULT_ATHLETE_DATA.DAN) ||
+      (typeof this.Gender != 'undefined' && this.Gender != null && this.Gender != Refery.DEFAULT_REFERY_DATA.Gender) ||
+      (typeof this.DAN != 'undefined' && this.DAN != null && this.DAN != Refery.DEFAULT_REFERY_DATA.DAN) ||
+      (typeof this.DateBR != 'undefined' && this.DateBR != null) ||
       (typeof this.countryId != 'undefined' &&  this.countryId != null ) ||
       (typeof this.clubId != 'undefined' &&  this.clubId != null )
     );
@@ -149,6 +151,7 @@ export class Refery {
       this.FIO === otherRefery.FIO &&
       this.Gender === otherRefery.Gender &&
       this.DAN === otherRefery.DAN &&
+      this.DateBR === otherRefery.DateBR &&
       this.clubId === otherRefery.clubId &&
       this.countryId === otherRefery.CountryId &&
       this.coachId === otherRefery.CoachId;
@@ -160,6 +163,7 @@ export class Refery {
 export class ReferyValidation {
   FIO?: 'exists' | boolean;
   DAN?: boolean;
+  DateBR?: boolean;
   Gender?: boolean;
   ClubName?: boolean;
   CountryKod?: boolean;

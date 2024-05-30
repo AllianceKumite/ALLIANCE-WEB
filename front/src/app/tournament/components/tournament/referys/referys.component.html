@@ -16,14 +16,14 @@
       </div>
 
       <!-- name -->
-      <div class="col-6 col-sm-7 col-md-6 col-lg-2 p-0 m-0">
+      <div class="col-5 col-sm-5 col-md-5 col-lg-2 p-0 m-0">
         <div class="col-header fio">
           <span>{{'referyTable.fio' | translate}}</span>
         </div>
       </div>
 
       <!-- coach -->
-      <div class="col-3 col-sm-2 col-md-3 col-lg-1 p-0 m-0">
+      <div class="col-2 col-sm-2 col-md-2 col-lg-1 p-0 m-0">
         <div class="col-header gender">
           <span>{{'referyTable.gender' | translate}}</span>
         </div>
@@ -34,7 +34,12 @@
           {{'referyTable.dan' | translate}}
         </div>
       </div>
-      <div class="col-4 col-sm-5 col-md-5 col-lg-2 p-0 m-0">
+      <div class="col-2 col-sm-2 col-md-2 col-lg-1 p-0 m-0">
+        <div class="col-header grade">
+          {{'dataTable.date' | translate}}
+        </div>
+      </div>
+      <div class="col-4 col-sm-4 col-md-4 col-lg-1 p-0 m-0">
         <div class="col-header country">
           <span>{{'referyTable.countrykod' | translate}}</span>
         </div>
@@ -45,17 +50,17 @@
           <span>{{'referyTable.club' | translate}}</span>
         </div>
       </div>
-      <div class="col-5 col-sm-5 col-md-5 col-lg-1 p-0 m-0">
+      <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
         <div class="col-header num">
           <span>{{'referyTable.tatami' | translate}}</span>
         </div>
       </div>
-      <div class="col-5 col-sm-5 col-md-5 col-lg-1 p-0 m-0">
+      <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
         <div class="col-header num">
           <span>{{'referyTable.team' | translate}}</span>
         </div>
       </div>
-      <div class="col-5 col-sm-5 col-md-5 col-lg-1 p-0 m-0">
+      <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
         <div class="col-header num">
           <span></span>
         </div>
@@ -68,12 +73,12 @@
           <span>{{i + 1}}</span>
         </div>
       </div>
-      <div class="col-6 col-sm-7 col-md-6 col-lg-2 p-0 m-0">
+      <div class="col-5 col-sm-5 col-md-5 col-lg-2 p-0 m-0">
         <div class="col-data fio">
           <span>{{refery.FIO}}</span>
         </div>
       </div>
-      <div class="col-3 col-sm-2 col-md-3 col-lg-1 p-0 m-0">
+      <div class="col-2 col-sm-2 col-md-2 col-lg-1 p-0 m-0">
         <div class="col-data gender">
           <span>{{refery.Gender}}</span>
         </div>
@@ -83,7 +88,12 @@
           <span>{{refery.DAN}}</span>
         </div>
       </div>
-      <div class="col-4 col-sm-5 col-md-5 col-lg-2 p-0 m-0">
+      <div class="col-2 col-sm-2 col-md-2 col-lg-1 p-0 m-0">
+        <div class="col-data grade">
+          <span *ngIf="refery.DateBR != 'None'">{{refery.DateBR | date: 'dd.MM.yyyy' }}</span>
+        </div>
+      </div>
+      <div class="col-4 col-sm-4 col-md-4 col-lg-1 p-0 m-0">
         <div class="col-data country flex-wrap">
           <img src="{{ flagDir}}/{{refery.countryFlag }}" alt="" height="30">
           <span style="width: 100%;">{{ 'db.country.' + refery.countryId | translate }}</span>
@@ -94,17 +104,17 @@
           <span>{{refery.ClubName}}</span>
         </div>
       </div>
-      <div class="col-5 col-sm-5 col-md-5 col-lg-1 p-0 m-0">
+      <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
         <div class="col-data num">
           <span *ngIf="refery.TatamiId > 0">{{refery.TatamiId}}</span>
         </div>
       </div>
-      <div class="col-5 col-sm-5 col-md-5 col-lg-1 p-0 m-0">
+      <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
         <div class="col-data num">
           <span *ngIf="refery.BrigadeId > 0">{{refery.BrigadeId}}</span>
         </div>
       </div>
-      <div class="col-5 col-sm-5 col-md-5 col-lg-1 p-0 m-0">
+      <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">
         <div class="col-data num">
           <span *ngIf="refery.BrigadeId > 0">{{getSushin(refery.sushin)}}</span>
         </div>

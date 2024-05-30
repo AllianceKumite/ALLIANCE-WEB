@@ -17,6 +17,8 @@ urlpatterns = [
     path('api-champ-get-categories', GetCategoryDynamic),                   # get all categories from champ
     path('api-champ-get-categories-time', GetCategoryTimeDynamic),                   # get all categories from champ
     path('api-champ-get-tatami', GetTatamiCurrentFightAndAllCategories),    # get tatami referenced with cat. for dropL.
+    path('api-champ-get-tatami-time', GetTatamiCurrentFightByTimeAndAllCategories),    # get tatami referenced with cat. for dropL.
+
     path('api-champ-get-tatami-urlvideo', GetTatamiUrlVideo),
     path('api-champ-get-tatamis-current-fight', GetTatamisCurrentFight),    # get tatami referenced with cat. for dropL.
     path('api-champ-get-referys', GetReferysRequest),                       # get referys from champ

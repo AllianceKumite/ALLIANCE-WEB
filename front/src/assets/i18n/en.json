@@ -73,6 +73,7 @@
     "coach": {
         "club": "Club",
         "coach": "Coach",
+        "time": "Time",
         "region": "Region",
         "branch": "Branch",
         "allPart": "Total",

@@ -553,6 +553,7 @@ def InsertNewRefery(request):
 
         gender = json_string.get('Gender')
         dan = json_string.get('DAN')
+        date = json_string.get('DateBR')
         coach_id = json_string.get('coachId')
 
         if all(i is None for i in [fio, gender, dan, coach_id]):
@@ -574,9 +575,9 @@ def InsertNewRefery(request):
         clubId = coach.clubId.clubId if hasattr(coach, 'clubId') and coach.clubId is not None else 'null'
 
         query = (f'INSERT INTO {champ}_refery '
-            f'(ReferyId, CoachId, ClubId, CountryId, FIO, DAN, Gender, TatamiId, BrigadeId)'
+            f'(ReferyId, CoachId, ClubId, CountryId, FIO, DateBR, DAN, Gender, TatamiId, BrigadeId)'
             f' VALUES ' +
-            f'(null, {coach.coachId}, {clubId}, {coach.countryId.countryId}, "{fio}", "{dan}", "{gender}", 1, 0)')
+            f'(null, {coach.coachId}, {clubId}, {coach.countryId.countryId}, "{fio}", "{date}", "{dan}", "{gender}", 1, 0)')
 
         cursor.execute(query)
 
@@ -619,6 +620,7 @@ def UpdateRefery(request):
 
         _gender = json_string.get('Gender')
         _dan = json_string.get('DAN')
+        _date = json_string.get('DateBR')
 
         try:
             cursor = connection.cursor()
@@ -628,6 +630,7 @@ def UpdateRefery(request):
                             f'SET FIO = "{_fio}", ' +
                             f'Gender = "{_gender}", ' +
                             f'DAN = "{_dan}" ' +
+                            f'DateBR = "{_date}" ' +
                             f'WHERE ReferyId = {referyId}')
                 cursor.execute(query)
         except Exception as e:

@@ -256,12 +256,14 @@ export class RegreferyComponent {
       FIO: !(isUser && refery.FIO != null && refery.FIO != ''),
       gender: !(isUser && refery.Gender != null),
       DAN: !(isUser && refery.DAN != null),
+      DateBR: !(isUser && refery.DateBR != null),
     };
 
     if (
       activeReferyValidationError.FIO == false &&
       activeReferyValidationError.gender == false &&
-      activeReferyValidationError.DAN == false
+      activeReferyValidationError.DAN == false &&
+      activeReferyValidationError.DateBR == false
     ) {
       return false;
     }
@@ -273,6 +275,7 @@ export class RegreferyComponent {
     this.cleanErrors();
     this.activeRefery = new Refery();
     this.activeRefery.FIO = current.FIO;
+    this.activeRefery.DateBR = current.DateBR;
     this.activeRefery.DAN = current.DAN;
     this.activeRefery.Gender = current.Gender;
     this.activeRefery.ReferyId = current.ReferyId;

@@ -95,9 +95,9 @@
   }
 
   .flag {
-    height: 100%;
+    /* height: 40%; */
     /* padding: 2px; */
-    width: auto;
+    width: 32px;
     object-fit: cover;
   }
 

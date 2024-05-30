@@ -253,6 +253,7 @@ class CreateDynamicChamp:
             'ClubId int NOT NULL, ' +
             'CountryId int NOT NULL, ' +
             'FIO varchar(256) NOT NULL, ' +
+            'DateBR date NOT NULL, ' +
             'DAN varchar(10) NOT NULL, ' +
             'Gender varchar(40) NOT NULL, ' +
             'TatamiId int DEFAULT -1, ' +

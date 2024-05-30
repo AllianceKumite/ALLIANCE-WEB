@@ -97,7 +97,7 @@ def getReferys(title):
 
     query = ('SELECT DISTINCT ' +
         # f'FIO, DAN, Gender, {title}_club.ClubId, {title}_club.ClubName, countries.countryId, countryNameEn, countryNameRu, countryNameUa, countryFlag ' +
-        f'FIO, DAN, Gender, ReferyId, TatamiId, BrigadeId, sushin, clubs.ClubId, clubs.ClubName, countries.countryId, countryNameEn, countryNameRu, countryNameUa, countryFlag ' +
+        f'FIO, DateBR, DAN, Gender, ReferyId, TatamiId, BrigadeId, sushin, clubs.ClubId, clubs.ClubName, countries.countryId, countryNameEn, countryNameRu, countryNameUa, countryFlag ' +
         f'FROM {title}_refery ' +
         f'{clubJoin} ' +
         f'{countryJoin} ' +
@@ -127,7 +127,7 @@ def getReferysCoach(title, coachId = None):
 
     query = ('SELECT ' +
         # f'FIO, DAN, Gender, {title}_club.ClubId, {title}_club.ClubName, countries.countryId, countryNameEn, countryNameRu, countryNameUa, countryFlag ' +
-        f'FIO, DAN, Gender, ReferyId, clubs.ClubId, clubs.ClubName, countries.countryId, countryNameEn, countryNameRu, countryNameUa, countryFlag ' +
+        f'FIO, DateBR, DAN, Gender, ReferyId, clubs.ClubId, clubs.ClubName, countries.countryId, countryNameEn, countryNameRu, countryNameUa, countryFlag ' +
         f'FROM {title}_refery ' +
         f'{clubJoin} ' +
         f'{countryJoin} ' + 
@@ -147,31 +147,32 @@ def getReferysCoach(title, coachId = None):
 
     return responseObject
 
-def getFightByCoach(title, coachId):
+def getFightByCoach(title, coachId, time):
     cursor = connection.cursor()
 
     query = ('SELECT ' + 
-            f'{title}_athchamp.FIO, {title}_champ.NumDuel, {title}_champ.TatamiId from {title}_athchamp inner join {title}_champ on '
-            f'({title}_athchamp.athId = {title}_champ.AthIdRed or {title}_athchamp.athId = {title}_champ.AthIdWhite) and {title}_champ.NumDuel > 0 and {title}_champ.DuelIsPlace = 0 '
-            f'where {title}_athchamp.CoachId = {coachId} order by {title}_champ.TatamiId, {title}_champ.NumDuel'
+            f'{title}_athchamp.FIO, {title}_champ.NumDuel, {title}_champ.TatamiId, {title}_category.Time from {title}_athchamp inner join {title}_champ on '
+            f'({title}_athchamp.athId = {title}_champ.AthIdRed or {title}_athchamp.athId = {title}_champ.AthIdWhite) and ({title}_champ.NumDuel > 0 and {title}_champ.DuelIsPlace = 0) '
+            f'inner join {title}_category on ({title}_category.categoryId = {title}_athchamp.CategoryId or {title}_category.categoryId = {title}_athchamp.Category2Id) and ({title}_category.Time = {time}) '
+            f'where {title}_athchamp.CoachId = {coachId} order by {title}_category.Time, {title}_champ.TatamiId, {title}_champ.NumDuel'
     )   
     cursor.execute(query)
 
     dict_to_return = dict_fetch_all(cursor)
-
+ 
     responseObject =  dict_to_return
 
     return responseObject
 
-def getFightByClub(title, clubId):
+def getFightByClub(title, clubId, time):
     cursor = connection.cursor()
 
     query = ('SELECT ' + 
-            f'{title}_athchamp.FIO, {title}_champ.NumDuel, {title}_champ.TatamiId from {title}_athchamp inner join {title}_champ on '
+            f'{title}_athchamp.FIO, {title}_champ.NumDuel, {title}_champ.TatamiId, {title}_category.Time from {title}_athchamp inner join {title}_champ on '
             f'({title}_athchamp.athId = {title}_champ.AthIdRed or {title}_athchamp.athId = {title}_champ.AthIdWhite) and {title}_champ.NumDuel > 0 and {title}_champ.DuelIsPlace = 0 '
-            f'where {title}_athchamp.ClubId = {clubId} order by {title}_champ.TatamiId, {title}_champ.NumDuel'
+            f'inner join {title}_category on ({title}_category.categoryId = {title}_athchamp.CategoryId or {title}_category.categoryId = {title}_athchamp.Category2Id and {title}_category.Time = {time}) '
+            f'where {title}_athchamp.ClubId = {clubId} order by {title}_category.Time, {title}_champ.TatamiId, {title}_champ.NumDuel'
     )   
-    print(query)
     cursor.execute(query)
 
     dict_to_return = dict_fetch_all(cursor)

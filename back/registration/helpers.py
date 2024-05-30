@@ -126,7 +126,19 @@ def getTatamisCategories(champName):
         f'ON {champName}_champ.CategoryId = {champName}_category.CategoryId ' +
         f'GROUP BY {champName}_category.categoryId, TatamiId ' +
         'ORDER BY TatamiId')
+    print(query)
+    cursor.execute(query)
 
+    return fetch_tatami(cursor)
+
+def getTatamisCategoriesByTime(champName, time):
+    cursor = connection.cursor()
+    query = (f'SELECT {champName}_category.categoryId, TatamiId ' +
+        f'FROM {champName}_champ ' +
+        f'INNER JOIN {champName}_category ' +
+        f'ON ({champName}_champ.CategoryId = {champName}_category.CategoryId and {champName}_category.Time = {time}) ' +
+        f'GROUP BY {champName}_category.categoryId, TatamiId ' +
+        'ORDER BY TatamiId')
     cursor.execute(query)
 
     return fetch_tatami(cursor)
@@ -134,6 +146,13 @@ def getTatamisCategories(champName):
 def getTatamisTotalDuel(champName, tatamiId):
     cursor = connection.cursor()
     query = f'SELECT COUNT(*) FROM {champName}_champ WHERE ({champName}_champ.TatamiId = {tatamiId} and {champName}_champ.NumDuel > 0)'
+    cursor.execute(query)
+    count = int(cursor.fetchall()[0][0])
+    return count
+
+def getTatamisTotalDuelTime(champName, tatamiId, time):
+    cursor = connection.cursor()
+    query = f'SELECT COUNT(*) FROM {champName}_champ JOIN {champName}_category ON ( {champName}_category.CategoryId = {champName}_champ.CategoryId and {champName}_category.Time = {time}) WHERE ({champName}_champ.TatamiId = {tatamiId} and {champName}_champ.NumDuel > 0)'
     cursor.execute(query)
     count = int(cursor.fetchall()[0][0])
     return count

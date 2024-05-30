@@ -15,6 +15,8 @@ export class RegreferyService {
     ) { }
 
   public insertNewRefery(model: any) {
+    console.log('insertNewRefery');
+    
     return this.http.post(`${this.baseUrl}/api-champ-insert-new-refery`, model);
   }
 

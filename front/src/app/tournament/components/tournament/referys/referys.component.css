@@ -24,7 +24,7 @@
 
 .row-header {
     background-image: linear-gradient(to right, #243949 0%, #507899 100%);
-    height: 50px;
+    height: 60px;
     display: flex;
     justify-content: flex-start;
     align-items: center;

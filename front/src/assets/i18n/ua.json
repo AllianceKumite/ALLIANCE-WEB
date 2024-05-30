@@ -73,6 +73,7 @@
     "coach": {
         "club": "Клуб",
         "coach": "Тренер",
+        "time": "Час",
         "region": "Регіон",
         "branch": "Бранч",
         "allPart": "Всього",

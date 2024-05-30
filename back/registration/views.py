@@ -526,13 +526,16 @@ def GetNextFightByCoach(request):
         json_string = JSONParser().parse(request)
         title = json_string.get("title")
         coachId = json_string.get('coachid')
+        time = json_string.get('time')
+
+        print(time)
 
         if title is None:
             return HttpResponse(status=400)
 
         try:
             responseObject = getFightByCoach(
-                title, coachId
+                title, coachId, time
             )
 
         except Exception as e:
@@ -548,13 +551,14 @@ def GetNextFightByClub(request):
         json_string = JSONParser().parse(request)
         title = json_string.get("title")
         clubId = json_string.get('clubid')
-        print(clubId)
+        time = json_string.get('time')
+
         if title is None:
             return HttpResponse(status=400)
 
         try:
             responseObject = getFightByClub(
-                title, clubId
+                title, clubId, time
             )
 
         except Exception as e:
@@ -609,6 +613,64 @@ def GetTatamiCurrentFightAndAllCategories(request):
         for tatamiId in tatamisCategories:
             currentFight = None
             totalDuel = getTatamisTotalDuel(title, tatamiId)
+            cntDuelUpToSemi = getTatamisUpToSemiDuel(title, tatamiId)
+            cntDuelSemiFinalFinal = getTatamisSemiFinalFinalDuel(title, tatamiId)
+            # print('tatami', tatamiId, '=', totalDuel, cntDuelUpToSemi, cntDuelSemiFinalFinal)
+            currentFightDetails = getCurrentFight(
+                title, champType, tatamiId, None, None
+            )
+
+            tatamisCategories[tatamiId]["total"] = totalDuel
+            tatamisCategories[tatamiId]["upsemi"] = cntDuelUpToSemi
+            tatamisCategories[tatamiId]["semi_final"] = cntDuelSemiFinalFinal
+            if currentFightDetails != None:
+                currentFightDetails["total"] = getTatamiFightsCount(
+                    title, champType, tatamiId
+                )
+
+                currentFight = {
+                    "details": currentFightDetails,
+                    "red": getParticipantInfo(
+                        title, champType, currentFightDetails["AthIdRed"]
+                    ),
+                    "white": getParticipantInfo(
+                        title, champType, currentFightDetails["AthIdWhite"]
+                    ),
+                }
+
+                tatamisCategories[tatamiId]["fight"] = currentFight
+
+        # except:
+        #     return HttpResponse(status=400)
+
+        return JsonResponse(tatamisCategories, status=200)
+
+    return HttpResponse(status=200)
+
+@csrf_exempt
+# GetTatami
+def GetTatamiCurrentFightByTimeAndAllCategories(request):
+    if request.method == "POST":
+        json_string = JSONParser().parse(request)
+
+        title = json_string.get("title")
+        time = json_string.get("time")
+
+        if title is None:
+            return HttpResponse(status=400)
+        # try:
+        title = title.replace(" ", "_")
+
+        champType = getChampType(title)
+
+        print(title)
+        print(time)
+        tatamisCategories = getTatamisCategoriesByTime(title, time)
+
+        for tatamiId in tatamisCategories:
+            currentFight = None
+            # totalDuel = getTatamisTotalDuel(title, tatamiId)
+            totalDuel = getTatamisTotalDuelTime(title, tatamiId, time)
             cntDuelUpToSemi = getTatamisUpToSemiDuel(title, tatamiId)
             cntDuelSemiFinalFinal = getTatamisSemiFinalFinalDuel(title, tatamiId)
             # print('tatami', tatamiId, '=', totalDuel, cntDuelUpToSemi, cntDuelSemiFinalFinal)

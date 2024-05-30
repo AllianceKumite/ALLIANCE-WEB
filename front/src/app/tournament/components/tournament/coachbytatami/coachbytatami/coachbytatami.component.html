@@ -1,8 +1,29 @@
 <!-- <p>coachbytatami works!</p> -->
 <div class="container">
-    <div class="row p-0 mt-3 d-flex flex-wrap align-items-center">
+    <div class="row p-0 m-0 d-flex flex-wrap align-items-center">
         <div class="list-group list-group-horizontal w-100 justify-content-between p-0 m-0">
-            <div class="list-group-item p-0 m-0 col-6"
+            <div class="p-0 m-0 col-3">
+                <span>{{'coach.time' | translate}}</span>
+            </div>
+            <div class="p-0 m-0 col-4">
+                <span>{{'coach.club' | translate}}</span>
+            </div>
+            <div class="p-0 m-0 col-5">
+                <span>{{'coach.coach' | translate}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row p-0 m-0 d-flex flex-wrap align-items-center">
+        <div class="list-group list-group-horizontal w-100 justify-content-between p-0 m-0">
+            <div class="list-group-item p-0 m-0 col-3"
+                style="border-radius: 4px; border: 1px solid rgb(207, 207, 207);color: #444; background-color: #fff;">
+                <ng-select #timeManageSelector bindLabel="coachName" bindValue="coachId" placeholder="Time"
+                    name="selectedTime" [items]="subtimes" [(ngModel)]="filter.time" (ngModelChange)="onTimeChange()"
+                    class="form-control" [clearable]="false" [disabled]="subtimes && subtimes.length == 1"></ng-select>
+            </div>
+
+            <div class="list-group-item p-0 m-0 col-4"
                 style="border-radius: 4px; border: 1px solid rgb(207, 207, 207);color: #444; background-color: #fff;">
                 <ng-select *ngIf="clubs" [items]="clubs" bindLabel="name" bindValue="id"
                     [(ngModel)]="selectedClub" (change)="changeClub()" [searchable]="false"
@@ -10,7 +31,7 @@
                     name="selectedClub" dropdownPosition="bottom">
                 </ng-select>
             </div>
-            <div class="list-group-item p-0 m-0 col-6"
+            <div class="list-group-item p-0 m-0 col-5"
                 style="border-radius: 4px; border: 1px solid rgb(207, 207, 207);color: #444; background-color: #fff;">
                 <ng-select *ngIf="coaches" [items]="coaches" bindLabel="name" bindValue="id" 
                     [(ngModel)]="selectedCoach" (change)="changeCoach()" [searchable]="false"
@@ -24,7 +45,7 @@
         </div>
     </div>
 
-    <div class="row p-0 mt-3 d-flex flex-wrap align-items-center justify-content-between">
+    <div class="row p-0 m-0 d-flex flex-wrap align-items-center justify-content-between">
         <div class="list-group list-group-horizontal w-100 flex-wrap justify-content-between p-0 m-0">
             <div *ngFor="let tatami of tatamies; let i = index;" class="col-6 p-1"
                 style="border: 1px solid transparent; color: #444; background-color: #fff;">
@@ -40,7 +61,7 @@
         </div>
     </div>
 
-    <div class="row p-0 mt-3 d-flex flex-wrap align-items-center justify-content-between">
+    <div class="row p-0 m-0 d-flex flex-wrap align-items-center justify-content-between">
         <div class="box-data p-0 mt-3 w-100" id="box-data-part">
             <div class="row p-0 m-0 w-100 row-header align-items-center">
                 <div class="col-1 col-sm-1 col-md-1 col-lg-1 p-0 m-0">

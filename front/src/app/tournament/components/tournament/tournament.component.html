@@ -243,7 +243,7 @@
                 </li>
 
                 <!-- <li *ngIf="isSuperAdmin && !isMobileView" class="nav-item" routerLinkActive="active" -->
-                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="routerLinkActiveOptions">
+                <li *ngIf="isSuperAdmin && !isMobileView" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="routerLinkActiveOptions">
                     <ng-select *ngIf="admins" #adminSelector (change)="changeAdmins()" [searchable]="false"
                         placeholder="{{ 'navbar.admin' | translate }}" bindLabel="name" bindValue="id"
                         class="nav-link filter-item filter-item-custom m-0" name="selectedAdmin"

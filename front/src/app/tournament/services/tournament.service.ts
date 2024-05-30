@@ -116,7 +116,7 @@ export class TournamentService {
     return this.http.post(`${environment.serverApiUrl}/api-champ-get-referys-coach`, filter);
   }
 
-  getTatamisCurrentFight(filter: any) {
+  getTatamisCurrentFight(filter: any) {  
     return this.http.post(
       `${environment.serverApiUrl}/api-champ-get-tatamis-current-fight`,
       filter
@@ -161,6 +161,13 @@ export class TournamentService {
   getTatami(filter: any) {
     return this.http.post(
       `${environment.serverApiUrl}/api-champ-get-tatami`,
+      filter
+    );
+  }
+
+  getTatamiByTime(filter: any) {
+    return this.http.post(
+      `${environment.serverApiUrl}/api-champ-get-tatami-time`,
       filter
     );
   }

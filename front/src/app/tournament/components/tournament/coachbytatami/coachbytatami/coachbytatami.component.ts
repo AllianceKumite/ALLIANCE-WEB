@@ -23,6 +23,16 @@ export class CoachbytatamiComponent implements OnInit, AfterViewInit {
 
   selectedClub;
   selectedCoach;
+  subtimes;
+
+  filter = {
+    title: null,
+    tatami: null,
+    time: null,
+    category: null
+};
+
+
 
   firstName;
   lastName;
@@ -42,12 +52,13 @@ export class CoachbytatamiComponent implements OnInit, AfterViewInit {
 
   }
   
-  ngOnInit(): void {
+  async ngOnInit() {
     // this.restoreFromLocalStorage();
 
     this.activeRoute.parent.params.subscribe(params => {
       const name = params['name'];
       this.nameOfChampionship = name;
+      this.filter.title = this.nameOfChampionship;
     })
 
     this.tournamentService
@@ -73,12 +84,30 @@ export class CoachbytatamiComponent implements OnInit, AfterViewInit {
         })
       });
 
-    this.tournamentService.getTatami({ title: this.nameOfChampionship }).subscribe(response => {
+    await  this.loadSubtimes();
+    console.log(this.subtimes);
+    console.log(this.filter.time);
+    
+    
+
+    let club = localStorage.getItem('nextfightselectedClub');
+    let coach = localStorage.getItem('nextfightselectedCoach');
+    let time = localStorage.getItem('nextfightselectedTime');
+
+    if (time) {
+      this.filter.time = Number(time);
+        this.cdref.detectChanges();
+    };
+
+    this.tournamentService.getTatamiByTime({ title: this.nameOfChampionship, time: this.filter.time }).subscribe(response => {
       this.tatamies = Object.values(response)
-      this.tournamentService.getTatamisCurrentFight({ title: this.nameOfChampionship }).subscribe(response => {
+      this.tournamentService.getTatamisCurrentFight({ title: this.nameOfChampionship, time: this.filter.time }).subscribe(response => {
         this.updateTatamisCurrentFights(response);
-        let club = localStorage.getItem('nextfightselectedClub');
-        let coach = localStorage.getItem('nextfightselectedCoach');
+        
+        if (time) {
+          this.filter.time = Number(time);
+          this.cdref.detectChanges();
+        };
 
         if (club) {
           this.selectedCoach = undefined;
@@ -96,6 +125,19 @@ export class CoachbytatamiComponent implements OnInit, AfterViewInit {
       });
     });
   }
+
+  async loadSubtimes() {
+    this.subtimes = await this.tournamentService.getSubtimes(this.filter.title).toPromise();
+
+    if (this.subtimes.length > 0) {
+        this.filter.time = this.subtimes[0];
+    }
+
+    if (this.subtimes.length == 1) {
+
+    }
+
+}
 
   updateTatamisCurrentFights(newFights) {
     let hasChanged = false;
@@ -119,12 +161,48 @@ export class CoachbytatamiComponent implements OnInit, AfterViewInit {
     }
   }
 
+  onTimeChange(){
+    this.saveToLocalStorage();
+    this.tournamentService.getTatamiByTime({ title: this.nameOfChampionship, time: this.filter.time }).subscribe(response => {
+      this.tatamies = Object.values(response)
+      this.tournamentService.getTatamisCurrentFight({ title: this.nameOfChampionship, time: this.filter.time }).subscribe(response => {
+        this.updateTatamisCurrentFights(response);
+        
+        // if (time) {
+        //   this.filter.time = Number(time);
+        //   this.cdref.detectChanges();
+        // };
+
+        // if (club) {
+        //   this.selectedCoach = undefined;
+        //   this.selectedClub = Number(club);
+        //   this.cdref.detectChanges();
+
+        //   this.changeClub();
+        // };
+        // if (coach) {
+        //   this.selectedClub = undefined;
+        //   this.selectedCoach = Number(coach);
+        //   this.cdref.detectChanges();
+        //   this.changeCoach();
+        // };
+      });
+    });
+
+    if (this.selectedClub) {
+      this.changeClub();
+    }
+    if (this.selectedCoach) {
+      this.changeCoach();
+    }
+  }
+
   changeClub() {
     this.selectedCoach = undefined;
     if (this.selectedClub) {
       this.saveToLocalStorage();
       this.tournamentService
-        .getNextFightsByClub({ title: this.nameOfChampionship, clubid: this.selectedClub })
+        .getNextFightsByClub({ title: this.nameOfChampionship, clubid: this.selectedClub, time: this.filter.time })
         .subscribe((response) => {
           this.participants = Object.values(response);
           this.participants = this.participants.map((p: any) => {
@@ -153,9 +231,9 @@ export class CoachbytatamiComponent implements OnInit, AfterViewInit {
     if (this.selectedCoach) {
       this.saveToLocalStorage();
       this.tournamentService
-        .getNextFightsByCoach({ title: this.nameOfChampionship, coachid: this.selectedCoach })
+        .getNextFightsByCoach({ title: this.nameOfChampionship, coachid: this.selectedCoach, time: this.filter.time })
         .subscribe((response) => {
-          this.participants = Object.values(response);
+          this.participants = Object.values(response);         
           this.participants = this.participants.map((p: any) => {
             if (p.FIO) {
               p.FIO = this.getFIO(p.FIO);
@@ -167,6 +245,7 @@ export class CoachbytatamiComponent implements OnInit, AfterViewInit {
   }
 
   saveToLocalStorage() {
+    localStorage.setItem('nextfightselectedTime', this.filter.time);
     localStorage.setItem('nextfightselectedClub', this.selectedClub);
     localStorage.setItem('nextfightselectedCoach', this.selectedCoach);
   }
